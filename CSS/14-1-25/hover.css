@@ -1,0 +1,13 @@
+div{
+    height: 300px;
+    width: 300px;
+    background-color: black;
+}
+
+
+div:hover{
+    width: 500px;
+    /* display: none; */
+    background-color: aqua;
+}
+

@@ -1,0 +1,136 @@
+***HTML***:  
+
+-HTML is Stands for hyperntext markup language it is used to give the structure of the web-page.
+-the current version is HTML5.
+
+***Structure of HTML***:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+***what is DOCKTYPE***
+
+-it is use to represent Document type as well as which version of HTML we use.
+
+***What is HTML***: 
+-it is root element or root tag of html.
+-all tag will be wrapped under this tag.
+
+***head***:
+-head tag is used to provid main information to the browser and when the server is running the first tag read by the browser is head tag.
+
+
+***what is meta tag***:
+-it is present inside the head tag.
+-it is used to provid additional information of webside to the browser.
+
+***title tag***:
+-it is used to give title to the Document.
+
+***body tag***:
+-it is present in html tag ,inside body tag we can provide image ,videos,paragraph etc.. in body.
+
+
+***what is static***:
+-static application is same for all users, same data and pages for all users ..
+-eg-wikipidia,w3School etc..
+
+***dynamic application***:
+-in dynamic application the data and content will be chang according to user.
+-data not same for all user,data will generated dynamicly.
+
+***tag***:
+-HTML is a collection of tags
+- a tag is a keyword or predifined word with opening and closing angular brases.
+-tag is used to tell what type of content display on the UI or shows on the UI or Render on the UI.
+-tags are classified into two types,
+
+1.pared
+2 Unpared
+
+
+*** pared tag***
+-the tag which content opening and closing tag is known as parent tag.
+-eg-html,head,body etc...
+
+
+***Unpared tag***:
+-a tag which contentonly openingtag and dosent content closing tag is known as Unpared tag.
+-eg- meta,input,image,video,etc....
+
+
+***HTML element***:
+-an element which content opening tag and closing tag and in between some content is known as html element.
+-eg- <h1>pavan</h1>
+
+
+
+
+***31-12-24***
+
+Elements  are classified into two types:
+1.Block level elements 
+2.Inline Elements
+
+***1.Block Level Elements***:
+
+-Block level elements will take entire width or space on viewport or container
+-each time it will start with new line 
+-we can give hight and width to the Block level element
+
+eg- <p>, <head>,<div>,<header>,<fooder> etc..
+
+***2.Inline Elements***:
+
+-it will take only the content width or space.
+-it will not start in next line it will start in same line.
+-we cant give hight and width to the Inline elements.
+-eg-<b>,all formatting tgs are Inline Elements.
+
+
+*** formatting tag***
+-formatting tag are used to change or formatting text according or client requirements on display on the UI.
+-eg <i>,<b>,<del>,<strong>,<b>,<sub>,<sup><mark>....
+
+
+
+***Attributs***
+-Attributs are which will gives additional information about the tag.
+-it will be written in opening tag as key and value pair.
+-eg <style>,<title>....
+
+-title Attributs 
+
+
+
+*** Headings***
+-heading tags are block level elements.
+-heading tags in html <h1> to <h6> where h1 is bigger and h6 is smaller
+
+***image tag***
+
+
+
+
+***List***
+1.orderd List
+2.Unorderd List
+3.Discription List
+
+
+
+
+
+
+
+***Table***
+-Combination of rows and Coloms.

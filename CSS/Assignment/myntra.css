@@ -1,0 +1,136 @@
+#header{
+    height: 80px;
+    width: 100%;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#logo-navlinks{
+    height: 70px;
+    width: 50%;
+    /* border:1px solid black; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#logo{
+    height: 70px;
+    width:15% ;
+}
+
+#nav-links{
+    height: 70px;
+    width:80% ;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 11px;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+sup{
+    color: red;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#search-bar{
+    height: 45px;
+    width: 30%;
+    
+    /* border:1px solid rgb(200, 197, 197); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(192, 188, 188);
+
+}
+
+#search-icon{
+    height: 45px;
+    width: 15%;
+    /* background-color: rgb(205, 201, 201); */
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+   
+}
+
+#search-input{
+    height: 40px;
+    width: 80%;
+    /* background-color: rgb(205, 201, 201); */
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    height: 40px;
+    width: 95%;
+    border: none;
+    outline: none;
+}
+
+
+
+#icons{
+    height: 60px;
+    width: 18%;
+    /* border:1px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+#profile{
+    height: 50px; 
+    width:30% ;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+#profile>i{
+    font-size: 20px;
+}
+
+#wishlist{
+    height: 50px; 
+    width:30% ;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#wishlist>i{
+    font-size: 20px;
+}
+
+#bag{
+    height: 50px; 
+    width:30% ;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#bag>i{
+    font-size: 20px;
+}

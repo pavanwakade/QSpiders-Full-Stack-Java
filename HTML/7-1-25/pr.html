@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frorm1</title>
+  </head>
+  <body>
+    <center>
+    <form action="" method="">
+      <table >
+        <tr>
+          <td>
+            <label for="name">Name :</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              placeholder="pavan wakade"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="dob">DOB</label>
+          </td>
+          <td>
+            <input type="date" name="dob" id="dob" value="10/8/1999" />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="email">Email</label>
+          </td>
+          <td>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              placeholder="abc@gmail.com"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="mon">Mobile NO: </label>
+          </td>
+          <td>
+            <input
+              type="tel"
+              name="mon"
+              id="mon"
+              pattern="[6-9]{1}[0-9]{9}"
+              maxlength="10"
+              minlength="10"
+              required
+              placeholder="8317277608"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="address">Address</label>
+          </td>
+          <td>
+            <textarea
+              name="address"
+              id="address"
+              placeholder="at: latur"
+            ></textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="gender">gender:</label>
+          </td>
+          <td>
+            <label for="gender-male">Male</label>
+            <input type="radio" name="gender" />
+
+            <label for="gender-female">Female</label>
+            <input type="radio" name="gender" />
+
+            <label for="gender-other">Other</label>
+            <input type="radio" name="gender" />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="age">Age</label>
+          </td>
+          <td>
+            <input
+              type="number"
+              name="age"
+              id="name"
+              maxlength="2"
+              minlength="1"
+              placeholder="25"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="img">Image</label>
+          </td>
+          <td>
+            <input type="file" id="img" name="img" />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="country">Country:</label>
+          </td>
+          <td>
+            <select name="country" id="country">
+              <option value="country">india</option>
+              <option value="country">USA</option>
+              <option value="country">Japan</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="skill">Skills:</label>
+          </td>
+          <td>
+            <label for="html">html:</label>
+            <input type="checkbox" name="Html" id="html" checked disabled />
+
+            <label for="skill">css:</label>
+            <input type="checkbox" name="css" id="css" />
+
+            <label for="skill">js:</label>
+            <input type="checkbox" name="js" id="js" />
+
+            <label for="skill">Java:</label>
+            <input type="checkbox" name="jav" id="java" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">password</label>
+          </td>
+          <td>
+            <input type="password" id="password" name="password" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center">
+            <input type="submit" value="submit" />
+          </td>
+        </tr>
+      </table>
+    </center>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+p::first-letter{
+    color: red;
+    font-size: 50px;
+}
+h4::first-line{
+    color: rgb(219, 163, 9);
+}
+
+
+
+input::placeholder{
+    color: blue;font-size: large;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+h3::before{
+    content: "This is Pavan ";
+}
+h5::selection{
+    color: blue;
+    background-color: yellow;
+}

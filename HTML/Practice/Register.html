@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a new account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Create a new account</h1>
+        <p class="subtitle">It's quick and easy.</p>
+        
+        <form action="Register">
+            <div class="name-container">
+                <input type="text" placeholder="First name" required>
+                <input type="text" placeholder="Surname">
+            </div>
+
+            <label>Date of birth <span class="info-icon">?</span></label>
+            <div class="date-select">
+                <input type="date" name="dob" id="" required>
+            </div>
+
+            <label>Gender <span class="info-icon">?</span></label>
+            <div class="gender-container">
+                <label class="gender-option">
+                    Female
+                    <input type="radio" name="gender" value="female">
+                </label>
+                <label class="gender-option">
+                    Male
+                    <input type="radio" name="gender" value="male">
+                </label>
+                <label class="gender-option">
+                    Custom
+                    <input type="radio" name="gender" value="custom">
+                </label>
+            </div>
+
+            <input type="text" placeholder="Mobile number or email address" required>
+            <input type="password" placeholder="New password" required>
+
+
+            <button class="signup-button">Sign Up</button>
+
+            <div class="login-link">
+                <a href="#">Already have an account?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

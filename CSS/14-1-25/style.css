@@ -1,0 +1,24 @@
+article p{
+    color: blue;
+}
+
+article+section{
+
+    color: red;
+}
+
+div p:hover {
+    height: 500px;
+    width: 300px;
+    color: aqua;
+}
+.pp{
+
+    height: 200px;
+    width: 200px;
+    background-color: aqua;
+}
+
+.pp:hover{
+    background-color: rgb(123, 255, 0);
+}

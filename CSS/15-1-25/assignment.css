@@ -1,0 +1,99 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.banner img{
+    width: 100%;
+    height: 210px;
+    background-color: aquamarine;
+}
+img{
+    width: 100%;
+    height: 80%;    
+    object-fit: fill;
+    margin-bottom: 10px;
+}
+.row1{
+    height: 80vh;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.card{
+    height: 100%;
+    width: 24%;
+    flex-direction: column;
+    align-items: center;
+    display: flex; 
+    box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.3);
+    
+}
+.hd p{
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.subcard{
+    height: 45%;
+    width: 93%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around; 
+    margin-bottom: 3%;
+}
+
+.final{
+    height: 100%;
+    width: 46%;
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.final p{   
+    text-align: center;
+    margin: 0;
+    font-size: 14px; 
+}
+
+.singleimg {
+    position: relative;
+    display: inline-block;
+}
+
+.singleimg p {
+    position: absolute;
+    bottom: 10;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0; 
+
+}
+
+.head{
+    width: 100%;
+    height: 60px;
+    background-color:rgba(0, 0, 0, 0.87);
+    color: aliceblue;
+}
+.logo{
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-size: 25px;
+display: flex;
+justify-content: center;
+text-align: left;
+margin-left: 20px;
+/* justify-items: center; */
+align-items: center;
+}
+header input{
+    margin-left: 73%;
+}
+header label{
+    margin-left: 50%;
+}
