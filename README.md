@@ -54,26 +54,10 @@ public class AboutMe {
 
 </div>
 
-## 📊 GitHub Stats
 
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_GITHUB_USERNAME&show_icons=true&theme=tokyonight" alt="GitHub Stats" height="150">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=YOUR_GITHUB_USERNAME&theme=tokyonight" alt="GitHub Streak" height="150">
-</div>
 
-## 🎯 Featured Projects
 
-<div align="center">
-  <a href="https://pavanwakade-portfolio.netlify.app/" target="_blank">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=YOUR_GITHUB_USERNAME&repo=portfolio&theme=tokyonight" alt="Portfolio Project">
-  </a>
-</div>
 
-## 📈 Contribution Graph
-
-<div align="center">
-  <img src="https://activity-graph.herokuapp.com/graph?username=YOUR_GITHUB_USERNAME&theme=tokyo-night">
-</div>
 
 ## 🤝 Let's Connect!
 
