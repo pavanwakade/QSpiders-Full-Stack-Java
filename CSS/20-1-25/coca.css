@@ -17,5 +17,11 @@ img{
 #french{
     position: absolute;
     top: 250px;
-    left: 350px;
+    left: 420px;
+}
+
+#burger{
+    position: absolute;
+    top: 260px;
+    left: 300px;
 }

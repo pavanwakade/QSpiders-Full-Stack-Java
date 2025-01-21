@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>border</title>
+
+    <style>
+
+*{
+    height: 100vh;
+}
+        section{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-around;
+        }
+        div{
+            height: 300px;
+            width: 300px;
+            background-color: cadetblue;
+
+            border-top: solid 5px red;
+            border-bottom: dotted 5px black;
+            border-left: 5px double green;
+            border-right: 5px solid gold;
+
+        }
+
+        article{
+            height: 300px;
+            width: 300px;
+            background-color: cadetblue;
+            border-radius: 50%;
+        }
+        section2{
+            height: 300px;
+            width: 300px;
+            background-color: cadetblue;
+            border-radius:0px 50px 0px 50px ;
+        }
+
+        section3{
+            height: 300px;
+            width: 300px;
+            background-color: cadetblue;
+        }
+
+        section3:hover{
+          
+            background-color: yellow;
+            border-radius:50%;
+            transition-duration: 2s;
+            
+        }
+        p{
+            text-align: center;
+            color: rgb(180, 0, 0);
+            border-color: black 1px solid;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+    <div>
+        
+    </div>
+
+    <article>
+
+    </article>
+
+    <section2>
+
+    </section2>
+
+
+    <section3>
+        <p>please hover me</p> 
+    </section3>
+</section>
+</body>
+</html>
