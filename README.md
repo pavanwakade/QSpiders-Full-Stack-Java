@@ -66,13 +66,20 @@ public class AboutMe {
 
 
 ## 🌟 Professional Journey
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=pavanwakade&show_icons=true&theme=github_dark&hide_border=true&bg_color=0d1117" width="400">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=pavanwakade&theme=github-dark-blue&hide_border=true&background=0d1117" width="400">
+</div>
+
+<br>
 <div align="center">
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=pavanwakade&theme=github_dark" width="800">
 </div>
 
 
 
-
+<br>
 
 
 
