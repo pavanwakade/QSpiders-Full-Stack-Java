@@ -48,6 +48,7 @@ public class AboutMe {
 ### Database
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=Oracle&logoColor=white)
 
 ### Testing
 ![Manual Testing](https://img.shields.io/badge/Manual_Testing-8A2BE2?style=for-the-badge&logo=testing-library&logoColor=white)
