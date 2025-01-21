@@ -65,11 +65,8 @@ public class AboutMe {
   
   If you're interested in collaborating on projects or just want to say hi, feel free to reach out! Check out my [portfolio](https://pavanwakade-portfolio.netlify.app/) to see more of my work.
   
-  <p align="center">
-    <img src="https://komarev.com/ghpvc/?username=YOUR_GITHUB_USERNAME&label=Profile+Views" alt="Profile Views">
-  </p>
+  
 </div>
-
 ---
 <div align="center">
   ⭐️ From [Pavan Wakade](https://github.com/pavanwakade) with ❤️
