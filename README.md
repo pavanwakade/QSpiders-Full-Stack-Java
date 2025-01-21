@@ -55,10 +55,6 @@ public class AboutMe {
 </div>
 
 
-
-
-
-
 ## 🤝 Let's Connect!
 
 <div align="center">
@@ -67,7 +63,27 @@ public class AboutMe {
   
   
 </div>
----
+
+
+## 🌟 Professional Journey
 <div align="center">
-  ⭐️ From [Pavan Wakade](https://github.com/pavanwakade) with ❤️
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=pavanwakade&theme=github_dark" width="800">
+</div>
+
+
+
+
+
+
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=pavanwakade&theme=github-compact&hide_border=true" width="800">
+</div>
+
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=pavanwakade&color=blue" alt="Profile views">
+</p>
+<div align="center">
+  ⭐️ Created with precision by <a href="https://github.com/pavanwakade">Pavan Wakade</a> 💻
 </div>
