@@ -48,15 +48,12 @@ public class AboutMe {
 ### Database
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=Oracle&logoColor=white)
 
 ### Testing
 ![Manual Testing](https://img.shields.io/badge/Manual_Testing-8A2BE2?style=for-the-badge&logo=testing-library&logoColor=white)
 
 </div>
-
-
-
-
 
 
 ## 🤝 Let's Connect!
@@ -65,12 +62,36 @@ public class AboutMe {
   
   If you're interested in collaborating on projects or just want to say hi, feel free to reach out! Check out my [portfolio](https://pavanwakade-portfolio.netlify.app/) to see more of my work.
   
-  <p align="center">
-    <img src="https://komarev.com/ghpvc/?username=YOUR_GITHUB_USERNAME&label=Profile+Views" alt="Profile Views">
-  </p>
+  
 </div>
 
----
+
+## 🌟 Professional Journey
+
 <div align="center">
-  ⭐️ From [Pavan Wakade](https://github.com/pavanwakade) with ❤️
+  <img src="https://github-readme-stats.vercel.app/api?username=pavanwakade&show_icons=true&theme=github_dark&hide_border=true&bg_color=0d1117" width="400">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=pavanwakade&theme=github-dark-blue&hide_border=true&background=0d1117" width="400">
+</div>
+
+<br>
+<div align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=pavanwakade&theme=github_dark" width="800">
+</div>
+
+
+
+<br>
+
+
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=pavanwakade&theme=github-compact&hide_border=true" width="800">
+</div>
+
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=pavanwakade&color=blue" alt="Profile views">
+</p>
+<div align="center">
+  ⭐️ Created with precision by <a href="https://github.com/pavanwakade">Pavan Wakade</a> 💻
 </div>
