@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+</head>
+<style>
+
+        div0{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        div{
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            border: 10px solid  black;
+            border-top: 10px solid red;
+            background-color: aqua;
+            animation-name: box;
+            animation-duration:3s ;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+@keyframes box{
+    to{
+        background-color: blueviolet;
+        transform: rotate(360deg);
+    }
+}
+        
+</style>
+<body>
+
+    <div0>
+        <div>
+            
+        </div>
+    </div0>
+</body>
+</html>

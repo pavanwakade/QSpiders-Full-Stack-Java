@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation2</title>
+</head>
+<style>
+
+        body{
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            border-bottom: 30px solid black;
+        }
+
+        div{
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: rgb(255, 149, 0);
+            animation-name: box;
+            animation-duration:1s ;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+@keyframes box{
+0%{
+
+    transform: translateY(-100px);
+    background-color: red;
+}
+
+30%{
+
+transform: translateY(-200px);
+background-color: black;
+} 
+60%{
+
+transform: translateY(-300px);
+background-color: blue;
+}
+
+100%{
+
+transform: translateY(-500px);
+background-color: brown;
+} 
+
+
+    }
+
+        
+</style>
+<body>
+
+        <div>
+            
+        </div>
+
+</body>
+</html>
