@@ -1,4 +1,4 @@
-package Inheritance;
+package inheritance.single;
 
 public class SingleInheritDriver {
     public static void main(String[] args) {

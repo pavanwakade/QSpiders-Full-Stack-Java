@@ -1,3 +1,5 @@
+package numberPrograms;
+
 import java.util.Scanner;
 
 public class PrimeNoMethod {

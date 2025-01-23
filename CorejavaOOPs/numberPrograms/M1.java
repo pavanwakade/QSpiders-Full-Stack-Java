@@ -1,3 +1,5 @@
+package numberPrograms;
+
 import java.util.Scanner;
 public class M1 {
     public static Scanner sc = new Scanner(System.in);

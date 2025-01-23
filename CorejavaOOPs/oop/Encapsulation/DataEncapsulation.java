@@ -1,3 +1,5 @@
+package oop.Encapsulation;
+
 // DataEncapsulation1.java
 public class DataEncapsulation {
     private String bankName;

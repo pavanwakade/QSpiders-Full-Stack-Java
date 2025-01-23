@@ -1,4 +1,4 @@
-package Inheritance;
+package inheritance.single;
 
 public class SingleInherit {
     String brand;

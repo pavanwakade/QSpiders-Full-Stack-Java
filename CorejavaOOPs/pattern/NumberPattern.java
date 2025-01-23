@@ -1,4 +1,4 @@
-package mock;
+package pattern;
 
 public class NumberPattern {
 
