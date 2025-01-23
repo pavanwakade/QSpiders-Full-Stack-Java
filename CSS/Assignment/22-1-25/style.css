@@ -46,11 +46,16 @@ body{
 }
 
 #s4:hover{
-    transform: rotate(360deg);
-        transition: 2s;
-        animation: linear;
-        animation-direction: initial;
-        animation-iteration-count: infinite;
+  
+     transform: scale(2);
+    transform: skew(90deg); 
+    transform: translate(-100px, 100px);
+    /* transform: rotate(180deg); */
+   /* transition-delay: 1s;  */
+    transition-timing-function: ease-in-out;
+    transition-duration: 2s;
+
+        }
 
         /* transform: rotate(45deg) translate(100px, 50px); */
         /* transform: translate(50px, 100px); */
@@ -67,4 +72,4 @@ body{
 
 
 
-}
+/* } */
