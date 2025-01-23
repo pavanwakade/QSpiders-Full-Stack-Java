@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 30px solid black;
+            justify-content:space-evenly;
+            /* position: relative; */
+
+        }
+    div{
+        height: 50px;
+            width: 50px;
+            /* border-radius: 50%; */
+            background-color: rgb(255, 149, 0);
+            animation-name: box1;
+            animation-duration:5s ;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-delay: 0.3s;
+
+    }
+
+    @keyframes box1{
+0%{
+
+    transform: translate(0,0) rotate(0deg);
+    background-color: red;
+}
+
+25%{
+
+transform: translate(200px,0px) rotate(90deg) ;
+background-color: black;
+
+} 
+50%{
+
+transform: translate(200px,200px) rotate(180deg) ;
+background-color: blue;
+
+}
+75%{
+    transform: translate(0,200px) rotate(270deg) ;
+background-color: blue;
+}
+100%{
+
+transform: translate(0,0) rotate(360deg);
+background-color: brown;
+} 
+}
+
+
+
+div2{
+        height: 50px;
+            width: 50px;
+            /* border-radius: 50%; */
+            background-color: rgb(255, 149, 0);
+            animation-name: box2;
+            animation-duration:5s ;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-delay: 0.3s;
+
+    }
+
+    @keyframes box2{
+0%{
+
+    transform: translate(0,0) rotate(0deg) scale(2);
+    background-color: red;
+}
+
+25%{
+
+transform: translate(200px,0px) rotate(90deg) ;
+background-color: black;
+
+} 
+50%{
+
+transform: translate(200px,200px) rotate(180deg) scale(2);
+background-color: blue;
+
+}
+75%{
+    transform: translate(0,200px) rotate(270deg) ;
+background-color: blue;
+}
+100%{
+
+transform: translate(0,0) rotate(360deg);
+background-color: brown;
+} 
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div>
+        
+    </div>
+
+
+    <div2>
+        
+    </div2>
+</body>
+</html>
