@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pockeman</title>
+
+    <style>
+ 
+
+   .contaoner{
+    width: 80%;
+    height: 500px;
+    margin: auto;
+    border: 2px solid greenyellow;
+    position: relative;
+
+
+   }
+
+.pock1{
+    height: 100px;
+    width: 200px;
+    margin-top: 90px;
+    border-radius: 200px 200px 0px 0px;
+    background-color: rgb(255, 0, 0);
+    animation-name: pack1;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-direction: alternate;
+}
+
+@keyframes pack1 {
+    to{
+        transform: rotate(-45deg);
+    }
+}
+
+
+.pock2{
+    height: 100px;
+    width: 200px;
+    border-radius: 0px 0px 200px 200px;
+    background-color: rgb(255, 0, 0);
+    animation-name: pack2;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-direction: alternate;
+}
+
+@keyframes pack2 {
+    to{
+        transform: rotate(45deg);
+    }
+}
+
+.boll-container{
+    height: 200px;
+    width: 70%;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    overflow: hidden;
+}
+
+.ball{
+    height: 30px;
+    width: 300px;
+    background-color: yellow;
+    position: absolute;
+    top: 78px;
+    animation-name: boll;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
+    position: absolute;
+    animation-duration: 2s;
+    z-index: -1;
+}
+@keyframes boll {
+    0%{
+        transform: translateX(700px);
+    }
+
+    100%{
+        transform: translateX(-700px);
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <div class="contaoner">
+        <!-- div -->
+        <div class="pock1">
+        
+        </div>
+        <div class="pock2">
+        
+        </div>
+
+        <div class="boll-container">
+
+            <div class="boll">
+                
+            </div>
+
+            <div class="boll">
+                
+            </div>
+        
+        
+        </div>
+    </div>
+</body>
+</html>
