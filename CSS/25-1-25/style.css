@@ -1,0 +1,130 @@
+body {
+  height: 100vh;
+  width: 100%;
+  background-color: #0d1224;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  position: relative;
+}
+
+#laptop {
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  bottom: 25px;
+  right: 400px;
+  animation-name: laptop;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: 0.5s;
+}
+
+#coffy {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  bottom: 95px;
+  right: 530px;
+  animation-name: coffy;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: 0.5s;
+}
+
+#tv {
+    height: 70px;
+    width: 130px;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 50px;
+    right: 60px;
+    background-color: #3e0a9c;
+    border: 2px solid rgb(18, 1, 1);
+    box-shadow: 4px 4px 10px 7px  #2d2d2d; 
+    transform-origin: center; 
+    transform:  rotate3d(0, 100, 100, 20deg);
+
+    animation-name: tv;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-delay: 0.5s;
+  }
+  
+ 
+#tv img {
+  height: 100%;
+  width: 100%;
+}
+
+
+/* @keyframes tv {
+    0% {
+        transform: translateY(-10px);
+      }
+    
+      100% {
+        transform: translateY(10px);
+      }
+} */
+
+
+
+#cc {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    top: 90px;
+    left: 10px;
+    border-bottom: 4px solid #f26e3f;
+    border-left: 4px solid #f26e3f;
+    border-right: 4px solid #f26e3f;
+    border-radius: 20px;
+    transform: rotate3d(-1000, -100, -100, 50deg);
+    animation-name: cc;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-delay: 0.5s;
+  }
+  
+  
+  @keyframes cc {
+      to {
+        transform: rotate3d(-1000, -100, -100, 50deg);
+        transform: rotate(360deg);
+    }
+    }
+
+  
+@keyframes laptop {
+  0% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes coffy {
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+
