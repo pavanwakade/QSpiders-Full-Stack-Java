@@ -1,0 +1,190 @@
+package newInternship;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+public class SignIn extends JFrame {
+	JTextField userNameField, mobileNumberField;
+	private JCheckBox termsCheckbox;
+	private JButton signinButton, cancleButton;
+
+	/**
+	 * 
+	 */
+	public SignIn() {
+		setupFrame();
+		initializeComponant();
+		addComponant();
+	}
+
+	public void setupFrame() {
+		setSize(700, 500);
+		setVisible(true);
+		setContentPane(createBAckgroundImage());
+	}
+
+	public void addComponant() {
+
+		JPanel formepanal = new JPanel();
+		formepanal.add(Box.createVerticalStrut(190));
+		formepanal.setLayout(new BoxLayout(formepanal, BoxLayout.Y_AXIS));
+		formepanal.setBackground(new Color(0, 0, 0, 0));
+
+		JLabel title = new JLabel("User Sign- in", SwingConstants.CENTER);
+		title.setFont(new Font("Arial", Font.BOLD, 25));
+		title.setForeground(Color.BLUE);
+		formepanal.add(title);
+
+		formepanal.add(Box.createVerticalStrut(20));
+		addFormRow("User Name :", userNameField, formepanal);
+		addFormRow("Mobile number :", mobileNumberField, formepanal);
+
+		formepanal.add(Box.createVerticalStrut(10));
+		formepanal.add(termsCheckbox);
+
+		signinButton = new JButton("Sign In");
+		cancleButton = new JButton("Cancel");
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(signinButton);
+		buttonPanel.add(Box.createHorizontalStrut(10));
+		buttonPanel.add(cancleButton);
+
+		formepanal.add(Box.createVerticalStrut(20));
+		formepanal.add(buttonPanel);
+		add(formepanal);
+
+	}
+
+	private void addFormRow(String labletext, JComponent componant, JPanel formepanal) {
+
+		JPanel rowpanal = new JPanel();
+		rowpanal.setLayout(new BoxLayout(rowpanal, BoxLayout.Y_AXIS));
+		rowpanal.setBackground(new Color(0, 0, 0, 0));
+
+		JLabel lable = new JLabel(labletext);
+		lable.setForeground(Color.WHITE);
+		lable.setFont(new Font("Arial", Font.PLAIN, 15));
+		formepanal.add(lable);
+		formepanal.add(Box.createVerticalStrut(10));
+		rowpanal.add(componant);
+		formepanal.add(rowpanal);
+//		formepanal.add(Box.createVerticalStrut(10));
+
+	}
+
+	private void initializeComponant() {
+		userNameField = createStyedTextField(20);
+
+		mobileNumberField = createStyedTextField(20);
+		termsCheckbox = createStyleCheckbox("Agree terms to terms & conditions");
+	}
+
+	private JCheckBox createStyleCheckbox(String text) {
+		JCheckBox checkbox = new JCheckBox(text);
+		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
+		checkbox.setForeground(Color.WHITE);
+		checkbox.setOpaque(false);
+		return checkbox;
+	}
+
+	private JTextField createStyedTextField(int widthCols) {
+		JTextField textField = new JTextField(widthCols);
+		textField.setBackground(new Color(255, 255, 255));
+		textField.setForeground(new Color(33, 33, 33));
+		textField.setFont(new Font("Arial", Font.PLAIN, 15));
+
+		return textField;
+	}
+
+	private void showerrormessage(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void handleSignin() {
+
+		if (termsCheckbox.isSelected()) {
+			showerrormessage("Agree terms and Conditions");
+			return;
+		}
+
+		else {
+			JOptionPane.showMessageDialog(this, "Sign-In Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+	void setupListnearSignin() {
+
+		signinButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				handleSignin();
+			}
+		});
+	}
+
+	public JPanel createBAckgroundImage() {
+
+		return new JPanel() {
+
+			@Override
+			protected void paintComponent(Graphics g) {
+
+//				ImageIcon icon = new ImageIcon("D:\\coding with pavan\\Qspiders\\java\\newInternship\\res\\linkdein2.jpg");
+				ImageIcon icon = new ImageIcon("res/linkdein2.jpg");
+
+				Image image = icon.getImage();
+
+				double panalwidth = getWidth();
+
+				double panalhight = getHeight();
+
+				double imagewidh = image.getWidth(this);
+
+				double imagehight = image.getHeight(this);
+
+				double scale = (Math.max(panalwidth / imagewidh, panalhight / imagehight));
+
+				int scaledWidth = ((int) (imagewidh * scale));
+
+				int scaledHight = ((int) (imagehight * scale));
+
+				int p = ((int) (panalwidth - scaledWidth) / 2);
+
+				int q = ((int) (panalhight - scaledHight) / 2);
+
+				g.drawImage(image, p, q, scaledWidth, scaledHight, this);
+
+				g.setColor(new Color(0, 0, 0, 100));
+
+				g.fillRect(0, 0, getWidth(), getHeight());
+			}
+		};
+	}
+
+	public static void main(String[] args) {
+		new SignIn();
+	}
+
+}

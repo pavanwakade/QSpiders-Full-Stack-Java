@@ -37,3 +37,17 @@ sudo class
 .Absolute
 .Sticky
 .Fixed                             left ,right ,top ,Bottom
+
+
+
+
+******* Z-index *******
+
+
+   
+
+
+
+
+   1)diff between grid and flex
+   2)
