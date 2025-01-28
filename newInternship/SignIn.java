@@ -2,7 +2,6 @@ package newInternship;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -33,6 +32,7 @@ public class SignIn extends JFrame {
 		setupFrame();
 		initializeComponant();
 		addComponant();
+		setupListner();
 	}
 
 	public void setupFrame() {
@@ -41,36 +41,26 @@ public class SignIn extends JFrame {
 		setContentPane(createBAckgroundImage());
 	}
 
+	
 	public void addComponant() {
 
 		JPanel formepanal = new JPanel();
-		formepanal.add(Box.createVerticalStrut(190));
 		formepanal.setLayout(new BoxLayout(formepanal, BoxLayout.Y_AXIS));
 		formepanal.setBackground(new Color(0, 0, 0, 0));
 
+		
 		JLabel title = new JLabel("User Sign- in", SwingConstants.CENTER);
 		title.setFont(new Font("Arial", Font.BOLD, 25));
 		title.setForeground(Color.BLUE);
 		formepanal.add(title);
-
 		formepanal.add(Box.createVerticalStrut(20));
+		
 		addFormRow("User Name :", userNameField, formepanal);
 		addFormRow("Mobile number :", mobileNumberField, formepanal);
 
-		formepanal.add(Box.createVerticalStrut(10));
 		formepanal.add(termsCheckbox);
+		formepanal.add(signinButton);
 
-		signinButton = new JButton("Sign In");
-		cancleButton = new JButton("Cancel");
-
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-		buttonPanel.add(signinButton);
-		buttonPanel.add(Box.createHorizontalStrut(10));
-		buttonPanel.add(cancleButton);
-
-		formepanal.add(Box.createVerticalStrut(20));
-		formepanal.add(buttonPanel);
 		add(formepanal);
 
 	}
@@ -84,11 +74,13 @@ public class SignIn extends JFrame {
 		JLabel lable = new JLabel(labletext);
 		lable.setForeground(Color.WHITE);
 		lable.setFont(new Font("Arial", Font.PLAIN, 15));
-		formepanal.add(lable);
-		formepanal.add(Box.createVerticalStrut(10));
+		rowpanal.add(lable);
+		
+		rowpanal.add(Box.createHorizontalStrut(10));
 		rowpanal.add(componant);
+		
 		formepanal.add(rowpanal);
-//		formepanal.add(Box.createVerticalStrut(10));
+		formepanal.add(Box.createVerticalStrut(10));
 
 	}
 
@@ -96,16 +88,13 @@ public class SignIn extends JFrame {
 		userNameField = createStyedTextField(20);
 
 		mobileNumberField = createStyedTextField(20);
+		
 		termsCheckbox = createStyleCheckbox("Agree terms to terms & conditions");
+		
+		signinButton=createStyleButton("Sign-In",Color.magenta);
 	}
 
-	private JCheckBox createStyleCheckbox(String text) {
-		JCheckBox checkbox = new JCheckBox(text);
-		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
-		checkbox.setForeground(Color.WHITE);
-		checkbox.setOpaque(false);
-		return checkbox;
-	}
+
 
 	private JTextField createStyedTextField(int widthCols) {
 		JTextField textField = new JTextField(widthCols);
@@ -115,14 +104,38 @@ public class SignIn extends JFrame {
 
 		return textField;
 	}
+	
+	
+	private JCheckBox createStyleCheckbox(String text) {
+		JCheckBox checkbox = new JCheckBox(text);
+		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
+		checkbox.setForeground(Color.WHITE);
+		checkbox.setOpaque(false);
+		
+		return checkbox;
+	}
+	
+	private JButton createStyleButton(String text,Color bgcolor) {
+		JButton button = new JButton(text);
+		button.setFont(new Font("Arial", Font.BOLD, 15));
+		button.setForeground(Color.WHITE);
+		button.setBackground(bgcolor);
+		button.setOpaque(false);
+		button.setFocusPainted(false);
+		
+		return button;
+	}
 
+	
 	private void showerrormessage(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
+	
+	
 	private void handleSignin() {
 
-		if (termsCheckbox.isSelected()) {
+		if (!termsCheckbox.isSelected()) {
 			showerrormessage("Agree terms and Conditions");
 			return;
 		}
@@ -132,7 +145,9 @@ public class SignIn extends JFrame {
 		}
 	}
 
-	void setupListnearSignin() {
+	
+	
+	void setupListner() {
 
 		signinButton.addActionListener(new ActionListener() {
 
@@ -144,6 +159,8 @@ public class SignIn extends JFrame {
 		});
 	}
 
+	
+	
 	public JPanel createBAckgroundImage() {
 
 		return new JPanel() {
