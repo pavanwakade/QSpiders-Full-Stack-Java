@@ -1,6 +1,4 @@
-body{
-    
-}
+
 
 header{
     /* margin-top: 45px; */
@@ -147,16 +145,59 @@ position: absolute;
 }
 
 
-#mob{
+#book{
     position: absolute;
-    top: 480px;
-    right: 460px;
+    top: 850px;
+    left: 450px;
+    z-index: 1;
 }
 
 #mob img{
+    position: absolute;
+    top: 600px;
+    right: 571px;
+    width: 150px;
+    /* height: 450px; */
+    z-index: 2;
+
+    /* background-color: red; */
+    /* transform: translateY(0); */
+    transform: scale(2);
+    /* Scroll Animation */
+    animation: mobl linear;
+    animation-timeline: scroll();
+    /* animation-range: entry 0% cover 50%; */
+}
+
+@keyframes mobl {
+    /* from {
+        transform: translateY(0);
+    } */
+
+    60% {
+        
+        /* transform: scale(1.9); */
+        width: 210px;
+        right: 561px;
+        /* top: 1000px; */
+        transform: translateY(360px);
+    }
+    100% {
+        
+        /* transform: scale(1.9); */
+        width: 210px;
+        right: 561px;
+        /* top: 1000px; */
+        transform: translateY(430px);
+    }
+}
+
+/* 
+#mob img{
     width: 390px;
     height: 450px;
-}
+} */
+
 
 
 #txt_cards{
@@ -167,43 +208,59 @@ position: absolute;
     justify-content: space-around;  /* or use space-between, depending on your design */
     align-items: center;
     
+    
+    
   
 }
-.card{
-    height: 300px;
-    width: 200px;
-    background-color: yellow;
-    
-    /* border: 1px solid red; */
-    /* border-radius: 30px; */
+
+
+
+.card {
+    height: 250px;  
+    width: 200px;   
+    /* background-color: yellow; */
+    border-radius: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    /* width: calc(200px * 10); Adjust based on the number of cards */
+    /* animation: slide 10s linear infinite; */
 }
 
 
+/* @keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+} */
 
-#imgs{
+#imgs {
     height: 80%;
     width: 100%;
-    background-color: #0f5d30;
+    /* background-color: #0f5d30; */
+    overflow: hidden;
 }
 
 #imgs img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover; 
 }
 
-
-
-#title{
+#title {
     height: 20%;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;
 }
 
 b {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    padding: 0 10px;
+    font-size: 14px;
+    color: rgb(116, 113, 113);
 }
