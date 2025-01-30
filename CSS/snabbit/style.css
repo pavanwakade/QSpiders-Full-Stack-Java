@@ -587,3 +587,233 @@ margin-top: 30px;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Small devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    #nav {
+        width: 90%;
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    #quot {
+        width: 90%;
+        position: relative;
+        top: 50px;
+        right: 0;
+    }
+
+    #a { font-size: 24px; }
+    #b, #c { font-size: 36px; }
+
+    .step-card {
+        max-width: 95%;
+        flex-direction: column;
+    }
+
+    .step-card__image {
+        width: 100%;
+    }
+
+    #txt_cards {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .card {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    #sec {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #x {
+        width: 90%;
+        margin: 10px 0;
+    }
+
+    #FAQS {
+        width: 95%;
+    }
+
+    #description {
+        width: 90%;
+        margin: 10px auto;
+        margin-left: auto;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #nav {
+        width: 70%;
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    #quot {
+        width: 70%;
+        position: absolute;
+        top: 150px;
+        right: 20%;
+    }
+
+    #a { font-size: 32px; }
+    #b, #c { font-size: 54px; }
+
+    .step-card {
+        max-width: 80%;
+        flex-direction: row;
+    }
+
+    .step-card__image {
+        width: 37%;
+    }
+
+    #txt_cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .card {
+        width: 45%;
+        margin: 10px;
+    }
+
+    #sec {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    #x {
+        width: 45%;
+        margin: 10px;
+    }
+
+    #description {
+        width: 85%;
+        margin-left: 50px;
+    }
+}
+
+/* Large devices (laptops/desktops, 1024px and up) */
+@media only screen and (min-width: 1024px) {
+    #nav {
+        width: 40%;
+        font-size: 14px;
+    }
+
+    #quot {
+        width: 470px;
+        right: 30%;
+    }
+
+    #a { font-size: 40px; }
+    #b, #c { font-size: 72px; }
+
+    .step-card {
+        max-width: 50%;
+    }
+
+    #txt_cards {
+        flex-direction: row;
+        height: 800px;
+        padding: 0;
+    }
+
+    .card {
+        width: 200px;
+        margin: 0;
+    }
+
+    #sec {
+        height: 300px;
+        flex-wrap: nowrap;
+    }
+
+    #x {
+        width: 25%;
+        margin: 0;
+    }
+
+    #description {
+        width: 80%;
+        margin-left: 100px;
+    }
+}
+
+/* Extra Large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #nav {
+        width: 40%;
+    }
+
+    #quot {
+        right: 30%;
+    }
+
+    .step-card {
+        max-width: 50%;
+    }
+
+    #txt_cards {
+        justify-content: space-around;
+    }
+
+    .card {
+        width: 200px;
+    }
+
+    #x {
+        width: 25%;
+    }
+
+    #description {
+        width: 80%;
+    }
+}
+
+/* For landscape orientation on mobile devices */
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+    #firstbanner_cleaner {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    #quot {
+        position: relative;
+        top: 20px;
+        margin: 0 auto;
+    }
+
+    .step-card {
+        margin: 10px auto;
+    }
+}
+
+/* For devices with high pixel density screens */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
