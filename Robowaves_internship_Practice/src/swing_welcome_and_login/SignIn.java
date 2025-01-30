@@ -111,8 +111,8 @@ public class SignIn extends JFrame {
 	
 	private JTextField createStyedTextField(int widthCols) {
 		JTextField textField = new JTextField(widthCols);
-		textField.setBackground(new Color(255, 255, 255));
-		textField.setForeground(new Color(33, 33, 33));
+		textField.setBackground(new Color(20, 20, 20));
+		textField.setForeground(Color.WHITE);
 		textField.setFont(new Font("Arial", Font.PLAIN, 15));
 
 		return textField;
@@ -124,6 +124,7 @@ public class SignIn extends JFrame {
 	
 	private JCheckBox createStyleCheckbox(String text) {
 		JCheckBox checkbox = new JCheckBox(text);
+		checkbox.setBackground(new Color(30, 30, 30));
 		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
 		checkbox.setForeground(Color.WHITE);
 		checkbox.setOpaque(false);
@@ -167,10 +168,13 @@ public class SignIn extends JFrame {
 		
 		
 		String name = userNameField.getText().strip();
+		
 		String no = mobileNumberField.getText().strip();
+		
 		long phoneNo = Long.parseLong(no);
 
 		String query = "SELECT * FROM sign_in WHERE username='" + name + "' AND mobilenumber=" + phoneNo;
+		
 		ConeectionJDBC connection = new ConeectionJDBC();
 		try {
 			ResultSet rs = connection.s.executeQuery(query);

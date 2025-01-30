@@ -1,0 +1,434 @@
+
+body{
+    margin: 0;
+    padding: 0;
+}
+header{
+    /* margin-top: 45px; */
+    /* background-color:#F2F2F2; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    
+}
+
+
+#nav {
+    height: 65px;
+    width: 40%;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    color: #5D0F36;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed; 
+    top: 45px; 
+    z-index: 1000; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#nav a{
+    text-decoration: none;
+}
+
+
+
+main{
+    background-color: rgb(93, 15, 54);
+
+}
+
+#firstbanner_cleaner{
+    width: 100%;
+    height: 800px;
+    background-color: #F2F2F2;
+    /* position: relative; */
+}
+
+
+#stars1{
+    position: absolute;
+    top: 160px;
+    left: 400px;
+}
+
+#stars2{
+    position: absolute;
+    top: 340px;
+    left: 480px;
+}
+
+
+#stars3{
+    position: absolute;
+    top: 267px;
+    right: 333px;
+}
+
+
+
+#quot {
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;    
+    width: 470px;
+    font-weight: 900;
+    /* color: #3C1 72A; */
+    position: absolute;
+    top: 150px;
+    right: 30%;
+    /* background-color: yellow; */
+}
+
+#a{
+    font-size: 40px;
+    color: #3C172A;
+    display: flex;
+    justify-content: center;
+
+}
+#b{
+    color: #FF2E6D !important;
+    font-size: 72px;
+    text-decoration: underline;
+    text-decoration-thickness: 10px;
+  
+}
+#c{
+    position: absolute;
+    /* right: 300px; */
+    font-size: 72px;
+    color: #3C172A;
+}
+
+p{
+    color: #5D0F36;
+    font-family: 'Satoshi', sans-serif;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 
+#firstbanner_cleaner{
+position: absolute;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    justify-content: space-around;
+} */
+
+#clean_mob{
+    position: relative;
+}
+
+#cleaner1{
+    position: absolute;
+    top: 270px;
+    left: 20px;
+}
+
+#cleaner1 img{
+    width: 430px;
+    height: 650px;
+}
+
+#plays{
+    position: absolute;
+    top: 360px;
+    right: 490px;
+}
+
+#cleaner2{
+    position: absolute;
+    top: 270px;
+    right: 20px;
+}
+
+
+#cleaner2 img{
+    width: 430px;
+    height: 650px;
+}
+
+
+#book{
+    position: absolute;
+    top: 850px;
+    left: 450px;
+    z-index: 1;
+}
+
+#mob img{
+    position: absolute;
+    top: 600px;
+    right: 571px;
+    width: 150px;
+    /* height: 450px; */
+    z-index: 2;
+
+    /* background-color: red; */
+    /* transform: translateY(0); */
+    transform: scale(2);
+    /* Scroll Animation */
+    animation: mobl linear;
+    animation-timeline: scroll();
+    /* animation-range: entry 0% cover 50%; */
+}
+
+@keyframes mobl {
+    /* from {
+        transform: translateY(0);
+    } */
+0%{
+transform: translateY(0)
+}
+
+    60% {
+        
+        /* transform: scale(1.9); */
+        width: 210px;
+        right: 561px;
+        /* top: 1000px; */
+        transform: translateY(360px);
+    }
+    100% {
+        
+        /* transform: scale(1.9); */
+        width: 210px;
+        right: 571px;
+        /* top: 1000px; */
+        transform: translateY(430px);
+    }
+}
+
+/* 
+#mob img{
+    width: 390px;
+    height: 450px;
+} */
+
+
+
+#txt_cards{
+    width: 100%;
+    height: 740px;
+    display: flex;
+    justify-content: space-around;  /* or use space-between, depending on your design */
+    align-items: center;
+    position: relative;
+  
+}
+
+
+
+.card {
+    height: 250px;  
+    width: 200px;   
+    /* background-color: yellow; */
+    border-radius: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    /* width: calc(200px * 10);  */
+    /* animation: slide 10s linear infinite; */
+    /* margin-left: 10px; */
+}
+
+
+/* @keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-90%); }
+} */
+
+#imgs {
+    height: 80%;
+    width: 100%;
+    /* background-color: #0f5d30; */
+    overflow: hidden;
+}
+
+#imgs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+#title {
+    height: 20%;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;
+}
+
+b {
+    font-size: 14px;
+    color: rgb(116, 113, 113);
+}
+
+#ds{
+    
+    position: absolute;
+    top: 1380px;
+    left: 30px;
+    width: 380px;
+    padding: 18px;
+    padding-top: 10px;
+    border-radius: 30px;
+    background-color: white;
+    overflow: hidden;
+
+}
+
+
+
+#how_works{
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;    
+    font-weight: 900;
+    /* background-color: aqua; */
+    font-size: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 90px;
+    font-style: italic;
+}
+#d{
+    
+    color: #3C172A;
+    display: flex;
+    justify-content: center;
+   
+
+}
+
+#e{
+    color: #FF2E6D !important;
+    
+    /* text-decoration: underline; */
+    /* text-decoration-thickness: 10px; */
+   
+}
+
+#vertical_cards{
+    position: relative;
+   height: 2000px; 
+   width: 100%;
+   background-color: #F2F2F2;
+   margin: 0;
+   padding: 0;
+   position: relative;
+   
+}
+
+
+
+#cimg{
+    height: 70%;
+    width: 37%;
+    /* background-color: #FF2E6D; */
+}
+
+#ctst{
+    height: 70%;
+    width: 50%;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 10px;
+}
+
+#cimg img{
+    height: 100%;
+    width: 100%;
+}
+
+#no {
+    display: flex;
+    justify-content: center;  /* Centers text horizontally */
+    align-items: center;  /* Centers text vertically */
+    
+    height: 30px;
+    width: 70px;
+    color: #ffffff;
+    border-radius: 30px;
+    background-color: #FF2E6D;
+    font-weight: bold; /* Ensures text is bold */
+}
+
+
+
+#card1{
+    position: sticky;
+    top: 1600;
+    height: 280px;
+    width: 50%;
+   background-color: rgb(255, 255, 255); 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   justify-content: space-around;
+   position: absolute;
+   margin-top: 20px;
+   right: 335px;
+   border-radius: 35px;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+#card2{
+    position: sticky;
+    top: 2000;
+    height: 280px;
+    width: 50%;
+   background-color: rgb(255, 255, 255); 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   justify-content: space-around;
+   position: absolute;
+   margin-top: 290px;
+   right: 335px;
+   border-radius: 35px;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+
+
+#card3{
+    position: sticky;
+    top: 1800;
+    height: 280px;
+    width: 50%;
+   background-color: rgb(255, 255, 255); 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   justify-content: space-around;
+   position: absolute;
+   margin-top: 290px;
+   right: 335px;
+   border-radius: 35px;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}

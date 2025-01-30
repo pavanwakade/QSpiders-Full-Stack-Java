@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snabbit - India's First Quick Service App</title>
+    <link rel="shortcut icon" href="/snabbit/Assets/snabbit_logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5D0F36;
+            --secondary: #FF2E6D;
+            --dark: #3C172A;
+            --light: #F2F2F2;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            color: var(--primary);
+        }
+
+        .nav {
+            position: fixed;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(800px, 90%);
+            padding: 1rem 2rem;
+            background: var(--white);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--secondary);
+        }
+
+        .hero {
+            min-height: 800px;
+            background: var(--light);
+            position: relative;
+            padding: 150px 5% 0;
+            overflow: hidden;
+        }
+
+        .hero__content {
+            max-width: 470px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero__title {
+            font-family: 'Sofia Sans Extra Condensed', sans-serif;
+            font-weight: 900;
+        }
+
+        .hero__title-first {
+            font-size: 40px;
+            color: var(--dark);
+        }
+
+        .hero__title-highlight {
+            font-size: 72px;
+            color: var(--secondary);
+            text-decoration: underline;
+            text-decoration-thickness: 10px;
+        }
+
+        .hero__title-last {
+            font-size: 72px;
+            color: var(--dark);
+        }
+
+        .hero__description {
+            margin-top: 1rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .services {
+            padding: 4rem 5%;
+            background: var(--primary);
+        }
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card__image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .service-card__title {
+            padding: 1rem;
+            text-align: center;
+            font-size: 14px;
+            color: #747171;
+        }
+
+        .steps {
+            padding: 4rem 5%;
+            background: var(--light);
+        }
+
+        .steps__title {
+            font-family: 'Sofia Sans Extra Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 72px;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .steps__title span:last-child {
+            color: var(--secondary);
+        }
+
+        .step-card {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            background: var(--white);
+            border-radius: 35px;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-card__image {
+            width: 37%;
+            object-fit: cover;
+        }
+
+        .step-card__content {
+            flex: 1;
+        }
+
+        .step-card__number {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 30px;
+            margin-bottom: 1rem;
+        }
+
+        .step-card__title {
+            font-family: 'Sofia Sans Extra Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card__description {
+            color: rgba(93, 15, 54, 0.7);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem;
+            }
+
+            .hero__title-highlight,
+            .hero__title-last {
+                font-size: 48px;
+            }
+
+            .step-card {
+                flex-direction: column;
+            }
+
+            .step-card__image {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="https://snabbit.com/">
+            <img src="/snabbit/Assets/snabbit-icon.svg" alt="Snabbit">
+        </a>
+        <a href="#why-us">Why us?</a>
+        <a href="#faqs">FAQs</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">
+                <span class="hero__title-first">INDIA'S FIRST</span>
+                <span class="hero__title-highlight">QUICK</span>
+                <span class="hero__title-last">SERVICE APP</span>
+            </h1>
+            <p class="hero__description">
+                On-demand home services to empower urban households
+            </p>
+        </div>
+        <!-- Note: Images from the original layout should be positioned here -->
+    </section>
+
+    <section class="services" id="services">
+        <div class="services__grid">
+            <div class="service-card">
+                <img src="https://snabbit.com/assets/services/Fan%20Cleaning.png" alt="Fan Cleaning" class="service-card__image">
+                <h3 class="service-card__title">Fan Cleaning</h3>
+            </div>
+            <div class="service-card">
+                <img src="https://snabbit.com/assets/services/General%20Cleaning.png" alt="General Cleaning" class="service-card__image">
+                <h3 class="service-card__title">General Cleaning</h3>
+            </div>
+            <div class="service-card">
+                <img src="https://snabbit.com/assets/services/Laundry.png" alt="Laundry" class="service-card__image">
+                <h3 class="service-card__title">Laundry</h3>
+            </div>
+            <div class="service-card">
+                <img src="https://snabbit.com/assets/services/Dishwashing.png" alt="Dishwashing" class="service-card__image">
+                <h3 class="service-card__title">Dishwashing</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps" id="how-it-works">
+        <h2 class="steps__title">
+            <span>HOW SNABBIT</span>
+            <span>WORKS?</span>
+        </h2>
+        
+        <div class="step-card">
+            <img src="/snabbit/Assets/card1.png" alt="Step 1" class="step-card__image">
+            <div class="step-card__content">
+                <span class="step-card__number">STEP 1</span>
+                <h3 class="step-card__title">SNABBIT YOUR WAY</h3>
+                <p class="step-card__description">
+                    Need help now? Get a Snabbit expert at your doorstep in just 15 minutes. Prefer a later time? Schedule what works best for you.
+                </p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <img src="/snabbit/Assets/card1.png" alt="Step 2" class="step-card__image">
+            <div class="step-card__content">
+                <span class="step-card__number">STEP 2</span>
+                <h3 class="step-card__title">SNABBIT YOUR WAY</h3>
+                <p class="step-card__description">
+                    Need help now? Get a Snabbit expert at your doorstep in just 15 minutes. Prefer a later time? Schedule what works best for you.
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
