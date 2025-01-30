@@ -231,6 +231,7 @@ public class SignIn extends JFrame {
 //				ImageIcon icon = new ImageIcon("D:\\coding with pavan\\Qspiders\\java\\newInternship\\res\\linkdein2.jpg");
 				ImageIcon icon = new ImageIcon("res/linkdein2.jpg");
 
+				
 				Image image = icon.getImage();
 
 				double panalwidth = getWidth();
