@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            height: 100vh;
+            width: 100%;
+        }
+        section{
+            background-color: yellow;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-around;
+
+        }
+    .me{
+    background-color: aqua;
+    height: 50%;
+    width: 200px;
+    }
+
+    @media (max-width:600px) {
+        section{
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .me{
+            width: 70%;
+            height: 200px;
+            
+        }
+    }
+    </style>
+</head>
+<body>
+    <section>
+    <div class="me"></div>
+    <div class="me"></div>
+    <div class="me"></div>
+    <div class="me"></div>
+    <div class="me"></div>
+
+</section>
+</body>
+</html>

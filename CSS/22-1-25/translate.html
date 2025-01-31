@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transitions and Transformations</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+        }
+        .translate {
+            background-color: #ff5733;
+        }
+        .translate:hover {
+            transform: translateX(50px);
+        }
+        .scale {
+            background-color: #33ff57;
+        }
+        .scale:hover {
+            transform: scale(1.5);
+        }
+        .rotate {
+            background-color: #3357ff;
+        }
+        .rotate:hover {
+            transform: rotate(45deg);
+        }
+        .skew {
+            background-color: #ff33a1;
+        }
+        .skew:hover {
+            transform: skewX(20deg);
+        }
+        .rotate-scale {
+            background-color: #ffd700;
+        }
+        .rotate-scale:hover {
+            transform: rotate(30deg) scale(1.2);
+        }
+        .translate-rotate {
+            background-color: #00ced1;
+        }
+        .translate-rotate:hover {
+            transform: translateY(-20px) rotate(-15deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box translate">Move</div>
+        <div class="box scale">Scale</div>
+        <div class="box rotate">Rotate</div>
+        <div class="box skew">Skew</div>
+        <div class="box rotate-scale">Rotate & Scale</div>
+        <div class="box translate-rotate">Move & Rotate</div>
+    </div>
+</body>
+</html>

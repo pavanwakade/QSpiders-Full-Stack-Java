@@ -243,3 +243,11 @@ input::placeholder {
     display: block;
 } */
 
+
+
+@media(max-width:600px){
+    #header{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
