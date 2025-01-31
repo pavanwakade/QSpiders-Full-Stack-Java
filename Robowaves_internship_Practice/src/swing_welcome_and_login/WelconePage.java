@@ -152,8 +152,8 @@ public class WelconePage extends JFrame {
 		if (option == JOptionPane.YES_OPTION) {
 			
 			new SignIn();
-			JOptionPane.showConfirmDialog(null, "SucessFull Loged", "Susess", JOptionPane.YES_NO_OPTION,
-					JOptionPane.INFORMATION_MESSAGE);
+//			JOptionPane.showConfirmDialog(null, "SucessFull Loged", "Susess", JOptionPane.YES_NO_OPTION,
+//					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

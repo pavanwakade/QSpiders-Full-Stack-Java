@@ -33,16 +33,13 @@ public class SignIn extends JFrame {
 		initializeComponant();
 		addComponant();
 		setupListner();
+
+		setVisible(true);
+
 	}
 
-	
-	
-	
-	
-	
 	public void setupFrame() {
 		setSize(700, 500);
-		setVisible(true);
 		setContentPane(createBAckgroundImage());
 	}
 
@@ -68,10 +65,6 @@ public class SignIn extends JFrame {
 
 	}
 
-	
-	
-	
-	
 	private void addFormRow(String labletext, JComponent componant, JPanel formepanal) {
 
 		JPanel rowpanal = new JPanel();
@@ -91,10 +84,6 @@ public class SignIn extends JFrame {
 
 	}
 
-	
-	
-	
-	
 	private void initializeComponant() {
 		userNameField = createStyedTextField(20);
 
@@ -105,10 +94,6 @@ public class SignIn extends JFrame {
 		signinButton = createStyleButton("Sign-In", Color.magenta);
 	}
 
-	
-	
-	
-	
 	private JTextField createStyedTextField(int widthCols) {
 		JTextField textField = new JTextField(widthCols);
 		textField.setBackground(new Color(20, 20, 20));
@@ -118,24 +103,16 @@ public class SignIn extends JFrame {
 		return textField;
 	}
 
-	
-	
-	
-	
 	private JCheckBox createStyleCheckbox(String text) {
 		JCheckBox checkbox = new JCheckBox(text);
 		checkbox.setBackground(new Color(30, 30, 30));
 		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
-		checkbox.setForeground(new Color(47,129,229));
+		checkbox.setForeground(new Color(47, 129, 229));
 		checkbox.setOpaque(false);
 
 		return checkbox;
 	}
 
-	
-	
-	
-	
 	private JButton createStyleButton(String text, Color bgcolor) {
 		JButton button = new JButton(text);
 		button.setFont(new Font("Arial", Font.BOLD, 15));
@@ -147,16 +124,10 @@ public class SignIn extends JFrame {
 		return button;
 	}
 
-	
-	
-	
 	private void showerrormessage(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
-	
-	
-	
 	private void handleSignin() {
 
 		if (!termsCheckbox.isSelected()) {
@@ -164,17 +135,28 @@ public class SignIn extends JFrame {
 			return;
 		}
 
-		
-		
-		
 		String name = userNameField.getText().strip();
-		
-		String no = mobileNumberField.getText().strip();
-		
-		long phoneNo = Long.parseLong(no);
 
-		String query = "SELECT * FROM sign_in WHERE username='" + name + "' AND mobilenumber=" + phoneNo;
-		
+		String no = mobileNumberField.getText().strip();
+		long phoneNo = 0;
+
+		if (!no.isEmpty()) {
+			try {
+				phoneNo = Long.parseLong(no);
+			} catch (NumberFormatException e) {
+				showerrormessage("Mobile number should contain only digits.");
+				return;
+			}
+		}
+
+		if (name.isEmpty() || no.isEmpty()) {
+			showerrormessage("Please fill all required fields.");
+			return;
+		}
+
+		String query = "SELECT * FROM users WHERE name='" + name + "' AND mobile_number=" + phoneNo;
+//	    String query = "SELECT * FROM users WHERE name='" + name + "' AND mobile_number=" + mobile + " AND destination='" + dest + "'";
+
 		ConeectionJDBC connection = new ConeectionJDBC();
 		try {
 			ResultSet rs = connection.s.executeQuery(query);
@@ -202,10 +184,6 @@ public class SignIn extends JFrame {
 		}
 	}
 
-	
-	
-	
-	
 	void setupListner() {
 
 		signinButton.addActionListener(new ActionListener() {
@@ -218,9 +196,6 @@ public class SignIn extends JFrame {
 		});
 	}
 
-	
-	
-	
 	public JPanel createBAckgroundImage() {
 
 		return new JPanel() {
@@ -231,7 +206,6 @@ public class SignIn extends JFrame {
 //				ImageIcon icon = new ImageIcon("D:\\coding with pavan\\Qspiders\\java\\newInternship\\res\\linkdein2.jpg");
 				ImageIcon icon = new ImageIcon("res/linkdein2.jpg");
 
-				
 				Image image = icon.getImage();
 
 				double panalwidth = getWidth();
@@ -260,10 +234,6 @@ public class SignIn extends JFrame {
 			}
 		};
 	}
-	
-	
-	
-	
 
 	public static void main(String[] args) {
 		new SignIn();
