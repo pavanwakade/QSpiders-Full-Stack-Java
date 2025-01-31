@@ -126,7 +126,7 @@ public class SignIn extends JFrame {
 		JCheckBox checkbox = new JCheckBox(text);
 		checkbox.setBackground(new Color(30, 30, 30));
 		checkbox.setFont(new Font("Arial", Font.BOLD, 15));
-		checkbox.setForeground(Color.WHITE);
+		checkbox.setForeground(new Color(47,129,229));
 		checkbox.setOpaque(false);
 
 		return checkbox;
