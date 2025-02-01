@@ -38,7 +38,7 @@ public class SignUp extends JFrame {
 	private JButton signup, cancle;
 	private JComboBox<String> destination;
 
-	ConeectionJDBC connection = new ConeectionJDBC();
+	static ConeectionJDBC connection = new ConeectionJDBC();
 
 	public SignUp() {
 
@@ -96,7 +96,8 @@ public class SignUp extends JFrame {
 
 		signup = createStyleButton("Create Account");
 
-		String[] combo = { "Select Destination", "Assosiate Software Developer", "Full Stack Developer" };
+		String[] combo = { "Select Destination","Software Developer/Engineer", "Full Stack Developer", "Front End Developer", "Back End Developer", "Mobile App Developer", "DevOps Engineer", "Cybersecurity Engineer", "Data Analyst", "Database Administrator", "UI/UX Designer", "AI/Machine Learning Engineer","Tester"};
+
 		destination = new JComboBox<String>(combo);
 		createStyleCombobox(destination);
 
@@ -130,78 +131,8 @@ public class SignUp extends JFrame {
 		add(formPanel);
 	}
 
-	private void handlesignup() {
-
-		String name = usernameField.getText().trim();
-		String mob = mobnoField.getText().trim();
-		String dest = (String) destination.getSelectedItem();
-		long mobile = 0;
-
-		if (!mob.isEmpty()) {
-			try {
-				mobile = Long.parseLong(mob);
-			} catch (NumberFormatException e) {
-				showErrorMessage("Mobile number should contain only digits.");
-				return;
-			}
-		}
-
-		if (!checkbox.isSelected()) {
-			showErrorMessage("Agree to the terms and conditions.");
-			return;
-		}
-
-		if (name.isEmpty() || mob.isEmpty() || dest.equals("Select Destination")) {
-			showErrorMessage("Please fill all required fields.");
-			return;
-		}
-
-		String query = "SELECT * FROM users WHERE name='" + name + "' AND mobile_number=" + mobile
-				+ " AND destination='" + dest + "'";
-
-		try {
-			ResultSet rs = connection.s.executeQuery(query);
-
-			if (rs.next()) {
-				showSuccessMessage("Account Already Present");
-			} else {
-				String insert = "INSERT INTO users (name, destination, mobile_number) VALUES (?, ?, ?)";
-				PreparedStatement conn = connection.c.prepareStatement(insert);
-				conn.setString(1, name);
-				conn.setString(2, dest);
-				conn.setLong(3, mobile);
-				conn.executeUpdate();
-
-				ResultSet rsCheck = connection.s.executeQuery(query);
-
-				if (rsCheck.next()) {
-					showSuccessMessage("Account Created Successfully!");
-				} else {
-					showErrorMessage("Failed to create account. Please try again.");
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (connection.c != null) {
-					connection.c.close();
-					System.out.println("Database connection closed.");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private void showSuccessMessage(String msg) {
-
-		JOptionPane.showConfirmDialog(null, msg, "Susess", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-	}
-
-	private void showErrorMessage(String msg) {
-		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
-	}
+	
+	
 
 	private void createStyleCombobox(JComboBox<String> dest) {
 
@@ -284,6 +215,72 @@ public class SignUp extends JFrame {
 		};
 
 	}
+	
+	private void handlesignup() {
+
+		String name = usernameField.getText().trim();
+		String mob = mobnoField.getText().trim();
+		String dest = (String) destination.getSelectedItem();
+		long mobile = 0;
+
+		if (!mob.isEmpty()) {
+			try {
+				mobile = Long.parseLong(mob);
+			} catch (NumberFormatException e) {
+				showErrorMessage("Mobile number should contain only digits.");
+				return;
+			}
+		}
+
+		if (!checkbox.isSelected()) {
+			showErrorMessage("Agree to the terms and conditions.");
+			return;
+		}
+
+		if (name.isEmpty() || mob.isEmpty() || dest.equals("Select Destination")) {
+			showErrorMessage("Please fill all required fields.");
+			return;
+		}
+
+		String query = "SELECT * FROM users WHERE name='" + name + "' AND mobile_number=" + mobile
+				+ " AND destination='" + dest + "'";
+
+		try {
+			ResultSet rs = connection.s.executeQuery(query);
+
+			if (rs.next()) {
+				showSuccessMessage("Account Already Present");
+			} else {
+				String insert = "INSERT INTO users (name, destination, mobile_number) VALUES (?, ?, ?)";
+				PreparedStatement conn = connection.c.prepareStatement(insert);
+				conn.setString(1, name);
+				conn.setString(2, dest);
+				conn.setLong(3, mobile);
+				conn.executeUpdate();
+
+				ResultSet rsCheck = connection.s.executeQuery(query);
+
+				if (rsCheck.next()) {
+					showSuccessMessage("Account Created Successfully!");
+					dispose();
+				} else {
+					showErrorMessage("Failed to create account. Please try again.");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection.c != null) {
+					connection.c.close();
+					System.out.println("Database connection closed.");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 	void setupActionListnear() {
 		signup.addActionListener(new ActionListener() {
@@ -312,6 +309,17 @@ public class SignUp extends JFrame {
 		});
 	}
 
+	
+	private void showSuccessMessage(String msg) {
+
+		JOptionPane.showConfirmDialog(null, msg, "Susess", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+
+	private void showErrorMessage(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+		
+	}
 	public static void main(String[] args) {
 
 		SwingUtilities.invokeLater(new Runnable() {

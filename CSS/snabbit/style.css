@@ -31,6 +31,8 @@ header{
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
+
 #nav a{
     text-decoration: none;
 }
@@ -60,6 +62,9 @@ header{
     background-color: #F2F2F2;
     /* position: relative; */
 }
+
+
+
 
 #quot {
     font-family: 'Sofia Sans Extra Condensed', sans-serif;    
@@ -597,4 +602,15 @@ margin-top: 30px;
 
 
 
+@media (max-width:600px) {
+    
+    header{
+width: 90%;
+margin: auto;
+   
+}
 
+#firstbanner_cleaner{
+    
+}
+}

@@ -68,7 +68,7 @@ public class SignIn extends JFrame {
 	private void addFormRow(String labletext, JComponent componant, JPanel formepanal) {
 
 		JPanel rowpanal = new JPanel();
-		rowpanal.setLayout(new BoxLayout(rowpanal, BoxLayout.Y_AXIS));
+		rowpanal.setLayout(new BoxLayout(rowpanal, BoxLayout.X_AXIS));
 		rowpanal.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lable = new JLabel(labletext);
