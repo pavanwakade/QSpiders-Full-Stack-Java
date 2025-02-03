@@ -1,4 +1,4 @@
-# Java Swing and AWT Interview Guide
+# Java Swing and AWT Notes 
 
 ## Table of Contents
 - [Basic Concepts](#basic-concepts)
