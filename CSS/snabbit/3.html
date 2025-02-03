@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Resume Builder</h2>
+
+            <!-- Personal Info Section -->
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" placeholder="Enter full name" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter email" />
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" placeholder="Enter phone number" />
+            </div>
+
+            <div class="form-group">
+                <label for="github">GitHub:</label>
+                <input type="url" id="github" placeholder="Enter GitHub link" />
+            </div>
+
+            <div class="form-group">
+                <label for="objective">Objective:</label>
+                <textarea id="objective" placeholder="Enter your objective"></textarea>
+            </div>
+
+            <h3>Achievements:</h3>
+            <div id="achievements-container"></div>
+            <button onclick="addAchievement()">Add Achievement</button>
+
+            <h3>Skills:</h3>
+            <div id="skills-container"></div>
+            <button onclick="addSkill()">Add Skill</button>
+
+            <h3>Projects:</h3>
+            <div id="projects-container"></div>
+            <button onclick="addProject()">Add Project</button>
+
+            <h3>Education:</h3>
+            <div id="education-container"></div>
+            <button onclick="addEducation()">Add Education</button>
+
+            <button id="download-btn" onclick="downloadPDF()">Download PDF</button>
+        </div>
+
+        <div class="preview-container">
+            <h2>Preview</h2>
+            <div id="resume-preview"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
