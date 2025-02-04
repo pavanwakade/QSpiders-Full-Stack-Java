@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\Admin\Desktop"/>
+			<item value="C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\hibernate\food_app"/>
+			<item value="C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\hibernate"/>
 			<item value="D:\coding with pavan\Qspiders\QSpiders-Full-Stack-Java\hibernate"/>
 			<item value="D:\coding with pavan\Qspiders\Hibernate"/>
 		</list>
@@ -46,24 +49,25 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="foodapp"/>
 			<item value="food"/>
 			<item value="hy"/>
 			<item value="hh"/>
 			<item value="hj"/>
 			<item value="projects"/>
 			<item value="foodappprojects"/>
-			<item value="foodapp"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="foodapp"/>
+			<item value="foodaddDB"/>
 			<item value="app"/>
 			<item value="m"/>
 			<item value="h"/>
 			<item value="hjh"/>
 			<item value="foodappinhibernet"/>
 			<item value="foodappproject"/>
-			<item value="foodapp"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
