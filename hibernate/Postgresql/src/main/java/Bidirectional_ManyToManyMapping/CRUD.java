@@ -1,12 +1,14 @@
 package Bidirectional_ManyToManyMapping;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class CRUD {
 
@@ -24,6 +26,8 @@ public class CRUD {
 
 //		insertdata();
 //		updateData();
+//		fetchallstudent();
+//		fetchallsubject();
 		deleteData();
 
 	}
@@ -92,21 +96,77 @@ public class CRUD {
 		Subjects sub = em.find(Subjects.class, 102);
 		Students stu = em.find(Students.class, 2);
 
-		if (sub == null && stu == null) {
-			System.out.println("No records found for deletion.");
-			return;
+		if (sub != null && stu != null) {
+			List<Subjects> sublist = stu.getSub();
+
+			Iterator<Subjects> subiterator = sublist.iterator();
+
+			while (subiterator.hasNext()) {
+				Subjects subj = subiterator.next();
+				
+				if (subj.getId() == sub.getId()) {
+					subiterator.remove();
+					break;
+				}
+			}
+			stu.setSub(sublist);
+
+			List<Students> stulist = sub.getStu();
+
+			Iterator<Students> stuiterator = stulist.iterator();
+
+			while (stuiterator.hasNext()) {
+				Students stude = stuiterator.next();
+				if (stude.getId() == stu.getId()) {
+					stuiterator.remove();
+					break;
+				}
+			}
+			sub.setStu(stulist);
+
 		}
 
 		et.begin();
-
-		if (sub != null) {
-			em.remove(sub);
-			System.out.println("Subject & student record deleted successfully.");
-		}
-
-		
-
+		em.merge(sub);
+		em.merge(stu);
 		et.commit();
+		System.out.println("Subject & student record deleted successfully.");
+	}
+
+	public static void fetchallstudent() {
+
+		Query query = em.createQuery("select e from Students e");
+
+		List<Students> stuList = query.getResultList();
+
+		if (stuList != null) {
+
+			for (Students students : stuList) {
+//				System.out.println(students.getId());
+//				System.out.println(students.getName());
+//				System.out.println(students.getClass());
+				System.out.println(students);
+			}
+		} else {
+			System.out.println("Students is not presents");
+		}
+	}
+
+	public static void fetchallsubject() {
+
+		Query query = em.createQuery("select e from Subjects e");
+
+		List<Subjects> subList = query.getResultList();
+
+		if (subList != null) {
+
+			for (Subjects subjects : subList) {
+
+				System.out.println(subjects);
+			}
+		} else {
+			System.out.println("subjects is not presents");
+		}
 	}
 
 }

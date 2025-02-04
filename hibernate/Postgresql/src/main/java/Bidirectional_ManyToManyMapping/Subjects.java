@@ -17,7 +17,8 @@ public class Subjects {
 	private String name;
 	
 	@JoinTable
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "sub")
+
 //	@ManyToMany
 	private List<Students> stu;
 

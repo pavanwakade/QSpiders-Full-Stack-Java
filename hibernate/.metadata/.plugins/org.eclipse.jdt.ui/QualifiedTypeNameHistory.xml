@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="CRUDOperationOnPostgresql.cardata"/>
-    <fullyQualifiedTypeName name="relationship.OneToOneRelatoion.Adharcard"/>
-    <fullyQualifiedTypeName name="relationship.OneToOneRelatoion.Persion"/>
     <fullyQualifiedTypeName name="org.hibernate.mapping.List"/>
     <fullyQualifiedTypeName name="relationship.oneTomanyRelationship.Bank"/>
     <fullyQualifiedTypeName name="java.lang.VerifyError"/>
@@ -37,21 +33,12 @@
     <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
     <fullyQualifiedTypeName name="hiberPostgresql.SecontLevelCatche"/>
     <fullyQualifiedTypeName name="bidirectional_OneToMany_ManyToOne_Mapping.insert"/>
-    <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Students"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Subjects"/>
-    <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
     <fullyQualifiedTypeName name="java.awt.Menu"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.CascadeType"/>
     <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
-    <fullyQualifiedTypeName name="javax.persistence.Table"/>
-    <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="food_App.entitys.Users"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="javax.persistence.Id"/>
-    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
-    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
@@ -60,4 +47,17 @@
     <fullyQualifiedTypeName name="java.util.logging.ErrorManager"/>
     <fullyQualifiedTypeName name="javax.persistence.EntityTransaction"/>
     <fullyQualifiedTypeName name="food_App.dao.Helper"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="java.security.Identity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="foodapp.Entity.users"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Subjects"/>
+    <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Students"/>
+    <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
 </qualifiedTypeNameHistroy>

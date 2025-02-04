@@ -13,11 +13,12 @@ public class Students {
 	private int id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "stu")
+	@ManyToMany()
+
 	private List<Subjects> sub;
 
 	public Students() {
-		super();
+		super(); 
 	}
 
 	public int getId() {
