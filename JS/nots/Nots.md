@@ -1,4 +1,4 @@
-## History of JavaScript  
+## History of JavaScript  (**3-2-25**)
 - **1995**: JavaScript was created by **Brendan Eich** while working at **Netscape Corporation**.  
   - Initially called **Mocha**, then renamed **LiveScript**, and finally **JavaScript** in the same year.  
 - **1997**: JavaScript was handed over to **ECMA (European Computer Manufacturers Association)** for standardization.  
@@ -6,9 +6,9 @@
   - ECMA is a **non-profit organization** responsible for maintaining and evolving the **ECMAScript standard**.  
 
 ## JavaScript Features  
-- **High-Level**: Simplifies low-level operations for ease of use.  
+- **High-Level**: portability,readabilitya,writyabiloty,Simplifies low-level operations for ease of use.  
 - **Object-Oriented & Object-Based**: Supports **prototype-based inheritance**.  
-- **Single-Threaded**: Executes one operation at a time.  
+- **Single-Threaded**: Executes one Task(operation) at a time.  
 - **Synchronous (by default)**: Executes code sequentially.  
 - **Interpreted & Just-in-Time (JIT) Compiled**:  
   - Initially, JavaScript was interpreted.  
@@ -36,19 +36,45 @@
 
 ## Ways to Add JavaScript
 1. **Internal** - Write JavaScript code inside the **script** tag within an HTML file.
+
 2. **External** - Create a separate file with a **.js** extension and link it to the HTML file using the **script** tag.
 
 ## Tokens
-- Tokens are the smallest unit of a programming language.
+- Tokens are the smallest unit of a programming language.(;,...)
 
 ### Types of Tokens
-1. **Keywords** - Reserved words recognized by the JavaScript engine (e.g., `let`, `var`, `const`, `function`).
+1. **Keywords** - Reserved words or pre defined words recognized by the JavaScript engine (e.g., `let`, `var`, `const`, `function`).
+
 2. **Identifiers** - Names given by the programmer to JavaScript members like variables, objects, and functions.
+
 3. **Literals** - Fixed values or data in JavaScript.
    - **Primitive Literals**: Numbers, Booleans, Undefined, Null, Strings, NaN, Symbols.
    - **Non-Primitive Literals**: Objects, Arrays, Functions.
+
 4. **Operators** - Symbols that perform operations on operands (e.g., `+`, `-`, `*`, `/`).
+
 5. **Separators** - Symbols used to separate code elements (e.g., `{}`, `()`, `,`, `;`).
+
 6. **Comments** - Used to add explanations or disable code execution (e.g., `// single-line`, `/* multi-line */`).
+
 7. **Punctuators** - Symbols that define structure (e.g., `[]`, `{}`, `()`).
+
+
+
+**4-2-25**
+
+## variavles
+1.var   (eg var=10; var name="pavan"; 
+2.let
+3.const
+
+
+| Variable Type | Declaration | Initialization | Decl. & Init. | Updation | Redecl. & Reinit. |
+|-------------- |-------------|---------------|--------------|----------|------------------   |
+| **var**       | ✅          | ✅            | ✅           | ✅        | ✅              |
+|---------------|-------------|----------------|---------------|-----------|------------------|
+| **let**       | ✅          | ✅            | ✅           | ✅        | ❌              |
+|---------------|-------------|----------------|---------------|-----------|------------------|
+| **const**     | ❌          | ✅            | ✅           | ❌        | ❌              |
+|-------------- |-------------|--------------- |--------------|------------|------------------|
 
