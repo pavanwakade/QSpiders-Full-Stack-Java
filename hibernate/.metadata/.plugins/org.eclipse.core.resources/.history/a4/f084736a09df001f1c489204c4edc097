@@ -1,0 +1,12 @@
+package hiberPostgresql;
+
+import javax.persistence.EntityManagerFactory;
+
+public class Annotations {
+
+	public static void main(String[] args) {
+	EntityManagerFactory emf=Persista
+
+	}
+
+}

@@ -1,0 +1,8 @@
+package Bidirectional_ManyToManyMapping;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Subject {
+
+}

@@ -1,0 +1,42 @@
+package bidirectionalOneToManyMapping;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+
+public class insert {
+
+	public static void main(String[] args) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("pavan");
+
+		EntityManager em = emf.createEntityManager();
+
+		EntityTransaction et = em.getTransaction();
+		
+		
+		
+		Banks bk = new Banks();
+
+		bk.setId(101);
+		bk.setName("SBI");
+		bk.setAdd("pune");
+		
+
+		Accounts ac = new Accounts();
+
+		ac.setId(1);
+		ac.setName("jivan");
+		ac.setBalance(1000);
+		ac.setBank(bk);
+		
+
+		
+		
+		
+
+	}
+
+}

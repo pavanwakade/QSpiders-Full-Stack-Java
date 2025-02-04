@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Hibernate/src/main/resources/META-INF/persistencem.xml&apos; to &apos;MySQL.xml&apos;" description="Rename resource &apos;persistencem.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/META-INF/persistencem.xml" name="MySQL.xml" stamp="1737270445857" updateReferences="true"/>
+</session>

@@ -1,0 +1,11 @@
+package bidirectionalOneToManyMapping;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Banks {
+
+	@Id
+	private int id;
+}

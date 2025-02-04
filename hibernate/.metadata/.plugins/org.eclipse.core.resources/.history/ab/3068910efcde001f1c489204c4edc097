@@ -1,0 +1,18 @@
+package Bidirectional_ManyToManyMapping;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Subjects {
+
+	
+	@Id
+	private int id;
+	
+	private String name;
+	
+	private List<Students> stu;
+}

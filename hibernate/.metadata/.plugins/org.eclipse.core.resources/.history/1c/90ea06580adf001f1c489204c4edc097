@@ -1,0 +1,32 @@
+package Annotations_All;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
+@Table(name = "teacher_table")
+public class Teacher {
+
+	@Id
+	private int id;
+	
+	@Column(name = "Teacher_name")
+	private String name;
+	
+	
+	@Column(name = "Teacher_phonenumber",nullable = false,unique = true,updatable = false)
+	private long phone;
+	
+	@CreationTimestamp
+	private LocalDateTime createtime;
+	
+	@UpdateTimestamp
+	private LocalDateTime updateTime;
+}

@@ -1,0 +1,55 @@
+package Bidirectional_ManyToManyMapping;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class Students {
+
+	@Id
+	private int id;
+	
+	private String name;
+	
+	@ManyToMany
+	private List<Subjects> sub;
+
+	public Students() {
+		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<Subjects> getSub() {
+		return sub;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSub(List<Subjects> sub) {
+		this.sub = sub;
+	}
+
+	@Override
+	public String toString() {
+		return "Students [id=" + id + ", name=" + name + "]";
+	}
+	
+	
+	
+}

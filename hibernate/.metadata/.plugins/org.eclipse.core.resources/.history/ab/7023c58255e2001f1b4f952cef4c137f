@@ -1,0 +1,9 @@
+package projrct_foodApp.Entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class User_Table {
+
+	
+}

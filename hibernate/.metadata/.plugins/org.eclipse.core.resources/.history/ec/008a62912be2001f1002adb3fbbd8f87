@@ -1,0 +1,5 @@
+package projrct_foodApp.Entity;
+
+public class User_Table {
+
+}

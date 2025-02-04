@@ -1,0 +1,123 @@
+package Bidirectional_ManyToManyMapping;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
+public class CRUD {
+
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pavan");
+    static EntityManager em = emf.createEntityManager();
+    static EntityTransaction et = em.getTransaction();
+
+    public static void insertData() {
+        try {
+            Students stu1 = new Students();
+            stu1.setId(1);
+            stu1.setName("Pavan");
+
+            Students stu2 = new Students();
+            stu2.setId(2);
+            stu2.setName("Sonali");
+
+            List<Students> students = new ArrayList<>();
+            students.add(stu1);
+            students.add(stu2);
+
+            Subjects sub1 = new Subjects();
+            sub1.setId(101);
+            sub1.setName("Java");
+
+            Subjects sub2 = new Subjects();
+            sub2.setId(102);
+            sub2.setName("Python");
+
+            List<Subjects> subjects = new ArrayList<>();
+            subjects.add(sub1);
+            subjects.add(sub2);
+
+            // Setting relationships
+            stu1.setSub(subjects);
+            stu2.setSub(subjects);
+
+            sub1.setStu(students);
+            sub2.setStu(students);
+
+            et.begin();
+            em.persist(stu1);
+            em.persist(stu2);
+            em.persist(sub1);
+            em.persist(sub2);
+            et.commit();
+
+            System.out.println("Data inserted successfully.");
+        } catch (Exception e) {
+            if (et.isActive()) et.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateData() {
+        try {
+            et.begin();
+            Subjects sub = em.find(Subjects.class, 102);
+            if (sub != null) {
+                sub.setName("SQL");
+                em.merge(sub);
+                et.commit();
+                System.out.println("Record updated successfully.");
+            } else {
+                System.out.println("Subject with ID not found.");
+            }
+        } catch (Exception e) {
+            if (et.isActive()) et.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteData() {
+        try {
+            et.begin();
+
+            Subjects sub = em.find(Subjects.class, 102);
+            Students stu = em.find(Students.class, 2);
+
+            if (stu != null && sub != null) {
+                // First remove relationships
+                stu.getSub().remove(sub);
+                sub.getStu().remove(stu);
+
+                // Merge back the updated relationships
+                em.merge(stu);
+                em.merge(sub);
+
+                // Now delete entities
+                em.remove(sub);
+                em.remove(stu);
+
+                et.commit();
+                System.out.println("Record deleted successfully.");
+            } else {
+                System.out.println("Student or Subject with given ID not found.");
+            }
+        } catch (Exception e) {
+            if (et.isActive()) et.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static void closeResources() {
+        if (em != null) em.close();
+        if (emf != null) emf.close();
+    }
+
+    public static void main(String[] args) {
+        try {
+            // insertData();
+            // updateData();
+            deleteData();
+        } finally {
+            closeResources();
+        }
+    }
+}

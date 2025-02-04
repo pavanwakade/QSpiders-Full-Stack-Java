@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="D:\coding with pavan\Qspiders\QSpiders-Full-Stack-Java\hibernate"/>
+			<item value="D:\coding with pavan\Qspiders\Hibernate"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="food"/>
+			<item value="hy"/>
+			<item value="hh"/>
+			<item value="hj"/>
+			<item value="projects"/>
+			<item value="foodappprojects"/>
+			<item value="foodapp"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="app"/>
+			<item value="m"/>
+			<item value="h"/>
+			<item value="hjh"/>
+			<item value="foodappinhibernet"/>
+			<item value="foodappproject"/>
+			<item value="foodapp"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

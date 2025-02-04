@@ -1,0 +1,17 @@
+package asss;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Employees {
+
+	@Id
+	private int id;
+	
+	private String name;
+	
+	private double sal;
+	
+	
+}

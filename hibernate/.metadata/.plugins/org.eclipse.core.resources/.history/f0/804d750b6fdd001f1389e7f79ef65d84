@@ -1,0 +1,5 @@
+package bidirectionalOneToManyMapping;
+
+public class Account {
+
+}

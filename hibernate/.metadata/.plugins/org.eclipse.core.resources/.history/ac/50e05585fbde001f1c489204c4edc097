@@ -1,0 +1,5 @@
+package Bidirectional_ManyToManyMapping;
+
+public class Student {
+
+}

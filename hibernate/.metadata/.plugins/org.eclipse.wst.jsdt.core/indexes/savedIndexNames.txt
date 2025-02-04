@@ -1,0 +1,1 @@
+INDEX VERSION 1.4+D:\coding with pavan\Qspiders\Hibernate\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes

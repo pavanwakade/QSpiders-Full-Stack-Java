@@ -1,0 +1,64 @@
+package Bidirectional_ManyToManyMapping;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class Subjects {
+
+	@Id
+	private int id;
+
+	private String name;
+	
+	@JoinTable
+//	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
+    private List<Students> students = new ArrayList<>();
+
+	public Subjects() {
+		super();
+	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<Students> getStu() {
+		return stu;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStu(List<Students> stu) {
+		this.stu = stu;
+	}
+	
+	public void removeSubject(Subjects subject) {
+        Subjects.remove(subject);
+        subject.getStu().remove(this);
+    }
+
+	@Override
+	public String toString() {
+		return "Subjects [id=" + id + ", name=" + name + "]";
+	}
+
+}

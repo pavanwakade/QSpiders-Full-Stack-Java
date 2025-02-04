@@ -1,0 +1,15 @@
+package hiberPostgresql;
+
+import javax.persistence.Cacheable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Cacheable
+@Entity
+public class SecontLevelCatche {
+
+	@Id
+	private int id;
+	
+	private String  name;
+}

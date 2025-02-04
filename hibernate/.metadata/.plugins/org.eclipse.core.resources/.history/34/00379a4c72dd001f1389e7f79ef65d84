@@ -1,0 +1,68 @@
+package bidirectionalOneToManyMapping;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Banks {
+
+	@Id
+	private int id;
+	
+	private String name;
+	
+	private double balance;
+	
+	
+	@OneToMany
+	private List<Accounts> account;
+
+	public Banks() {
+		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public Accounts getAccount() {
+		return account;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public void setAccount(Accounts account) {
+		this.account = account;
+	}
+
+	@Override
+	public String toString() {
+		return "Banks [id=" + id + ", name=" + name + ", balance=" + balance + "]";
+	}
+	
+	
+	
+	
+}
