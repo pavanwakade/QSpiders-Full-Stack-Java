@@ -76,5 +76,26 @@
 | **let**       | ✅          | ✅            | ✅           | ✅        | ❌              |
 | **const**     | ❌          | ✅            | ✅           | ❌        | ❌              |
 
+
+## JavaScript Data Types  
+JavaScript has **two main categories** of data types:  
+
+### 🔹 **1. Primitive Data Types** (Immutable, Stored by Value)  
+1. **Number** – Integers & Floating-point values  
+2. **String** – Textual data  
+3. **Boolean** – `true` or `false`  
+4. **Undefined** – Variable declared but not assigned  
+5. **Null** – Represents an empty or unknown value  
+6. **Symbol (ES6)** – Unique identifier  
+7. **BigInt (ES11)** – Large integers beyond `Number.MAX_SAFE_INTEGER`  
+
+### 🔹 **2. Non-Primitive (Reference) Data Types** (Mutable, Stored by Reference)  
+8. **Object** – Key-value pairs  
+9. **Array** – Ordered collection of values  
+10. **Function** – Block of reusable code  
+11. **Date** – Represents date & time  
+12. **RegExp** – Regular expressions for pattern matching
+
+
   
 
