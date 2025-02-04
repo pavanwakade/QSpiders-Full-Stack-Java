@@ -68,20 +68,13 @@
 2.let
 3.const
 
+🌟 **JavaScript Variable Behavior Table** 🌟
 
 | Variable Type |Declaration. |Initialization.| Decl & Init. | Updation. | Redecl & Reinit. |
 |-------------- |-------------|---------------|--------------|----------|------------------   |
 | **var**       | ✅          | ✅            | ✅           | ✅        | ✅              |
 | **let**       | ✅          | ✅            | ✅           | ✅        | ❌              |
 | **const**     | ❌          | ✅            | ✅           | ❌        | ❌              |
-|-------------- |-------------|--------------- |--------------|------------|------------------|
 
-🌟 **JavaScript Variable Behavior Table** 🌟  
+  
 
-| 🔹 Feature           | 🌿 `var`  | 🌱 `let`  | 🔥 `const`  |
-|---------------------|:--------:|:--------:|:---------:|
-| **Declaration**      | ✅        | ✅        | ❌        |
-| **Initialization**   | ✅        | ✅        | ✅        |
-| **Decl. & Init.**    | ✅        | ✅        | ✅        |
-| **Updation**         | ✅        | ✅        | ❌        |
-| **Redecl. & Reinit.** | ✅        | ❌        | ❌        |
