@@ -4,10 +4,14 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="Subjects"/>
+			<item value="Students"/>
 			<item value="ac"/>
 			<item value="dev"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Subjectss"/>
+			<item value="Studentss"/>
 			<item value="ac1"/>
 		</list>
 	</section>

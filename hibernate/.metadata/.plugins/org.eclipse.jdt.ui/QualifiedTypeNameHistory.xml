@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.hibernate.mapping.List"/>
     <fullyQualifiedTypeName name="relationship.oneTomanyRelationship.Bank"/>
     <fullyQualifiedTypeName name="java.lang.VerifyError"/>
     <fullyQualifiedTypeName name="relationship.oneTomanyRelationship.Account"/>
@@ -29,7 +28,6 @@
     <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.UpdateTimestamp"/>
     <fullyQualifiedTypeName name="Annotations_All.Teacher"/>
-    <fullyQualifiedTypeName name="javax.persistence.Cacheable"/>
     <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
     <fullyQualifiedTypeName name="hiberPostgresql.SecontLevelCatche"/>
     <fullyQualifiedTypeName name="bidirectional_OneToMany_ManyToOne_Mapping.insert"/>
@@ -57,7 +55,9 @@
     <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
+    <fullyQualifiedTypeName name="javax.persistence.Cacheable"/>
+    <fullyQualifiedTypeName name="foodapp.Entity.User"/>
     <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Subjects"/>
     <fullyQualifiedTypeName name="Bidirectional_ManyToManyMapping.Students"/>
-    <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
 </qualifiedTypeNameHistroy>

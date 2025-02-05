@@ -18,51 +18,49 @@ public class CRUD {
 
 	static EntityTransaction et = em.getTransaction();
 
-	static Subjects sub = new Subjects();
+	static Subjectss sub = new Subjectss();
 
-	static Students stu = new Students();
+	static Studentss stu = new Studentss();
 
 	public static void main(String[] args) {
-
 //		insertdata();
 //		updateData();
 //		fetchallstudent();
 //		fetchallsubject();
-		deleteData();
-
+//		deleteData();
 	}
 
 	public static void insertdata() {
 
-		Students stu1 = new Students();
+		Studentss stu1 = new Studentss();
 		stu1.setId(1);
 		stu1.setName("pavan");
 
-		Students stu2 = new Students();
+		Studentss stu2 = new Studentss();
 		stu2.setId(2);
 		stu2.setName("Sonali");
 
-		List<Students> students = new ArrayList<Students>();
-		students.add(stu1);
-		students.add(stu2);
+		List<Studentss> Studentss = new ArrayList<Studentss>();
+		Studentss.add(stu1);
+		Studentss.add(stu2);
 
-		Subjects sub1 = new Subjects();
+		Subjectss sub1 = new Subjectss();
 		sub1.setId(101);
 		sub1.setName("java");
 
-		Subjects sub2 = new Subjects();
+		Subjectss sub2 = new Subjectss();
 		sub2.setId(102);
 		sub2.setName("python");
 
-		List<Subjects> subjects = new ArrayList<Subjects>();
-		subjects.add(sub1);
-		subjects.add(sub2);
+		List<Subjectss> Subjectss = new ArrayList<Subjectss>();
+		Subjectss.add(sub1);
+		Subjectss.add(sub2);
 
-		stu1.setSub(subjects);
-		stu2.setSub(subjects);
+		stu1.setSub(Subjectss);
+		stu2.setSub(Subjectss);
 
-		sub1.setStu(students);
-		sub2.setStu(students);
+		sub1.setStu(Studentss);
+		sub2.setStu(Studentss);
 
 		et.begin();
 
@@ -76,7 +74,7 @@ public class CRUD {
 
 	public static void updateData() {
 
-		sub = em.find(Subjects.class, 102);
+		sub = em.find(Subjectss.class, 102);
 
 		if (sub != null) {
 
@@ -93,17 +91,17 @@ public class CRUD {
 	}
 
 	public static void deleteData() {
-		Subjects sub = em.find(Subjects.class, 102);
-		Students stu = em.find(Students.class, 2);
+		Subjectss sub = em.find(Subjectss.class, 102);
+		Studentss stu = em.find(Studentss.class, 2);
 
 		if (sub != null && stu != null) {
-			List<Subjects> sublist = stu.getSub();
+			List<Subjectss> sublist = stu.getSub();
 
-			Iterator<Subjects> subiterator = sublist.iterator();
+			Iterator<Subjectss> subiterator = sublist.iterator();
 
 			while (subiterator.hasNext()) {
-				Subjects subj = subiterator.next();
-				
+				Subjectss subj = subiterator.next();
+
 				if (subj.getId() == sub.getId()) {
 					subiterator.remove();
 					break;
@@ -111,12 +109,12 @@ public class CRUD {
 			}
 			stu.setSub(sublist);
 
-			List<Students> stulist = sub.getStu();
+			List<Studentss> stulist = sub.getStu();
 
-			Iterator<Students> stuiterator = stulist.iterator();
+			Iterator<Studentss> stuiterator = stulist.iterator();
 
 			while (stuiterator.hasNext()) {
-				Students stude = stuiterator.next();
+				Studentss stude = stuiterator.next();
 				if (stude.getId() == stu.getId()) {
 					stuiterator.remove();
 					break;
@@ -124,48 +122,49 @@ public class CRUD {
 			}
 			sub.setStu(stulist);
 
+			et.begin();
+			em.merge(sub);
+			em.merge(stu);
+			et.commit();
+			System.out.println("Subject & student record deleted successfully.");
+		} else {
+			System.out.println("student or subject not found");
 		}
-
-		et.begin();
-		em.merge(sub);
-		em.merge(stu);
-		et.commit();
-		System.out.println("Subject & student record deleted successfully.");
 	}
 
 	public static void fetchallstudent() {
 
-		Query query = em.createQuery("select e from Students e");
+		Query query = em.createQuery("select e from Studentss e");
 
-		List<Students> stuList = query.getResultList();
+		List<Studentss> stuList = query.getResultList();
 
 		if (stuList != null) {
 
-			for (Students students : stuList) {
-//				System.out.println(students.getId());
-//				System.out.println(students.getName());
-//				System.out.println(students.getClass());
-				System.out.println(students);
+			for (Studentss Studentss : stuList) {
+//				System.out.println(Studentss.getId());
+//				System.out.println(Studentss.getName());
+//				System.out.println(Studentss.getClass());
+				System.out.println(Studentss);
 			}
 		} else {
-			System.out.println("Students is not presents");
+			System.out.println("Studentss is not presents");
 		}
 	}
 
 	public static void fetchallsubject() {
 
-		Query query = em.createQuery("select e from Subjects e");
+		Query query = em.createQuery("select e from Subjectss e");
 
-		List<Subjects> subList = query.getResultList();
+		List<Subjectss> subList = query.getResultList();
 
 		if (subList != null) {
 
-			for (Subjects subjects : subList) {
+			for (Subjectss Subjectss : subList) {
 
-				System.out.println(subjects);
+				System.out.println(Subjectss);
 			}
 		} else {
-			System.out.println("subjects is not presents");
+			System.out.println("Subjectss is not presents");
 		}
 	}
 
