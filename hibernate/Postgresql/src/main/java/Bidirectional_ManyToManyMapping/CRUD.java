@@ -3,6 +3,7 @@ package Bidirectional_ManyToManyMapping;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,13 +24,59 @@ public class CRUD {
 	static Studentss stu = new Studentss();
 
 	public static void main(String[] args) {
-//		insertdata();
-//		updateData();
-//		fetchallstudent();
-//		fetchallsubject();
-//		deleteData();
+		
+//		choice();
+		
+		
 	}
 
+	
+	public static void choice() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Choice\n1.insert\n2.Update\n3.Show all student\n4.Show all Subject\n5.delete subject from student");
+		int choice=sc.nextInt();
+		switch (choice) {
+		case 1:
+		{
+			insertdata();
+			break;
+
+		}
+		
+		case 2:
+		{
+			updateData();
+			break;
+
+		}
+		
+		case 3:
+		{
+			fetchallstudent();
+			break;
+
+		}
+		
+		case 4:
+		{
+			fetchallsubject();
+			break;
+
+		}
+		
+		case 5:
+		{
+			deleteData();
+			break;
+
+		}
+
+		default:
+			
+			System.out.println();
+			break;
+		}
+	}
 	public static void insertdata() {
 
 		Studentss stu1 = new Studentss();

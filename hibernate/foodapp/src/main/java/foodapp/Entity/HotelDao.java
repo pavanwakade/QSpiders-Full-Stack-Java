@@ -22,11 +22,12 @@ public class HotelDao {
 
 //		fetchHotelAndUser();
 
-		fetchAll();
+//		fetchAll();
 //
 //		updateHotelFromUser();
 
 //		removeHotelFromUser();
+		giveUserToHotel();
 
 	}
 
@@ -57,8 +58,12 @@ public class HotelDao {
 		Hotel hotel = em.find(Hotel.class, 1);
 
 		System.out.println("User: " + user.getName() + " " + "Uid: " + user.getId());
-		System.out.println(".................................");
 		System.out.println("Hotel: " + hotel.getName() + " " + "Hid: " + hotel.getId());
+		
+		System.out.println(".................................");
+
+//		System.out.println(user);
+//		System.out.println(hotel);
 
 	}
 
@@ -70,8 +75,9 @@ public class HotelDao {
 		for (Hotel hotel : hotels) {
 
 			System.out.println("........................");
-			System.out.println(hotel.getId());
-			System.out.println(hotel.getName());
+//			System.out.println(hotel.getId());
+//			System.out.println(hotel.getName());
+			System.out.println(hotel);
 			System.out.println("........................");
 
 		}
@@ -83,11 +89,16 @@ public class HotelDao {
 		for (Users user : users) {
 
 			System.out.println("........................");
-			System.out.println(user.getId());
-			System.out.println(user.getName());
+//			System.out.println(user.getId());
+//			System.out.println(user.getName());
+			
+			System.out.println(user);
 			System.out.println("........................");
 		}
 	}
+	
+	
+	
 
 	public static void updateHotelFromUser() {
 		Users user = em.find(Users.class, 2);
@@ -100,6 +111,8 @@ public class HotelDao {
 		et.commit();
 
 	}
+	
+	
 
 	public static void removeHotelFromUser() {
 		Users user = em.find(Users.class, 1);
@@ -136,4 +149,63 @@ public class HotelDao {
 		em.merge(user);
 		et.commit();
 	}
+	
+	public static void giveUserToHotel(){
+		Users user=em.find(Users.class, 1);
+		Hotel hotel=em.find(Hotel.class, 1);
+		if (user != null && hotel != null) {
+			List<Hotel> hotelList = user.getHotels();
+			hotelList.add(hotel);
+			user.setHotels(hotelList);
+			List<Users> userlist=hotel.getUsers();
+			userlist.add(user);
+			hotel.setUsers(userlist);
+			et.begin();
+			em.merge(user);
+			em.merge(hotel);
+			et.commit();
+			System.out.println("Hotel given to user");
+		}
+		else {
+			System.out.println("user or hotel not find");
+		}
+
+	}
+	
+	
+//	public static void removeUserFromHotel() {
+//		Users user = em.find(Users.class, 1);
+//		Hotel hotel = em.find(Hotel.class, 1);
+//
+//		if (user != null && hotel != null) {
+//
+//			List<Hotel> hotelList = user.getHotels();
+//			Iterator<Hotel> hotelIterator = hotelList.iterator();
+//
+//			while (hotelIterator.hasNext()) {
+//				Hotel h = hotelIterator.next();
+//				if (h.getId() == hotel.getId()) {
+//					hotelIterator.remove();
+//					break;
+//				}
+//			}
+//			user.setHotels(hotelList);
+//
+//			List<Users> userList = hotel.getUsers();
+//			Iterator<Users> userIterator = userList.iterator();
+//
+//			while (userIterator.hasNext()) {
+//				Users u = userIterator.next();
+//				if (u.getId() == user.getId()) {
+//					userIterator.remove();
+//					break;
+//				}
+//			}
+//			hotel.setUsers(userList);
+//		}
+//
+//		et.begin();
+//		em.merge(user);
+//		et.commit();
+//	}
 }
