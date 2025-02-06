@@ -1,6 +1,6 @@
 package Switch;
 import java.util.Scanner;
-public class AllLeapYear 
+public class AllLeapYear
 {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) 
