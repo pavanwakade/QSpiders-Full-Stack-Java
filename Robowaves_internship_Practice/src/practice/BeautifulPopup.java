@@ -7,32 +7,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import javazoom.jl.player.Player;
 
 public class BeautifulPopup {
     private static final int POPUP_INTERVAL = 45 * 60 * 1000; // 45 minutes in milliseconds
     
     // Audio player class for MP3
-    static class MP3Player {
-        public static void playGreeting(String timeOfDay) {
-            new Thread(() -> {
-                try {
-                    String audioFile = "C:\\Users\\Admin\\Desktop\\Qspiders\\QSpiders-Full-Stack-Java\\Robowaves_internship_Practice\\res\\greetings\\" + timeOfDay.toLowerCase() + ".mp3";
-                    FileInputStream fis = new FileInputStream(audioFile);
-                    Player player = new Player(fis);
-                    player.play();
-                    fis.close();
-                } catch (Exception e) {
-                    System.err.println("Error playing audio: " + e.getMessage());
-                }
-            }).start();
-        }
-    }
+    
 
     static class CustomPopup extends JDialog {
         public CustomPopup(String message, String title) {
@@ -106,7 +89,7 @@ public class BeautifulPopup {
             int finalWidth = Math.min(maxWidth, Math.max(minWidth, messageWidth));
 
             setSize(finalWidth, 100);
-            setLocationRelativeTo(null);
+//            setLocationRelativeTo(null);
 
             // Add fade-in effect
             Timer fadeTimer = new Timer();
@@ -152,7 +135,6 @@ public class BeautifulPopup {
                 SwingUtilities.invokeLater(() -> {
                     CustomPopup popup = new CustomPopup("It's time to take a break, Sir! Relax and refresh yourself. 😊☕", "Reminder");
                     popup.setVisible(true);
-                    MP3Player.playGreeting("reminder");
                 });
             }
         }, POPUP_INTERVAL, POPUP_INTERVAL);
@@ -190,7 +172,6 @@ public class BeautifulPopup {
         SwingUtilities.invokeLater(() -> {
             CustomPopup popup = new CustomPopup(greeting + " " + emoji, "Welcome");
             popup.setVisible(true);
-            MP3Player.playGreeting(audioGreeting);
 
         });
     }
