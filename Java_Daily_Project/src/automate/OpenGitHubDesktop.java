@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class OpenGitHubDesktop {
     public static void main(String[] args) {
@@ -31,7 +32,8 @@ public class OpenGitHubDesktop {
                 pb.start();
                 Thread.sleep(8000); // Wait for GitHub Desktop to fully open
                 typeInSummaryAndCommit("updated");
-                pushToOrigin();
+                pushToOrigin(); // Push to origin
+                closeApplication(); // Close the application after pushing
             } catch (IOException | InterruptedException | AWTException e) {
                 e.printStackTrace();
             }
@@ -57,7 +59,6 @@ public class OpenGitHubDesktop {
 
     private static void typeInSummaryAndCommit(String message) throws AWTException {
         Robot robot = new Robot();
-
         // Ensure GitHub Desktop is in focus (Alt + Tab)
         robot.keyPress(KeyEvent.VK_ALT);
         robot.keyPress(KeyEvent.VK_TAB);
@@ -66,7 +67,7 @@ public class OpenGitHubDesktop {
         robot.delay(5000); // Ensure focus on GitHub Desktop
 
         // Move the mouse to the "Summary (required)" field and click
-        robot.mouseMove(220, 540);
+        robot.mouseMove(220, 540); // Adjust these coordinates if necessary
         robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
         robot.delay(1000);
@@ -93,27 +94,60 @@ public class OpenGitHubDesktop {
         }
         System.out.println("Typed in Summary: " + message);
 
-        // Press Enter to Commit
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        // Move to the "Commit to main" button and click
+        robot.mouseMove(300, 700); // Adjust these coordinates if necessary
+        robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
         System.out.println("Commit button pressed!");
+        
+        // Wait for commit process to complete
+        robot.delay(3000);
     }
-
+    
     private static void pushToOrigin() throws AWTException {
         Robot robot = new Robot();
-
-        // Navigate to the "Push origin" button using Shift + Tab
-        for (int i = 0; i < 4; i++) {
+        System.out.println("Looking for Push to origin button using keyboard navigation...");
+        
+        // Wait for the commit to finish and Push to origin button to be available
+        robot.delay(2000);
+        
+        // Use Shift+Tab 8 times to navigate to the Push to origin button
+        System.out.println("Pressing Shift+Tab 8 times to navigate to Push to origin button");
+        for (int i = 0; i < 8; i++) {
             robot.keyPress(KeyEvent.VK_SHIFT);
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_SHIFT);
-            robot.delay(500);
+            robot.delay(500); // Small delay between key presses
         }
-
-        // Press Enter to Push
+        
+        // Press Enter to activate the Push to origin button
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
+        
         System.out.println("Push to origin initiated!");
+        
+        // Wait for push to complete
+        robot.delay(5000);
+    }
+    
+    private static void closeApplication() throws AWTException {
+        Robot robot = new Robot();
+        System.out.println("Closing GitHub Desktop application...");
+        
+        // Wait to ensure push is complete
+        robot.delay(2000);
+        
+        // Press Alt+F4 to close the application
+robot.keyPress(KeyEvent.VK_ALT);
+
+        robot.keyPress(KeyEvent.VK_F4);
+        robot.keyRelease(KeyEvent.VK_F4);
+        robot.keyRelease(KeyEvent.VK_ALT);
+        
+        System.out.println("GitHub Desktop closed successfully!");
+        System.out.println("Commit successfully!");
+        JOptionPane.showMessageDialog(null, "Commit successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
     }
 }
