@@ -180,7 +180,7 @@ public class GitHubDesktop {
         
         int exitCode = process.waitFor();
         if (exitCode != 0) {
-            throw new IOException("Command failed with exit code: " + exitCode);
+            throw new IOException("No Changes Found: " + exitCode);
         }
     }
 }
