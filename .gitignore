@@ -9,3 +9,6 @@ NASA/imp.txt
 NASA/nasa.txt
 NASA/nasa.zip
 NASA/nasa/.gitattributes
+*.md
+*.properties
+*.MF
