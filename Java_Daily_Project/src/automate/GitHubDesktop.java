@@ -1,5 +1,3 @@
-//kjejfhuifh
-//ifhfh
 package automate;
 
 import java.io.BufferedReader;
