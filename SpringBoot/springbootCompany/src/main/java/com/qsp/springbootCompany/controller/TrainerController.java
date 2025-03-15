@@ -45,7 +45,6 @@ public class TrainerController {
 			return "Trainer Deleted Sucessfully";
 		}
 		return "Trainer Not Found";
-
 	}
 	
 //	http://localhost:8080/findbysubject?sub=SpringBoot
