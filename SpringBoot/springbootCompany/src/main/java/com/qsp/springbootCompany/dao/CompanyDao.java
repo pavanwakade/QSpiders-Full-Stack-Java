@@ -39,4 +39,8 @@ public class CompanyDao {
    public List<Company>findByLocation(String location){
 	   return repository.findByLocation(location);
    }
+   
+   public List<Company>findBySalary(double sal){
+	   return repository.findBySalary(sal);
+   }
 }
