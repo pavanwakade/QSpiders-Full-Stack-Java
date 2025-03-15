@@ -49,10 +49,10 @@ public class CompanyService {
 		return null;
 	}
 	
-	public List<Company>FindBySalary(int sal){
-		
-		return dao.findBySalary(sal);
-		
-	}
+//	public List<Company>FindBySalary(int sal){
+//		
+//		return dao.findBySalary(sal);
+//		
+//	}
 
 }

@@ -21,6 +21,8 @@ public class CompanyController {
     @Autowired
     private CompanyService service;
 
+   
+    
 //    http://localhost:8080/company
     @PostMapping("/company")
     public Company saveCompany(@RequestBody Company company) {
@@ -62,11 +64,11 @@ public class CompanyController {
     }
     
     
-    @GetMapping("/findbycustomsalary{salary}")
-    public List<Company>findByCustomSalary(@PathVariable int sal){
-		return service.FindBySalary(sal);
-    	
-    }
+//    @GetMapping("/findbycustomsalary{salary}")
+//    public List<Company>findByCustomSalary(@PathVariable int sal){
+//		return service.FindBySalary(sal);
+//    	
+//    }
     
     
 }

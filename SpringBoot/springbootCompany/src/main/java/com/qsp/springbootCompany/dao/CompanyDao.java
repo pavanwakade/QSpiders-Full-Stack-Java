@@ -40,7 +40,7 @@ public class CompanyDao {
 	   return repository.findByLocation(location);
    }
    
-   public List<Company>findBySalary(double sal){
-	   return repository.findBySalary(sal);
-   }
+//   public List<Company>findBySalary(double sal){
+//	   return repository.findBySalary(sal);
+//   }
 }

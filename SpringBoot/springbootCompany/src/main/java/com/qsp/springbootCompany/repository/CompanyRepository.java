@@ -14,7 +14,7 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
 	 
 	 List<Company> findByName(String name);
 	 
-	 List<Company> findBySalary(double salary);
+//	 List<Company> findBySalary(double salary);
 	 
 //	 
 //	@Query("select c from Company where c.salary=:sal")
