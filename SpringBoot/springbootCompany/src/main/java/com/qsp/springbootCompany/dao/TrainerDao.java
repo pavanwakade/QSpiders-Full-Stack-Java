@@ -32,10 +32,6 @@ public class TrainerDao {
 	}
 	
 	
-	public void deleteTrainer(Trainer trainer) {
-		 repository.delete(trainer);
-	}
-	
 	public List<Trainer> findBySubject(String subject) {
 		return repository.findBySubject(subject);
 	}
@@ -50,4 +46,11 @@ public class TrainerDao {
 		return repository.findByName(name);
 		
 	}
+	
+	public void deleteTrainer(Trainer trainer) {
+		 repository.delete(trainer);
+	}
+	
+	
+	
 }

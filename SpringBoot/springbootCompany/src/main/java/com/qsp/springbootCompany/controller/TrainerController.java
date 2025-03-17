@@ -35,17 +35,6 @@ public class TrainerController {
 		return service.TrainerfondById(id);
 	}
 
-//	http://localhost:8080/deletetrainerbyid?id=3
-	@DeleteMapping("/deletetrainerbyid")
-	public String deleteTrainerById(@RequestParam int id) {
-		Trainer trainer = service.TrainerfondById(id);
-
-		if (trainer != null) {
-			service.deleteTrainer(trainer);
-			return "Trainer Deleted Sucessfully";
-		}
-		return "Trainer Not Found";
-	}
 	
 //	http://localhost:8080/findbysubject?sub=SpringBoot
 	@GetMapping("/findbysubject")
@@ -73,4 +62,23 @@ public class TrainerController {
 	}
 	
 	
-}
+	
+
+//	http://localhost:8080/deletetrainerbyid?id=3
+	@DeleteMapping("/deletetrainerbyid")
+	public String deleteTrainerById(@RequestParam int id) {
+		Trainer trainer = service.TrainerfondById(id);
+
+		if (trainer != null) {
+			service.deleteTrainer(trainer);
+			return "Trainer Deleted Sucessfully";
+		}
+		return "Trainer Not Found";
+	}
+	
+	
+	
+	
+	}
+	
+	

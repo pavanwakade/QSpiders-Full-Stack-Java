@@ -51,4 +51,6 @@ public class TrainerService {
 	public List<Trainer> findByName(String name){
 		return dao.findByNAme(name);
 	}
+	
+	
 }
