@@ -1,0 +1,344 @@
+:root {
+  --nasa-blue: #0b3d91;
+  --nasa-red: #e03c31;
+  --nasa-gray: #212529;
+  --space-black: #020202;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Navbar Styling */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--nasa-blue);
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand i {
+  margin-right: 8px;
+  color: var(--nasa-red);
+}
+
+.nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: var(--nasa-blue);
+  color: white !important;
+  border-radius: 5px;
+}
+
+.nav-logout {
+  color: var(--nasa-blue) !important;
+  border: 1px solid var(--nasa-blue);
+  border-radius: 5px;
+}
+
+.nav-logout:hover {
+  background-color: var(--nasa-red) !important;
+  border-color: var(--nasa-red);
+}
+
+/* Carousel Styling */
+.carousel-item {
+  height: 80vh;
+  position: relative;
+}
+
+.carousel-item img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.carousel-caption {
+  bottom: 20%;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.carousel-caption h5 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Card Styling */
+.card-section {
+  padding: 4rem 0;
+  background-color: #f8f9fa;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  color: var(--nasa-blue);
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--nasa-gray);
+}
+
+.card-text {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--nasa-blue);
+  border-color: var(--nasa-blue);
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--nasa-red);
+  border-color: var(--nasa-red);
+  transform: translateY(-2px);
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 2rem 0;
+}
+
+footer .nav-link {
+  color: #6c757d;
+  transition: color 0.3s ease;
+}
+
+footer .nav-link:hover {
+  color: var(--nasa-blue) !important;
+  background-color: transparent;
+}
+
+footer .copyright {
+  margin-top: 1.5rem;
+  color: #6c757d;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+  }
+
+  .nav-logout {
+    position: relative !important;
+    margin-top: 1rem;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    height: 90vh;
+  }
+
+  .carousel-caption {
+    bottom: 10%;
+    max-width: 90%;
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+
+  .card-section {
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item {
+    height: 70vh;
+  }
+
+  .carousel-caption {
+    bottom: 5%;
+    padding: 1rem;
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card {
+    max-width: 90%;
+    margin: 0 auto 2rem auto;
+  }
+}
+
+/* Scroll Animation Classes */
+.card {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+.card.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Only apply initial animation state on mobile */
+@media (min-width: 992px) {
+  .card {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Enhanced Form Styling */
+.form-select, .form-control {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--nasa-blue);
+    transition: all 0.3s ease;
+}
+
+.form-select:focus, .form-control:focus {
+    box-shadow: 0 0 15px rgba(11, 61, 145, 0.3);
+    border-color: var(--nasa-red);
+}
+
+.form-check-input:checked {
+    background-color: var(--nasa-blue);
+    border-color: var(--nasa-blue);
+}
+
+/* Container Background Enhancement */
+.bg-dark.bg-opacity-50 {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Text Enhancements */
+.text-success {
+    text-shadow: 0 0 15px rgba(25, 135, 84, 0.5);
+}
+
+.text-primary {
+    text-shadow: 0 0 10px rgba(11, 61, 145, 0.3);
+}
+
+.text-white {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Button Enhancement */
+.btn-primary {
+    background: linear-gradient(45deg, var(--nasa-blue), #1a5fb4);
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, var(--nasa-red), #ff4757);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .bg-dark.bg-opacity-50 {
+        margin: 1rem;
+        max-width: calc(100% - 2rem) !important;
+    }
+    
+    .form-check {
+        margin-bottom: 0.5rem;
+    }
+    
+    .text-success {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .text-success {
+        font-size: 1.5rem;
+    }
+    
+    .form-label {
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bg-dark.bg-opacity-50 {
+    animation: fadeIn 0.6s ease-out;
+}

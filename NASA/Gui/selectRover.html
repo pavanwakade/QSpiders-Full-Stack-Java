@@ -1,69 +1,272 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Rover Photos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-cover bg-center" style="background-image: url('/Assets/marse.jpg');">
-    <div class="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50 p-4">
-        <h1 class="text-3xl font-bold text-green-500 mb-4 text-center">Mars Rover Photos</h1>
-        <div class="w-full max-w-md">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"
+        ></script>
+        <title>NASA-API Explorer</title>
+    
+        <link rel="stylesheet" href="style.css">
+       
+      </head>
+<body style="background-image: url('/Assets/marse.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+
+
+
+
+
+
+
+
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"
+        ><i class="fas fa-rocket"></i>NASA-API</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#"
+              ><i class="fas fa-star me-1"></i>APOD</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/selectRover.html"
+              ><i class="fas fa-robot me-1"></i>Mars Rovers</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fas fa-cog me-1"></i>Admin</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fas fa-file-code me-1"></i>API Docs</a
+            >
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link nav-logout" href="#"
+              ><i class="fas fa-sign-out-alt me-1"></i>Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+        <div class="bg-dark bg-opacity-50 p-4 rounded-4 w-100" style="max-width: 500px;">
+            <h1 class="text-center text-success mb-4 fw-bold">Mars Rover Photos</h1>
+            
             <div class="mb-4">
-                <label class="block text-blue-500 font-bold mb-2" for="rover-type">Select Rover Type:</label>
-                <select id="rover-type" class="w-full p-2 border border-gray-300 rounded">
+                <label class="form-label text-primary fw-bold" for="rover-type">Select Rover Type</label>
+                <select id="rover-type" class="form-select form-select-lg">
                     <option>Curiosity</option>
-                    <option>Curiosity</option>
-                    <option>Curiosity</option>
+                    <option>Opportunity</option>
+                    <option>Spirit</option>
                 </select>
             </div>
+
             <div class="mb-4">
-                <label class="block text-blue-500 font-bold mb-2" for="camera">Select Camera(s):</label>
-                <div class="flex flex-col space-y-2">
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="fhaz">
-                        <span class="ml-2 text-white">FHAZ</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="rhaz">
-                        <span class="ml-2 text-white">RHAZ</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mast">
-                        <span class="ml-2 text-white">MAST</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="chemcam">
-                        <span class="ml-2 text-white">CHEMCAM</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mahli">
-                        <span class="ml-2 text-white">MAHLI</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mardi">
-                        <span class="ml-2 text-white">MARDI</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="navcam">
-                        <span class="ml-2 text-white">NAVCAM</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="minites">
-                        <span class="ml-2 text-white">PANCAM</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="minites">
-                        <span class="ml-2 text-white">MINITES</span>
-                    </label>
+                <label class="form-label text-primary fw-bold mb-3">Select Camera(s)</label>
+                <div class="d-grid gap-2 row row-cols-1 row-cols-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="fhaz" id="fhaz">
+                        <label class="form-check-label text-white" for="fhaz">FHAZ</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="rhaz" id="rhaz">
+                        <label class="form-check-label text-white" for="rhaz">RHAZ</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="mast" id="mast">
+                        <label class="form-check-label text-white" for="mast">MAST</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="chemcam" id="chemcam">
+                        <label class="form-check-label text-white" for="chemcam">CHEMCAM</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="mahli" id="mahli">
+                        <label class="form-check-label text-white" for="mahli">MAHLI</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="mardi" id="mardi">
+                        <label class="form-check-label text-white" for="mardi">MARDI</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="navcam" id="navcam">
+                        <label class="form-check-label text-white" for="navcam">NAVCAM</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="pancam" id="pancam">
+                        <label class="form-check-label text-white" for="pancam">PANCAM</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="camera" value="minites" id="minites">
+                        <label class="form-check-label text-white" for="minites">MINITES</label>
+                    </div>
                 </div>
             </div>
+
             <div class="mb-4">
-                <label class="block text-blue-500 font-bold mb-2" for="earth-date">Enter Earth Date:</label>
-                <input type="date" id="earth-date" class="w-full p-2 border border-gray-300 rounded">
+                <label class="form-label text-primary fw-bold" for="earth-date">Enter Earth Date</label>
+                <input type="date" id="earth-date" class="form-control form-control-lg">
             </div>
-            <button class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded">Show Photos</button>
+
+            <button class="btn btn-primary btn-lg w-100 mt-3">Show Photos</button>
         </div>
     </div>
-</body>
-</html>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+              <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                  <a href="#" class="nav-link px-2">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link px-2">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link px-2">Documentation</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link px-2">FAQs</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link px-2">About</a>
+                </li>
+              </ul>
+              <div class="d-flex justify-content-center">
+                <a href="#" class="me-3 text-decoration-none">
+                  <i class="fab fa-twitter fa-lg" style="color: #1da1f2"></i>
+                </a>
+                <a href="#" class="me-3 text-decoration-none">
+                  <i class="fab fa-facebook fa-lg" style="color: #4267b2"></i>
+                </a>
+                <a href="#" class="me-3 text-decoration-none">
+                  <i class="fab fa-linkedin fa-lg" style="color: #146bee"></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                  <i class="fab fa-github fa-lg" style="color: #080808"></i>
+                </a>
+              </div>
+              <p class="text-center copyright mt-3">
+                © 2024 NASA-API Explorer. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+  
+      <script>
+        // Get all nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        // Add click event listener to each nav link
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            // Check if navbar is expanded (mobile view)
+            if (navbarCollapse.classList.contains('show')) {
+              // Close the navbar
+              navbarCollapse.classList.remove('show');
+            }
+          });
+        });
+  
+        // Scroll Animation
+        const cards = document.querySelectorAll('.card');
+        
+        const observerOptions = {
+          threshold: 0.2,
+          rootMargin: '0px'
+        };
+  
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('appear');
+              // Unobserve after animation
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+  
+        // Only observe on mobile devices
+        if (window.innerWidth < 992) {
+          cards.forEach(card => {
+            observer.observe(card);
+          });
+        }
+      </script>
+    </body>
+  </html>
