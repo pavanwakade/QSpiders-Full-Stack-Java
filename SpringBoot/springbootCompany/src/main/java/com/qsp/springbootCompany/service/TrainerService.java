@@ -47,4 +47,8 @@ public class TrainerService {
 	public List<Trainer> findAllTrainer(Trainer trainer){
 		return dao.findAllTrainer(trainer);
 	}
+	
+	public List<Trainer> findByName(String name){
+		return dao.findByNAme(name);
+	}
 }

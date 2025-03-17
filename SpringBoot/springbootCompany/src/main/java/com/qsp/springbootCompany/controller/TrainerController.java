@@ -64,4 +64,13 @@ public class TrainerController {
 	{
 		return service.findAllTrainer(trainer);
 	}
+	
+//	http://localhost:8080/findtrainerbyname?name=Tejus
+	@GetMapping("/findtrainerbyname")
+	public List<Trainer> findByName(@RequestParam String name){
+		return service.findByName(name);
+		
+	}
+	
+	
 }

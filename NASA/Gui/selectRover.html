@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover Photos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-cover bg-center" style="background-image: url('/Assets/marse.jpg');">
+    <div class="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50 p-4">
+        <h1 class="text-3xl font-bold text-green-500 mb-4 text-center">Mars Rover Photos</h1>
+        <div class="w-full max-w-md">
+            <div class="mb-4">
+                <label class="block text-blue-500 font-bold mb-2" for="rover-type">Select Rover Type:</label>
+                <select id="rover-type" class="w-full p-2 border border-gray-300 rounded">
+                    <option>Curiosity</option>
+                    <option>Curiosity</option>
+                    <option>Curiosity</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-blue-500 font-bold mb-2" for="camera">Select Camera(s):</label>
+                <div class="flex flex-col space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="fhaz">
+                        <span class="ml-2 text-white">FHAZ</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="rhaz">
+                        <span class="ml-2 text-white">RHAZ</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mast">
+                        <span class="ml-2 text-white">MAST</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="chemcam">
+                        <span class="ml-2 text-white">CHEMCAM</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mahli">
+                        <span class="ml-2 text-white">MAHLI</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="mardi">
+                        <span class="ml-2 text-white">MARDI</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="navcam">
+                        <span class="ml-2 text-white">NAVCAM</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="minites">
+                        <span class="ml-2 text-white">PANCAM</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-red-500" name="camera" value="minites">
+                        <span class="ml-2 text-white">MINITES</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-blue-500 font-bold mb-2" for="earth-date">Enter Earth Date:</label>
+                <input type="date" id="earth-date" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+            <button class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded">Show Photos</button>
+        </div>
+    </div>
+</body>
+</html>

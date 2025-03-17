@@ -46,4 +46,8 @@ public class TrainerDao {
 		return repository.findAll();
 	}
 	
+	public List<Trainer>findByNAme(String name){
+		return repository.findByName(name);
+		
+	}
 }
