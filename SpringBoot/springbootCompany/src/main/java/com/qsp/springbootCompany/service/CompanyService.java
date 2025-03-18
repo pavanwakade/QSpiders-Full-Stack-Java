@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.qsp.springbootCompany.dao.CompanyDao;
 import com.qsp.springbootCompany.dto.Company;
 import com.qsp.springbootCompany.exception.IdNotFoundException;
+import com.qsp.springbootCompany.exception.LocationNotFoundException;
+import com.qsp.springbootCompany.exception.NameNotFoundException;
 
 @Service
 public class CompanyService {
@@ -19,63 +21,44 @@ public class CompanyService {
 	@Autowired
 	private CompanyDao dao;
 
-	public Company saveCompany(Company company) {
-		return dao.saveCompany(company);
-	}
+	public ResponseEntity<List<Company>> FindByName(String name) {
 
-	public Company updateCompany(Company company) {
-		return dao.updateCompany(company);
-	}
+		List<Company> companies = dao.findByName(name);
 
-	public void deleteCompany(int id) {
-
-		Optional<Company> optional = dao.findCompanyById(id);
-
-		if (optional.isPresent()) {
-			dao.deleteCompany(id);
+		if (!companies.isEmpty()) {
+			
+			return new ResponseEntity<List<Company>>(companies, HttpStatus.OK);
 		}
-		throw new IdNotFoundException();
-
+		throw new NameNotFoundException();
 	}
+	
+	
+	
 
-	public Company CompanyfondById(int id) {
-		Optional<Company> optional = dao.findCompanyById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		throw new IdNotFoundException();
-
-	}
-
-	public List<Company> findAll() {
-		return dao.findAll();
-	}
-
-	public List<Company> findByLocation(String location) {
-		List<Company> compineas = dao.findByLocation(location);
-		if (!compineas.isEmpty()) {
-			return dao.findByLocation(location);
-		}
-		return null;
-	}
-
-//	public List<Company>FindBySalary(int sal){
-//		
-//		return dao.findBySalary(sal);
-//		
-//	}
-
-	// using ResponsetEntity Class
-
-	public ResponseEntity<Company> saveusingRequestEntity(Company company) {
+	public ResponseEntity<Company> saveCompany(Company company) {
+		
 		Company retcompany = dao.saveCompany(company);
+		
 		return new ResponseEntity<Company>(retcompany, HttpStatus.CREATED);
+	}
+	
+	
+	
 
+	public ResponseEntity<Company> updateCompany(Company company) {
+
+		Company company2 = dao.saveCompany(company);
+		
+		return new ResponseEntity<Company>(company2, HttpStatus.CREATED);
 	}
 
+	
+	
+	
 	public ResponseEntity<Company> findById(int id) {
 
 		Company company = null;
+		
 		Optional<Company> optional = dao.findCompanyById(id);
 
 		if (optional.isPresent()) {
@@ -86,10 +69,36 @@ public class CompanyService {
 		}
 
 		throw new IdNotFoundException();
+	}
+	
+	
+	
 
+	public ResponseEntity<List<Company>> findAll() {
+		
+		List<Company> company = dao.findAll();
+		
+		return new ResponseEntity<List<Company>>(company, HttpStatus.OK);
 	}
 
-	public ResponseEntity<String> deleteCompany1(int id) {
+	
+	
+	
+	public ResponseEntity<List<Company>> findByLocation(String location) {
+		
+		List<Company> compineas = dao.findByLocation(location);
+		
+		if (!compineas.isEmpty()) {
+			
+			return new ResponseEntity<List<Company>>(compineas, HttpStatus.OK);
+		}
+		throw new LocationNotFoundException();
+	}
+	
+	
+	
+
+	public ResponseEntity<String> deleteCompany(int id) {
 
 		Optional<Company> optional = dao.findCompanyById(id);
 
@@ -99,8 +108,8 @@ public class CompanyService {
 
 			return new ResponseEntity<String>("company deleted", HttpStatus.OK);
 		}
-		return new ResponseEntity<String>("company not deleted", HttpStatus.NOT_FOUND);
 
+		throw new IdNotFoundException();
 	}
 
 }

@@ -35,50 +35,30 @@ public class TrainerController {
 		return service.TrainerfondById(id);
 	}
 
-	
 //	http://localhost:8080/findbysubject?sub=SpringBoot
 	@GetMapping("/findbysubject")
-	public List<Trainer> findBySubject(@RequestParam String sub){
-
-		 List<Trainer> list=service.findBySubject(sub);
-		if (list!=null) {
-			return list;
-		}
-		return null;
+	public List<Trainer> findBySubject(@RequestParam String sub) {
+		return service.findBySubject(sub);
 	}
-	
+
 //	http://localhost:8080/findalltrainer
 	@GetMapping("/findalltrainer")
-	public List<Trainer>findAllTYrainer(Trainer trainer)
-	{
+	public List<Trainer> findAllTYrainer(Trainer trainer) {
 		return service.findAllTrainer(trainer);
 	}
-	
+
 //	http://localhost:8080/findtrainerbyname?name=Tejus
 	@GetMapping("/findtrainerbyname")
-	public List<Trainer> findByName(@RequestParam String name){
+	public List<Trainer> findByName(@RequestParam String name) {
 		return service.findByName(name);
-		
+
 	}
-	
-	
-	
 
 //	http://localhost:8080/deletetrainerbyid?id=3
 	@DeleteMapping("/deletetrainerbyid")
-	public String deleteTrainerById(@RequestParam int id) {
-		Trainer trainer = service.TrainerfondById(id);
+	public void deleteTrainerById(@RequestParam int id) {
+		service.deleteTrainer(id);
 
-		if (trainer != null) {
-			service.deleteTrainer(trainer);
-			return "Trainer Deleted Sucessfully";
-		}
-		return "Trainer Not Found";
 	}
-	
-	
-	
-	
-	}
-	
-	
+
+}

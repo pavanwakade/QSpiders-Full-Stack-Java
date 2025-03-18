@@ -11,5 +11,7 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer>{
 	List<Trainer> findBySubject(String subject);
 	
 	List<Trainer> findByName(String name);
+	
+	
 
 }

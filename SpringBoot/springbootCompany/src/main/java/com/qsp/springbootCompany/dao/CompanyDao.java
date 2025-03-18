@@ -40,15 +40,10 @@ public class CompanyDao {
 		return repository.findByLocation(location);
 	}
 
-//   public List<Company>findBySalary(double sal){
-//	   return repository.findBySalary(sal);
-//   }
+   public List<Company>findByName(String name){
+	   return repository.findByName(name);
+   }
 
-	// using ResponsetEntity Class
-
-	public ResponseEntity<Company> saveusingRequestEntity(Company company) {
-		Company retcompany=repository.save(company);
-		return new ResponseEntity<Company>(retcompany, HttpStatus.CREATED);
-	}
+	
 	
 }

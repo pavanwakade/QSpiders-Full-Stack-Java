@@ -33,14 +33,21 @@ public class TrainerService {
 
 	}
 
-	public void deleteTrainer(Trainer trainer) {
-		dao.deleteTrainer(trainer);
+	public void deleteTrainer(int id) {		
+		Optional<Trainer>optional=dao.findTrainerById(id);
+		if (optional.isPresent()) {
+			dao.deleteTrainer(id);
+		}
 	}
 	
 	
 	public List<Trainer> findBySubject(String subject) {
-		return dao.findBySubject(subject);
 		
+		List<Trainer> list=dao.findBySubject(subject);
+		if (list!=null) {
+			return list;
+		}
+		return null;
 	}
 	
 	

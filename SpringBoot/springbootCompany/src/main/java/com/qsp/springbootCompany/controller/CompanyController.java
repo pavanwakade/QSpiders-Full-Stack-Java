@@ -21,71 +21,80 @@ import com.qsp.springbootCompany.service.CompanyService;
 @RestController
 public class CompanyController {
 
-    @Autowired
-    private CompanyService service;
+	@Autowired
+	private CompanyService service;
 
-    
-    //without  ResponsetEntity Class
-   
-    
+	// with ResponsetEntity Class
+
+	
+	
+	
 //    http://localhost:8080/company
-    @PostMapping("/company")
-    public Company saveCompany(@RequestBody Company company) {
-        return service.saveCompany(company);
-    }
-    
-    
-//    http://localhost:8080/company
-    @PostMapping("/companyupdate")
-    public Company updateCompany(@RequestBody Company company) {
-        return service.updateCompany(company);
-    }
-    
-    
-        //http://localhost:8080/company?id=1
-    @DeleteMapping("/company")
-    public void deleteCompany(@RequestParam int id) {
-       
-        service.deleteCompany(id);
-    }
-    
-    
-    //http://localhost:8080/findallcompany
-    @GetMapping("/findallcompany")
-    public List<Company> findAllCompanys() {
-        return service.findAll();
-    }
-    
-    
-    //http://localhost:8080/findcompanybylocation?location=pune
-    @GetMapping("/findcompanybylocation")
-    public List<Company>findByLocation(@RequestParam String location){
-    	return service.findByLocation(location);
-    }
-    
-    
-//    @GetMapping("/findbycustomsalary{salary}")
-//    public List<Company>findByCustomSalary(@PathVariable int sal){
-//		return service.FindBySalary(sal);
-//    	
-//    }
-    
-    
-    
-    
-    //using  ResponsetEntity Class
-    
-    @PostMapping("/saveusingRequestEntity")
-    public ResponseEntity<String> saveusingRequestEntity( Company company){
-    
-		return new ResponseEntity<String>("Company saved",HttpStatus.CREATED);
-    	
-    }
-    
-    @GetMapping("/getcompanybyid")
-    
-    public ResponseEntity<Company> getcompanyById(@RequestParam int id){
-    
-    	return service.findById(id);
-    }
+	@PostMapping("/company")
+	public ResponseEntity<Company> saveCompany(@RequestBody Company company) {
+		
+		return service.saveCompany(company);
+	}
+	
+	
+	
+
+//    http://localhost:8080/companyupdate
+	@PostMapping("/companyupdate")
+	public ResponseEntity<Company> updateCompany(@RequestBody Company company) {
+		
+		return service.updateCompany(company);
+	}
+
+	
+	
+	
+//	http://localhost:8080/getcompanybyid?id=2
+	@GetMapping("/getcompanybyid")
+	public ResponseEntity<Company> getcompanyById(@RequestParam int id) {
+
+		return service.findById(id);
+	}
+
+	
+	
+	
+	// http://localhost:8080/company?id=1
+	@DeleteMapping("/company")
+	public void deleteCompany(@RequestParam int id) {
+
+		service.deleteCompany(id);
+	}
+
+	
+	
+	
+	// http://localhost:8080/findallcompany
+	@GetMapping("/findallcompany")
+	public ResponseEntity<List<Company>> findAllCompany() {
+		
+		return service.findAll();
+	}
+
+	
+	
+	
+	// http://localhost:8080/findcompanybylocation?location=pune
+	@GetMapping("/findcompanybylocation")
+	public ResponseEntity<List<Company>> findByLocation(@RequestParam String location) {
+		
+		return service.findByLocation(location);
+	}
+
+	
+	
+	
+//	http://localhost:8080/findbyName/infosys
+	@GetMapping("/findbyName/{name}")
+	public ResponseEntity<List<Company>> findBycompanyName(@PathVariable String name) {
+		
+		return service.FindByName(name);
+
+	}
+
 }

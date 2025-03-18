@@ -47,8 +47,8 @@ public class TrainerDao {
 		
 	}
 	
-	public void deleteTrainer(Trainer trainer) {
-		 repository.delete(trainer);
+	public void deleteTrainer(int id) {
+		 repository.deleteById(id);
 	}
 	
 	
