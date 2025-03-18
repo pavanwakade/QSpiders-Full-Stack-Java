@@ -44,14 +44,9 @@ public class CompanyController {
     
         //http://localhost:8080/company?id=1
     @DeleteMapping("/company")
-    public String deleteCompany(@RequestParam int id) {
-        Company company = service.CompanyfondById(id);
-        if (company != null) {
-            service.CompanyfondById(id);
-            service.deleteCompany(company);
-            return "Company deleted successfully";
-        }
-        return "Company not found";
+    public void deleteCompany(@RequestParam int id) {
+       
+        service.deleteCompany(id);
     }
     
     
@@ -81,9 +76,16 @@ public class CompanyController {
     //using  ResponsetEntity Class
     
     @PostMapping("/saveusingRequestEntity")
-    public ResponseEntity<Company> saveusingRequestEntity( Company company){
-    	Company retcompany=service.saveusingRequestEntity(company);
-		return new ResponseEntity<String>(retcompany,HttpStatus.CREATED);
+    public ResponseEntity<String> saveusingRequestEntity( Company company){
+    
+		return new ResponseEntity<String>("Company saved",HttpStatus.CREATED);
     	
+    }
+    
+    @GetMapping("/getcompanybyid")
+    
+    public ResponseEntity<Company> getcompanyById(@RequestParam int id){
+    
+    	return service.findById(id);
     }
 }

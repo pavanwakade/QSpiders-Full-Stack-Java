@@ -24,8 +24,8 @@ public class CompanyDao {
 		return repository.save(company);
 	}
 
-	public void deleteCompany(Company company) {
-		repository.delete(company);
+	public void deleteCompany(int id) {
+		repository.deleteById(id);
 	}
 
 	public Optional<Company> findCompanyById(int id) {
@@ -50,4 +50,5 @@ public class CompanyDao {
 		Company retcompany=repository.save(company);
 		return new ResponseEntity<Company>(retcompany, HttpStatus.CREATED);
 	}
+	
 }
