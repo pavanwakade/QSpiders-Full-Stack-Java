@@ -49,7 +49,7 @@ public class Companyservice {
         Optional<Company> optional = dao.findCompanyById(id);
         if (optional.isPresent()) {
             dao.findCompanyById(id);
-            return new ResponseEntity<String>("Company is deleted", HttpStatus.OK);
+            return new ResponseEntity<String>("Company is deleted with id"+id, HttpStatus.OK);
         }
 //        throw new IDNotExistException("Company with ID " + id + " does not exist");
         return null;

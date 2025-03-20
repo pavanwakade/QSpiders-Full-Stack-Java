@@ -20,6 +20,7 @@ public class Employee {
 
 	private double salary;
 
+	
 	@ManyToOne
 	@JoinColumn
 	@JsonIgnore
