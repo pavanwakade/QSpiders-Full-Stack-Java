@@ -2,6 +2,7 @@ package com.companywithemployee.entity;
 
 import java.util.List;
 
+import com.companywithemployee.util.Location;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;

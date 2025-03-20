@@ -1,5 +1,6 @@
 package com.companywithemployee.Dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class CompanyDao {
 	
 	public void deleteCompany(int id) {
 		 repository.deleteCompanyById(id);
+	}
+	
+	
+	public List<Company> findAllCompny() {
+		return repository.findAll();
 	}
 
 }
