@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.companywithemployee.entity.Company;
-import com.companywithemployee.entity.Employee;
 import com.companywithemployee.repository.CompanyRepository;
 
 @Component

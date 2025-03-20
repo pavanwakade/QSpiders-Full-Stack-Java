@@ -17,8 +17,11 @@ public class Companyservice {
 	@Autowired
 	private CompanyDao dao;
 
-	public Company saveCompany(Company company) {
-		return dao.saveCompany(company);
+public ResponseEntity<Company> saveCompany(Company company) {
+		
+		Company retcompany = dao.saveCompany(company);
+		
+		return new ResponseEntity<Company>(retcompany, HttpStatus.CREATED);
 	}
 
 	
