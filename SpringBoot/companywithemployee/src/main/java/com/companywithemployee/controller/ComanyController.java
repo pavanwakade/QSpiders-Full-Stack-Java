@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.companywithemployee.entity.Company;
 import com.companywithemployee.entity.Employee;
+import com.companywithemployee.repository.CompanyRepository;
 import com.companywithemployee.service.Companyservice;
 
 @RestController
@@ -22,11 +24,21 @@ public class ComanyController {
 	@Autowired
 	private Companyservice service;
 
+	@Autowired
+	private CompanyRepository repository;
 	
 	@PostMapping("/company")
 	public ResponseEntity<Company> saveCompany(@RequestBody Company company) {
 		
 		return service.saveCompany(company);
+	}
+	
+	
+	
+	@PatchMapping("/company/{companyid}/{employeeid}")
+	public void mapcompanyToEmployee(@PathVariable int companyid,@PathVariable int employeeid) {
+		
+		ResponseEntity<Company> company=service.findCompanyById(companyid);
 	}
 
 	
