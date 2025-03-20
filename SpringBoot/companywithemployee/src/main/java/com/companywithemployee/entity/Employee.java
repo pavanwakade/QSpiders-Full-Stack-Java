@@ -11,15 +11,15 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
+
 	private double salary;
-	
+
 	@ManyToOne
 	@JoinColumn
 	@JsonIgnore
@@ -68,9 +68,5 @@ public class Employee {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
-	
-	
-	
 
 }
