@@ -1,6 +1,7 @@
 package com.companywithemployee.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.companywithemployee.entity.Company;
 import com.companywithemployee.entity.Employee;
 import com.companywithemployee.repository.CompanyRepository;
+import com.companywithemployee.repository.EmployeeRepository;
 import com.companywithemployee.service.Companyservice;
 
 @RestController
@@ -25,7 +27,13 @@ public class ComanyController {
 	private Companyservice service;
 
 	@Autowired
-	private CompanyRepository repository;
+	private CompanyRepository companyrepository;
+	
+	
+	@Autowired
+	private EmployeeRepository emprepository;
+	
+	
 	
 	@PostMapping("/company")
 	public ResponseEntity<Company> saveCompany(@RequestBody Company company) {
@@ -38,7 +46,21 @@ public class ComanyController {
 	@PatchMapping("/company/{companyid}/{employeeid}")
 	public void mapcompanyToEmployee(@PathVariable int companyid,@PathVariable int employeeid) {
 		
-		ResponseEntity<Company> company=service.findCompanyById(companyid);
+		Company company=companyrepository.findById(companyid).orElse(null);	
+		if (company == null) {
+			
+			return;
+		}
+		
+		Employee employee=emprepository.findById(employeeid).orElse(null);
+		
+		if (employee == null) {
+			return;
+		}
+		
+		employee.setCompany(company);
+		
+		emprepository.save(employee);
 	}
 
 	
