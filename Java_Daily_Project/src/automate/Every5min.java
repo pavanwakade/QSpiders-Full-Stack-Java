@@ -29,7 +29,9 @@ public class Every5min {
         if (args.length >= 2) {
             commitMessage = args[1];
         } else {
-            commitMessage = "auto-update " + System.currentTimeMillis();
+            commitMessage = "updateed";
+//            commitMessage = "auto-update " + System.currentTimeMillis();
+
         }
 
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
