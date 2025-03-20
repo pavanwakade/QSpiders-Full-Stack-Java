@@ -23,7 +23,7 @@ public class Employee {
 	
 	@ManyToOne
 	@JoinColumn
-	@JsonIgnore
+//	@JsonIgnore
 	private Company company;
 
 	public Employee() {
