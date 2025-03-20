@@ -1,5 +1,7 @@
 package com.companywithemployee.Dao;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +22,14 @@ public class CompanyDao {
 		return repository.save(company);
 	}
 	
+	public Optional<Company> findCompanyById(int id) {
+		return repository.findById(id);
+	}
 	
-	public Employee deleteCompany(int id) {
-		return repository.deleteById(id);;
+	
+	
+	public void deleteCompany(int id) {
+		 repository.deleteCompanyById(id);
 	}
 
 }
