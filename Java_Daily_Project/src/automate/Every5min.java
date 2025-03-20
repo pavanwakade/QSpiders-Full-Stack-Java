@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class Every5min {
     private static final String DEFAULT_REPO_PATH = "C:\\Users\\Admin\\Desktop\\Qspiders\\QSpiders-Full-Stack-Java";
-    private static final int COMMIT_INTERVAL_MINUTES = 1;
+    private static final int COMMIT_INTERVAL_MINUTES = 10;
 
     public static void main(String[] args) {
         final String repoPath;  // Made final
