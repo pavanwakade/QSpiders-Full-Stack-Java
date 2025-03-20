@@ -43,6 +43,8 @@ public class ComanyController {
 	
 	
 	
+	
+	
 	@PatchMapping("/company/{companyid}/{employeeid}")
 	public void mapcompanyToEmployee(@PathVariable int companyid,@PathVariable int employeeid) {
 		
@@ -63,6 +65,10 @@ public class ComanyController {
 		emprepository.save(employee);
 	}
 
+	
+	
+	
+	
 	
 	@PostMapping("/updateCompany")
 	public ResponseEntity<Company> updateCompany(Company company) {

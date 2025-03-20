@@ -19,6 +19,8 @@ public class Employee {
 	private String name;
 
 	private double salary;
+	
+	private String mail;
 
 	
 	@ManyToOne
@@ -30,11 +32,12 @@ public class Employee {
 		super();
 	}
 
-	public Employee(int id, String name, double salary, Company company) {
+	public Employee(int id, String name, double salary, String mail, Company company) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
+		this.mail = mail;
 		this.company = company;
 	}
 
@@ -62,6 +65,14 @@ public class Employee {
 		this.salary = salary;
 	}
 
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
 	public Company getCompany() {
 		return company;
 	}
@@ -70,4 +81,14 @@ public class Employee {
 		this.company = company;
 	}
 
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
 }
