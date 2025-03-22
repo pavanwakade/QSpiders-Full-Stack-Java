@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,6 +34,10 @@ public class ComanyController {
 	
 	@Autowired
 	private EmployeeRepository emprepository;
+	
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	
 	
@@ -92,4 +98,23 @@ public class ComanyController {
 	public ResponseEntity<Company> deleteEmployeeById(@PathVariable int id) {
 		return service.findCompanyById(id);
 	}
+	
+	
+	
+	
+	@PostMapping("/mail/{to}/{subject}/{text}")
+	public void sendMail(@PathVariable String to,@PathVariable String subject,@PathVariable String text)
+	{
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setTo(to);
+		mailMessage.setSubject(subject);
+		mailMessage.setText(text);
+		
+		javaMailSender.send(mailMessage);
+		
+	}
+	
+	
+	
+	
 }
