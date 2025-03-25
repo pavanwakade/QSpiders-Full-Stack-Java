@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Documentation Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=50&h=50&fit=crop" alt="Logo" class="logo-img">
+                <span>DocuMark</span>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle">🌙</button>
+                <button id="export-pdf" class="export-btn">Export PDF</button>
+                <input type="text" id="search-docs" placeholder="Search documentation..." class="search-input">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Documentation</h2>
+                <button id="collapse-sidebar" class="collapse-btn">◀</button>
+            </div>
+            <div class="menu" id="menu">
+                <!-- Menu items will be added here -->
+            </div>
+            <div class="add-page">
+                <button onclick="addNewPage()">+ Add New Page</button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="breadcrumb" id="breadcrumb">
+                <!-- Breadcrumb will be added here -->
+            </div>
+            <div id="markdown-content"></div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About DocuMark</h3>
+                <p>A powerful markdown documentation viewer for your projects.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('Getting Started'); return false;">Getting Started</a></li>
+                    <li><a href="#" onclick="showPage('Installation'); return false;">Installation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Statistics</h3>
+                <p id="doc-stats">
+                    Pages: <span id="page-count">0</span><br>
+                    Last Updated: <span id="last-updated">Never</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DocuMark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
