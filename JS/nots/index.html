@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Documentation Viewer</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+</head>
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* color: white; */
+}
+
+:root {
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --text-color: #212529;
+    --bg-color: #ffffff;
+    --sidebar-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --header-height: 60px;
+    --footer-height: 300px;
+    --primary-rgb: 13, 110, 253;
+    --sidebar-bg-rgb: 248, 249, 250;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.main-header {
+    height: var(--header-height);
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.theme-toggle, .export-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover, .export-btn:hover {
+    background: var(--sidebar-bg);
+}
+
+.search-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 250px;
+    font-size: 0.875rem;
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    margin-top: var(--header-height);
+}
+
+.sidebar {
+    width: 220px;
+    background: rgba(var(--sidebar-bg-rgb), 0.95);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-breadcrumb {
+    font-size: 0.875rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-breadcrumb span {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.sidebar-breadcrumb .separator {
+    color: var(--border-color);
+}
+
+.sidebar-header h2 {
+    color: var(--text-color);
+    font-size: 1.25rem;
+}
+
+.collapse-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.collapse-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.menu {
+    padding: 1rem 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.menu-item {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.25rem 1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+.menu-item:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: var(--border-color);
+}
+
+.menu-item.active {
+    background: rgba(var(--primary-rgb), 0.15);
+    color: var(--primary-color);
+    font-weight: 500;
+    border-color: var(--primary-color);
+}
+
+.menu-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.menu-item:hover .menu-actions {
+    opacity: 1;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s ease;
+}
+
+.edit-btn {
+    color: var(--primary-color);
+}
+
+.delete-btn {
+    color: #dc3545;
+}
+
+.breadcrumb {
+    padding: 1rem 0;
+    color: var(--text-color);
+    font-size: 0.875rem;
+}
+
+.breadcrumb span {
+    color: var(--primary-color);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 2rem;
+    background: var(--bg-color);
+    overflow-y: auto;
+    margin-left: 220px;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    padding-bottom: var(--footer-height);
+}
+
+#markdown-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.preview-content {
+    background: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.preview-content h1 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.preview-content h2 {
+    margin: 2rem 0 1rem;
+    color: var(--text-color);
+}
+
+.preview-content p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.preview-content code {
+    background: var(--sidebar-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+    color: #d63384;
+}
+
+.preview-content pre {
+    background: var(--sidebar-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.15rem 0.25rem;  /* Decreased padding */
+    /* background: var(--bg-color); */
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.7rem;  /* Smaller font size */
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;  /* Removed gap */
+    opacity: 0;
+    min-width: 35px;  /* Added minimum width */
+    /* letter-spacing: -1px; Add negative letter spacing */
+}
+
+.copy-btn svg {
+    width: 19px;  /* Smaller icon */
+    height: 19px;
+    margin-right: -1px; /* Add negative margin to push text closer */
+}
+
+.preview-content pre:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.copy-btn.copied {
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+    
+}
+
+/* Footer Styles */
+.main-footer {
+    background: var(--sidebar-bg);
+    padding: 3rem 0 1rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    position: relative;
+    z-index: 99;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-section a:hover {
+    color: var(--primary-hover);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.modal-textarea {
+    width: 100%;
+    height: 400px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: monospace;
+    resize: vertical;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.modal-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.modal-buttons button:first-child {
+    background: var(--primary-color);
+    color: white;
+}
+
+.modal-buttons button:first-child:hover {
+    background: var(--primary-hover);
+}
+
+.modal-buttons button:last-child {
+    background: #6c757d;
+    color: white;
+}
+
+.modal-buttons button:last-child:hover {
+    background: #5c636a;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-color: #e5e7eb;
+    --bg-color: #1f2937;
+    --sidebar-bg: #111827;
+    --border-color: #374151;
+    --primary-rgb: 59, 130, 246;
+    --sidebar-bg-rgb: 17, 24, 39;
+    color: #e5e7eb;  /* Add this line */
+}
+
+body.dark-theme .content {
+    color: #e5e7eb;
+}
+
+body.dark-theme .preview-content {
+    color: #e5e7eb;
+}
+
+body.dark-theme .preview-content p,
+body.dark-theme .preview-content li,
+body.dark-theme .preview-content h1,
+body.dark-theme .preview-content h2,
+body.dark-theme .preview-content h3,
+body.dark-theme .preview-content h4,
+body.dark-theme .preview-content h5,
+body.dark-theme .preview-content h6 {
+    color: #e5e7eb;
+}
+
+.add-page {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.add-page button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.add-page button:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.add-page button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Update for dark theme */
+body.dark-theme .add-page button {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .add-page button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        gap: 0.5rem;
+    }
+
+    .search-input {
+        width: 150px;
+    }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1200px) {
+    .content {
+        padding: 1.5rem;
+    }
+    
+    .footer-content {
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .content {
+        margin-left: 200px;
+    }
+    
+    .main-footer {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+    
+    .header-content {
+        padding: 0 1rem;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        z-index: 1001;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .content, .main-footer {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .header-actions {
+        gap: 0.5rem;
+    }
+    
+    .search-input {
+        width: 150px;
+    }
+    
+    .preview-content {
+        padding: 1.5rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    /* Add mobile menu button */
+    .mobile-menu-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5rem;
+        height: auto;
+    }
+    
+    .main-header {
+        height: auto;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .search-wrapper {
+        width: 100%;
+    }
+    
+    .container {
+        margin-top: calc(var(--header-height) + 60px);
+    }
+    
+    .preview-content {
+        padding: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Add Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-color);
+    cursor: pointer;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1002;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mobile-menu-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Add overlay for mobile menu */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .sidebar-overlay.show {
+        display: block;
+    }
+}
+
+/* Add Sidebar Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+</style>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=50&h=50&fit=crop" alt="Logo" class="logo-img">
+                <span>DocuMark</span>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle">🌙</button>
+                <button id="export-pdf" class="export-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                    Export PDF
+                </button>
+                <div class="search-wrapper">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    <input type="text" id="search-docs" placeholder="Search documentation..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Add Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    
+    <!-- Add Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-breadcrumb">
+                    Documentation <span class="separator">/</span> <span>Installation</span>
+                </div>
+            </div>
+            <div class="menu" id="menu">
+                <!-- Menu items will be added here -->
+            </div>
+            <div class="add-page">
+                <button onclick="addNewPage()">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Add New Page
+                </button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="breadcrumb" id="breadcrumb">
+                <!-- Breadcrumb will be added here -->
+            </div>
+            <div id="markdown-content"></div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About DocuMark</h3>
+                <p>A powerful markdown documentation viewer for your projects.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('Getting Started'); return false;">Getting Started</a></li>
+                    <li><a href="#" onclick="showPage('Installation'); return false;">Installation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Statistics</h3>
+                <p id="doc-stats">
+                    Pages: <span id="page-count">0</span><br>
+                    Last Updated: <span id="last-updated">Never</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DocuMark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+
+        // Store markdown content for each pages
+let pages = {
+    'Started': `# Getting Started\n\nWelcome to the documentation! This is a sample markdown page.\n\n## Features\n\n- Easy to use\n- Supports markdown\n- Customizable\n- Dark mode support\n- Responsive design\n- Code syntax highlighting`,
+    'Installation': `# Installation\n\n## Requirements\n\n- Node.js 14+\n- npm or yarn\n\n## Steps\n\n1. Clone the repository\n2. Run \`npm install\`\n3. Start the server with \`npm start\`\n\n## Code Example\n\n\`\`\`javascript\nconst app = require('express')();\napp.listen(3000, () => {\n    console.log('Server running on port 3000');\n});\n\`\`\``,
+};
+
+// Initialize the viewer
+function initViewer() {
+    // Add initial menu items
+    updateMenu();
+    
+    // Show first page by default
+    const firstPage = Object.keys(pages)[0];
+    showPage(firstPage);
+
+    // Initialize theme
+    initializeTheme();
+
+    // Update statistics
+    updateStatistics();
+
+    // Add event listeners
+    setupEventListeners();
+}
+
+// Initialize theme
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+    updateThemeToggle();
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+    // Search functionality
+    document.getElementById('search-docs').addEventListener('input', handleSearch);
+
+    // Export PDF
+    document.getElementById('export-pdf').addEventListener('click', exportToPDF);
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+    });
+    
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+    });
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    });
+}
+
+// Toggle theme
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeToggle();
+}
+
+// Update theme toggle button
+function updateThemeToggle() {
+    const button = document.getElementById('theme-toggle');
+    button.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+}
+
+// Handle search
+function handleSearch(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+    });
+}
+
+// Export to PDF
+function exportToPDF() {
+    const content = document.getElementById('markdown-content').innerHTML;
+    const isDarkMode = document.body.classList.contains('dark-theme');
+    const style = `
+        <style>
+            body { 
+                font-family: Arial, sans-serif;
+                ${isDarkMode ? `
+                    background-color: #1f2937;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            .preview-content { 
+                max-width: 800px; 
+                margin: 0 auto; 
+                padding: 2rem;
+                ${isDarkMode ? `
+                    background-color: #1f2937;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            .preview-content h1,
+            .preview-content h2,
+            .preview-content h3,
+            .preview-content h4,
+            .preview-content h5,
+            .preview-content h6,
+            .preview-content p,
+            .preview-content li {
+                ${isDarkMode ? 'color: #e5e7eb !important;' : ''}
+            }
+            .preview-content pre {
+                ${isDarkMode ? `
+                    background-color: #111827;
+                    border: 1px solid #374151;
+                ` : ''}
+            }
+            .preview-content code {
+                ${isDarkMode ? `
+                    background-color: #111827;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                }
+            }
+        </style>
+    `;
+    const win = window.open('', '_blank');
+    win.document.write(`
+        <html>
+            <head>${style}</head>
+            <body>${content}</body>
+        </html>
+    `);
+    win.document.close();
+    win.print();
+}
+
+// Update statistics
+function updateStatistics() {
+    const pageCount = Object.keys(pages).length;
+    const lastUpdated = new Date().toLocaleString();
+    
+    document.getElementById('page-count').textContent = pageCount;
+    document.getElementById('last-updated').textContent = lastUpdated;
+}
+
+// Update the menu with current pages
+function updateMenu() {
+    const menu = document.getElementById('menu');
+    menu.innerHTML = '';
+    
+    Object.keys(pages).forEach(pageName => {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'menu-item';
+        menuItem.innerHTML = `
+            ${pageName}
+            <div class="menu-actions">
+                <button class="edit-btn" onclick="editPage('${pageName}')">✎</button>
+                <button class="delete-btn" onclick="deletePage('${pageName}')">×</button>
+            </div>
+        `;
+        menuItem.onclick = (e) => {
+            if (!e.target.className.includes('btn')) {
+                showPage(pageName);
+            }
+        };
+        menu.appendChild(menuItem);
+    });
+}
+
+// Enhanced page transition
+function showPage(pageName) {
+    const content = document.getElementById('markdown-content');
+    content.style.opacity = '0';
+    content.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        // Update sidebar breadcrumb
+        const sidebarBreadcrumb = document.querySelector('.sidebar-breadcrumb');
+        sidebarBreadcrumb.innerHTML = `<span class="separator">/</span> <span>${pageName}</span>`;
+        
+        // Update active state in menu
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.textContent.includes(pageName)) {
+                item.classList.add('active');
+            }
+        });
+        
+        // // Update breadcrumb with animation
+        // const breadcrumb = document.getElementById('breadcrumb');
+        // breadcrumb.innerHTML = `
+        //     <div class="breadcrumb-item">Documentation</div>
+        //     <div class="breadcrumb-separator">/</div>
+        //     <div class="breadcrumb-item active">${pageName}</div>
+        // `;
+        
+        // Show markdown content with animation
+        content.innerHTML = `
+            <div class="preview-content">
+                ${marked.parse(pages[pageName] || '')}
+            </div>
+        `;
+        
+        // Add copy buttons to code blocks
+        addCopyButtons();
+        
+        // Apply syntax highlighting
+        Prism.highlightAll();
+        
+        // Fade in content
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+    }, 300);
+}
+
+// Add copy buttons to code blocks
+function addCopyButtons() {
+    document.querySelectorAll('pre').forEach(pre => {
+        const button = document.createElement('button');
+        button.className = 'copy-btn';
+        button.innerHTML = `<svg width="19" height="19" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
+        
+        button.addEventListener('click', () => {
+            const code = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                `;
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = `
+                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        </svg>
+                    `;
+                }, 2000);
+            });
+        });
+        
+        pre.appendChild(button);
+    });
+}
+
+// Add a new page
+function addNewPage() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Create New Page</h2>
+            <input type="text" id="page-name" placeholder="Page Name" class="modal-input">
+            <textarea id="page-content" placeholder="Enter markdown content..." class="modal-textarea"></textarea>
+            <div class="modal-buttons">
+                <button onclick="saveNewPage()">Save</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Enhanced notification system
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-icon">${type === 'success' ? '✓' : '!'}</div>
+            <div class="notification-message">${message}</div>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }, 100);
+}
+
+// Update save functions to use notifications
+function saveNewPage() {
+    const pageName = document.getElementById('page-name').value.trim();
+    const content = document.getElementById('page-content').value.trim();
+    
+    if (pageName && content) {
+        if (!pages[pageName]) {
+            pages[pageName] = content;
+            updateMenu();
+            showPage(pageName);
+            updateStatistics();
+            closeModal();
+            showNotification('Page created successfully');
+        } else {
+            showNotification('A page with this name already exists!', 'error');
+        }
+    } else {
+        showNotification('Please enter both page name and content!', 'error');
+    }
+}
+
+// Edit existing page
+function editPage(pageName) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Edit Page</h2>
+            <input type="text" id="page-name" value="${pageName}" readonly class="modal-input">
+            <textarea id="page-content" class="modal-textarea">${pages[pageName]}</textarea>
+            <div class="modal-buttons">
+                <button onclick="saveEditedPage('${pageName}')">Save</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Save edited page
+function saveEditedPage(pageName) {
+    const content = document.getElementById('page-content').value.trim();
+    
+    if (content) {
+        pages[pageName] = content;
+        showPage(pageName);
+        updateStatistics();
+        closeModal();
+    } else {
+        alert('Content cannot be empty!');
+    }
+}
+
+// Close modal
+function closeModal() {
+    const modal = document.querySelector('.modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Delete a page
+function deletePage(pageName) {
+    if (confirm(`Are you sure you want to delete "${pageName}"?`)) {
+        delete pages[pageName];
+        updateMenu();
+        updateStatistics();
+        
+        // Show first available page or empty content
+        const firstPage = Object.keys(pages)[0];
+        if (firstPage) {
+            showPage(firstPage);
+        } else {
+            document.getElementById('markdown-content').innerHTML = '';
+            document.getElementById('breadcrumb').innerHTML = '';
+        }
+    }
+}
+
+// Initialize when the page loads
+document.addEventListener('DOMContentLoaded', initViewer);
+    </script>
+</body>
+</html>

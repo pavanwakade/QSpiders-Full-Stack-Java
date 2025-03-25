@@ -40,6 +40,36 @@ function setupEventListeners() {
 
     // Export PDF
     document.getElementById('export-pdf').addEventListener('click', exportToPDF);
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+    });
+    
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+    });
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    });
 }
 
 // Toggle theme
@@ -69,10 +99,53 @@ function handleSearch(e) {
 // Export to PDF
 function exportToPDF() {
     const content = document.getElementById('markdown-content').innerHTML;
+    const isDarkMode = document.body.classList.contains('dark-theme');
     const style = `
         <style>
-            body { font-family: Arial, sans-serif; }
-            .preview-content { max-width: 800px; margin: 0 auto; padding: 2rem; }
+            body { 
+                font-family: Arial, sans-serif;
+                ${isDarkMode ? `
+                    background-color: #1f2937;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            .preview-content { 
+                max-width: 800px; 
+                margin: 0 auto; 
+                padding: 2rem;
+                ${isDarkMode ? `
+                    background-color: #1f2937;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            .preview-content h1,
+            .preview-content h2,
+            .preview-content h3,
+            .preview-content h4,
+            .preview-content h5,
+            .preview-content h6,
+            .preview-content p,
+            .preview-content li {
+                ${isDarkMode ? 'color: #e5e7eb !important;' : ''}
+            }
+            .preview-content pre {
+                ${isDarkMode ? `
+                    background-color: #111827;
+                    border: 1px solid #374151;
+                ` : ''}
+            }
+            .preview-content code {
+                ${isDarkMode ? `
+                    background-color: #111827;
+                    color: #e5e7eb;
+                ` : ''}
+            }
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                }
+            }
         </style>
     `;
     const win = window.open('', '_blank');
