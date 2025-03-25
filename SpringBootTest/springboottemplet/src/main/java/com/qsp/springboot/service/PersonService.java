@@ -17,8 +17,11 @@ public class PersonService {
 	@Autowired
 	PersonDao dao;
 
-	public Person savePerson(Person person) {
-		return dao.savePerson(person);
+	public ResponseEntity<Person> saveperson(Person p) {
+
+		Person retp = dao.savePerson(p);
+
+		return new ResponseEntity<Person>(retp, HttpStatus.CREATED);
 	}
 
 	public ResponseEntity<Person> findById(int id) {
@@ -55,8 +58,7 @@ public class PersonService {
 		return new ResponseEntity<Person>(HttpStatus.NOT_FOUND);
 
 	}
-	
-	
+
 	public ResponseEntity<Person> findByPhone(long phone) {
 
 		Person person = null;
