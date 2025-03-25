@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* color: white; */
 }
 
 :root {
@@ -102,7 +103,7 @@ body {
 }
 
 .sidebar {
-    width: 280px;
+    width: 220px;
     background: rgba(var(--sidebar-bg-rgb), 0.95);
     border-right: 1px solid var(--border-color);
     display: flex;
@@ -235,7 +236,9 @@ body {
     padding: 2rem;
     background: var(--bg-color);
     overflow-y: auto;
-    margin-left: 280px;
+    margin-left: 220px;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    padding-bottom: var(--footer-height);
 }
 
 #markdown-content {
@@ -285,6 +288,49 @@ body {
     border-radius: 4px;
     overflow-x: auto;
     margin: 1rem 0;
+    position: relative;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.15rem 0.25rem;  /* Decreased padding */
+    /* background: var(--bg-color); */
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.7rem;  /* Smaller font size */
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;  /* Removed gap */
+    opacity: 0;
+    min-width: 35px;  /* Added minimum width */
+    /* letter-spacing: -1px; Add negative letter spacing */
+}
+
+.copy-btn svg {
+    width: 19px;  /* Smaller icon */
+    height: 19px;
+    margin-right: -1px; /* Add negative margin to push text closer */
+}
+
+.preview-content pre:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.copy-btn.copied {
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+    
 }
 
 /* Footer Styles */
@@ -293,6 +339,10 @@ body {
     padding: 3rem 0 1rem;
     border-top: 1px solid var(--border-color);
     margin-top: auto;
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    position: relative;
+    z-index: 99;
 }
 
 .footer-content {
