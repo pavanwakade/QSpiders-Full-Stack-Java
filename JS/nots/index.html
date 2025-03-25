@@ -1,0 +1,477 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Documentation Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .main-header, .main-footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+        .header-content, .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            margin-right: 0.5rem;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        .theme-toggle, .export-btn, .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+        .search-input {
+            border: none;
+            outline: none;
+            margin-left: 0.5rem;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background: #f4f4f4;
+            padding: 1rem;
+        }
+        .sidebar-header {
+            margin-bottom: 1rem;
+        }
+        .sidebar-breadcrumb {
+            font-weight: bold;
+        }
+        .menu {
+            margin-bottom: 1rem;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+        .menu-item.active {
+            background: #ddd;
+        }
+        .menu-actions {
+            display: flex;
+            align-items: center;
+        }
+        .edit-btn, .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .add-page {
+            text-align: center;
+        }
+        .add-page button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .content {
+            flex: 1;
+            padding: 1rem;
+        }
+        .breadcrumb {
+            margin-bottom: 1rem;
+        }
+        .page-title {
+            margin-bottom: 1rem;
+        }
+        .preview-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            width: 500px;
+            max-width: 90%;
+        }
+        .modal-input, .modal-textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal-buttons {
+            text-align: right;
+        }
+        .modal-buttons button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 0.5rem;
+        }
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #28a745;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .notification.show {
+            opacity: 1;
+        }
+        .notification.error {
+            background: #dc3545;
+        }
+        .notification-content {
+            display: flex;
+            align-items: center;
+        }
+        .notification-icon {
+            margin-right: 0.5rem;
+        }
+        .dark-theme {
+            background: #1f2937;
+            color: #e5e7eb;
+        }
+        .dark-theme .sidebar {
+            background: #374151;
+        }
+        .dark-theme .menu-item.active {
+            background: #4b5563;
+        }
+        .dark-theme .preview-content {
+            background: #1f2937;
+        }
+        .dark-theme .modal-content {
+            background: #374151;
+        }
+        .dark-theme .modal-input, .dark-theme .modal-textarea {
+            background: #4b5563;
+            color: #e5e7eb;
+        }
+        .dark-theme .modal-buttons button {
+            background: #2563eb;
+        }
+        .dark-theme .notification {
+            background: #10b981;
+        }
+        .dark-theme .notification.error {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=50&h=50&fit=crop" alt="Logo" class="logo-img">
+                <span>DocuMark</span>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle">🌙</button>
+                <button id="export-pdf" class="export-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                    <span>Export PDF</span>
+                </button>
+                <div class="search-wrapper">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    <input type="text" id="search-docs" placeholder="Search documentation..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Add Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    
+    <!-- Add Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-breadcrumb">
+                    Documentation <span class="separator">/</span> <span>Installation</span>
+                </div>
+            </div>
+            <div class="menu" id="menu">
+                <!-- Menu items will be added here -->
+            </div>
+            <div class="add-page">
+                <button onclick="addNewPage()">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Add New Page
+                </button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="breadcrumb" id="breadcrumb">
+                <!-- Breadcrumb will be added here -->
+            </div>
+            <div id="markdown-content"></div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About DocuMark</h3>
+                <p>A powerful markdown documentation viewer for your projects.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('Getting Started'); return false;">Getting Started</a></li>
+                    <li><a href="#" onclick="showPage('Installation'); return false;">Installation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Need help? Feel free to contact us.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DocuMark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Store markdown content for each pages
+        let pages = {
+            'Getting Started': `# Getting Started\n\nWelcome to the documentation! This is a sample markdown page.\n\n## Features\n\n- Easy to use\n- Supports markdown\n- Customizable\n- Dark mode support\n- Responsive design\n- Code syntax highlighting`,
+            'Installation': `# Installation\n\n## Requirements\n\n- Node.js 14+\n- npm or yarn\n\n## Steps\n\n1. Clone the repository\n2. Run \`npm install\`\n3. Start the server with \`npm start\`\n\n## Code Example\n\n\`\`\`javascript\nconst app = require('express')();\napp.listen(3000, () => {\n    console.log('Server running on port 3000');\n});\n\`\`\``,
+            'Dummy Page 1': `# Dummy Page 1\n\nThis is a dummy page for testing purposes.\n\n## Section 1\n\n- Item 1\n- Item 2\n- Item 3\n\n## Section 2\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+            'Dummy Page 2': `# Dummy Page 2\n\nThis is another dummy page for testing purposes.\n\n## Overview\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\n## Details\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`
+        };
+
+        // Initialize the viewer
+        function initViewer() {
+            // Add initial menu items
+            updateMenu();
+            
+            // Show first page by default
+            const firstPage = Object.keys(pages)[0];
+            showPage(firstPage);
+
+            // Initialize theme
+            initializeTheme();
+
+            // Add event listeners
+            setupEventListeners();
+        }
+
+        // Initialize theme
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+            updateThemeToggle();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            // Search functionality
+            document.getElementById('search-docs').addEventListener('input', handleSearch);
+
+            // Export PDF
+            document.getElementById('export-pdf').addEventListener('click', exportToPDF);
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+                document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+            });
+            
+            overlay.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+
+            // Close sidebar when clicking menu items on mobile
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !sidebar.contains(e.target) && 
+                    !mobileMenuBtn.contains(e.target) && 
+                    sidebar.classList.contains('show')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Add helper function to close mobile menu
+            function closeMobileMenu() {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('show');
+                        overlay.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                }, 250);
+            });
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeToggle();
+        }
+
+        // Update theme toggle button
+        function updateThemeToggle() {
+            const button = document.getElementById('theme-toggle');
+            button.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        }
+
+        // Handle search
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            menuItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+            });
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            const contentElement = document.getElementById('markdown-content');
+            const contentClone = contentElement.cloneNode(true);
+            
+            contentClone.querySelectorAll('.copy-btn').forEach(btn => btn.remove());
+            
+            const content = contentClone.innerHTML;
+            const isDarkMode = document.body.classList.contains('dark-theme');
+            const style = `
+                <style>
+                    body { 
+                        font-family: Arial, sans-serif;
+                        ${isDarkMode ? `
+                            background-color: #1f2937;
+                            color: #e5e7eb;
+                        ` : ''}
+                    }
+                    .preview-content { 
+                        max-width: 800px; 
+                        margin: 0 auto; 
+                        padding: 2rem;
+                        ${isDarkMode ? `
+                            background-color: #1f2937;
+                            color: #e5e7eb;
+                        ` : ''}
+                    }
+                    .preview-content * {
+                        color: ${isDarkMode ? '#e5e7eb' : '#000000'} !important;
+                    }
+                    .preview-content pre {
+                        ${isDarkMode ? `
+                            background-color: #111827;
+                            border: 1px solid #374151;
+                        ` : ''}
+                    }
+                    .preview-content code {
+                        ${isDarkMode ? `
+                            background-color: #111827;
+                            color: #e5e7eb;
+                        ` : ''}
+                    }
+                    @media print {
+                        body {
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                            color-adjust: exact;
+                        }
+                       

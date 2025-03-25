@@ -1,7 +1,13 @@
-// Store markdown content for each pages
+// Store markdown content for each pages with submenus
 let pages = {
-    'Started': `# Getting Started\n\nWelcome to the documentation! This is a sample markdown page.\n\n## Features\n\n- Easy to use\n- Supports markdown\n- Customizable\n- Dark mode support\n- Responsive design\n- Code syntax highlighting`,
-    'Installation': `# Installation\n\n## Requirements\n\n- Node.js 14+\n- npm or yarn\n\n## Steps\n\n1. Clone the repository\n2. Run \`npm install\`\n3. Start the server with \`npm start\`\n\n## Code Example\n\n\`\`\`javascript\nconst app = require('express')();\napp.listen(3000, () => {\n    console.log('Server running on port 3000');\n});\n\`\`\``,
+    'Started': {
+        content: `# Getting Started\n\nWelcome to the documentation! This is a sample markdown page.\n\n## Features\n\n- Easy to use\n- Supports markdown\n- Customizable\n- Dark mode support\n- Responsive design\n- Code syntax highlighting`,
+        subPages: {}
+    },
+    'Installation': {
+        content: `# Installation\n\n## Requirements\n\n- Node.js 14+\n- npm or yarn\n\n## Steps\n\n1. Clone the repository\n2. Run \`npm install\`\n3. Start the server with \`npm start\`\n\n## Code Example\n\n\`\`\`javascript\nconst app = require('express')();\napp.listen(3000, () => {\n    console.log('Server running on port 3000');\n});\n\`\`\``,
+        subPages: {}
+    }
 };
 
 // Initialize the viewer
@@ -43,28 +49,42 @@ function setupEventListeners() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.getElementById('sidebar-overlay');
     
-    mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         sidebar.classList.toggle('show');
         overlay.classList.toggle('show');
-        document.body.classList.toggle('menu-open');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
     });
     
     overlay.addEventListener('click', () => {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
-        document.body.classList.remove('menu-open');
+        closeMobileMenu();
     });
 
-    // Close sidebar when clicking a menu item on mobile
+    // Close sidebar when clicking menu items on mobile
     document.querySelectorAll('.menu-item').forEach(item => {
         item.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
-                sidebar.classList.remove('show');
-                overlay.classList.remove('show');
-                document.body.classList.remove('menu-open');
+                closeMobileMenu();
             }
         });
     });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && 
+            !sidebar.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target) && 
+            sidebar.classList.contains('show')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Add helper function to close mobile menu
+    function closeMobileMenu() {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
 
     // Handle window resize
     let resizeTimer;
@@ -176,14 +196,17 @@ function updateMenu() {
     const menu = document.getElementById('menu');
     menu.innerHTML = '';
     
-    Object.keys(pages).forEach(pageName => {
+    Object.entries(pages).forEach(([pageName, pageData]) => {
         const menuItem = document.createElement('div');
         menuItem.className = 'menu-item';
         menuItem.innerHTML = `
-            ${pageName}
+            <div class="menu-title">
+                ${pageName}
+                <button class="add-submenu-btn" onclick="addSubPage('${pageName}')">+</button>
+            </div>
             <div class="menu-actions">
                 <button class="edit-btn" onclick="editPage('${pageName}')">✎</button>
-                <button class="delete-btn" onclick="deletePage('${pageName}')">X</button>
+                <button class="delete-btn" onclick="deletePage('${pageName}')">×</button>
             </div>
         `;
         menuItem.onclick = (e) => {
@@ -191,6 +214,31 @@ function updateMenu() {
                 showPage(pageName);
             }
         };
+
+        // Add submenu if exists
+        if (Object.keys(pageData.subPages).length > 0) {
+            const subMenu = document.createElement('div');
+            subMenu.className = 'submenu';
+            Object.entries(pageData.subPages).forEach(([subPageName, subPageContent]) => {
+                const subMenuItem = document.createElement('div');
+                subMenuItem.className = 'submenu-item';
+                subMenuItem.innerHTML = `
+                    <div class="menu-title">${subPageName}</div>
+                    <div class="menu-actions">
+                        <button class="edit-btn" onclick="editSubPage('${pageName}', '${subPageName}')">✎</button>
+                        <button class="delete-btn" onclick="deleteSubPage('${pageName}', '${subPageName}')">×</button>
+                    </div>
+                `;
+                subMenuItem.onclick = (e) => {
+                    if (!e.target.className.includes('btn')) {
+                        showSubPage(pageName, subPageName);
+                    }
+                };
+                subMenu.appendChild(subMenuItem);
+            });
+            menuItem.appendChild(subMenu);
+        }
+        
         menu.appendChild(menuItem);
     });
 }
@@ -214,18 +262,13 @@ function showPage(pageName) {
             }
         });
         
-        // // Update breadcrumb with animation
-        // const breadcrumb = document.getElementById('breadcrumb');
-        // breadcrumb.innerHTML = `
-        //     <div class="breadcrumb-item">Documentation</div>
-        //     <div class="breadcrumb-separator">/</div>
-        //     <div class="breadcrumb-item active">${pageName}</div>
-        // `;
-        
-        // Show markdown content with animation
+        // Show markdown content with animation and page title
         content.innerHTML = `
+            <div class="page-title">
+                <h1>${pageName}</h1>
+            </div>
             <div class="preview-content">
-                ${marked.parse(pages[pageName] || '')}
+                ${marked.parse(pages[pageName].content || '')}
             </div>
         `;
         
@@ -236,6 +279,39 @@ function showPage(pageName) {
         Prism.highlightAll();
         
         // Fade in content
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+    }, 300);
+}
+
+// Show subpage content
+function showSubPage(parentPage, subPageName) {
+    const content = document.getElementById('markdown-content');
+    content.style.opacity = '0';
+    content.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        const sidebarBreadcrumb = document.querySelector('.sidebar-breadcrumb');
+        sidebarBreadcrumb.innerHTML = `
+            <span class="separator">/</span> 
+            <span>${parentPage}</span>
+            <span class="separator">/</span> 
+            <span>${subPageName}</span>
+        `;
+        
+        content.innerHTML = `
+            <div class="page-title">
+                <h1>${subPageName}</h1>
+                <div class="breadcrumb">${parentPage} / ${subPageName}</div>
+            </div>
+            <div class="preview-content">
+                ${marked.parse(pages[parentPage].subPages[subPageName] || '')}
+            </div>
+        `;
+        
+        addCopyButtons();
+        Prism.highlightAll();
+        
         content.style.opacity = '1';
         content.style.transform = 'translateY(0)';
     }, 300);
@@ -320,7 +396,7 @@ function saveNewPage() {
     
     if (pageName && content) {
         if (!pages[pageName]) {
-            pages[pageName] = content;
+            pages[pageName] = { content, subPages: {} };
             updateMenu();
             showPage(pageName);
             closeModal();
@@ -333,6 +409,45 @@ function saveNewPage() {
     }
 }
 
+// Add new subpage
+function addSubPage(parentPage) {
+    event.stopPropagation();
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Create Sub Page</h2>
+            <input type="text" id="subpage-name" placeholder="Sub Page Name" class="modal-input">
+            <textarea id="subpage-content" placeholder="Enter markdown content..." class="modal-textarea"></textarea>
+            <div class="modal-buttons">
+                <button onclick="saveSubPage('${parentPage}')">Save</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Save new subpage
+function saveSubPage(parentPage) {
+    const subPageName = document.getElementById('subpage-name').value.trim();
+    const content = document.getElementById('subpage-content').value.trim();
+    
+    if (subPageName && content) {
+        if (!pages[parentPage].subPages[subPageName]) {
+            pages[parentPage].subPages[subPageName] = content;
+            updateMenu();
+            showSubPage(parentPage, subPageName);
+            closeModal();
+            showNotification('Sub page created successfully');
+        } else {
+            showNotification('A sub page with this name already exists!', 'error');
+        }
+    } else {
+        showNotification('Please enter both sub page name and content!', 'error');
+    }
+}
+
 // Edit existing page
 function editPage(pageName) {
     const modal = document.createElement('div');
@@ -341,7 +456,7 @@ function editPage(pageName) {
         <div class="modal-content">
             <h2>Edit Page</h2>
             <input type="text" id="page-name" value="${pageName}" readonly class="modal-input">
-            <textarea id="page-content" class="modal-textarea">${pages[pageName]}</textarea>
+            <textarea id="page-content" class="modal-textarea">${pages[pageName].content}</textarea>
             <div class="modal-buttons">
                 <button onclick="saveEditedPage('${pageName}')">Save</button>
                 <button onclick="closeModal()">Cancel</button>
@@ -356,8 +471,39 @@ function saveEditedPage(pageName) {
     const content = document.getElementById('page-content').value.trim();
     
     if (content) {
-        pages[pageName] = content;
+        pages[pageName].content = content;
         showPage(pageName);
+        closeModal();
+    } else {
+        alert('Content cannot be empty!');
+    }
+}
+
+// Edit existing subpage
+function editSubPage(parentPage, subPageName) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Edit Sub Page</h2>
+            <input type="text" id="subpage-name" value="${subPageName}" readonly class="modal-input">
+            <textarea id="subpage-content" class="modal-textarea">${pages[parentPage].subPages[subPageName]}</textarea>
+            <div class="modal-buttons">
+                <button onclick="saveEditedSubPage('${parentPage}', '${subPageName}')">Save</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Save edited subpage
+function saveEditedSubPage(parentPage, subPageName) {
+    const content = document.getElementById('subpage-content').value.trim();
+    
+    if (content) {
+        pages[parentPage].subPages[subPageName] = content;
+        showSubPage(parentPage, subPageName);
         closeModal();
     } else {
         alert('Content cannot be empty!');
@@ -386,6 +532,17 @@ function deletePage(pageName) {
             document.getElementById('markdown-content').innerHTML = '';
             document.getElementById('breadcrumb').innerHTML = '';
         }
+    }
+}
+
+// Delete a subpage
+function deleteSubPage(parentPage, subPageName) {
+    if (confirm(`Are you sure you want to delete "${subPageName}"?`)) {
+        delete pages[parentPage].subPages[subPageName];
+        updateMenu();
+        
+        // Show parent page or empty content
+        showPage(parentPage);
     }
 }
 
