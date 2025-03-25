@@ -16,9 +16,6 @@ function initViewer() {
     // Initialize theme
     initializeTheme();
 
-    // Initialize sidebar state
-    initializeSidebar();
-
     // Update statistics
     updateStatistics();
 
@@ -33,22 +30,10 @@ function initializeTheme() {
     updateThemeToggle();
 }
 
-// Initialize sidebar
-function initializeSidebar() {
-    const savedState = localStorage.getItem('sidebarCollapsed') === 'true';
-    const sidebar = document.querySelector('.sidebar');
-    if (savedState) {
-        sidebar.classList.add('collapsed');
-    }
-}
-
 // Setup event listeners
 function setupEventListeners() {
     // Theme toggle
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-
-    // Sidebar collapse
-    document.getElementById('collapse-sidebar').addEventListener('click', toggleSidebar);
 
     // Search functionality
     document.getElementById('search-docs').addEventListener('input', handleSearch);
@@ -68,13 +53,6 @@ function toggleTheme() {
 function updateThemeToggle() {
     const button = document.getElementById('theme-toggle');
     button.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
-}
-
-// Toggle sidebar
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    const isCollapsed = sidebar.classList.toggle('collapsed');
-    localStorage.setItem('sidebarCollapsed', isCollapsed);
 }
 
 // Handle search
@@ -141,31 +119,47 @@ function updateMenu() {
     });
 }
 
-// Show a specific page
+// Enhanced page transition
 function showPage(pageName) {
-    // Update active state in menu
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-        if (item.textContent.includes(pageName)) {
-            item.classList.add('active');
-        }
-    });
-    
-    // Update breadcrumb
-    document.getElementById('breadcrumb').innerHTML = `
-        Documentation / <span>${pageName}</span>
-    `;
-    
-    // Show markdown content
     const content = document.getElementById('markdown-content');
-    content.innerHTML = `
-        <div class="preview-content">
-            ${marked.parse(pages[pageName] || '')}
-        </div>
-    `;
-
-    // Apply syntax highlighting
-    Prism.highlightAll();
+    content.style.opacity = '0';
+    content.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        // Update sidebar breadcrumb
+        const sidebarBreadcrumb = document.querySelector('.sidebar-breadcrumb');
+        sidebarBreadcrumb.innerHTML = `<span class="separator">/</span> <span>${pageName}</span>`;
+        
+        // Update active state in menu
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.textContent.includes(pageName)) {
+                item.classList.add('active');
+            }
+        });
+        
+        // // Update breadcrumb with animation
+        // const breadcrumb = document.getElementById('breadcrumb');
+        // breadcrumb.innerHTML = `
+        //     <div class="breadcrumb-item">Documentation</div>
+        //     <div class="breadcrumb-separator">/</div>
+        //     <div class="breadcrumb-item active">${pageName}</div>
+        // `;
+        
+        // Show markdown content with animation
+        content.innerHTML = `
+            <div class="preview-content">
+                ${marked.parse(pages[pageName] || '')}
+            </div>
+        `;
+        
+        // Apply syntax highlighting
+        Prism.highlightAll();
+        
+        // Fade in content
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+    }, 300);
 }
 
 // Add a new page
@@ -186,7 +180,28 @@ function addNewPage() {
     document.body.appendChild(modal);
 }
 
-// Save new page
+// Enhanced notification system
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-icon">${type === 'success' ? '✓' : '!'}</div>
+            <div class="notification-message">${message}</div>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }, 100);
+}
+
+// Update save functions to use notifications
 function saveNewPage() {
     const pageName = document.getElementById('page-name').value.trim();
     const content = document.getElementById('page-content').value.trim();
@@ -198,11 +213,12 @@ function saveNewPage() {
             showPage(pageName);
             updateStatistics();
             closeModal();
+            showNotification('Page created successfully');
         } else {
-            alert('A page with this name already exists!');
+            showNotification('A page with this name already exists!', 'error');
         }
     } else {
-        alert('Please enter both page name and content!');
+        showNotification('Please enter both page name and content!', 'error');
     }
 }
 
