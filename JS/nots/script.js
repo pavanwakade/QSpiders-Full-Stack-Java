@@ -16,9 +16,6 @@ function initViewer() {
     // Initialize theme
     initializeTheme();
 
-    // Update statistics
-    updateStatistics();
-
     // Add event listeners
     setupEventListeners();
 }
@@ -49,15 +46,26 @@ function setupEventListeners() {
     mobileMenuBtn.addEventListener('click', () => {
         sidebar.classList.toggle('show');
         overlay.classList.toggle('show');
-        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+        document.body.classList.toggle('menu-open');
     });
     
     overlay.addEventListener('click', () => {
         sidebar.classList.remove('show');
         overlay.classList.remove('show');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
     });
-    
+
+    // Close sidebar when clicking a menu item on mobile
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    });
+
     // Handle window resize
     let resizeTimer;
     window.addEventListener('resize', () => {
@@ -98,7 +106,12 @@ function handleSearch(e) {
 
 // Export to PDF
 function exportToPDF() {
-    const content = document.getElementById('markdown-content').innerHTML;
+    const contentElement = document.getElementById('markdown-content');
+    const contentClone = contentElement.cloneNode(true);
+    
+    contentClone.querySelectorAll('.copy-btn').forEach(btn => btn.remove());
+    
+    const content = contentClone.innerHTML;
     const isDarkMode = document.body.classList.contains('dark-theme');
     const style = `
         <style>
@@ -118,15 +131,8 @@ function exportToPDF() {
                     color: #e5e7eb;
                 ` : ''}
             }
-            .preview-content h1,
-            .preview-content h2,
-            .preview-content h3,
-            .preview-content h4,
-            .preview-content h5,
-            .preview-content h6,
-            .preview-content p,
-            .preview-content li {
-                ${isDarkMode ? 'color: #e5e7eb !important;' : ''}
+            .preview-content * {
+                color: ${isDarkMode ? '#e5e7eb' : '#000000'} !important;
             }
             .preview-content pre {
                 ${isDarkMode ? `
@@ -144,6 +150,12 @@ function exportToPDF() {
                 body {
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
+                    color-adjust: exact;
+                }
+                * {
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    color-adjust: exact;
                 }
             }
         </style>
@@ -159,15 +171,6 @@ function exportToPDF() {
     win.print();
 }
 
-// Update statistics
-function updateStatistics() {
-    const pageCount = Object.keys(pages).length;
-    const lastUpdated = new Date().toLocaleString();
-    
-    document.getElementById('page-count').textContent = pageCount;
-    document.getElementById('last-updated').textContent = lastUpdated;
-}
-
 // Update the menu with current pages
 function updateMenu() {
     const menu = document.getElementById('menu');
@@ -180,7 +183,7 @@ function updateMenu() {
             ${pageName}
             <div class="menu-actions">
                 <button class="edit-btn" onclick="editPage('${pageName}')">✎</button>
-                <button class="delete-btn" onclick="deletePage('${pageName}')">×</button>
+                <button class="delete-btn" onclick="deletePage('${pageName}')">X</button>
             </div>
         `;
         menuItem.onclick = (e) => {
@@ -320,7 +323,6 @@ function saveNewPage() {
             pages[pageName] = content;
             updateMenu();
             showPage(pageName);
-            updateStatistics();
             closeModal();
             showNotification('Page created successfully');
         } else {
@@ -356,7 +358,6 @@ function saveEditedPage(pageName) {
     if (content) {
         pages[pageName] = content;
         showPage(pageName);
-        updateStatistics();
         closeModal();
     } else {
         alert('Content cannot be empty!');
@@ -376,7 +377,6 @@ function deletePage(pageName) {
     if (confirm(`Are you sure you want to delete "${pageName}"?`)) {
         delete pages[pageName];
         updateMenu();
-        updateStatistics();
         
         // Show first available page or empty content
         const firstPage = Object.keys(pages)[0];
