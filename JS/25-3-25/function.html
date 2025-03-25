@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        text-align: center;
+      }
+      h1 {
+        color: red;
+      }
+
+      button {
+        background-color: green;
+
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>function day one</h1>
+
+    <p>add to cart item</p>
+
+    <h2></h2>
+
+    <button onclick="addtocart()">add</button>
+    <button onclick="removetocart()">Remove</button>
+
+
+
+    <button onclick="add()">add</button>
+
+    <script>
+      let heading = document.querySelector("h2");
+
+      let cartitemcount = 0;
+
+      heading.innerText = cartitemcount;
+
+      function addtocart() {
+        cartitemcount++;
+        heading.innerText = cartitemcount;
+      }
+
+      function removetocart() {
+        cartitemcount--;
+        heading.innerText = cartitemcount;
+      }
+
+      //   using Arrow fiunction/fat Arrow
+
+      let add = () => {
+        cartitemcount++;
+        heading.innerText = cartitemcount;
+      };
+
+ 
+
+    </script>
+  </body>
+</html>
