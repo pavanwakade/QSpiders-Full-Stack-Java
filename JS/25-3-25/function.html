@@ -1,66 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
 
-    <style>
-      body {
-        text-align: center;
-      }
-      h1 {
-        color: red;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-      button {
-        background-color: green;
+  <style>
+    body {
+      text-align: center;
+    }
 
-        color: white;
-      }
-    </style>
-  </head>
+    .cointainer {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
 
-  <body>
-    <h1>function day one</h1>
+    div {
+      margin: 20px;
+    }
 
-    <p>add to cart item</p>
+    h1 {
+      color: red;
+    }
 
-    <h2></h2>
+    button {
+      background-color: green;
 
-    <button onclick="addtocart()">add</button>
-    <button onclick="removetocart()">Remove</button>
+      color: white;
+    }
+  </style>
+</head>
 
+<body>
+  <h1>function day one</h1>
 
+  <div class="cointainer">
+    <div>
+      <p>add to cart item</p>
 
-    <button onclick="add()">add</button>
+      <h2></h2>
 
-    <script>
-      let heading = document.querySelector("h2");
+      <button onclick="addtocart()">add</button>
+      <button onclick="removetocart()">Remove</button>
+    </div>
 
-      let cartitemcount = 0;
+    <div>
+      <h2>add to cart item : <p class="cart"></p>
+      </h2>
+      <button onclick="add()">add</button>
+      <button onclick="remove()">Remove</button>
+    </div>
 
+  </div>
+  <script>
+    let heading = document.querySelector("h2");
+
+    let cartitemcount = 0;
+
+    heading.innerText = cartitemcount;
+
+    function addtocart() {
+      cartitemcount++;
       heading.innerText = cartitemcount;
+    }
 
-      function addtocart() {
-        cartitemcount++;
-        heading.innerText = cartitemcount;
-      }
+    function removetocart() {
+      cartitemcount--;
+      heading.innerText = cartitemcount;
+    }
 
-      function removetocart() {
-        cartitemcount--;
-        heading.innerText = cartitemcount;
-      }
+    //   using Arrow fiunction/fat Arrow
 
-      //   using Arrow fiunction/fat Arrow
 
-      let add = () => {
-        cartitemcount++;
-        heading.innerText = cartitemcount;
-      };
+    let cartcount = 0;
+    let cart = document.querySelector(".cart");
 
- 
+    let add = () => {
+      cartcount++;
+      cart.innerText = cartcount;
+    };
+    
 
-    </script>
-  </body>
+    let remove = () => {
+      cartcount--;
+      cart.innerText = cartcount;
+    };
+  </script>
+</body>
+
 </html>
