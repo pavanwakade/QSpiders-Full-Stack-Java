@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FunctionExpresition</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>FunctionExpresition</h1>
 
-    <Script>
+    <script>
+      let finctionvariable = function () {
+        console.log("Hello from FunctionExpresition");
+      };
 
+      finctionvariable();
 
-let finctionvariable = function (){
+      let finctionvariable2 = function add() {
+        console.log("Hello from FunctionExpresition2");
+        console.log(12 + 12);
+      };
 
-    console.log("Hello from FunctionExpresition")
-}
+      finctionvariable2();
+      
 
-finctionvariable();
+      //even no from start to end
+      let start = prompt("enter start number");
+      let end = prompt("enter End number");
 
-
-
-
-let finctionvariable2 = function add(){
-
-console.log("Hello from FunctionExpresition2")
-console.log(12+12)
-}
-
-finctionvariable2();
-
-
-
-    </Script>
-</body>
+      let checkEven = (a, b) => {
+        for (; a <= b; a++) {
+          if (a % 2 == 0) {
+            console.log(a);
+          }
+        }
+      };
+      // checkEven(start, end);
+    </script>
+  </body>
 </html>
