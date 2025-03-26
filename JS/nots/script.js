@@ -197,6 +197,10 @@ function updateMenu() {
     menu.innerHTML = '';
     
     Object.entries(pages).forEach(([pageName, pageData]) => {
+        const menuContainer = document.createElement('div');
+        menuContainer.className = 'menu-container';
+        
+        // Create main menu item
         const menuItem = document.createElement('div');
         menuItem.className = 'menu-item';
         menuItem.innerHTML = `
@@ -214,16 +218,21 @@ function updateMenu() {
                 showPage(pageName);
             }
         };
+        menuContainer.appendChild(menuItem);
 
         // Add submenu if exists
         if (Object.keys(pageData.subPages).length > 0) {
             const subMenu = document.createElement('div');
             subMenu.className = 'submenu';
+            
             Object.entries(pageData.subPages).forEach(([subPageName, subPageContent]) => {
                 const subMenuItem = document.createElement('div');
                 subMenuItem.className = 'submenu-item';
                 subMenuItem.innerHTML = `
-                    <div class="menu-title">${subPageName}</div>
+                    <div class="menu-title">
+                        <span class="menu-indent">└─</span>
+                        ${subPageName}
+                    </div>
                     <div class="menu-actions">
                         <button class="edit-btn" onclick="editSubPage('${pageName}', '${subPageName}')">✎</button>
                         <button class="delete-btn" onclick="deleteSubPage('${pageName}', '${subPageName}')">×</button>
@@ -232,14 +241,15 @@ function updateMenu() {
                 subMenuItem.onclick = (e) => {
                     if (!e.target.className.includes('btn')) {
                         showSubPage(pageName, subPageName);
+                        e.stopPropagation();
                     }
                 };
                 subMenu.appendChild(subMenuItem);
             });
-            menuItem.appendChild(subMenu);
+            menuContainer.appendChild(subMenu);
         }
         
-        menu.appendChild(menuItem);
+        menu.appendChild(menuContainer);
     });
 }
 
