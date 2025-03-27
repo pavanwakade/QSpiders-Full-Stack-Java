@@ -22,7 +22,7 @@ public class Every5min {
 
 	// Default Configuration Values
 	private static final int DEFAULT_COMMIT_INTERVAL_MINUTES = 1;
-	private static final String DEFAULT_COMMIT_MESSAGE = "Auto commit";
+	private static final String DEFAULT_COMMIT_MESSAGE = "Updated";
 
 	// Logging
 	private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
@@ -49,6 +49,7 @@ public class Every5min {
 		}
 	}
 
+	
 	private static boolean isInternetAvailable() {
 		try {
 			// Attempt to connect to a reliable host
