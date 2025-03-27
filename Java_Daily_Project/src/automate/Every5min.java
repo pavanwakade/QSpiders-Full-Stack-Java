@@ -277,8 +277,8 @@ public class Every5min {
 		label.setOpaque(true);
 		label.setBackground(new Color(76, 175, 80, 230)); // Material Green with transparency
 		label.setForeground(Color.WHITE);
-		label.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
-				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+//		label.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
+//				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
 		window.add(label);
 		window.pack();
