@@ -226,7 +226,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
 public class Every5min {
-    private static final int COMMIT_INTERVAL_MINUTES = 40;
+    private static final int COMMIT_INTERVAL_MINUTES = 1;
     private static final String DEFAULT_COMMIT_MESSAGE = "updated";
 
     public static void main(String[] args) {
