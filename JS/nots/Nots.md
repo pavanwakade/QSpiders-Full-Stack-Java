@@ -115,6 +115,7 @@ JavaScript has **two main categories** of data types:
 function demo(){
 
 }
+````
 
 **Arraow Function**
 
@@ -123,6 +124,7 @@ let a=()=>{
 
 }
 
+````
 **Anonymous Function**
 
 ````javascript
@@ -131,3 +133,5 @@ let a=()=>{
         console.log("immidiateFunction");
         
       })();
+      
+      ````
