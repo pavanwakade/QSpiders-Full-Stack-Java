@@ -49,7 +49,6 @@ public class Every5min {
 		}
 	}
 
-	
 	private static boolean isInternetAvailable() {
 		try {
 			// Attempt to connect to a reliable host
@@ -120,13 +119,10 @@ public class Every5min {
 			// Create a custom JOptionPane with a green theme
 			UIManager.put("OptionPane.background", new Color(76, 175, 80));
 			UIManager.put("Panel.background", new Color(76, 175, 80));
-			
-			JOptionPane optionPane = new JOptionPane(
-				message, 
-				JOptionPane.INFORMATION_MESSAGE, 
-				JOptionPane.DEFAULT_OPTION
-			);
-			
+
+			JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
+					JOptionPane.DEFAULT_OPTION);
+
 			JDialog dialog = optionPane.createDialog(null, title);
 			dialog.setModal(false);
 			dialog.setVisible(true);
