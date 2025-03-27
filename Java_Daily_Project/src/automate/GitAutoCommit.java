@@ -19,6 +19,8 @@ public class GitAutoCommit {
     private static final String REPOSITORIES_FILE = CONFIG_DIR + File.separator + "repositories.txt";
     private static final Logger LOGGER = Logger.getLogger(GitAutoCommit.class.getName());
     private static FileHandler fileHandler;
+    
+    
 
     static {
         try {
