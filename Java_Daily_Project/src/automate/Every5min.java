@@ -75,7 +75,7 @@ public class Every5min {
 	            }
 	        };
 	        mainPanel.setLayout(new BorderLayout(10, 10));
-	        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+//	        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
 	        // Title label
 	        JLabel titleLabel = new JLabel(title);
