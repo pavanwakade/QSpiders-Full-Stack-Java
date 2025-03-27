@@ -110,31 +110,29 @@ JavaScript has **two main categories** of data types:
 
 ## Functions
 
-**Nameed Function** or **Regular Function**
+### Nameed Function or Regular Function
 
-````javascript
+```javascript
 function demo(){
 
 }
-````
+```
 
-**Arraow Function**
+### Arraow Function
 
-````javascript
+```javascript
 let a=()=>{
 
 }
+```
+### Anonymous Function
 
-````
-**Anonymous Function**
-
-````javascript
+```javascript
 
 (function(){
     console.log("hello from Annonymous Function");
 })();
-
-      ````
+      ```
 
 
 
@@ -143,8 +141,7 @@ let a=()=>{
 ((a, b)=>{
     console.log(a + b);
 })(1, 2);
-
-      ````
+      ```
 
 
 ### HigherOrderFunction And CollBack Function
@@ -164,5 +161,4 @@ let a=()=>{
       };
 
       hiof(a);
-      
       ```
