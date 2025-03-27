@@ -64,9 +64,10 @@ public class Every5min {
 	                Graphics2D g2d = (Graphics2D) g.create();
 	                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-	                // Gradient background
-	                GradientPaint gradient = new GradientPaint(0, 0, new Color(76, 175, 80, 220), // Material Green start
-	                        0, getHeight(), new Color(56, 142, 60, 220) // Darker green end
+	             // Gradient background
+	                GradientPaint gradient = new GradientPaint(
+	                    0, 0, new Color(25, 118, 210, 229),  // Darker blue start (90% opacity = 229)
+	                    0, getHeight(), new Color(33, 150, 243, 229)  // Lighter blue end (90% opacity = 229)
 	                );
 	                g2d.setPaint(gradient);
 	                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
