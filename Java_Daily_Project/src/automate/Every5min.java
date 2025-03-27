@@ -136,16 +136,16 @@ public class Every5min {
 	                        BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1),
 	                        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
-	        // Auto-close timer with fade-out simulation
-	        AtomicFloat opacity = new AtomicFloat(0.9f);
+	        // Opacity management using a float array
+	        float[] opacity = {0.9f};
 	        Timer fadeOutTimer = new Timer(50, null);
 	        fadeOutTimer.addActionListener(e -> {
-	            opacity.set(opacity.get() - 0.1f);
-	            if (opacity.get() <= 0) {
+	            opacity[0] -= 0.1f;
+	            if (opacity[0] <= 0) {
 	                dialog.dispose();
 	                fadeOutTimer.stop();
 	            } else {
-	                dialog.setOpacity(opacity.get());
+	                dialog.setOpacity(opacity[0]);
 	            }
 	        });
 
