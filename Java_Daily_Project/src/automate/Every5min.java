@@ -1,3 +1,4 @@
+// Main application class
 package automate;
 
 import java.io.*;
@@ -148,6 +149,52 @@ public class Every5min {
         showNotification("Error", message + ": " + e.getMessage());
     }
 
+    // New method for displaying countdown
+    private static void startCountdownClock(int intervalMinutes) {
+        Thread countdownThread = new Thread(() -> {
+            while (true) {
+                try {
+                    for (int remainingMinutes = intervalMinutes; remainingMinutes > 0; remainingMinutes--) {
+                        for (int remainingSeconds = 59; remainingSeconds >= 0; remainingSeconds--) {
+                            // Clear console and print countdown
+                            clearConsole();
+                            System.out.printf("Next auto-commit in: %02d:%02d\n", remainingMinutes, remainingSeconds);
+                            
+                            // Sleep for 1 second
+                            Thread.sleep(1000);
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        });
+        countdownThread.setDaemon(true);
+        countdownThread.start();
+    }
+
+    // Method to clear console
+    private static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                // For Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // For Unix-like systems
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            // If clearing fails, just print some newlines
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+        }
+    }
+
     // Find Git executable
     private static String findGitExecutable() {
         List<String> possiblePaths = Arrays.asList(
@@ -256,6 +303,9 @@ public class Every5min {
             return;
         }
 
+        // Start the countdown clock
+        startCountdownClock(commitIntervalMinutes);
+
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(
             monitoredRepositories.size(), 
             runnable -> {
@@ -320,3 +370,37 @@ public class Every5min {
         }
     }
 }
+
+//// Stub for GitAutoCommitAdmin (minimal implementation)
+//package automate;
+//
+//import javax.swing.*;
+//import java.awt.*;
+//
+//public class GitAutoCommitAdmin extends JFrame {
+//    public GitAutoCommitAdmin() {
+//        setTitle("Git Auto Commit Admin");
+//        setSize(400, 300);
+//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        setLocationRelativeTo(null);
+//
+//        // Create a panel with a message
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new BorderLayout());
+//        
+//        JLabel messageLabel = new JLabel("Configure Git Auto Commit Repositories", SwingConstants.CENTER);
+//        panel.add(messageLabel, BorderLayout.CENTER);
+//
+//        JTextArea instructionsArea = new JTextArea(
+//            "To configure repositories:\n" +
+//            "1. Edit the config.properties file in " + 
+//            System.getProperty("user.home") + "/.gitautocommit/\n" +
+//            "2. Add repositories separated by path separator\n" +
+//            "3. Specify commit interval and message"
+//        );
+//        instructionsArea.setEditable(false);
+//        panel.add(new JScrollPane(instructionsArea), BorderLayout.SOUTH);
+//
+//        add(panel);
+//    }
+//}
