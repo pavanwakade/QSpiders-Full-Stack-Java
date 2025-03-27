@@ -1,16 +1,26 @@
 
-let start = prompt("enter start number");
-let end = prompt("enter End number");
+// let start = prompt("enter start number");
+// let end = prompt("enter End number");
 
-let checkEven = (a, b) => {
+// let checkEven = (a, b) => {
 
-    for (; a <= b; a++) {
+//     for (; a <= b; a++) {
 
-        if (a % 2 == 0) {
+//         if (a % 2 == 0) {
 
-            console.log(a);
-        }
-    }
-}
+//             console.log(a);
+//         }
+//     }
+// }
 
-checkEven(start, end);
+// checkEven(start, end);
+
+
+(()=>{
+    console.log("hello from Annonymous Function");
+})();
+
+
+((a, b)=>{
+    console.log(a + b);
+})(1, 2);

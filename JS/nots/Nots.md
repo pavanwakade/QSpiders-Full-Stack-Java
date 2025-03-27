@@ -128,10 +128,10 @@ let a=()=>{
 **Anonymous Function**
 
 ````javascript
- let b= (function () {
 
-        console.log("immidiateFunction");
-        
-      })();
-      
+((a, b)=>{
+    console.log(a + b);
+})(1, 2);
+
       ````
+
