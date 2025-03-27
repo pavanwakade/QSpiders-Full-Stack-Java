@@ -356,6 +356,7 @@ public class Every5min {
         runCommand(new String[] { gitPath, "push" }, repoPath);
         showNotification("Git Commit", "Changes pushed for " + repoPath);
     }
+    
 
     private static void runCommand(String[] command, String directory) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder(command);
