@@ -30,8 +30,8 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Every5min {
     private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
-    private static int COMMIT_INTERVAL_MINUTES = 5; // Default value
-    private static String DEFAULT_COMMIT_MESSAGE = "Updated automatically";
+    private static int COMMIT_INTERVAL_MINUTES = 1; // Default value
+    private static String DEFAULT_COMMIT_MESSAGE = "Updated";
     private static final String CONFIG_FILE = System.getProperty("user.home") + "/.gitautocommit/config.properties";
 
     // Method to load configuration

@@ -51,6 +51,8 @@ public class GitAdminPanel {
             String repoPath = fileChooser.getSelectedFile().getAbsolutePath();
             GitAutoCommit.addRepository(repoPath);
             updateRepoList();
+            JOptionPane.showMessageDialog(frame, "Repository added: " + repoPath, 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -60,6 +62,8 @@ public class GitAdminPanel {
             String repoPath = listModel.getElementAt(selectedIndex);
             GitAutoCommit.removeRepository(repoPath);
             updateRepoList();
+            JOptionPane.showMessageDialog(frame, "Repository removed: " + repoPath, 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(frame, "Please select a repository to remove.", 
                 "No Selection", JOptionPane.WARNING_MESSAGE);
