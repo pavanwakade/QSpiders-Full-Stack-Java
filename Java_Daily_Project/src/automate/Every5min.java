@@ -12,7 +12,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Every5min {
 	// Configuration Constants
