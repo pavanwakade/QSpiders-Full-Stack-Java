@@ -218,31 +218,6 @@ public class Every5min {
         }
     }
 
-    // New method to display countdown
-    private static void displayCountdown(int intervalMinutes, String repoPath) {
-        Thread countdownThread = new Thread(() -> {
-            int totalSeconds = intervalMinutes * 60;
-            while (totalSeconds > 0) {
-                try {
-                    int minutes = totalSeconds / 60;
-                    int seconds = totalSeconds % 60;
-                    
-                    System.out.printf("\rNext commit for %s in %02d:%02d    ", 
-                        repoPath, minutes, seconds);
-                    
-                    Thread.sleep(1000);
-                    totalSeconds--;
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-            }
-            System.out.println("\n"); // New line after countdown
-        });
-        countdownThread.setDaemon(true);
-        countdownThread.start();
-    }
-
     // Commit and push changes
     private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
         File repoDir = new File(repoPath);
@@ -297,9 +272,6 @@ public class Every5min {
                 try {
                     LOGGER.info("Checking repository: " + repoPath);
                     commitAndPushChanges(repoPath);
-                    
-                    // Start countdown for next commit
-                    displayCountdown(commitIntervalMinutes, repoPath);
                 } catch (Exception e) {
                     logException("Error processing repository: " + repoPath, e);
                 }
