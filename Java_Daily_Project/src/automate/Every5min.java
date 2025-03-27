@@ -13,227 +13,349 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.RoundRectangle2D;
-import sun.awt.AWTUtilities;
 
 public class Every5min {
-    // Configuration Constants
-    private static final String CONFIG_DIR = System.getProperty("user.home") + File.separator + ".gitautocommit";
-    private static final String CONFIG_FILE = CONFIG_DIR + File.separator + "config.properties";
-    private static final String LOG_FILE = CONFIG_DIR + File.separator + "gitautocommit.log";
+	// Configuration Constants
+	private static final String CONFIG_DIR = System.getProperty("user.home") + File.separator + ".gitautocommit";
+	private static final String CONFIG_FILE = CONFIG_DIR + File.separator + "config.properties";
+	private static final String LOG_FILE = CONFIG_DIR + File.separator + "gitautocommit.log";
 
-    // Default Configuration Values
-    private static final int DEFAULT_COMMIT_INTERVAL_MINUTES = 1;
-    private static final String DEFAULT_COMMIT_MESSAGE = "Updated";
+	// Default Configuration Values
+	private static final int DEFAULT_COMMIT_INTERVAL_MINUTES = 1;
+	private static final String DEFAULT_COMMIT_MESSAGE = "Updated";
 
-    // Logging
-    private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
-    private static FileHandler fileHandler;
+	// Logging
+	private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
+	private static FileHandler fileHandler;
 
-    // Configuration Properties
-    private static int commitIntervalMinutes;
-    private static String commitMessage;
-    private static List<String> monitoredRepositories;
+	// Configuration Properties
+	private static int commitIntervalMinutes;
+	private static String commitMessage;
+	private static List<String> monitoredRepositories;
 
-    // Static Initialization Block for Logging
-    static {
-        try {
-            // Create config and log directories
-            Files.createDirectories(Paths.get(CONFIG_DIR));
+	// Static Initialization Block for Logging
+	static {
+		try {
+			// Create config and log directories
+			Files.createDirectories(Paths.get(CONFIG_DIR));
 
-            // Set up file logging
-            fileHandler = new FileHandler(LOG_FILE, true);
-            fileHandler.setFormatter(new SimpleFormatter());
-            LOGGER.addHandler(fileHandler);
-            LOGGER.setLevel(Level.ALL);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			// Set up file logging
+			fileHandler = new FileHandler(LOG_FILE, true);
+			fileHandler.setFormatter(new SimpleFormatter());
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.ALL);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    // Stylish Popup Method
-    private static void showPopup(String title, String message) {
-        SwingUtilities.invokeLater(() -> {
-            // Create a custom JDialog with a more modern look
-            JDialog dialog = new JDialog();
-            dialog.setUndecorated(true);
-            dialog.setAlwaysOnTop(true);
+	// Reliable Popup Method
+	private static void showPopup(String title, String message) {
+		SwingUtilities.invokeLater(() -> {
+			// Custom JOptionPane with styled look
+			JOptionPane optionPane = new JOptionPane(
+				message, 
+				JOptionPane.INFORMATION_MESSAGE, 
+				JOptionPane.DEFAULT_OPTION
+			);
+			
+			// Customize colors
+			optionPane.setBackground(new Color(76, 175, 80)); // Material Green
+			
+			// Create dialog
+			JDialog dialog = optionPane.createDialog(null, title);
+			dialog.setAlwaysOnTop(true);
+			
+			// Set a custom icon if needed
+			ImageIcon icon = new ImageIcon(new byte[16]); // Create a blank icon
+			dialog.setIconImage(icon.getImage());
+			
+			// Show dialog
+			dialog.setModal(false);
+			dialog.setVisible(true);
+			
+			// Auto-close logic
+			new Timer(5000, e -> {
+				dialog.setVisible(false);
+				dialog.dispose();
+			}).start();
 
-            // Main panel with gradient background
-            JPanel mainPanel = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    Graphics2D g2d = (Graphics2D) g.create();
-                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    
-                    // Gradient background
-                    GradientPaint gradient = new GradientPaint(
-                        0, 0, new Color(76, 175, 80, 220),  // Material Green start
-                        0, getHeight(), new Color(56, 142, 60, 220)  // Darker green end
-                    );
-                    g2d.setPaint(gradient);
-                    g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-                    g2d.dispose();
-                }
-            };
-            mainPanel.setLayout(new BorderLayout(10, 10));
-            mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+			// Logging
+			LOGGER.info("Popup: " + title + " - " + message);
+		});
+	}
+	
+	private static boolean isInternetAvailable() {
+		try {
+			// Attempt to connect to a reliable host
+			URL url = new URL("https://www.google.com");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setConnectTimeout(3000);
+			connection.setReadTimeout(3000);
+			connection.setRequestMethod("HEAD");
 
-            // Title label
-            JLabel titleLabel = new JLabel(title);
-            titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-            titleLabel.setForeground(Color.WHITE);
+			int responseCode = connection.getResponseCode();
+			return (responseCode == HttpURLConnection.HTTP_OK);
+		} catch (Exception e) {
+			LOGGER.warning("Internet connection check failed: " + e.getMessage());
+			return false;
+		}
+	}
 
-            // Message label
-            JLabel messageLabel = new JLabel(message);
-            messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            messageLabel.setForeground(Color.WHITE);
+	// Load Configuration from Properties File
+	private static void loadConfiguration() {
+		Properties props = new Properties();
 
-            // Icon (optional placeholder)
-            JLabel iconLabel = new JLabel("✓");
-            iconLabel.setFont(new Font("Arial", Font.BOLD, 30));
-            iconLabel.setForeground(Color.WHITE);
+		try {
+			File configFile = new File(CONFIG_FILE);
 
-            // Layout components
-            JPanel textPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-            textPanel.setOpaque(false);
-            textPanel.add(titleLabel);
-            textPanel.add(messageLabel);
+			// Set default values
+			commitIntervalMinutes = DEFAULT_COMMIT_INTERVAL_MINUTES;
+			commitMessage = DEFAULT_COMMIT_MESSAGE;
+			monitoredRepositories = new ArrayList<>();
 
-            mainPanel.add(iconLabel, BorderLayout.WEST);
-            mainPanel.add(textPanel, BorderLayout.CENTER);
-            mainPanel.setBackground(new Color(0, 0, 0, 0));
-            mainPanel.setOpaque(false);
+			if (configFile.exists()) {
+				try (FileInputStream fis = new FileInputStream(configFile)) {
+					props.load(fis);
 
-            dialog.getContentPane().add(mainPanel);
-            dialog.getContentPane().setBackground(new Color(0, 0, 0, 0));
-            dialog.setBackground(new Color(0, 0, 0, 0));
+					// Load repositories
+					String repoList = props.getProperty("repositories", "");
+					if (!repoList.isEmpty()) {
+						monitoredRepositories = new ArrayList<>(Arrays.asList(repoList.split(File.pathSeparator)));
+					}
 
-            // Make dialog draggable
-            Point offset = new Point();
-            mainPanel.addMouseListener(new MouseAdapter() {
-                public void mousePressed(MouseEvent e) {
-                    offset.x = e.getX();
-                    offset.y = e.getY();
-                }
-            });
-            mainPanel.addMouseMotionListener(new MouseMotionAdapter() {
-                public void mouseDragged(MouseEvent e) {
-                    dialog.setLocation(
-                        dialog.getLocation().x + e.getX() - offset.x,
-                        dialog.getLocation().y + e.getY() - offset.y
-                    );
-                }
-            });
+					// Load commit interval
+					try {
+						commitIntervalMinutes = Integer.parseInt(
+								props.getProperty("interval", String.valueOf(DEFAULT_COMMIT_INTERVAL_MINUTES)));
+					} catch (NumberFormatException e) {
+						LOGGER.warning("Invalid interval in config, using default");
+						commitIntervalMinutes = DEFAULT_COMMIT_INTERVAL_MINUTES;
+					}
 
-            // Set dialog properties
-            dialog.pack();
-            dialog.setLocationRelativeTo(null);
+					// Load commit message
+					commitMessage = props.getProperty("commitMessage", DEFAULT_COMMIT_MESSAGE);
 
-            // Shadow effect
-            AWTUtilities.setWindowOpacity(dialog, 0.9f);
-            dialog.getRootPane().setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1, true));
+					LOGGER.info("Configuration loaded successfully");
+					LOGGER.info("Repositories: " + monitoredRepositories);
+					LOGGER.info("Interval: " + commitIntervalMinutes + " minutes");
+					LOGGER.info("Commit Message: " + commitMessage);
+				}
+			} else {
+				LOGGER.warning("No configuration file found. Using default settings.");
+			}
+		} catch (IOException e) {
+			LOGGER.severe("Error loading configuration: " + e.getMessage());
+		}
+	}
 
-            // Auto-close timer
-            Timer closeTimer = new Timer(5000, e -> {
-                // Fade out effect
-                Timer fadeOut = new Timer(50, fadeEvent -> {
-                    float opacity = AWTUtilities.getWindowOpacity(dialog);
-                    opacity -= 0.1f;
-                    if (opacity <= 0) {
-                        dialog.dispose();
-                        ((Timer)fadeEvent.getSource()).stop();
-                    } else {
-                        AWTUtilities.setWindowOpacity(dialog, opacity);
-                    }
-                });
-                fadeOut.start();
-            });
-            closeTimer.setRepeats(false);
-            closeTimer.start();
+	// Save Configuration to Properties File
+	private static void saveConfiguration() {
+		Properties props = new Properties();
 
-            // Show dialog
-            dialog.setVisible(true);
+		try {
+			// Ensure config directory exists
+			Files.createDirectories(Paths.get(CONFIG_DIR));
 
-            // Logging
-            LOGGER.info("Popup: " + title + " - " + message);
-        });
-    }
+			// Prepare properties
+			if (!monitoredRepositories.isEmpty()) {
+				props.setProperty("repositories", String.join(File.pathSeparator, monitoredRepositories));
+			}
+			props.setProperty("interval", String.valueOf(commitIntervalMinutes));
+			props.setProperty("commitMessage", commitMessage);
 
-    // Rest of the code remains the same as in the previous implementation...
-    // (All other methods from the previous Every5min class should be included here)
+			// Save to file
+			try (FileOutputStream fos = new FileOutputStream(CONFIG_FILE)) {
+				props.store(fos, "Git Auto Commit Configuration");
+				LOGGER.info("Configuration saved successfully");
+			}
+		} catch (IOException e) {
+			LOGGER.severe("Error saving configuration: " + e.getMessage());
+			showPopup("Configuration Error", "Could not save configuration: " + e.getMessage());
+		}
+	}
 
-    private static boolean isInternetAvailable() {
-        try {
-            // Attempt to connect to a reliable host
-            URL url = new URL("https://www.google.com");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(3000);
-            connection.setReadTimeout(3000);
-            connection.setRequestMethod("HEAD");
+	// Find Git executable
+	private static String findGitExecutable() {
+		List<String> possiblePaths = Arrays.asList("C:\\Program Files\\Git\\bin\\git.exe",
+				"C:\\Program Files (x86)\\Git\\bin\\git.exe", "/usr/bin/git", "/usr/local/bin/git");
 
-            int responseCode = connection.getResponseCode();
-            return (responseCode == HttpURLConnection.HTTP_OK);
-        } catch (Exception e) {
-            LOGGER.warning("Internet connection check failed: " + e.getMessage());
-            return false;
-        }
-    }
+		for (String path : possiblePaths) {
+			File file = new File(path);
+			if (file.exists() && file.canExecute()) {
+				return path;
+			}
+		}
 
-    // (All other methods from the previous implementation)
+		// Try which/where command
+		try {
+			ProcessBuilder pb = new ProcessBuilder(
+					System.getProperty("os.name").toLowerCase().contains("win") ? "where" : "which", "git");
+			Process process = pb.start();
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+				String line = reader.readLine();
+				if (line != null && new File(line).exists()) {
+					return line;
+				}
+			}
+		} catch (IOException e) {
+			LOGGER.warning("Could not find Git executable: " + e.getMessage());
+		}
 
-    // Main method
-    public static void main(String[] args) {
-        // Set look and feel to improve popup appearance
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            // Log error but continue
-            LOGGER.warning("Could not set system look and feel: " + e.getMessage());
-        }
+		return null;
+	}
 
-        // Set up uncaught exception handler
-        Thread.setDefaultUncaughtExceptionHandler(
-                (thread, throwable) -> logException("Uncaught exception in thread " + thread.getName(), throwable));
+	// Check if repository has changes
+	private static boolean hasChanges(String gitPath, String repoPath) throws IOException, InterruptedException {
+		ProcessBuilder pb = new ProcessBuilder(gitPath, "status", "--porcelain");
+		pb.directory(new File(repoPath));
+		Process process = pb.start();
 
-        try {
-            // Load configuration
-            loadConfiguration();
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+			boolean hasChanges = reader.readLine() != null;
+			process.waitFor();
+			return hasChanges;
+		}
+	}
 
-            // If no repositories configured, open admin page
-            if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
-                SwingUtilities.invokeLater(() -> {
-                    GitAutoCommitAdmin adminPage = new GitAutoCommitAdmin();
-                    adminPage.setVisible(true);
-                });
+	// Run Git command
+	private static void runCommand(String[] command, String directory) throws IOException, InterruptedException {
+		ProcessBuilder pb = new ProcessBuilder(command);
+		pb.directory(new File(directory));
+		pb.redirectErrorStream(true);
 
-                return;
-            }
+		Process process = pb.start();
 
-            // Schedule repository monitoring
-            scheduleRepositoryMonitoring();
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				LOGGER.info(line);
+			}
+		}
 
-            // Keep the application running
-            Thread.currentThread().join();
+		int exitCode = process.waitFor();
+		if (exitCode != 0) {
+			throw new IOException("Command failed with exit code: " + exitCode);
+		}
+	}
 
-        } catch (Exception e) {
-            logException("Unexpected error in main method", e);
-            System.exit(1);
-        }
-    }
-}
+	// Commit and Push Changes
+	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
+		File repoDir = new File(repoPath);
+		File gitDir = new File(repoPath + File.separator + ".git");
 
-// Note: You would also need to create a GitAutoCommitAdmin class 
-// which is referenced in the main method but not provided in the original code
-class GitAutoCommitAdmin extends JFrame {
-    public GitAutoCommitAdmin() {
-        // Implement the admin page UI for configuring repositories
-        setTitle("Git Auto Commit Admin");
-        setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Basic layout and components would go here
-        // This is a placeholder implementation
-    }
+		if (!repoDir.exists() || !repoDir.isDirectory()) {
+			throw new IOException("Repository directory does not exist: " + repoPath);
+		}
+
+		if (!gitDir.exists() || !gitDir.isDirectory()) {
+			throw new IOException("Not a git repository: " + repoPath);
+		}
+
+		String gitPath = findGitExecutable();
+		if (gitPath == null) {
+			throw new IOException("Git executable not found!");
+		}
+
+		// Check if there are changes to commit
+		if (hasChanges(gitPath, repoPath)) {
+			// Check internet connectivity
+			if (!isInternetAvailable()) {
+				// Show popup about no internet connection
+				showPopup("No Internet", "Unable to push changes. Internet connection is offline.");
+				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
+				return;
+			}
+
+			// Proceed with commit and push
+			try {
+				// Git commands
+				runCommand(new String[] { gitPath, "add", "." }, repoPath);
+				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
+				runCommand(new String[] { gitPath, "push" }, repoPath);
+
+				showPopup("Git Commit", "Committed and pushed changes in " + repoPath);
+				LOGGER.info("Committed and pushed changes in " + repoPath);
+			} catch (IOException | InterruptedException e) {
+				// Handle potential push failures
+				showPopup("Commit Error", "Failed to push changes. Check internet connection.");
+				LOGGER.severe("Failed to push changes: " + e.getMessage());
+			}
+		} else {
+			LOGGER.info("No changes to commit for " + repoPath);
+		}
+	}
+
+	// Schedule Repository Monitoring
+	private static void scheduleRepositoryMonitoring() {
+		if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
+			showPopup("Configuration Error", "No repositories configured for monitoring");
+			return;
+		}
+
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(monitoredRepositories.size(),
+				runnable -> {
+					Thread thread = new Thread(runnable);
+					thread.setUncaughtExceptionHandler(
+							(t, e) -> logException("Error in repository monitoring thread", e));
+					return thread;
+				});
+
+		for (String repoPath : monitoredRepositories) {
+			scheduler.scheduleAtFixedRate(() -> {
+				try {
+					LOGGER.info("Checking repository: " + repoPath);
+					commitAndPushChanges(repoPath);
+				} catch (Exception e) {
+					logException("Error processing repository: " + repoPath, e);
+				}
+			}, 0, commitIntervalMinutes, TimeUnit.MINUTES);
+		}
+	}
+
+	// Exception logging method
+	private static void logException(String message, Throwable e) {
+		LOGGER.log(Level.SEVERE, message, e);
+		showPopup("Error", message + ": " + e.getMessage());
+	}
+
+	// Main method
+	public static void main(String[] args) {
+		// Set look and feel to improve popup appearance
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			// Log error but continue
+			LOGGER.warning("Could not set system look and feel: " + e.getMessage());
+		}
+
+		// Set up uncaught exception handler
+		Thread.setDefaultUncaughtExceptionHandler(
+				(thread, throwable) -> logException("Uncaught exception in thread " + thread.getName(), throwable));
+
+		try {
+			// Load configuration
+			loadConfiguration();
+
+			// If no repositories configured, open admin page
+			if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
+				SwingUtilities.invokeLater(() -> {
+					GitAutoCommitAdmin adminPage = new GitAutoCommitAdmin();
+					adminPage.setVisible(true);
+				});
+
+				return;
+			}
+
+			// Schedule repository monitoring
+			scheduleRepositoryMonitoring();
+
+			// Keep the application running
+			Thread.currentThread().join();
+
+		} catch (Exception e) {
+			logException("Unexpected error in main method", e);
+			System.exit(1);
+		}
+	}
 }
