@@ -253,7 +253,7 @@ public class Every5min {
                     try {
                         // Try to get a default system icon
                         icon = Toolkit.getDefaultToolkit().createImage(
-                            Every5min.class.getResource("/java-icon.png")
+                            Every5min.class.getResource("/D:/downloads/artificial-intelligence.png")
                         );
                     } catch (Exception e) {
                         // Fallback to a generic system icon
