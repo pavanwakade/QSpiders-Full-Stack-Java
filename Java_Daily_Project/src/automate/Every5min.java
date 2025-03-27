@@ -33,6 +33,7 @@ public class Every5min {
 	private static String commitMessage;
 	private static List<String> monitoredRepositories;
 
+	
 	// Static Initialization Block for Logging
 	static {
 		try {
