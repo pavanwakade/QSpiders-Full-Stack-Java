@@ -49,7 +49,9 @@ public class GitAutoCommit {
         }
 
         if (repositories.isEmpty()) {
-            LOGGER.info("No repositories provided. Waiting for admin page to add repositories.");
+            LOGGER.info("No repositories provided via arguments. Starting auto-commit process and waiting for admin panel.");
+        } else {
+            LOGGER.info("Starting auto-commit with " + repositories.size() + " initial repositories.");
         }
 
         startAutoCommit();
@@ -82,6 +84,8 @@ public class GitAutoCommit {
             runCommand(new String[] { gitPath, "add", "." }, repoPath);
             runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
             runCommand(new String[] { gitPath, "push" }, repoPath);
+        } else {
+            LOGGER.info("No changes to commit in: " + repoPath);
         }
     }
 
@@ -144,6 +148,14 @@ public class GitAutoCommit {
             if (isGitRepository(repoPath) && !repositories.contains(repoPath)) {
                 repositories.add(repoPath);
                 LOGGER.info("Added repository: " + repoPath);
+                try {
+                    commitAndPushChanges(repoPath, DEFAULT_COMMIT_MESSAGE);
+                    LOGGER.info("Initial commit performed for: " + repoPath);
+                } catch (Exception e) {
+                    LOGGER.log(Level.SEVERE, "Error during initial commit for: " + repoPath, e);
+                }
+            } else if (!isGitRepository(repoPath)) {
+                LOGGER.warning("Not a valid Git repository: " + repoPath);
             }
         }
     }
