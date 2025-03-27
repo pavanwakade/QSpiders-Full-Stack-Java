@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Every5min {
 	// Configuration Constants
@@ -28,9 +29,9 @@ public class Every5min {
 	private static FileHandler fileHandler;
 
 	// Configuration Properties
-	static int commitIntervalMinutes;
-	static String commitMessage;
-	static List<String> monitoredRepositories;
+	private static int commitIntervalMinutes;
+	private static String commitMessage;
+	private static List<String> monitoredRepositories;
 
 	// Static Initialization Block for Logging
 	static {
@@ -149,7 +150,7 @@ public class Every5min {
 	}
 
 	// Save Configuration to Properties File
-	static void saveConfiguration() {
+	private static void saveConfiguration() {
 		Properties props = new Properties();
 
 		try {
@@ -286,7 +287,7 @@ public class Every5min {
 	}
 
 	// Schedule Repository Monitoring
-	static void scheduleRepositoryMonitoring() {
+	private static void scheduleRepositoryMonitoring() {
 		if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
 			showPopup("Configuration Error", "No repositories configured for monitoring");
 			return;
@@ -313,7 +314,7 @@ public class Every5min {
 	}
 
 	// Exception logging method
-	static void logException(String message, Throwable e) {
+	private static void logException(String message, Throwable e) {
 		LOGGER.log(Level.SEVERE, message, e);
 		showPopup("Error", message + ": " + e.getMessage());
 	}
@@ -355,183 +356,6 @@ public class Every5min {
 		} catch (Exception e) {
 			logException("Unexpected error in main method", e);
 			System.exit(1);
-		}
-	}
-}
-
-// GitAutoCommitAdmin Class
-class GitAutoCommitAdmin extends JFrame {
-	private JTable repositoryTable;
-	private DefaultTableModel tableModel;
-	private JTextField intervalField;
-	private JTextField commitMessageField;
-	private JButton addRepositoryButton;
-	private JButton removeRepositoryButton;
-	private JButton saveButton;
-
-	public GitAutoCommitAdmin() {
-		setTitle("Git Auto Commit Configuration");
-		setSize(600, 400);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
-
-		// Initialize components
-		initComponents();
-
-		// Load existing configuration
-		loadExistingConfiguration();
-	}
-
-	private void initComponents() {
-		setLayout(new BorderLayout());
-
-		// Repository Table
-		String[] columnNames = {"Repository Path"};
-		tableModel = new DefaultTableModel(columnNames, 0);
-		repositoryTable = new JTable(tableModel);
-		JScrollPane tableScrollPane = new JScrollPane(repositoryTable);
-		add(tableScrollPane, BorderLayout.CENTER);
-
-		// Configuration Panel
-		JPanel configPanel = new JPanel(new GridLayout(3, 2));
-		
-		// Interval Configuration
-		configPanel.add(new JLabel("Commit Interval (minutes):"));
-		intervalField = new JTextField(String.valueOf(Every5min.commitIntervalMinutes));
-		configPanel.add(intervalField);
-
-		// Commit Message Configuration
-		configPanel.add(new JLabel("Commit Message:"));
-		commitMessageField = new JTextField(Every5min.commitMessage);
-		configPanel.add(commitMessageField);
-
-		// Buttons Panel
-		JPanel buttonPanel = new JPanel();
-		addRepositoryButton = new JButton("Add Repository");
-		removeRepositoryButton = new JButton("Remove Repository");
-		saveButton = new JButton("Save Configuration");
-
-		buttonPanel.add(addRepositoryButton);
-		buttonPanel.add(removeRepositoryButton);
-		buttonPanel.add(saveButton);
-
-		// Add action listeners
-		addRepositoryButton.addActionListener(e -> addRepository());
-		removeRepositoryButton.addActionListener(e -> removeRepository());
-		saveButton.addActionListener(e -> saveConfiguration());
-
-		// Add panels to main frame
-		add(configPanel, BorderLayout.NORTH);
-		add(buttonPanel, BorderLayout.SOUTH);
-	}
-
-	private void loadExistingConfiguration() {
-		// Populate repositories
-		if (Every5min.monitoredRepositories != null) {
-			for (String repo : Every5min.monitoredRepositories) {
-				tableModel.addRow(new Object[]{repo});
-			}
-		}
-	}
-
-	private void addRepository() {
-		JFileChooser chooser = new JFileChooser();
-		chooser.setCurrentDirectory(new java.io.File("."));
-		chooser.setDialogTitle("Select Git Repository");
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		chooser.setAcceptAllFileFilterUsed(false);
-
-		if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File selectedDir = chooser.getSelectedFile();
-			File gitDir = new File(selectedDir, ".git");
-
-			if (gitDir.exists() && gitDir.isDirectory()) {
-				// Check if repository is already in the list
-				boolean exists = false;
-				for (int i = 0; i < tableModel.getRowCount(); i++) {
-					if (tableModel.getValueAt(i, 0).equals(selectedDir.getAbsolutePath())) {
-						exists = true;
-						break;
-					}
-				}
-
-				if (!exists) {
-					tableModel.addRow(new Object[]{selectedDir.getAbsolutePath()});
-				} else {
-					JOptionPane.showMessageDialog(this, 
-						"Repository already exists in the list.", 
-						"Duplicate Repository", 
-						JOptionPane.WARNING_MESSAGE
-					);
-				}
-			} else {
-				JOptionPane.showMessageDialog(this, 
-					"Selected directory is not a valid Git repository.", 
-					"Invalid Repository", 
-					JOptionPane.ERROR_MESSAGE
-				);
-			}
-		}
-	}
-
-	private void removeRepository() {
-		int selectedRow = repositoryTable.getSelectedRow();
-		if (selectedRow != -1) {
-			tableModel.removeRow(selectedRow);
-		} else {
-			JOptionPane.showMessageDialog(this, 
-				"Please select a repository to remove.", 
-				"No Repository Selected", 
-				JOptionPane.WARNING_MESSAGE
-			);
-		}
-	}
-
-	private void saveConfiguration() {
-		try {
-			// Update repositories
-			Every5min.monitoredRepositories.clear();
-			for (int i = 0; i < tableModel.getRowCount(); i++) {
-				Every5min.monitoredRepositories.add((String) tableModel.getValueAt(i, 0));
-			}
-
-			// Update interval
-			try {
-				int interval = Integer.parseInt(intervalField.getText());
-				if (interval > 0) {
-					Every5min.commitIntervalMinutes = interval;
-				} else {
-					throw new NumberFormatException("Interval must be positive");
-				}
-			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(this, 
-					"Invalid interval. Please enter a positive number.", 
-					"Invalid Input", 
-					JOptionPane.ERROR_MESSAGE
-				);
-				return;
-			}
-
-			// Update commit message
-			Every5min.commitMessage = commitMessageField.getText();
-
-			// Save configuration
-			Every5min.saveConfiguration();
-
-			// Close admin page
-			dispose();
-
-			// Restart monitoring
-			SwingUtilities.invokeLater(() -> {
-				try {
-					Every5min.scheduleRepositoryMonitoring();
-				} catch (Exception e) {
-					Every5min.logException("Error restarting repository monitoring", e);
-				}
-			});
-
-		} catch (Exception e) {
-			Every5min.logException("Error saving configuration", e);
 		}
 	}
 }
