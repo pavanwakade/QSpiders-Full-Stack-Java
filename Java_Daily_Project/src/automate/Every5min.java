@@ -211,131 +211,160 @@
 
 
 
-
-
 package automate;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.JWindow;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.awt.TrayIcon.MessageType;
 import java.time.LocalDateTime;
+import javax.swing.BorderFactory;
+import javax.swing.Timer;
 
 public class Every5min {
     private static final int COMMIT_INTERVAL_MINUTES = 1;
     private static final String DEFAULT_COMMIT_MESSAGE = "updated";
+    private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
+    private static FileHandler fileHandler;
 
-   
-
-            private static void sendNotification(String title, String message) {
-                try {
-                    if (!SystemTray.isSupported()) {
-                        System.out.println("System tray is not supported.");
-                        return;
-                    }
-
-                    // Create a default system tray icon
-                    java.awt.Image icon = null;
-                    try {
-                        // Try to get a default system icon
-                        icon = Toolkit.getDefaultToolkit().createImage(
-                            Every5min.class.getResource("/D:/downloads/artificial-intelligence.png")
-                        );
-                    } catch (Exception e) {
-                        // Fallback to a generic system icon
-                        icon = Toolkit.getDefaultToolkit().getDefaultToolkit().createImage(
-                            new byte[0]
-                        );
-                    }
-
-                    SystemTray tray = SystemTray.getSystemTray();
-                    TrayIcon trayIcon = new TrayIcon(icon, "Repository Notifier");
-                    trayIcon.setImageAutoSize(true);
-                    
-                    // Remove any existing tray icons to prevent multiple instances
-                    TrayIcon[] existingIcons = tray.getTrayIcons();
-                    for (TrayIcon existingIcon : existingIcons) {
-                        tray.remove(existingIcon);
-                    }
-                    
-                    tray.add(trayIcon);
-
-                    // Display the notification
-                    trayIcon.displayMessage(title, message, TrayIcon.MessageType.INFO);
-                } catch (AWTException e) {
-                    System.err.println("Could not create system tray notification");
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    System.err.println("Unexpected error in notification: " + e.getMessage());
-                    e.printStackTrace();
-                }
+    static {
+        try {
+            // Create log directory
+            File logDir = new File(System.getProperty("user.home"), ".gitautocommit");
+            if (!logDir.exists()) {
+                logDir.mkdirs();
             }
-
-    // Overloaded methods for different notification types
-    private static void notifyCommit(String repoName) {
-        sendNotification("Repository Commit", 
-            "Commit successful for repository: " + repoName + 
-            " at " + LocalDateTime.now());
+            fileHandler = new FileHandler(new File(logDir, "gitautocommit.log").getAbsolutePath(), true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setLevel(Level.ALL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void notifyPush(String repoName) {
-        sendNotification("Repository Push", 
-            "Push successful for repository: " + repoName + 
-            " at " + LocalDateTime.now());
+    // Right-top notification method
+    private static void showNotification(String title, String message) {
+        JWindow window = new JWindow();
+        window.setBackground(new Color(0, 0, 0, 0));
+
+        JLabel label = new JLabel("<html><body style='background-color: #4CAF50; color: white; padding: 10px;'>" +
+                "<b>" + title + "</b><br>" + message + "</body></html>");
+        label.setHorizontalAlignment(SwingConstants.LEFT);
+        label.setOpaque(true);
+        label.setBackground(new Color(76, 175, 80, 230)); // Material Green with transparency
+        label.setForeground(Color.WHITE);
+        label.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.DARK_GRAY),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
+
+        window.add(label);
+        window.pack();
+
+        // Position notification at top-right of the screen
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+            .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+        
+        int x = screenBounds.width - window.getWidth() - 20;
+        int y = 20;
+        window.setLocation(x, y);
+
+        window.setVisible(true);
+
+        // Auto-close notification after 5 seconds
+        Timer timer = new Timer(5000, e -> window.dispose());
+        timer.setRepeats(false);
+        timer.start();
+
+        LOGGER.info("Notification: " + title + " - " + message);
     }
 
-    private static void notifyDeleteFile(String repoName, String fileName) {
-        sendNotification("File Deleted", 
-            "File " + fileName + " deleted in repository: " + repoName + 
-            " at " + LocalDateTime.now());
+    private static void logException(String message, Throwable e) {
+        LOGGER.log(Level.SEVERE, message, e);
+        showNotification("Error", message + ": " + e.getMessage());
     }
 
     public static void main(String[] args) {
-        List<String> inputRepoPaths = new ArrayList<>();
-        String commitMessage = DEFAULT_COMMIT_MESSAGE;
-        
-        // Check if arguments are provided
-        if (args.length >= 1) {
-            // First argument can be either a path or a commit message
-            if (args[0].startsWith("-m=")) {
-                commitMessage = args[0].substring(3);
-            } else {
-                inputRepoPaths.addAll(Arrays.asList(args));
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            logException("Uncaught exception in thread " + thread.getName(), throwable);
+        });
+
+        try {
+            List<String> inputRepoPaths = new ArrayList<>();
+            String commitMessage = DEFAULT_COMMIT_MESSAGE;
+            
+            try {
+                inputRepoPaths = processArguments(args, commitMessage);
+            } catch (IllegalArgumentException e) {
+                showNotification("Argument Error", e.getMessage());
+                return;
             }
             
-            // Check for commit message in other arguments
+            List<String> validRepos = validateRepositories(inputRepoPaths);
+            if (validRepos.isEmpty()) {
+                showNotification("Repository Error", "No valid Git repositories selected.");
+                return;
+            }
+
+            scheduleRepositoryMonitoring(validRepos, commitMessage);
+
+        } catch (Exception e) {
+            logException("Unexpected error in main method", e);
+            System.exit(1);
+        }
+    }
+
+    private static List<String> processArguments(String[] args, String commitMessage) {
+        List<String> inputRepoPaths = new ArrayList<>();
+        
+        if (args.length >= 1) {
             for (String arg : args) {
                 if (arg.startsWith("-m=")) {
                     commitMessage = arg.substring(3);
-                    break;
+                } else {
+                    File potentialRepo = new File(arg);
+                    if (potentialRepo.exists() && potentialRepo.isDirectory()) {
+                        inputRepoPaths.add(potentialRepo.getAbsolutePath());
+                    } else {
+                        LOGGER.warning("Invalid repository path: " + arg);
+                    }
                 }
             }
         }
         
-        // If no repos specified, ask user to browse for them
         if (inputRepoPaths.isEmpty()) {
             inputRepoPaths = browseForRepositories();
-            if (inputRepoPaths.isEmpty()) {
-                System.out.println("No repositories selected. Exiting program.");
-                return;
-            }
         }
         
-        // Prompt for commit message if not specified in args
         if (commitMessage.equals(DEFAULT_COMMIT_MESSAGE)) {
             String userMessage = JOptionPane.showInputDialog(
                 "Enter commit message (or cancel for default):",
@@ -346,38 +375,9 @@ public class Every5min {
             }
         }
         
-        // Create a final copy of the repositories list for use in the lambda
-        final List<String> repoPaths = new ArrayList<>(inputRepoPaths);
-        final String finalCommitMessage = commitMessage;
-        
-        System.out.println("Auto-commit will run every " + COMMIT_INTERVAL_MINUTES + " minutes for these repositories:");
-        for (String repo : repoPaths) {
-            System.out.println("- " + repo);
-        }
-        System.out.println("Using commit message: \"" + finalCommitMessage + "\"");
-        
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        
-        scheduler.scheduleAtFixedRate(() -> {
-            for (String repoPath : repoPaths) {
-                try {
-                    System.out.println("\nChecking repository: " + repoPath);
-                    commitAndPushChanges(repoPath, finalCommitMessage);
-                } catch (Exception e) {
-                    System.err.println("Error processing repository: " + repoPath);
-                    e.printStackTrace();
-                }
-            }
-        }, 0, COMMIT_INTERVAL_MINUTES, TimeUnit.MINUTES);
-
-        try {
-            Thread.sleep(Long.MAX_VALUE);
-        } catch (InterruptedException e) {
-            scheduler.shutdown();
-            e.printStackTrace();
-        }
+        return inputRepoPaths;
     }
-    
+
     private static List<String> browseForRepositories() {
         List<String> repos = new ArrayList<>();
         boolean addMore = true;
@@ -393,22 +393,13 @@ public class Every5min {
                 File selectedFile = fileChooser.getSelectedFile();
                 String repoPath = selectedFile.getAbsolutePath();
                 
-                // Verify it's a git repository
                 if (isGitRepository(repoPath)) {
                     repos.add(repoPath);
-                    System.out.println("Added repository: " + repoPath);
+                    showNotification("Repository Added", "Added: " + repoPath);
                 } else {
-                    JOptionPane.showMessageDialog(
-                        null,
-                        "The selected folder is not a Git repository.\nPlease select a folder containing a .git directory.",
-                        "Not a Git Repository",
-                        JOptionPane.ERROR_MESSAGE
-                    );
-                    // Continue to allow selecting a different folder
-                    continue;
+                    showNotification("Repository Error", "Not a Git repository: " + repoPath);
                 }
             } else {
-                // User canceled the file chooser
                 break;
             }
             
@@ -424,10 +415,57 @@ public class Every5min {
         
         return repos;
     }
-    
+
+    private static List<String> validateRepositories(List<String> repositories) {
+        List<String> validRepos = new ArrayList<>();
+        for (String repoPath : repositories) {
+            try {
+                Path gitDir = Paths.get(repoPath, ".git");
+                if (Files.exists(gitDir) && Files.isDirectory(gitDir)) {
+                    validRepos.add(repoPath);
+                } else {
+                    LOGGER.warning("Not a valid Git repository: " + repoPath);
+                }
+            } catch (SecurityException e) {
+                LOGGER.severe("Security exception while checking repository: " + repoPath);
+            }
+        }
+        return validRepos;
+    }
+
     private static boolean isGitRepository(String directoryPath) {
         File gitDir = new File(directoryPath + File.separator + ".git");
         return gitDir.exists() && gitDir.isDirectory();
+    }
+
+    private static void scheduleRepositoryMonitoring(List<String> repositories, String commitMessage) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(repositories.size(), 
+            runnable -> {
+                Thread thread = new Thread(runnable);
+                thread.setUncaughtExceptionHandler((t, e) -> 
+                    logException("Error in repository monitoring thread", e)
+                );
+                return thread;
+            }
+        );
+        
+        for (String repoPath : repositories) {
+            scheduler.scheduleAtFixedRate(() -> {
+                try {
+                    LOGGER.info("Checking repository: " + repoPath);
+                    commitAndPushChanges(repoPath, commitMessage);
+                } catch (Exception e) {
+                    logException("Error processing repository: " + repoPath, e);
+                }
+            }, 0, COMMIT_INTERVAL_MINUTES, TimeUnit.MINUTES);
+        }
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            LOGGER.severe("Main thread interrupted: " + e.getMessage());
+            scheduler.shutdownNow();
+        }
     }
 
     public static void commitAndPushChanges(String repoPath, String commitMessage) throws IOException, InterruptedException {
@@ -451,14 +489,13 @@ public class Every5min {
             String ghPath = findGitHubCLI();
             if (ghPath == null) {
                 useGitCommandLine(gitPath, repoPath, commitMessage);
+                showNotification("Git Commit", "Committed changes in " + repoPath);
             } else {
                 useGitHubCLI(ghPath, repoPath, commitMessage);
+                showNotification("GitHub CLI Commit", "Committed changes in " + repoPath);
             }
-            System.out.println("Commit and push completed successfully for " + repoPath + " at " + 
-                java.time.LocalDateTime.now());
         } else {
-            System.out.println("No changes to commit for " + repoPath + " at " + 
-                java.time.LocalDateTime.now());
+            LOGGER.info("No changes to commit for " + repoPath);
         }
     }
 
@@ -533,56 +570,17 @@ public class Every5min {
     }
     
     private static void useGitHubCLI(String ghPath, String repoPath, String commitMessage) throws IOException, InterruptedException {
-        System.out.println("Using GitHub CLI to commit and push changes...");
-        
         runCommand(new String[]{ghPath, "repo", "sync"}, repoPath);
-        
-        // Check for deleted files
-        ProcessBuilder pbDeleted = new ProcessBuilder(findGitExecutable(), "ls-files", "--deleted");
-        pbDeleted.directory(new File(repoPath));
-        Process deletedProcess = pbDeleted.start();
-        
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(deletedProcess.getInputStream()))) {
-            String deletedFile;
-            while ((deletedFile = reader.readLine()) != null) {
-                notifyDeleteFile(new File(repoPath).getName(), deletedFile);
-            }
-        }
-        deletedProcess.waitFor();
-        
         runCommand(new String[]{ghPath, "api", "repos/{owner}/{repo}/git/commits", "--method", "POST", 
                                "-f", "message=" + commitMessage}, repoPath);
-        
-        notifyCommit(new File(repoPath).getName());
-        notifyPush(new File(repoPath).getName());
-        
-        System.out.println("Changes committed and pushed using GitHub CLI.");
+        showNotification("GitHub CLI", "Commit successful for " + repoPath);
     }
     
     private static void useGitCommandLine(String gitPath, String repoPath, String commitMessage) throws IOException, InterruptedException {
-        System.out.println("Using Git command line to commit and push changes...");
-        
-        // Check for deleted files
-        ProcessBuilder pbDeleted = new ProcessBuilder(gitPath, "ls-files", "--deleted");
-        pbDeleted.directory(new File(repoPath));
-        Process deletedProcess = pbDeleted.start();
-        
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(deletedProcess.getInputStream()))) {
-            String deletedFile;
-            while ((deletedFile = reader.readLine()) != null) {
-                notifyDeleteFile(new File(repoPath).getName(), deletedFile);
-            }
-        }
-        deletedProcess.waitFor();
-
         runCommand(new String[]{gitPath, "add", "."}, repoPath);
         runCommand(new String[]{gitPath, "commit", "-m", commitMessage}, repoPath);
         runCommand(new String[]{gitPath, "push"}, repoPath);
-        
-        notifyCommit(new File(repoPath).getName());
-        notifyPush(new File(repoPath).getName());
-        
-        System.out.println("Changes committed and pushed using Git.");
+        showNotification("Git Commit", "Changes pushed for " + repoPath);
     }
     
     private static void runCommand(String[] command, String directory) throws IOException, InterruptedException {
@@ -590,21 +588,12 @@ public class Every5min {
         pb.directory(new File(directory));
         pb.redirectErrorStream(true);
         
-        System.out.println("Executing command in directory: " + directory);
-        System.out.print("Command: ");
-        for (String part : command) {
-            System.out.print(part + " ");
-        }
-        System.out.println();
-        
         Process process = pb.start();
-        
-        
         
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                LOGGER.info(line);
             }
         }
         
