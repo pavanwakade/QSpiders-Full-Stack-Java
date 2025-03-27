@@ -482,6 +482,7 @@ public class Every5min {
 			LOGGER.info("No changes to commit for " + repoPath);
 		}
 	}
+	
 
 	private static boolean hasChanges(String gitPath, String repoPath) throws IOException, InterruptedException {
 		ProcessBuilder pb = new ProcessBuilder(gitPath, "status", "--porcelain");
