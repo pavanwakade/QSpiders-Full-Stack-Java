@@ -9,14 +9,20 @@
     <h1>higherorder</h1>
 
     <script>
-      let higherorder = (a, b, sum) => {
-        sum(a, b);
+      
+      // Higher order Function
+      let hiof = (cbf) => {
+        cbf();
       };
 
-      let add = (a, b) => {
-        console.log(a + b);
+      // collaback function
+      let a = () => {
+        let a = 10 + 10;
+        console.log(a);
+        document.write(a);
       };
-      higherorder(10, 20, add);
+
+      hiof(a);
     </script>
   </body>
 </html>

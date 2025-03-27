@@ -16,7 +16,7 @@
 // checkEven(start, end);
 
 
-(()=>{
+(function(){
     console.log("hello from Annonymous Function");
 })();
 

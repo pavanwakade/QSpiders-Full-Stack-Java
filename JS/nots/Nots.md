@@ -129,9 +129,39 @@ let a=()=>{
 
 ````javascript
 
+(function(){
+    console.log("hello from Annonymous Function");
+})();
+
+      ````
+
+
+
+````javascript
+
 ((a, b)=>{
     console.log(a + b);
 })(1, 2);
 
       ````
 
+
+**HigherOrderFunction And CollBack Function**
+
+
+````javascript
+
+
+      // Higher order Function
+      let hiof = (cbf) => {
+        cbf();
+      };
+
+      // collaback function
+      let a = () => {
+        console.log(10 + 10);
+      };
+
+      hiof(a);
+      
+      ````
