@@ -255,7 +255,8 @@ public class Every5min {
     private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
     private static FileHandler fileHandler;
 
-    static {
+    static 
+    {
         try {
             // Create log directory
             File logDir = new File(System.getProperty("user.home"), ".gitautocommit");
@@ -276,7 +277,7 @@ public class Every5min {
         JWindow window = new JWindow();
         window.setBackground(new Color(0, 0, 0, 0));
 
-        JLabel label = new JLabel("<html><body style='background-color: #4CAF50; color: white; padding: 10px;'>" +
+        JLabel label = new JLabel("<html><body style='background-color: white; color: black; padding: 10px;'>" +
                 "<b>" + title + "</b><br>" + message + "</body></html>");
         label.setHorizontalAlignment(SwingConstants.LEFT);
         label.setOpaque(true);
