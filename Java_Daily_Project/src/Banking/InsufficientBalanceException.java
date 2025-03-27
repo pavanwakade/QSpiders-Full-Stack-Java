@@ -1,6 +1,6 @@
 package Banking;
 
-public class InsufficientBalanceException extends Exception{
+public class InsufficientBalanceException extends Exception {
 
 	/**
 	 * this is an Exception for Insufficient Balance
