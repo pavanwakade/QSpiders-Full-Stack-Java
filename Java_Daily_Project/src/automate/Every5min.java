@@ -87,7 +87,7 @@ public class Every5min {
 	        messageLabel.setForeground(Color.WHITE);
 
 	        // Icon (optional placeholder)
-	        JLabel iconLabel = new JLabel("ok");
+	        JLabel iconLabel = new JLabel("✅");
 	        iconLabel.setFont(new Font("Arial", Font.BOLD, 30));
 	        iconLabel.setForeground(Color.WHITE);
 
