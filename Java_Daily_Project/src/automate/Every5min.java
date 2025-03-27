@@ -114,45 +114,36 @@ public class Every5min {
 		}
 	}
 
-	// Right-top notification method
-	private static void showNotification(String title, String message) {
+	// Popup method to replace showNotification
+	private static void showPopup(String title, String message) {
 		SwingUtilities.invokeLater(() -> {
-			JWindow window = new JWindow();
-			window.setBackground(new Color(0, 0, 0, 0));
+			// Create a custom JOptionPane with a green theme
+			UIManager.put("OptionPane.background", new Color(76, 175, 80));
+			UIManager.put("Panel.background", new Color(76, 175, 80));
+			
+			JOptionPane optionPane = new JOptionPane(
+				message, 
+				JOptionPane.INFORMATION_MESSAGE, 
+				JOptionPane.DEFAULT_OPTION
+			);
+			
+			JDialog dialog = optionPane.createDialog(null, title);
+			dialog.setModal(false);
+			dialog.setVisible(true);
 
-			JLabel label = new JLabel("<html><body style='background-color: white; color: black; padding: 10px;'>"
-					+ "<b>" + title + "</b><br>" + message + "</body></html>");
-			label.setHorizontalAlignment(SwingConstants.LEFT);
-			label.setOpaque(true);
-			label.setBackground(new Color(76, 175, 80, 230)); // Material Green with transparency
-			label.setForeground(Color.WHITE);
-
-			window.add(label);
-			window.pack();
-
-			// Position notification at top-right of the screen
-			Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
-					.getDefaultConfiguration().getBounds();
-
-			int x = screenBounds.width - window.getWidth() - 20;
-			int y = 20;
-			window.setLocation(x, y);
-
-			window.setVisible(true);
-
-			// Auto-close notification after 5 seconds
-			Timer timer = new Timer(5000, e -> window.dispose());
+			// Auto-close dialog after 5 seconds
+			Timer timer = new Timer(5000, e -> dialog.dispose());
 			timer.setRepeats(false);
 			timer.start();
 
-			LOGGER.info("Notification: " + title + " - " + message);
+			LOGGER.info("Popup: " + title + " - " + message);
 		});
 	}
 
 	// Exception logging method
 	private static void logException(String message, Throwable e) {
 		LOGGER.log(Level.SEVERE, message, e);
-		showNotification("Error", message + ": " + e.getMessage());
+		showPopup("Error", message + ": " + e.getMessage());
 	}
 
 	// Find Git executable
@@ -241,8 +232,8 @@ public class Every5min {
 		if (hasChanges(gitPath, repoPath)) {
 			// Check internet connectivity
 			if (!isInternetAvailable()) {
-				// Show notification about no internet connection
-				showNotification("No Internet", "Unable to push changes. Internet connection is offline.");
+				// Show popup about no internet connection
+				showPopup("No Internet", "Unable to push changes. Internet connection is offline.");
 				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
 				return;
 			}
@@ -254,11 +245,11 @@ public class Every5min {
 				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
 				runCommand(new String[] { gitPath, "push" }, repoPath);
 
-				showNotification("Git Commit", "Committed and pushed changes in " + repoPath);
+				showPopup("Git Commit", "Committed and pushed changes in " + repoPath);
 				LOGGER.info("Committed and pushed changes in " + repoPath);
 			} catch (IOException | InterruptedException e) {
 				// Handle potential push failures
-				showNotification("Commit Error", "Failed to push changes. Check internet connection.");
+				showPopup("Commit Error", "Failed to push changes. Check internet connection.");
 				LOGGER.severe("Failed to push changes: " + e.getMessage());
 			}
 		} else {
@@ -269,7 +260,7 @@ public class Every5min {
 	// Modify scheduleRepositoryMonitoring to handle internet connectivity
 	private static void scheduleRepositoryMonitoring() {
 		if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
-			showNotification("Configuration Error", "No repositories configured for monitoring");
+			showPopup("Configuration Error", "No repositories configured for monitoring");
 			return;
 		}
 
