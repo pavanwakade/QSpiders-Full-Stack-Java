@@ -12,7 +12,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 import java.awt.*;
-import java.time.LocalDateTime;
 
 public class Every5min {
 	// Configuration Constants
