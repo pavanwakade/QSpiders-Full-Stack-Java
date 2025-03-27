@@ -343,7 +343,6 @@ public class Every5min {
 
 				return;
 			}
-			
 
 			// Schedule repository monitoring
 			scheduleRepositoryMonitoring();
