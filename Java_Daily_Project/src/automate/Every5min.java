@@ -21,7 +21,7 @@ public class Every5min {
 	private static final String LOG_FILE = CONFIG_DIR + File.separator + "gitautocommit.log";
 
 	// Default Configuration Values
-	private static final int DEFAULT_COMMIT_INTERVAL_MINUTES = 5;
+	private static final int DEFAULT_COMMIT_INTERVAL_MINUTES = 1;
 	private static final String DEFAULT_COMMIT_MESSAGE = "Auto commit";
 
 	// Logging
