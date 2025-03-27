@@ -236,7 +236,7 @@ import java.awt.TrayIcon.MessageType;
 import java.time.LocalDateTime;
 
 public class Every5min {
-    private static final int COMMIT_INTERVAL_MINUTES = 40;
+    private static final int COMMIT_INTERVAL_MINUTES = 1;
     private static final String DEFAULT_COMMIT_MESSAGE = "updated";
 
     // Method to send desktop notifications
