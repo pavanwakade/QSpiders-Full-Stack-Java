@@ -49,25 +49,23 @@ public class Every5min {
 		}
 	}
 
-	
 	private static boolean isInternetAvailable() {
-        try {
-            // Attempt to connect to a reliable host
-            URL url = new URL("https://www.google.com");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(3000);
-            connection.setReadTimeout(3000);
-            connection.setRequestMethod("HEAD");
-            
-            int responseCode = connection.getResponseCode();
-            return (responseCode == HttpURLConnection.HTTP_OK);
-        } catch (Exception e) {
-            LOGGER.warning("Internet connection check failed: " + e.getMessage());
-            return false;
-        }
-    }
-	
-	
+		try {
+			// Attempt to connect to a reliable host
+			URL url = new URL("https://www.google.com");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setConnectTimeout(3000);
+			connection.setReadTimeout(3000);
+			connection.setRequestMethod("HEAD");
+
+			int responseCode = connection.getResponseCode();
+			return (responseCode == HttpURLConnection.HTTP_OK);
+		} catch (Exception e) {
+			LOGGER.warning("Internet connection check failed: " + e.getMessage());
+			return false;
+		}
+	}
+
 	// Load Configuration from Properties File
 	private static void loadConfiguration() {
 		Properties props = new Properties();
@@ -221,78 +219,79 @@ public class Every5min {
 	}
 
 	// Modify commitAndPushChanges to check internet connectivity
-    private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
-        File repoDir = new File(repoPath);
-        File gitDir = new File(repoPath + File.separator + ".git");
+	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
+		File repoDir = new File(repoPath);
+		File gitDir = new File(repoPath + File.separator + ".git");
 
-        if (!repoDir.exists() || !repoDir.isDirectory()) {
-            throw new IOException("Repository directory does not exist: " + repoPath);
-        }
+		if (!repoDir.exists() || !repoDir.isDirectory()) {
+			throw new IOException("Repository directory does not exist: " + repoPath);
+		}
 
-        if (!gitDir.exists() || !gitDir.isDirectory()) {
-            throw new IOException("Not a git repository: " + repoPath);
-        }
+		if (!gitDir.exists() || !gitDir.isDirectory()) {
+			throw new IOException("Not a git repository: " + repoPath);
+		}
 
-        String gitPath = findGitExecutable();
-        if (gitPath == null) {
-            throw new IOException("Git executable not found!");
-        }
+		String gitPath = findGitExecutable();
+		if (gitPath == null) {
+			throw new IOException("Git executable not found!");
+		}
 
-        // Check if there are changes to commit
-        if (hasChanges(gitPath, repoPath)) {
-            // Check internet connectivity
-            if (!isInternetAvailable()) {
-                // Show notification about no internet connection
-                showNotification("No Internet", "Unable to push changes. Internet connection is offline.");
-                LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
-                return;
-            }
+		// Check if there are changes to commit
+		if (hasChanges(gitPath, repoPath)) {
+			// Check internet connectivity
+			if (!isInternetAvailable()) {
+				// Show notification about no internet connection
+				showNotification("No Internet", "Unable to push changes. Internet connection is offline.");
+				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
+				return;
+			}
 
-            // Proceed with commit and push
-            try {
-                // Git commands
-                runCommand(new String[] { gitPath, "add", "." }, repoPath);
-                runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
-                runCommand(new String[] { gitPath, "push" }, repoPath);
+			// Proceed with commit and push
+			try {
+				// Git commands
+				runCommand(new String[] { gitPath, "add", "." }, repoPath);
+				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
+				runCommand(new String[] { gitPath, "push" }, repoPath);
 
-                showNotification("Git Commit", "Committed and pushed changes in " + repoPath);
-                LOGGER.info("Committed and pushed changes in " + repoPath);
-            } catch (IOException | InterruptedException e) {
-                // Handle potential push failures
-                showNotification("Commit Error", "Failed to push changes. Check internet connection.");
-                LOGGER.severe("Failed to push changes: " + e.getMessage());
-            }
-        } else {
-            LOGGER.info("No changes to commit for " + repoPath);
-        }
-    }
+				showNotification("Git Commit", "Committed and pushed changes in " + repoPath);
+				LOGGER.info("Committed and pushed changes in " + repoPath);
+			} catch (IOException | InterruptedException e) {
+				// Handle potential push failures
+				showNotification("Commit Error", "Failed to push changes. Check internet connection.");
+				LOGGER.severe("Failed to push changes: " + e.getMessage());
+			}
+		} else {
+			LOGGER.info("No changes to commit for " + repoPath);
+		}
+	}
 
-    // Modify scheduleRepositoryMonitoring to handle internet connectivity
-    private static void scheduleRepositoryMonitoring() {
-        if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
-            showNotification("Configuration Error", "No repositories configured for monitoring");
-            return;
-        }
+	// Modify scheduleRepositoryMonitoring to handle internet connectivity
+	private static void scheduleRepositoryMonitoring() {
+		if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
+			showNotification("Configuration Error", "No repositories configured for monitoring");
+			return;
+		}
 
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(monitoredRepositories.size(),
-                runnable -> {
-                    Thread thread = new Thread(runnable);
-                    thread.setUncaughtExceptionHandler(
-                            (t, e) -> logException("Error in repository monitoring thread", e));
-                    return thread;
-                });
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(monitoredRepositories.size(),
+				runnable -> {
+					Thread thread = new Thread(runnable);
+					thread.setUncaughtExceptionHandler(
+							(t, e) -> logException("Error in repository monitoring thread", e));
+					return thread;
+				});
 
-        for (String repoPath : monitoredRepositories) {
-            scheduler.scheduleAtFixedRate(() -> {
-                try {
-                    LOGGER.info("Checking repository: " + repoPath);
-                    commitAndPushChanges(repoPath);
-                } catch (Exception e) {
-                    logException("Error processing repository: " + repoPath, e);
-                }
-            }, 0, commitIntervalMinutes, TimeUnit.MINUTES);
-        }
-    }
+		for (String repoPath : monitoredRepositories) {
+			scheduler.scheduleAtFixedRate(() -> {
+				try {
+					LOGGER.info("Checking repository: " + repoPath);
+					commitAndPushChanges(repoPath);
+				} catch (Exception e) {
+					logException("Error processing repository: " + repoPath, e);
+				}
+			}, 0, commitIntervalMinutes, TimeUnit.MINUTES);
+		}
+	}
+
 	// Main method
 	public static void main(String[] args) {
 		// Set up uncaught exception handler
