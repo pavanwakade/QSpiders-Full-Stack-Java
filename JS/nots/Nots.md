@@ -107,3 +107,50 @@ JavaScript has **two main categories** of data types:
 11. **Date** – Represents date & time
 12. **RegExp** – Regular expressions for pattern matching
 
+## Functions
+
+### Named Function or Regular Function
+
+```javascript
+function demo() {
+  // Function body
+}
+```
+
+### Arrow Function
+
+```javascript
+let a = () => {
+  // Function body
+};
+```
+
+### Anonymous Function
+
+```javascript
+(function () {
+  console.log("Hello from Anonymous Function");
+})();
+```
+
+```javascript
+((a, b) => {
+  console.log(a + b);
+})(1, 2);
+```
+
+### Higher-Order Function and Callback Function
+
+```javascript
+// Higher-Order Function
+let hiof = (cbf) => {
+  cbf();
+};
+
+// Callback Function
+let a = () => {
+  console.log(10 + 10);
+};
+
+hiof(a);
+```
