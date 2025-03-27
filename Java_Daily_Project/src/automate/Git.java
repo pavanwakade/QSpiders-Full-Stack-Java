@@ -92,7 +92,7 @@ public class Git {
 			// Icon (optional placeholder)
 			JLabel iconLabel = new JLabel("pavan");
 			iconLabel.setFont(new Font("Arial", Font.BOLD, 15));
-			iconLabel.setForeground(Color.WHITE);
+			iconLabel.setForeground(Color.BLACK);
 
 			// Layout components
 			JPanel textPanel = new JPanel(new GridLayout(2, 1, 5, 5));
