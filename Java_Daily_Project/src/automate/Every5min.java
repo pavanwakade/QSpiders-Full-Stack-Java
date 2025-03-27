@@ -75,7 +75,7 @@ public class Every5min {
 	            }
 	        };
 	        mainPanel.setLayout(new BorderLayout(10, 10));
-//	        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+	        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
 	        // Title label
 	        JLabel titleLabel = new JLabel(title);
@@ -88,7 +88,7 @@ public class Every5min {
 	        messageLabel.setForeground(Color.WHITE);
 
 	        // Icon (optional placeholder)
-	        JLabel iconLabel = new JLabel("✓");
+	        JLabel iconLabel = new JLabel("ok");
 	        iconLabel.setFont(new Font("Arial", Font.BOLD, 30));
 	        iconLabel.setForeground(Color.WHITE);
 
