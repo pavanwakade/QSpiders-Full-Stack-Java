@@ -88,8 +88,8 @@ public class Git {
 	        messageLabel.setForeground(Color.WHITE);
 
 	        // Icon (optional placeholder)
-	        JLabel iconLabel = new JLabel("git");
-	        iconLabel.setFont(new Font("Arial", Font.BOLD, 30));
+	        JLabel iconLabel = new JLabel("pavan");
+	        iconLabel.setFont(new Font("Arial", Font.BOLD, 20));
 	        iconLabel.setForeground(Color.WHITE);
 
 	        // Layout components
