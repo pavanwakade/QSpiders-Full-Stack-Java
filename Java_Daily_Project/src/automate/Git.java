@@ -91,7 +91,7 @@ public class Git {
 
 			// Icon (optional placeholder)
 			JLabel iconLabel = new JLabel("pavan");
-			iconLabel.setFont(new Font("Arial", Font.BOLD, 20));
+			iconLabel.setFont(new Font("Arial", Font.BOLD, 10));
 			iconLabel.setForeground(Color.WHITE);
 
 			// Layout components
