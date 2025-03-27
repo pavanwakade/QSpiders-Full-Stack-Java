@@ -220,38 +220,8 @@ public class Every5min {
 		}
 	}
 
-	// Commit and push changes
-	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
-		File repoDir = new File(repoPath);
-		File gitDir = new File(repoPath + File.separator + ".git");
-
-		if (!repoDir.exists() || !repoDir.isDirectory()) {
-			throw new IOException("Repository directory does not exist: " + repoPath);
-		}
-
-		if (!gitDir.exists() || !gitDir.isDirectory()) {
-			throw new IOException("Not a git repository: " + repoPath);
-		}
-
-		String gitPath = findGitExecutable();
-		if (gitPath == null) {
-			throw new IOException("Git executable not found!");
-		}
-
-		if (hasChanges(gitPath, repoPath)) {
-			// Git commands
-			runCommand(new String[] { gitPath, "add", "." }, repoPath);
-			runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
-			runCommand(new String[] { gitPath, "push" }, repoPath);
-
-			showNotification("Git Commit", "Committed changes in " + repoPath);
-			LOGGER.info("Committed changes in " + repoPath);
-		} else {
-			LOGGER.info("No changes to commit for " + repoPath);
-		}
-	}
-
-	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
+	// Modify commitAndPushChanges to check internet connectivity
+    private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
         File repoDir = new File(repoPath);
         File gitDir = new File(repoPath + File.separator + ".git");
 
@@ -297,6 +267,32 @@ public class Every5min {
         }
     }
 
+    // Modify scheduleRepositoryMonitoring to handle internet connectivity
+    private static void scheduleRepositoryMonitoring() {
+        if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
+            showNotification("Configuration Error", "No repositories configured for monitoring");
+            return;
+        }
+
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(monitoredRepositories.size(),
+                runnable -> {
+                    Thread thread = new Thread(runnable);
+                    thread.setUncaughtExceptionHandler(
+                            (t, e) -> logException("Error in repository monitoring thread", e));
+                    return thread;
+                });
+
+        for (String repoPath : monitoredRepositories) {
+            scheduler.scheduleAtFixedRate(() -> {
+                try {
+                    LOGGER.info("Checking repository: " + repoPath);
+                    commitAndPushChanges(repoPath);
+                } catch (Exception e) {
+                    logException("Error processing repository: " + repoPath, e);
+                }
+            }, 0, commitIntervalMinutes, TimeUnit.MINUTES);
+        }
+    }
 	// Main method
 	public static void main(String[] args) {
 		// Set up uncaught exception handler
