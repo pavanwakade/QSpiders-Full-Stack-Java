@@ -129,6 +129,7 @@ let a = () => {
     console.log("Hello from Anonymous Function");
 })();
 ```
+### Another Way
 
 ```javascript
 ((a, b) => {
