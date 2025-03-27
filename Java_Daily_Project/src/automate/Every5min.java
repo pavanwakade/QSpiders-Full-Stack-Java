@@ -137,7 +137,7 @@ public class Every5min {
 	                        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
 	        // Opacity management using a float array
-	        float[] opacity = {0.9f};
+	        float[] opacity = {1f};
 	        Timer fadeOutTimer = new Timer(50, null);
 	        fadeOutTimer.addActionListener(e -> {
 	            opacity[0] -= 0.1f;
