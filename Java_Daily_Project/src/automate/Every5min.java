@@ -239,13 +239,7 @@ public class Every5min {
     private static final int COMMIT_INTERVAL_MINUTES = 1;
     private static final String DEFAULT_COMMIT_MESSAGE = "updated";
 
-    // Method to send desktop notifications
-//    private static void sendNotification(String title, String message) {
-//        try {
-//            if (!SystemTray.isSupported()) {
-//                System.out.println("System tray is not supported.");
-//                return;
-//            }
+   
 
             private static void sendNotification(String title, String message) {
                 try {
@@ -254,38 +248,39 @@ public class Every5min {
                         return;
                     }
 
-                    // Load the icon
+                    // Create a default system tray icon
                     java.awt.Image icon = null;
                     try {
-                        // Try loading from resources
-                        java.net.URL iconURL = Every5min.class.getResource("/icon.png");
-                        if (iconURL != null) {
-                            icon = Toolkit.getDefaultToolkit().getImage(iconURL);
-                        }
-                    } catch (Exception e) {
-                        // If resource loading fails, try default icon
-                        try {
-                            icon = Toolkit.getDefaultToolkit().getImage("icon.png");
-                        } catch (Exception ex) {
-                            System.out.println("Could not load icon");
-                        }
-                    }
-
-                    // Use a default icon if no custom icon is found
-                    if (icon == null) {
-                        icon = Toolkit.getDefaultToolkit().getImage(
+                        // Try to get a default system icon
+                        icon = Toolkit.getDefaultToolkit().createImage(
                             Every5min.class.getResource("/java-icon.png")
+                        );
+                    } catch (Exception e) {
+                        // Fallback to a generic system icon
+                        icon = Toolkit.getDefaultToolkit().getDefaultToolkit().createImage(
+                            new byte[0]
                         );
                     }
 
                     SystemTray tray = SystemTray.getSystemTray();
                     TrayIcon trayIcon = new TrayIcon(icon, "Repository Notifier");
                     trayIcon.setImageAutoSize(true);
+                    
+                    // Remove any existing tray icons to prevent multiple instances
+                    TrayIcon[] existingIcons = tray.getTrayIcons();
+                    for (TrayIcon existingIcon : existingIcons) {
+                        tray.remove(existingIcon);
+                    }
+                    
                     tray.add(trayIcon);
 
+                    // Display the notification
                     trayIcon.displayMessage(title, message, TrayIcon.MessageType.INFO);
                 } catch (AWTException e) {
                     System.err.println("Could not create system tray notification");
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.err.println("Unexpected error in notification: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
