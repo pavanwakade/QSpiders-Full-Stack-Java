@@ -1,6 +1,6 @@
 package Banking;
 
-public class NegativeBalanceException extends Exception{
+public class NegativeBalanceException extends Exception {
 
 	/**
 	 * this is an Exception for Negative Balance
@@ -13,7 +13,4 @@ public class NegativeBalanceException extends Exception{
 		super(message);
 	}
 
-	
-	
-	
 }
