@@ -66,7 +66,7 @@ public class Every5min {
 
 	             // Gradient background
 	                GradientPaint gradient = new GradientPaint(
-	                    0, 0, new Color(25, 118, 210, 229),  // Darker blue start (90% opacity = 229)
+	                    0, 0, new Color(25, 118, 210, 100),  // Darker blue start (90% opacity = 229)
 	                    0, getHeight(), new Color(33, 150, 243, 100)  // Lighter blue end (90% opacity = 229)
 	                );
 	                g2d.setPaint(gradient);
