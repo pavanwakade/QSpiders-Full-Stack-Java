@@ -50,123 +50,124 @@ public class Git {
 	}
 
 	private static void showPopup(String title, String message) {
-	    SwingUtilities.invokeLater(() -> {
-	        // Create a custom JDialog with a more modern look
-	        JDialog dialog = new JDialog();
-	        dialog.setUndecorated(true);
-	        dialog.setAlwaysOnTop(true);
+		SwingUtilities.invokeLater(() -> {
+			// Create a custom JDialog with a more modern look
+			JDialog dialog = new JDialog();
+			dialog.setUndecorated(true);
+			dialog.setAlwaysOnTop(true);
 
-	        // Main panel with gradient background
-	        JPanel mainPanel = new JPanel() {
-	            @Override
-	            protected void paintComponent(Graphics g) {
-	                super.paintComponent(g);
-	                Graphics2D g2d = (Graphics2D) g.create();
-	                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			// Main panel with gradient background
+			JPanel mainPanel = new JPanel() {
+				@Override
+				protected void paintComponent(Graphics g) {
+					super.paintComponent(g);
+					Graphics2D g2d = (Graphics2D) g.create();
+					g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-	             // Gradient background
-	                GradientPaint gradient = new GradientPaint(
-	                    0, 0, new Color(25, 118, 210, 100),  // Darker blue start (90% opacity = 229)
-	                    0, getHeight(), new Color(33, 150, 243, 100)  // Lighter blue end (90% opacity = 229)
-	                );
-	                g2d.setPaint(gradient);
-	                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-	                g2d.dispose();
-	            }
-	        };
-	        mainPanel.setLayout(new BorderLayout(10, 10));
-	        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+					// Gradient background
+					GradientPaint gradient = new GradientPaint(0, 0, new Color(25, 118, 210, 100), // Darker blue start
+																									// (90% opacity =
+																									// 229)
+							0, getHeight(), new Color(33, 150, 243, 100) // Lighter blue end (90% opacity = 229)
+					);
+					g2d.setPaint(gradient);
+					g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+					g2d.dispose();
+				}
+			};
+			mainPanel.setLayout(new BorderLayout(10, 10));
+			mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-	        // Title label
-	        JLabel titleLabel = new JLabel(title);
-	        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-	        titleLabel.setForeground(Color.WHITE);
+			// Title label
+			JLabel titleLabel = new JLabel(title);
+			titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+			titleLabel.setForeground(Color.WHITE);
 
-	        // Message label
-	        JLabel messageLabel = new JLabel(message);
-	        messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-	        messageLabel.setForeground(Color.WHITE);
+			// Message label
+			JLabel messageLabel = new JLabel(message);
+			messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+			messageLabel.setForeground(Color.WHITE);
 
-	        // Icon (optional placeholder)
-	        JLabel iconLabel = new JLabel("pavan");
-	        iconLabel.setFont(new Font("Arial", Font.BOLD, 20));
-	        iconLabel.setForeground(Color.WHITE);
+			// Icon (optional placeholder)
+			JLabel iconLabel = new JLabel("pavan");
+			iconLabel.setFont(new Font("Arial", Font.BOLD, 20));
+			iconLabel.setForeground(Color.WHITE);
 
-	        // Layout components
-	        JPanel textPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-	        textPanel.setOpaque(false);
-	        textPanel.add(titleLabel);
-	        textPanel.add(messageLabel);
+			// Layout components
+			JPanel textPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+			textPanel.setOpaque(false);
+			textPanel.add(titleLabel);
+			textPanel.add(messageLabel);
 
-	        mainPanel.add(iconLabel, BorderLayout.WEST);
-	        mainPanel.add(textPanel, BorderLayout.CENTER);
-	        mainPanel.setBackground(new Color(0, 0, 0, 0));
-	        mainPanel.setOpaque(false);
+			mainPanel.add(iconLabel, BorderLayout.WEST);
+			mainPanel.add(textPanel, BorderLayout.CENTER);
+			mainPanel.setBackground(new Color(0, 0, 0, 0));
+			mainPanel.setOpaque(false);
 
-	        dialog.getContentPane().add(mainPanel);
-	        dialog.getContentPane().setBackground(new Color(0, 0, 0, 0));
-	        dialog.setBackground(new Color(0, 0, 0, 0));
+			dialog.getContentPane().add(mainPanel);
+			dialog.getContentPane().setBackground(new Color(0, 0, 0, 0));
+			dialog.setBackground(new Color(0, 0, 0, 0));
 
-	        // Make dialog draggable
-	        Point offset = new Point();
-	        mainPanel.addMouseListener(new MouseAdapter() {
-	            public void mousePressed(MouseEvent e) {
-	                offset.x = e.getX();
-	                offset.y = e.getY();
-	            }
-	        });
-	        mainPanel.addMouseMotionListener(new MouseMotionAdapter() {
-	            public void mouseDragged(MouseEvent e) {
-	                dialog.setLocation(dialog.getLocation().x + e.getX() - offset.x,
-	                        dialog.getLocation().y + e.getY() - offset.y);
-	            }
-	        });
+			// Make dialog draggable
+			Point offset = new Point();
+			mainPanel.addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					offset.x = e.getX();
+					offset.y = e.getY();
+				}
+			});
+			mainPanel.addMouseMotionListener(new MouseMotionAdapter() {
+				public void mouseDragged(MouseEvent e) {
+					dialog.setLocation(dialog.getLocation().x + e.getX() - offset.x,
+							dialog.getLocation().y + e.getY() - offset.y);
+				}
+			});
 
-	        // Set dialog properties
-	        dialog.pack();
+			// Set dialog properties
+			dialog.pack();
 
-	        // Position the dialog in the top-right corner
-	        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	        int x = screenSize.width - dialog.getWidth() - 20; // 20 pixels from right edge
-	        int y = 20; // 20 pixels from top edge
-	        dialog.setLocation(x, y);
+			// Position the dialog in the top-right corner
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = screenSize.width - dialog.getWidth() - 20; // 20 pixels from right edge
+			int y = 20; // 20 pixels from top edge
+			dialog.setLocation(x, y);
 
-	        // Soft shadow (using Border instead of opacity manipulation)
-	        dialog.getRootPane()
-	                .setBorder(BorderFactory.createCompoundBorder(
-	                        BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1),
-	                        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+			// Soft shadow (using Border instead of opacity manipulation)
+			dialog.getRootPane()
+					.setBorder(BorderFactory.createCompoundBorder(
+							BorderFactory.createLineBorder(new Color(0, 0, 0, 50), 1),
+							BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
-	        // Opacity management using a float array
-	        float[] opacity = {0.9f};
-	        Timer fadeOutTimer = new Timer(50, null);
-	        fadeOutTimer.addActionListener(e -> {
-	            opacity[0] -= 0.1f;
-	            if (opacity[0] <= 0) {
-	                dialog.dispose();
-	                fadeOutTimer.stop();
-	            } else {
-	                dialog.setOpacity(opacity[0]);
-	            }
-	        });
+			// Opacity management using a float array
+			float[] opacity = { 0.9f };
+			Timer fadeOutTimer = new Timer(50, null);
+			fadeOutTimer.addActionListener(e -> {
+				opacity[0] -= 0.1f;
+				if (opacity[0] <= 0) {
+					dialog.dispose();
+					fadeOutTimer.stop();
+				} else {
+					dialog.setOpacity(opacity[0]);
+				}
+			});
 
-	        Timer closeTimer = new Timer(5000, e -> {
-	            fadeOutTimer.start();
-	        });
-	        closeTimer.setRepeats(false);
+			Timer closeTimer = new Timer(5000, e -> {
+				fadeOutTimer.start();
+			});
+			closeTimer.setRepeats(false);
 
-	        // Ensure the dialog is fully opaque before showing
-	        dialog.setOpacity(0.9f);
-	        dialog.setVisible(true);
+			// Ensure the dialog is fully opaque before showing
+			dialog.setOpacity(0.9f);
+			dialog.setVisible(true);
 
-	        // Start timers
-	        closeTimer.start();
+			// Start timers
+			closeTimer.start();
 
-	        // Logging
-	        LOGGER.info("Popup: " + title + " - " + message);
-	    });
+			// Logging
+			LOGGER.info("Popup: " + title + " - " + message);
+		});
 	}
-	
+
 	private static boolean isInternetAvailable() {
 		try {
 			// Attempt to connect to a reliable host
