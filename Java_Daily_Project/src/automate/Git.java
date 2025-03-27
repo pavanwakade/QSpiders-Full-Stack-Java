@@ -13,7 +13,7 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Every5min {
+public class Git {
 	// Configuration Constants
 	private static final String CONFIG_DIR = System.getProperty("user.home") + File.separator + ".gitautocommit";
 	private static final String CONFIG_FILE = CONFIG_DIR + File.separator + "config.properties";
@@ -24,7 +24,7 @@ public class Every5min {
 	private static final String DEFAULT_COMMIT_MESSAGE = "Updated";
 
 	// Logging
-	private static final Logger LOGGER = Logger.getLogger(Every5min.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Git.class.getName());
 	private static FileHandler fileHandler;
 
 	// Configuration Properties
