@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+      input {
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+      }
+      .output {
+        display: block;
+        margin: 10px;
+        background-color: bisque;
+      }
+      button {
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>higherorder</h1> -->
+
+    <form
+      style="display: flex; flex-direction: column; gap: 4px"
+      onsubmit="handleSubmit(event)"
+    >
+      <label for="name">name : </label>
+      <input type="text" name="name" id="name" />
+
+      <label for="email">Email : </label>
+     <input type="email" name="email" id="email" />
+
+     <label for="password">password :</label>
+      <input type="password" name="password" id="password" />
+      <button type="submit">submit</button>
+    </form>
+    <div class="output"></div>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (password === "1234" && name === "pavan") {
+          alert("login success");
+
+          let output = document.querySelector(".output");
+          output.innerHTML = `
+          <p>Name: ${name}</p>
+          <p>Email: ${email}</p>
+          <p>Password: ${password}</p>
+        `;
+        }
+      }
+    </script>
+  </body>
+</html>
