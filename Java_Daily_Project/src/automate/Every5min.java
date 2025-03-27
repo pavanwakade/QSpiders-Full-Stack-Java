@@ -10,7 +10,6 @@ import java.util.concurrent.*;
 import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
