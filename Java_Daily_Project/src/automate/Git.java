@@ -1,3 +1,4 @@
+//git
 package automate;
 
 import java.io.*;
@@ -87,7 +88,7 @@ public class Git {
 	        messageLabel.setForeground(Color.WHITE);
 
 	        // Icon (optional placeholder)
-	        JLabel iconLabel = new JLabel("✅");
+	        JLabel iconLabel = new JLabel("git");
 	        iconLabel.setFont(new Font("Arial", Font.BOLD, 30));
 	        iconLabel.setForeground(Color.WHITE);
 
