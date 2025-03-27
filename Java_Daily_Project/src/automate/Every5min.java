@@ -53,27 +53,24 @@ public class Every5min {
 	private static void showPopup(String title, String message) {
 		SwingUtilities.invokeLater(() -> {
 			// Custom JOptionPane with styled look
-			JOptionPane optionPane = new JOptionPane(
-				message, 
-				JOptionPane.INFORMATION_MESSAGE, 
-				JOptionPane.DEFAULT_OPTION
-			);
-			
+			JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE,
+					JOptionPane.DEFAULT_OPTION);
+
 			// Customize colors
 			optionPane.setBackground(new Color(76, 175, 80)); // Material Green
-			
+
 			// Create dialog
 			JDialog dialog = optionPane.createDialog(null, title);
 			dialog.setAlwaysOnTop(true);
-			
+
 			// Set a custom icon if needed
 			ImageIcon icon = new ImageIcon(new byte[16]); // Create a blank icon
 			dialog.setIconImage(icon.getImage());
-			
+
 			// Show dialog
 			dialog.setModal(false);
 			dialog.setVisible(true);
-			
+
 			// Auto-close logic
 			new Timer(5000, e -> {
 				dialog.setVisible(false);
@@ -84,7 +81,7 @@ public class Every5min {
 			LOGGER.info("Popup: " + title + " - " + message);
 		});
 	}
-	
+
 	private static boolean isInternetAvailable() {
 		try {
 			// Attempt to connect to a reliable host
