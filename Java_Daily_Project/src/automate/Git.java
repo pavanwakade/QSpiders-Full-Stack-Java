@@ -3,6 +3,8 @@ package automate;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
@@ -87,7 +89,7 @@ public class Git {
 			// Message label
 			JLabel messageLabel = new JLabel(message);
 			messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-			messageLabel.setForeground(Color.RED);
+			messageLabel.setForeground(Color.WHITE);
 
 			// Icon (optional placeholder)
 			JLabel iconLabel = new JLabel("pavan");
@@ -170,20 +172,79 @@ public class Git {
 	}
 
 	private static boolean isInternetAvailable() {
-		try {
-			// Attempt to connect to a reliable host
-			URL url = new URL("https://www.google.com");
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setConnectTimeout(3000);
-			connection.setReadTimeout(3000);
-			connection.setRequestMethod("HEAD");
+	    // Multiple reliable hosts for redundancy
+	    String[] checkUrls = {
+	        "https://www.google.com",
+	        "https://www.microsoft.com",
+//	        "https://www.cloudflare.com",
+//	        "https://1.1.1.1", // Cloudflare DNS
+//	        "https://8.8.8.8"  // Google DNS
+	    };
 
-			int responseCode = connection.getResponseCode();
-			return (responseCode == HttpURLConnection.HTTP_OK);
-		} catch (Exception e) {
-			LOGGER.warning("Internet connection check failed: " + e.getMessage());
-			return false;
-		}
+	    // Timeout settings
+	    int connectTimeout = 7000;  // 5 seconds
+	    int readTimeout = 7000;     // 5 seconds
+
+	    for (String urlString : checkUrls) {
+	        HttpURLConnection connection = null;
+	        try {
+	            // Create URL connection
+	            URL url = new URL(urlString);
+	            connection = (HttpURLConnection) url.openConnection();
+	            
+	            // Set timeouts
+	            connection.setConnectTimeout(connectTimeout);
+	            connection.setReadTimeout(readTimeout);
+	            
+	            // Use HEAD request for lightweight check
+	            connection.setRequestMethod("HEAD");
+	            
+	            // Add User-Agent to prevent potential blocking
+	            connection.setRequestProperty("User-Agent", 
+	                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+
+	            // Attempt connection
+	            int responseCode = connection.getResponseCode();
+	            
+	            // Check for successful responses
+	            boolean isConnected = (responseCode == HttpURLConnection.HTTP_OK) || 
+	                                  (responseCode == HttpURLConnection.HTTP_MOVED_TEMP) ||
+	                                  (responseCode == HttpURLConnection.HTTP_MOVED_PERM);
+	            
+	            if (isConnected) {
+	                LOGGER.info("Internet connection verified through: " + urlString);
+	                return true;
+	            }
+	        } catch (Exception e) {
+	            // Log each failed attempt
+	            LOGGER.warning("Connection check failed for " + urlString + ": " + e.getMessage());
+	        } finally {
+	            // Ensure connection is closed
+	            if (connection != null) {
+	                connection.disconnect();
+	            }
+	        }
+	    }
+
+	    // Additional network interface check
+	    try {
+	        // Check network interfaces
+	        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+	        while (interfaces.hasMoreElements()) {
+	            NetworkInterface iface = interfaces.nextElement();
+	            if (iface.isLoopback() || !iface.isUp())
+	                continue;
+
+	            // Check for at least one active interface
+	            return true;
+	        }
+	    } catch (SocketException e) {
+	        LOGGER.warning("Network interface check failed: " + e.getMessage());
+	    }
+
+	    // Comprehensive logging for no connection
+	    LOGGER.severe("No internet connection could be established");
+	    return false;
 	}
 
 	// Load Configuration from Properties File
@@ -325,6 +386,19 @@ public class Git {
 
 	// Commit and Push Changes
 	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
+		
+		 File lockFile = new File(repoPath + File.separator + ".git" + File.separator + "index.lock");
+		    if (lockFile.exists()) {
+		        LOGGER.warning("Git lock file found. Attempting to remove: " + lockFile.getPath());
+		        if (lockFile.delete()) {
+		            LOGGER.info("Successfully removed lock file");
+		        } else {
+		            LOGGER.severe("Could not remove lock file");
+		            showPopup("Git Error", "Unable to remove repository lock file. Manual intervention required.");
+		            return;
+		        }
+		    }
+		    
 		File repoDir = new File(repoPath);
 		File gitDir = new File(repoPath + File.separator + ".git");
 
