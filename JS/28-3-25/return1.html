@@ -9,6 +9,7 @@
     <h1>hello</h1>
 
     <script>
+
       let func1=(func)=>{
 
         return func(func3)
@@ -18,9 +19,13 @@
         return func("hello")
       }
 
-      let func3=(fun)=>{
-        return fun()
+      let func3=(arg)=>{
+        return arg
       }
+
+      let x=func1(func2);
+
+      console.log(x);
     </script>
   </body>
 </html>
