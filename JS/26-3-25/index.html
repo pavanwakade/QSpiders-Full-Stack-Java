@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="""https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Stylish Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body{
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,7 +58,11 @@
         let password = document.getElementById("password").value;
 
         if (password === "1234" && name === "pavan") {
-          alert("login success");
+          Swal.fire({
+            icon: 'success',
+            title: 'Login',
+            text: 'Login successfull!'
+          });
 
           let output = document.querySelector(".output");
           output.innerHTML = `
