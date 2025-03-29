@@ -52,19 +52,17 @@ complimentMachine("Sam",awesome);
 function checkNumber(num, callback) {
     console.log(callback(num));
 }
-checkNumber(10, (n) => (n % 2 === 0 ? "Even Number" : "Odd Number"));
+let check=(num)=> num%2==0 ? "Even Number" : "Odd Number";
+checkNumber(10,check);
 
 // 8. Number Judge
-function judgeNumber(num, callback) {
-    console.log(callback(num));
-}
-judgeNumber(-5, (n) => (n > 0 ? "Positive" : "Negative"));
+let judgeNumber = (num, callback) => console.log(callback(num));
+judgeNumber(-5, (n) => n > 0 ? "Positive" : "Negative");
 
 // 9. Tiny Calculator
-function tinyCalculator(a, b, callback) {
-    console.log(callback(a, b));
-}
-tinyCalculator(8, 2, (x, y) => x * y);
+let cal = (a, b, callback) =>  console.log(callback(a, b));
+
+cal(8, 2, (x, y) => (x * y));
 
 // 10. Name Styler
 function nameStyler(name, callback) {
