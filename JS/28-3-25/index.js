@@ -18,7 +18,7 @@ mathWizard(5, 3, (x, y) => {
    return x + y
 }
 );
-
+// 4
 let decide = (msg, yesCallback, noCallback) => {
     if (msg === "happy") {
         console.log(yesCallback());
@@ -118,14 +118,12 @@ function speak(message, callback) {
 }
 speak("HELLO", (msg) => (msg === msg.toUpperCase() ? "Shouting!" : "Whispering!"));
 
+
+
 // 19. Number Magic Show
-function numberMagic(num, callback) {
-    console.log(callback(num));
-}
+let numberMagic = (num, callback) => console.log(callback(num));
 numberMagic(10, (n) => (n % 5 === 0 ? "High Five!" : "No Magic"));
 
 // 20. Friendly Introduction
-function introduce(name, callback) {
-    console.log(callback(name));
-}
+let introduce = (name, callback) => console.log(callback(name));
 introduce("Bob", (name) => `Hey, I'm ${name}! Nice to meet you!`);
