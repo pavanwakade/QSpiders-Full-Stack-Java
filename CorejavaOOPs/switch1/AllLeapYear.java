@@ -1,4 +1,4 @@
-package Switch1;
+package switch1;
 import java.util.Scanner;
 public class AllLeapYear
 {
