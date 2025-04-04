@@ -18,6 +18,9 @@
 // •	Hint: A callback is just a function you pass to another function.
 
 
+
+
+
       let shout = (msg, callback) => callback(msg);
 
       let call = (msg) => {
@@ -27,6 +30,8 @@
           console.log(`${msg} is not hello`);
         }
       };
+
+
       shout("hello", call);
 
 
