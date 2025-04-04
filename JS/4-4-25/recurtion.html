@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>recuertion in js</title>
+  </head>
+  <body>
+    <h1>recuertion in js</h1>
+
+    <script>
+      let factorial = (num) => {
+        if (num <= 0 || num == 1) return 1; // Base case
+        return num * factorial(num - 1); // Recursive case
+      };
+
+      let num = parseInt(
+        prompt("Enter a number to calculate its factorial:"),
+        10
+      );
+      
+      console.log(factorial(num));
+    </script>
+  </body>
+</html>
