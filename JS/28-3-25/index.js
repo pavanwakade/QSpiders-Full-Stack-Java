@@ -2,7 +2,13 @@
 function shout(message, callback) {
     callback(message);
 }
-shout("hello", (msg) => console.log(msg.toUpperCase()));
+
+let upper = (msg) => {
+    console.log(msg.toUpperCase())
+}
+shout("hello", upper);
+
+
 
 
 
@@ -86,9 +92,9 @@ nameStyler("pavan", (name) => `***${name.toUpperCase()}***`);
 // 11. Number Transformer
 let transform = (num, operation) => {
     if (operation === 'square') {
-        return console.log(`Square of ${num} :`,num * num);
+        return console.log(`Square of ${num} :`, num * num);
     } else {
-        return console.log(`Cube of ${num} :`,num * num * num);
+        return console.log(`Cube of ${num} :`, num * num * num);
     }
 };
 transform(3, 'square');
@@ -148,3 +154,4 @@ numberMagic(10, (n) => (n % 5 === 0 ? "High Five!" : "No Magic"));
 // 20. Friendly Introduction
 let introduce = (name, callback) => console.log(callback(name));
 introduce("Bob", (name) => `Hey, I'm ${name}! Nice to meet you!`);
+

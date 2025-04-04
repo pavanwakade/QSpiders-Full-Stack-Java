@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>assignment</title>
+  </head>
+  <body>
+    <h1>assignment</h1>
+
+    <script>
+
+
+
+// 1. What is a Callback?
+// •	Task: Write a function called shout that accepts a message and a callback.
+// •	Goal: The callback should decide how to display the message (e.g., print "HELLO" if the message is "hello").
+// •	Hint: A callback is just a function you pass to another function.
+
+
+      let shout = (msg, callback) => callback(msg);
+
+      let call = (msg) => {
+        if (msg == "hello") {
+          console.log("HELLO");
+        } else {
+          console.log(`${msg} is not hello`);
+        }
+      };
+      shout("hello", call);
+
+
+//       2. The Friendly Robot
+// •	Task: Create a function robot that accepts a name and a callback.
+// •	Goal: The callback should return a personalized greeting like "Hello, NAME! I am your friendly robot."
+// •	Hint: Let the callback handle the greeting logic.
+
+
+
+    </script>
+  </body>
+</html>

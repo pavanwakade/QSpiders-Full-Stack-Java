@@ -10,15 +10,11 @@
 
     <script>
       let factorial = (num) => {
-        if (num <= 0 || num == 1) return 1; // Base case
-        return num * factorial(num - 1); // Recursive case
+        if (num <= 0 || num == 1) return 1;
+        return num * factorial(num - 1);
       };
 
-      let num = parseInt(
-        prompt("Enter a number to calculate its factorial:"),
-        10
-      );
-      
+      let num = prompt("Enter a number to calculate its factorial:");
       console.log(factorial(num));
     </script>
   </body>
