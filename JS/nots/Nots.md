@@ -163,8 +163,31 @@ hiof(a);
 ```javascript
 
 let str="hello";
-let str='hello';
-let str=new String("hello");
+let str1='hello';
+let str3=new String("hello");
+
+
+
+###String Methods
+
+##toUpperCase
+
+##toLowerCase
+
+##charCodeAt
+
+##
+
+
+##
+
+
+##
+
+
+
+
+
 
 
 
