@@ -1,3 +1,22 @@
+
+## 🔗 Table of Contents (TOC)
+
+- [History of JavaScript](#history-of-javascript-3-2-25)
+- [JavaScript Features](#javascript-features)
+- [Additional Concepts](#additional-concepts)
+- [AST (Abstract Syntax Tree)](#what-is-ast-abstract-syntax-tree)
+- [Script Tag](#script-tag)
+- [NoScript](#noscript)
+- [Ways to Add JavaScript](#ways-to-add-javascript)
+- [Tokens](#tokens)
+- [Variables](#variavles)
+- [Data Types](#javascript-data-types)
+- [Functions](#functions)
+- [Strings](#strings)
+
+---
+
+
 ## History of JavaScript (**3-2-25**)
 
 - **1995**: JavaScript was created by **Brendan Eich** while working at **Netscape Corporation**.
@@ -253,7 +272,19 @@ console.log(str.endsWith("p"));   // false
 
 
 
+Your notes are well-structured and comprehensive — great work organizing them! To **navigate the main topics in the header** easily, especially when your document grows, you can add a **Table of Contents (TOC)** at the top with **anchor links** to each major section. Here's how to do it:
 
+
+
+Now you can make your headings navigable like this:
+
+
+## History of JavaScript (**3-2-25**) <a name="history-of-javascript-3-2-25"></a>
+
+
+If you're viewing this in **Markdown-supported editors** (like VSCode, GitHub, Obsidian, or online Markdown previewers), these links will work like bookmarks and make jumping between sections super fast and easy.
+
+Would you like me to reformat your entire document with these anchors added to each heading and a TOC at the top?
 
 
 
