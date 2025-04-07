@@ -107,7 +107,7 @@ JavaScript has **two main categories** of data types:
 11. **Date** – Represents date & time
 12. **RegExp** – Regular expressions for pattern matching
 
-### Functions
+# Functions
 
 ## Named Function or Regular Function
 ```javascript
@@ -160,7 +160,7 @@ hiof(a);
 
 
 
-### Strings
+# Strings
 
 ** declering String **
 
@@ -171,8 +171,8 @@ let str3=new String("hello");
 ```
 
 
-### String Methods
-## ✅ JavaScript String Methods – Cheat Sheet
+## String Methods
+### ✅ JavaScript String Methods – Cheat Sheet
 
 Assume:
 
@@ -180,43 +180,43 @@ Assume:
 let str = "hello";
 ```
 
-## 🔠 `toUpperCase()`
+### 🔠 `toUpperCase()`
 Converts all characters to uppercase.
 ```javascript
 console.log(str.toUpperCase()); // Output: "HELLO"
 ```
 
-## 🔡 `toLowerCase()`
+### 🔡 `toLowerCase()`
 Converts all characters to lowercase.
 ```javascript
 console.log(str.toLowerCase()); // Output: "hello"
 ```
 
-## 🔍 `charAt(index)`
+### 🔍 `charAt(index)`
 Returns the character at the specified index.
 ```javascript
 console.log(str.charAt(0)); // Output: "h"
 ```
 
-## 🔢 `charCodeAt(index)`
+### 🔢 `charCodeAt(index)`
 Returns the Unicode of the character at a given index.
 ```javascript
 console.log(str.charCodeAt(0)); // Output: 104
 ```
 
-## 📏 `padStart(targetLength, padString)`
+### 📏 `padStart(targetLength, padString)`
 Pads the current string from the start with a given string until the resulting string reaches the given length.
 ```javascript
 console.log(str.padStart(10, "X")); // Output: "XXXXXhello"
 ```
 
-## 📏 `padEnd(targetLength, padString)`
+### 📏 `padEnd(targetLength, padString)`
 Pads the current string from the end.
 ```javascript
 console.log(str.padEnd(10, "X")); // Output: "helloXXXXX"
 ```
 
-## 🔍 `startsWith(searchString)`
+### 🔍 `startsWith(searchString)`
 Checks if the string starts with the given characters.
 ```javascript
 console.log(str.startsWith("h"));  // true
@@ -224,7 +224,7 @@ console.log(str.startsWith("he")); // true
 console.log(str.startsWith("p"));  // false
 ```
 
-## 🔚 `endsWith(searchString)`
+### 🔚 `endsWith(searchString)`
 Checks if the string ends with the given characters.
 ```javascript
 console.log(str.endsWith("llo")); // true
