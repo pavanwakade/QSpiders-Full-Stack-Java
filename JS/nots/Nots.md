@@ -143,22 +143,26 @@ let a = () => {
 let hiof = (cbf) => {
     cbf();
 };
+```
 
-// Callback Function
+### Callback Function
+
+```java
 let a = () => {
     console.log(10 + 10);
 };
 
 hiof(a);
 
+```
 
 
 
 
 
-###Strings
+### Strings
 
-**declering String**
+** declering String **
 
 ```javascript
 let str="hello";
@@ -167,8 +171,8 @@ let str3=new String("hello");
 ```
 
 
-###String Methods
-##✅ JavaScript String Methods – Cheat Sheet
+### String Methods
+## ✅ JavaScript String Methods – Cheat Sheet
 
 Assume:
 
