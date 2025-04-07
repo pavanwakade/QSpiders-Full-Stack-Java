@@ -156,6 +156,15 @@ hiof(a);
 
 
 
+##Strings
+
+**declering String**
+
+```javascript
+
+let str="hello";
+let str='hello';
+let str=new String("hello");
 
 
 
@@ -185,7 +194,16 @@ hiof(a);
 
 
 
-#JavaScript Topics###
+
+
+
+
+
+
+
+
+
+###JavaScript Topics###
 1. History
 2. Introduction
 3. Javascript Runtime Environment
@@ -210,8 +228,10 @@ hiof(a);
 22. Dom
 23. Event
 24. Exception Handling
-#JavaScript Notes###
-#History
+
+###JavaScript Notes###
+##History
+
 1. JavaScript was first created by Brendan Eich in just 10 days in May 1995 while he was working at Netscape Communications Corporation.
 2. The initial release was called Mocha and later renamed to LiveScript, and finally JavaScript.
 3. Initially, JavaScript was designed to be a lightweight scripting language for adding interactivity to web pages.
@@ -239,21 +259,27 @@ hiof(a);
 10. Every browser have js engine to run js code. Therefore browser become environment to run js code.
 11. To run Js code outside browser we just need Javascript runtime environment (Node).
 12. Js is used to add functionality to website.
+
 #Javascript Runtime Environment
+
 1. JavaScript Runtime Enviroment provides the enviroment where we can run our JavaScript code.
 2. Two javascript runtime enviroments are : I. Browser II. Node.js
+
 #Browser
 1. A browser is a software application that is used to access and view information on the World Wide Web (WWW).
 2. It allows users to interact with web pages, view multimedia content, and surf the internet.
 3. The Browser acts as a JavaScript runtime environment because it includes a JavaScript engine that interprets and executes JavaScript code
+
 #JavaScript Engine
 1. A JavaScript engine is a computer program that executes JavaScript code.
 2. It is a core component of web browsers, server-side JavaScript platforms, and other JavaScript-based environments.
+
 #Some Popular JavaScript Engines Include:
 1. V8 (fastest Js engine): developed by Google, used in Google Chrome and Node.js
 2. SpiderMonkey : developed by Mozilla, used in Firefox
 3. JavaScriptCore : developed by Apple, used in Safari
 4. Chakra : developed by Microsoft, used in Microsoft Edge and Internet Explorer (legacy)
+
 #Node.Js
 1. The main reason of javascript popularity.
 2. Node.js is a software application that executes JavaScript code. It is not a framework or a library.
