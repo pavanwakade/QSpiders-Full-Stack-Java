@@ -169,20 +169,84 @@ let str3=new String("hello");
 
 
 ###String Methods
+# ✅ JavaScript String Methods – Cheat Sheet
 
-##toUpperCase
+Assume:
+```javascript
+let str = "hello";
+```
 
-##toLowerCase
+---
 
-##charCodeAt
+## 🔠 `toUpperCase()`
+Converts all characters to uppercase.
+```javascript
+console.log(str.toUpperCase()); // Output: "HELLO"
+```
 
-##
+## 🔡 `toLowerCase()`
+Converts all characters to lowercase.
+```javascript
+console.log(str.toLowerCase()); // Output: "hello"
+```
+
+## 🔍 `charAt(index)`
+Returns the character at the specified index.
+```javascript
+console.log(str.charAt(0)); // Output: "h"
+```
+
+## 🔢 `charCodeAt(index)`
+Returns the Unicode of the character at a given index.
+```javascript
+console.log(str.charCodeAt(0)); // Output: 104
+```
+
+## 📏 `padStart(targetLength, padString)`
+Pads the current string from the start with a given string until the resulting string reaches the given length.
+```javascript
+console.log(str.padStart(10, "X")); // Output: "XXXXXhello"
+```
+
+## 📏 `padEnd(targetLength, padString)`
+Pads the current string from the end.
+```javascript
+console.log(str.padEnd(10, "X")); // Output: "helloXXXXX"
+```
+
+## 🔍 `startsWith(searchString)`
+Checks if the string starts with the given characters.
+```javascript
+console.log(str.startsWith("h"));  // true
+console.log(str.startsWith("he")); // true
+console.log(str.startsWith("p"));  // false
+```
+
+## 🔚 `endsWith(searchString)`
+Checks if the string ends with the given characters.
+```javascript
+console.log(str.endsWith("llo")); // true
+console.log(str.endsWith("o"));   // true
+console.log(str.endsWith("p"));   // false
+```
 
 
-##
 
 
-##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
