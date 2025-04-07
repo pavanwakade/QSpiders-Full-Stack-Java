@@ -1,14 +1,15 @@
 package java8;
-//
-//interface calculator {
-//	void add();
-//}
+
+@FunctionalInterface
+interface Calculatorr {
+	int add(int a, int b);
+}
 
 public class LambdaExprestion1 {
 
 	public static void main(String[] args) {
 
-		Runnable r = () -> System.out.println("hhh");
-
+		Calculatorr c = (a, b) -> a + b;
+		System.out.println(c.add(4, 6));
 	}
 }
