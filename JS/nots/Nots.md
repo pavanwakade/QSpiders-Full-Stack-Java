@@ -156,27 +156,25 @@ hiof(a);
 
 
 
-##Strings
+###Strings
 
 **declering String**
 
 ```javascript
-
 let str="hello";
 let str1='hello';
 let str3=new String("hello");
-
+```
 
 
 ###String Methods
-# ✅ JavaScript String Methods – Cheat Sheet
+##✅ JavaScript String Methods – Cheat Sheet
 
 Assume:
+
 ```javascript
 let str = "hello";
 ```
-
----
 
 ## 🔠 `toUpperCase()`
 Converts all characters to uppercase.
