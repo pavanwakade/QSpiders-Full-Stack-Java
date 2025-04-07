@@ -162,7 +162,7 @@ hiof(a);
 
 # Strings
 
-** declering String **
+**declering String**
 
 ```javascript
 let str="hello";
