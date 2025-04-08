@@ -219,9 +219,9 @@ JavaScript has **two main categories** of data types:
 2. **String** – Textual data
 3. **Boolean** – `true` or `false`
 4. **Undefined** – Variable declared but not assigned
-5. **Null** – Represents an empty or unknown value
+5. **Null** – Represents an empty or unknown value(if we want to make variable value empty that time make empty explicitly)
 6. **Symbol (ES6)** – Unique identifier
-7. **BigInt (ES11)** – Large integers beyond `Number.MAX_SAFE_INTEGER`
+7. **BigInt (ES11)** – Large integers beyond `Number.MAX_SAFE_INTEGER` (justr add "n" in last)
 
 ### 🔹 **2. Non-Primitive (Reference) Data Types** (Mutable, Stored by Reference)
 
@@ -817,6 +817,18 @@ console.log(sayHello()); // Output: Hello!
 let a = () => {
     // Function body
 };
+```
+
+```
+//if only one operation in body
+let a=(x,y) => x + y;
+console.log(a(2,3));
+```
+
+```
+//if there is only one argument
+let hello = arg => `hello ${arg}`;
+console.log(hello("pavan"));
 ```
 
 ## 5. Higher Order Function
