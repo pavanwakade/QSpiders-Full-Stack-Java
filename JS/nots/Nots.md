@@ -40,7 +40,8 @@
 - [Strings](#strings)
 
 ---
-
+[Questions]()
+---
 
 ## History of JavaScript
 
@@ -2821,3 +2822,16 @@ and transfer control to the nearest catch block that can handle the exception.
 
 
 
+## Questions
+
+- 1. diffrance between var/const/let ?
+
+- 2. NULL vs Undefined
+
+- 3. what is NAN
+
+- 4. symbol
+bigint? range?
+hoistning
+TDZ
+truthly,falsly
