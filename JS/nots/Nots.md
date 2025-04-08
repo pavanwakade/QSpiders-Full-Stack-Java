@@ -1,7 +1,6 @@
 
 # JavaScript Contents
 1. [History of JavaScript](#history-of-javascript-3-2-25)
-2. Introduction
 3. [JavaScript Features](#javascript-features)
 3. [Javascript Runtime Environment](#javascript-runtime-environment)
 4. [Token](#token)
@@ -9,14 +8,15 @@
 6. [Global Execution Context](#global-execution-context)
 7. [Var Let Const](#javascript-data-types)
 8. [Function](#functions)
-8. [Function](#functions-1)
-9. Practice Questions
-10. Lexical Scope
-11. Closure
-12. Interview Questions
-13. Array
-14. Object
-15. Json
+9. [String](#strings)
+10. [String methods](#string-methods)
+ <!-- Practice Questions
+. Lexical Scope
+. Closure
+. Interview Questions
+. Array
+. Object
+. Json
 16. Call Apply Bind
 17. Constructor Function
 18. This Keyword
@@ -25,7 +25,7 @@
 21. Prototype
 22. Dom
 23. Event
-24. Exception Handling
+24. Exception Handling -->
 
 
 - [Additional Concepts](#additional-concepts)
@@ -1032,7 +1032,6 @@ let str3=new String("hello");
 ```
 
 ## String Methods
-### ✅ JavaScript String Methods – Cheat Sheet
 
 Assume:
 
@@ -1044,12 +1043,16 @@ let str = "hello";
 Converts all characters to uppercase.
 ```javascript
 console.log(str.toUpperCase()); // Output: "HELLO"
+console.log("abc".toUpperCase());   // "ABC"
+console.log("JavaScript".toUpperCase()); // "JAVASCRIPT"
 ```
 
 ### 🔡 `toLowerCase()`
 Converts all characters to lowercase.
 ```javascript
 console.log(str.toLowerCase()); // Output: "hello"
+console.log("ABC".toLowerCase());   // "abc"
+console.log("JavaScript".toLowerCase()); // "javascript"
 ```
 
 ### 🔍 `charAt(index)`
@@ -1062,18 +1065,23 @@ console.log(str.charAt(0)); // Output: "h"
 Returns the Unicode of the character at a given index.
 ```javascript
 console.log(str.charCodeAt(0)); // Output: 104
+console.log("A".charCodeAt(0));  // 65
 ```
 
 ### 📏 `padStart(targetLength, padString)`
 Pads the current string from the start with a given string until the resulting string reaches the given length.
 ```javascript
 console.log(str.padStart(10, "X")); // Output: "XXXXXhello"
+console.log("hi".padStart(6, "*"));       // "****hi"
+console.log("123".padStart(5, "0"));      // "00123"
 ```
 
 ### 📏 `padEnd(targetLength, padString)`
 Pads the current string from the end.
 ```javascript
 console.log(str.padEnd(10, "X")); // Output: "helloXXXXX"
+console.log("hi".padEnd(6, "*"));        // "hi****"
+console.log("123".padEnd(5, "0"));       // "12300"
 ```
 
 ### 🔍 `startsWith(searchString)`
@@ -1094,12 +1102,119 @@ console.log(str.endsWith("p"));   // false
 
 
 
+### 🔁 `repeat(count)`
+Returns a new string with a specified number of copies.
+```javascript
+console.log("ha".repeat(3));       // "hahaha"
+console.log("x".repeat(5));        // "xxxxx"
+console.log("*-".repeat(4));       // "*-*-*-*-"
+```
 
 
 
+### 🔍 `includes(searchString)`
+Checks if string contains specified characters.
+```javascript
+console.log(str.includes("world"));  // true
+console.log(str.includes("W"));      // false
+console.log("abc123".includes("1")); // true
+```
 
 
 
+### ✂️ `slice(start, end)`
+Extracts a section of a string.
+```javascript
+console.log(str.slice(0, 5));     // "hello"
+console.log(str.slice(6));        // "world"
+console.log(str.slice(-5));       // "world"
+```
+
+
+
+### 🔄 `replace(searchValue, newValue)`
+Replaces first match.
+```javascript
+console.log(str.replace("world", "JS")); // "hello JS"
+console.log("aaa".replace("a", "b"));    // "baa"
+console.log("123-456".replace("-", ":")); // "123:456"
+```
+
+
+
+### 🔄 `replaceAll(searchValue, newValue)`
+Replaces all matches.
+```javascript
+console.log("a-b-c".replaceAll("-", "."));  // "a.b.c"
+console.log("xxXxx".replaceAll("x", "y"));  // "yyXyy"
+console.log("123123".replaceAll("1", "9")); // "923923"
+```
+
+
+
+### ✂️ `substring(start, end)`
+Extracts characters between two indexes.
+```javascript
+console.log(str.substring(0, 5));     // "hello"
+console.log(str.substring(6, 11));    // "world"
+console.log("JavaScript".substring(4)); // "Script"
+```
+
+
+
+### ✂️ `substr(start, length)` *(deprecated but still supported)*
+Returns a portion of the string.
+```javascript
+console.log(str.substr(0, 5));     // "hello"
+console.log(str.substr(6, 5));     // "world"
+console.log("123456".substr(2, 3)); // "345"
+```
+
+
+### 🧹 `trim()`
+Removes whitespace from both ends.
+```javascript
+console.log("  hello  ".trim());       // "hello"
+console.log("   space\t\n".trim());    // "space"
+console.log("text".trim());            // "text"
+```
+
+
+### ⬅️ `trimStart()` / `trimLeft()`
+Removes whitespace from start only.
+```javascript
+console.log("  hello".trimStart());   // "hello"
+console.log("\n\t hi".trimStart());   // "hi"
+console.log("  no".trimLeft());       // "no"
+```
+
+
+### ➡️ `trimEnd()` / `trimRight()`
+Removes whitespace from end only.
+```javascript
+console.log("hello  ".trimEnd());     // "hello"
+console.log("done\n".trimEnd());      // "done"
+console.log("space  ".trimRight());   // "space"
+```
+
+
+### 🔡 `toString()`
+Converts value to string.
+```javascript
+console.log((123).toString());         // "123"
+console.log((true).toString());        // "true"
+console.log((["a", "b"]).toString());  // "a,b"
+```
+
+
+### 🔢 `valueOf()`
+Returns the primitive value of a string object.
+```javascript
+let strObj = new String("hello");
+console.log(strObj.valueOf());         // "hello"
+console.log("abc".valueOf());          // "abc"
+console.log("123".valueOf());          // "123"
+```
 
 
 
