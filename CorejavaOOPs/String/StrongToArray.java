@@ -10,22 +10,27 @@ public class StrongToArray {
 
 		char a[] = new char[str.length()];
 
-		for (int i = 0; i < str.length(); i++) {
+		int p = a.length - 1;
 
-			a[i] = str.charAt(i);
+		for (int i = 0; i < str.length(); i++, p--) {
+
+			a[p] = str.charAt(i);
 		}
-		char c[]=new char[a.length];
-		
-//		for(int j=a.length;j>0;j--) {
-//			
-//			c[j]=a[j];
-//		}
-		
-		
 		System.out.println(Arrays.toString(a));
-
-//		String[] c = str.split("");
+		
+		
+//		char c[] = new char[a.length];
+//		int count = 0;
+//		for (int j = a.length - 1; j >= 0; j--, count++) {
+//
+//			c[count] = a[j];
+//		}
 //		System.out.println(Arrays.toString(c));
+
+		
+
+		String[] c = str.split("");
+		System.out.println(Arrays.toString(c));
 
 	}
 }

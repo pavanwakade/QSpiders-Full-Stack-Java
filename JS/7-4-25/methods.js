@@ -134,16 +134,21 @@ let strArray = strs.split(' ');
 
 //isFinite(arg)
 
-let numbr=10;
+// let numbr=10;
 
-console.log(isFinite(numbr));
+// console.log(isFinite(numbr));
 
-console.log(isFinite("10"));
-console.log(Number.isInteger(numbr));
-console.log(Number.isNaN("10"));
-console.log(Number.isNaN(10));
-console.log(Number.isNaN(NaN));
-console.log(Number.parseInt("1000 year old")); //only 1000
-console.log(Number.parseInt("10.5")); //only 10
-console.log(Number.parseInt("10.5abc")); //only 10
-console.log(Number.parseFloat("10.5abc")); //10.5
+// console.log(isFinite("10"));
+// console.log(Number.isInteger(numbr));
+// console.log(Number.isNaN("10"));
+// console.log(Number.isNaN(10));
+// console.log(Number.isNaN(NaN));
+// console.log(Number.parseInt("1000 year old")); //only 1000
+// console.log(Number.parseInt("10.5")); //only 10
+// console.log(Number.parseInt("10.5abc")); //only 10
+// console.log(Number.parseFloat("10.5abc")); //10.5
+
+
+
+
+
