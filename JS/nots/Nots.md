@@ -5,10 +5,11 @@
 3. [JavaScript Features](#javascript-features)
 3. [Javascript Runtime Environment](#javascript-runtime-environment)
 4. [Token](#token)
-5. Scope
-6. Global Execution Context
-7. Var Let Const
-8. Function
+5. [Scope](#scope)
+6. [Global Execution Context](#global-execution-context)
+7. [Var Let Const](#javascript-data-types)
+8. [Function](#functions)
+8. [Function](#functions-1)
 9. Practice Questions
 10. Lexical Scope
 11. Closure
@@ -397,7 +398,93 @@ These operators are essential for performing various operations in JavaScript, f
 
 
 
+
+
 # Functions
+1. Function is object.
+2. Function is a block of instruction which is used to perform a specific task.
+3. A function get executed only when it is called.
+4. The main advantage of function is we can achieve code reusability.
+5. To call a function we need its reference and ().
+6. Name of function is variable which holds the reference of function object.
+7. Creating a function using function keyword supports function hoisting.
+8. Therefore we can also call a function before function declaration.
+9. When we try to log function name the entire function defination is printed.
+10. The scope within function block is known as local scope.
+11. Any member with local scope cannot be used outside the function block.
+12. A parameter of function will have local scope.
+13. Variable written inside function even using var have local scope.
+14. Inside a function we can use the members of global scope.
+15. In javascript 'this' is a property of every function.(every function will have 'this' Keyword except arrow function)
+
+
+
+# Parameter
+1. The variables declared in the function defination is known as parameters.
+2. The parameters have local scope (can be used only inside function body).
+3. Parameters are used to hold the values passed by caller (or calling statement).
+
+
+
+# Arguments
+1. The values passed in the method call statement is known as arguments.
+2. Note : An argument can be a literal, variable or an expression which gives a results.
+
+
+
+# Return Keyword
+1. It is a keyword used as control transfer statement in a function.
+2. Return will stop the execution of the function and transfer control along with data to the caller.
+
+
+
+# Ways To Create Functions
+1. Function declaration statement : Create using function keyword
+1.
+Syntax :
+```
+function func_variable(parameters) {
+//statements
+}
+func_variable()
+```
+2.
+```
+Example : Create a function 'greet' which should print a message "Good Morning" when it is called.
+function func_variable(parameters) {
+//statements
+}
+func_variable()
+
+```
+3.
+
+```
+Function can be Hoisted.
+//Here, we are accessing function before it's declaration statement.
+greet();
+function greet() {
+console.log("Good Morning");
+}
+output : Good Morning
+```
+4. Function does not belongs to temporal dead zone.
+2. Function as expression / expression function
+1. Function which is passed to an variable as a value is called as first class function.
+2. Function can not be Hoisted because it is object is created in execution phase.
+3. Function does not belongs to temporal dead zone
+
+
+# Functional Programming
+1. Functional Programming is a programming technique where we pass a function along with a value to another function.
+2. In this approach, we generate Generic Function. Here function task is not predefined. It perform multiple task not only single task
+3. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
+4. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
+
+
+
+# Types Of Functions
+1. Function decalaration statement : Using function keyword
 
 ## Named Function or Regular Function
 ```javascript
@@ -447,11 +534,189 @@ hiof(a);
 ```
 
 
+2. Function as expression / expression function
+3. Immediate Invoke Function (IIF)
+1. when a function is called as soon as it's object is created is known as Immediate Invoke Function.
+2. We have to write the function inside the paranthesis to group it. [using Group operator -> (function code) ].
+3. The function is not visible(available) outside the scope.
+4. After grouping it, we have to use paranthesis to call this function.
+5. Immediate Invoke Function execute only once.
+4. Arrow Function
+1. The main function of arrow function is to reduce the function syntax.
+2. Arrow Function is introduced in ES6.
+3. If we have only single parameter, it is not necessary to use paranthesis for paramenter.
+4. If function have single statement, then block (curly braces) is optional.
+5. It does not have its own 'this' property.
+6. Implicit return :- If there is only one statement and If block is not created then JS Engine will return that statement automatically.
+7. Explicit return :- If block is created and function is not returning any value, JS Engine will return undefined. To return a value Explicitly from block, we have to use return keyword.If block is created then we have to use return keyword to return value otherwise JS Engine will return undefined.
+5. Higher Order Function
+1. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
+6. Callback Function
+1. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
+
+
+# Nested Function
+1. The function inside another function is called as nested function.
+2.
+Example :
+
+```
+function outer(){
+function inner(){
+}
+return inner
+}
+```
+
+3. The outer function is known as parent and the inner function is known as child.
+4. The inner function is local to outer function, it cannot be accessed from outside.
+5.
+To use inner function outside, the outer function must return the reference of inner function.
+
+```
+function outer(){
+function inner(){
+}
+return inner
+}
+```
+We can now call inner function from outside as follows: 1st Way:
+
+```
+let fun=outer();
+fun(); // -----> inner() is called
+2nd Way:
+outer()(); // -----> inner() is called
+
+```
+
+
+# Hoisting
+
+Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope before the code runs. This allows you to use them before they are actually declared in your code.
+Variable Hoisting
+1. **var**
+- Variables declared with `var` are moved to the top of their function scope.
+- They start as `undefined` until the line of code where they are assigned a value.
+
+
+```javascript
+console.log(x); // undefined
+var x = 5;
+console.log(x); // 5
+```
+
+
+2. **let** and **const**
+- Variables declared with `let` and `const` are also moved to the top of their block scope.
+- They are not initialized until the code reaches their declaration.
+- Using them before they are declared gives a `ReferenceError`.
+
+```javascript
+console.log(y); // ReferenceError: Cannot access 'y' before initialization
+let y = 10;
+console.log(y); // 10
+console.log(z); // ReferenceError: Cannot access 'z' before initialization
+const z = 15;
+console.log(z); // 15
+```
+
+## Function Hoisting
+1. **Function Declarations**
+- Function declarations are moved to the top of their scope.
+- You can call these functions before they are declared in the code.
+
+
+```javascript
+console.log(sum(2, 3)); // 5
+function sum(a, b) {
+return a + b;
+}
+```
+
+
+2. **Function Expressions**
+- Function expressions (functions assigned to variables) are not fully hoisted.
+- Only the variable declaration is hoisted, not the function itself.
+```javascript
+console.log(multiply); // undefined
+var multiply = function (a, b) {
+return a * b;
+};
+```
+```javascript
+console.log(divide); // ReferenceError: Cannot access 'divide' before initialization
+let divide = function (a, b) {
+return a / b;
+};
+```
+
+
+### Key Points
+- **`var` variables**: Moved to the top of the function scope, start as `undefined`.
+- **`let` and `const` variables**: Moved to the top of the block scope, not initialized until declared.
+- **Function declarations**: Fully moved to the top, can be used before they appear in the code.
+- **Function expressions**: Only the variable part is moved, not the function assignment.
+Temporal Dead Zone
+The Temporal Dead Zone (TDZ) is the time span between variable declaration and its initialization. During this time, the variable declared with let and const cannot be used.
+
+
+
+#### Example of TDZ
+```javascript
+console.log(a); // Error: Cannot access 'a' before initialization
+let a = 10;
+console.log(a); // 10
+```
+Here, `a` cannot be used before the line `let a = 10;`.
+
+#### Key Points
+1. **Variables with `let` and `const`**:
+- These variables are in the TDZ from the start of the block until they are declared.
+- Trying to use them before the declaration gives an error.
+2. **Purpose of TDZ**:
+- The TDZ helps catch mistakes by not allowing the use of variables before they are properly declared.
+
+#### Simple Example
+```javascript
+function example() {
+console.log(b); // Error: Cannot access 'b' before initialization
+let b = 20;
+console.log(b); // 20
+}
+example();
+```
+In this function, `b` is in the TDZ until `let b = 20;` is executed.
+
+
+
+#### Comparison with `var`
+```javascript
+function exampleVar() {
+console.log(c); // undefined (no TDZ for `var`)
+var c = 30;
+console.log(c); // 30
+}
+exampleVar();
+```
+For variables declared with `var`, there is no TDZ. They are hoisted to the top and initialized as `undefined`.
+
+
+
+### Summary
+- **TDZ**: Time when `let` or `const` variables can't be used.
+- **Error**: Using these variables before they are declared gives an error.
+- **Why**: This helps find mistakes in the code.
+
+
+
+
+
+
 
 
 
 # Strings
-
 **declering String**
 
 ```javascript
@@ -459,7 +724,6 @@ let str="hello";
 let str1='hello';
 let str3=new String("hello");
 ```
-
 
 ## String Methods
 ### ✅ JavaScript String Methods – Cheat Sheet
@@ -648,17 +912,14 @@ console.log(str.endsWith("p"));   // false
 
 
 # Scope
-1. Scope defines the visibility or accessibility of a variable.
+1. Scope defines the visibility or accessibility of a variable.1. The variable declared in global scope can be accessed anywhere in the program.
+2. Global scope has the highest accessibility.
+3. Variable declared with var goes in Global scope.
+
 
 # We Have Two Scopes
 1. Global Scope
 2. Local Scope
-
-
-#  Scope
-1. The variable declared in global scope can be accessed anywhere in the program.
-2. Global scope has the highest accessibility.
-3. Variable declared with var goes in Global scope.
 
 # Local Scope
 1. Local/block scope/function scope
@@ -667,7 +928,7 @@ console.log(str.endsWith("p"));   // false
 4.
 Function's Local Scope
 - Local scope created for function is refered as function scope. - Variable's declared in function's scope can not be accessed from outside.
-
+
 Block's Local Scope
 - Local scope created for block is refered as block scope. - Variable's declared in block scope can not be accessed from outside. - But only variables declared with var are accessible from outside of block. Note: Variables declared with let and const are also locally scoped. Firefox represent it as - Block scope. Chrome represent it as - Script scope.
 
@@ -815,206 +1076,12 @@ console.log(b);
 console.log("end");
 ```
 
-# Functions
-1. Function is object.
-2. Function is a block of instruction which is used to perform a specific task.
-3. A function get executed only when it is called.
-4. The main advantage of function is we can achieve code reusability.
-5. To call a function we need its reference and ().
-6. Name of function is variable which holds the reference of function object.
-7. Creating a function using function keyword supports function hoisting.
-8. Therefore we can also call a function before function declaration.
-9. When we try to log function name the entire function defination is printed.
-10. The scope within function block is known as local scope.
-11. Any member with local scope cannot be used outside the function block.
-12. A parameter of function will have local scope.
-13. Variable written inside function even using var have local scope.
-14. Inside a function we can use the members of global scope.
-15. In javascript 'this' is a property of every function.(every function will have 'this' Keyword except arrow function)
-# Parameter
-1. The variables declared in the function defination is known as parameters.
-2. The parameters have local scope (can be used only inside function body).
-3. Parameters are used to hold the values passed by caller (or calling statement).
-# Arguments
-1. The values passed in the method call statement is known as arguments.
-2. Note : An argument can be a literal, variable or an expression which gives a results.
-# Return Keyword
-1. It is a keyword used as control transfer statement in a function.
-2. Return will stop the execution of the function and transfer control along with data to the caller.
-# Ways To Create Functions
-1. Function declaration statement : Create using function keyword
-1.
-Syntax :
-function func_variable(parameters) {
-//statements
-}
-func_variable()
-2.
-Example : Create a function 'greet' which should print a message "Good Morning" when it is called.
-function func_variable(parameters) {
-//statements
-}
-func_variable()
-3.
-Function can be Hoisted.
-//Here, we are accessing function before it's declaration statement.
-greet();
-function greet() {
-console.log("Good Morning");
-}
-output : Good Morning
-4. Function does not belongs to temporal dead zone.
-2. Function as expression / expression function
-1. Function which is passed to an variable as a value is called as first class function.
-2. Function can not be Hoisted because it is object is created in execution phase.
-3. Function does not belongs to temporal dead zone
-# Functional Programming
-1. Functional Programming is a programming technique where we pass a function along with a value to another function.
-2. In this approach, we generate Generic Function. Here function task is not predefined. It perform multiple task not only single task
-3. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
-4. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
-# Types Of Functions
-1. Function decalaration statement : Using function keyword
-2. Function as expression / expression function
-3. Immediate Invoke Function (IIF)
-1. when a function is called as soon as it's object is created is known as Immediate Invoke Function.
-2. We have to write the function inside the paranthesis to group it. [using Group operator -> (function code) ].
-3. The function is not visible(available) outside the scope.
-4. After grouping it, we have to use paranthesis to call this function.
-5. Immediate Invoke Function execute only once.
-4. Arrow Function
-1. The main function of arrow function is to reduce the function syntax.
-2. Arrow Function is introduced in ES6.
-3. If we have only single parameter, it is not necessary to use paranthesis for paramenter.
-4. If function have single statement, then block (curly braces) is optional.
-5. It does not have its own 'this' property.
-6. Implicit return :- If there is only one statement and If block is not created then JS Engine will return that statement automatically.
-7. Explicit return :- If block is created and function is not returning any value, JS Engine will return undefined. To return a value Explicitly from block, we have to use return keyword.If block is created then we have to use return keyword to return value otherwise JS Engine will return undefined.
-5. Higher Order Function
-1. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
-6. Callback Function
-1. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
-
-
-# Nested Function
-1. The function inside another function is called as nested function.
-2.
-Example :
-function outer(){
-function inner(){
-}
-return inner
-}
-3. The outer function is known as parent and the inner function is known as child.
-4. The inner function is local to outer function, it cannot be accessed from outside.
-5.
-To use inner function outside, the outer function must return the reference of inner function.
-function outer(){
-function inner(){
-}
-return inner
-}
-We can now call inner function from outside as follows: 1st Way:
-let fun=outer();
-fun(); // -----> inner() is called
-2nd Way:
-outer()(); // -----> inner() is called
-Hoisting
-Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope before the code runs. This allows you to use them before they are actually declared in your code.
-Variable Hoisting
-1. **var**
-- Variables declared with `var` are moved to the top of their function scope.
-- They start as `undefined` until the line of code where they are assigned a value.
-```javascript
-console.log(x); // undefined
-var x = 5;
-console.log(x); // 5
-```
-2. **let** and **const**
-- Variables declared with `let` and `const` are also moved to the top of their block scope.
-- They are not initialized until the code reaches their declaration.
-- Using them before they are declared gives a `ReferenceError`.
-```javascript
-console.log(y); // ReferenceError: Cannot access 'y' before initialization
-let y = 10;
-console.log(y); // 10
-console.log(z); // ReferenceError: Cannot access 'z' before initialization
-const z = 15;
-console.log(z); // 15
-```
-#### Function Hoisting
-1. **Function Declarations**
-- Function declarations are moved to the top of their scope.
-- You can call these functions before they are declared in the code.
-```javascript
-console.log(sum(2, 3)); // 5
-function sum(a, b) {
-return a + b;
-}
-```
-2. **Function Expressions**
-- Function expressions (functions assigned to variables) are not fully hoisted.
-- Only the variable declaration is hoisted, not the function itself.
-```javascript
-console.log(multiply); // undefined
-var multiply = function (a, b) {
-return a * b;
-};
-```
-```javascript
-console.log(divide); // ReferenceError: Cannot access 'divide' before initialization
-let divide = function (a, b) {
-return a / b;
-};
-```
-### Key Points
-- **`var` variables**: Moved to the top of the function scope, start as `undefined`.
-- **`let` and `const` variables**: Moved to the top of the block scope, not initialized until declared.
-- **Function declarations**: Fully moved to the top, can be used before they appear in the code.
-- **Function expressions**: Only the variable part is moved, not the function assignment.
-Temporal Dead Zone
-The Temporal Dead Zone (TDZ) is the time span between variable declaration and its initialization. During this time, the variable declared with let and const cannot be used.
-#### Example of TDZ
-```javascript
-console.log(a); // Error: Cannot access 'a' before initialization
-let a = 10;
-console.log(a); // 10
-```
-Here, `a` cannot be used before the line `let a = 10;`.
-#### Key Points
-1. **Variables with `let` and `const`**:
-- These variables are in the TDZ from the start of the block until they are declared.
-- Trying to use them before the declaration gives an error.
-2. **Purpose of TDZ**:
-- The TDZ helps catch mistakes by not allowing the use of variables before they are properly declared.
-#### Simple Example
-```javascript
-function example() {
-console.log(b); // Error: Cannot access 'b' before initialization
-let b = 20;
-console.log(b); // 20
-}
-example();
-```
-In this function, `b` is in the TDZ until `let b = 20;` is executed.
-#### Comparison with `var`
-```javascript
-function exampleVar() {
-console.log(c); // undefined (no TDZ for `var`)
-var c = 30;
-console.log(c); // 30
-}
-exampleVar();
-```
-For variables declared with `var`, there is no TDZ. They are hoisted to the top and initialized as `undefined`.
-### Summary
-- **TDZ**: Time when `let` or `const` variables can't be used.
-- **Error**: Using these variables before they are declared gives an error.
-- **Why**: This helps find mistakes in the code.
 ### JavaScript Closures Explained Simply
 Closure
 A closure is a feature in JavaScript where a function remembers and can access variables from outside its own scope, even after the outer function has finished executing.
 Example of a Closure
+
+```
 function outerFunction() {
 let outerVariable = 'I am outside!';
 function innerFunction() {
@@ -1025,6 +1092,7 @@ return innerFunction;
 const closureFunction = outerFunction();
 closureFunction(); // Logs: 'I am outside!'
 ```
+
 Here, `innerFunction` remembers `outerVariable` from `outerFunction` even after `outerFunction` has finished running. This is a closure.
 Key Points
 1. Function Inside a Function :
@@ -1034,6 +1102,8 @@ Key Points
 3. Practical Use :
 - Closures are useful for creating private variables and functions.
 Simple Example
+
+```
 function createCounter() {
 let count = 0;
 return function() {
@@ -1046,6 +1116,7 @@ counter(); // Logs: 1
 counter(); // Logs: 2
 counter(); // Logs: 3
 ```
+
 In this example, the inner function increments and logs the `count` variable each time it is called. The `count` variable is remembered between calls because of the closure.
 Summary
 - Closure : A function that remembers and can use variables from outside its own scope.
@@ -1054,6 +1125,7 @@ Summary
 Javascript Date() object and its methods
 ### 1. `getDay()`
 - **Description:** Returns the day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday).
+
 ```javascript
 const now = new Date();
 const dayOfWeek = now.getDay();
@@ -1081,6 +1153,8 @@ console.log("Saturday");
 break;
 }
 ```
+
+
 ### 2. `getDate()`
 - **Description:** Returns the day of the month (1-31).
 ```javascript
@@ -1088,6 +1162,8 @@ const now = new Date();
 const dayOfMonth = now.getDate();
 console.log(`Day of the month: ${dayOfMonth}`);
 ```
+
+
 ### 3. `getHours()`
 - **Description:** Returns the hour (0-23).
 ```javascript
@@ -1095,6 +1171,7 @@ const now = new Date();
 const hour = now.getHours();
 console.log(`Current hour: ${hour}`);
 ```
+
 ### 4. `getMinutes()`
 - **Description:** Returns the minutes (0-59).
 ```javascript
@@ -1102,6 +1179,8 @@ const now = new Date();
 const minutes = now.getMinutes();
 console.log(`Current minutes: ${minutes}`);
 ```
+
+
 ### 5. `getSeconds()`
 - **Description:** Returns the seconds (0-59).
 ```javascript
@@ -1109,13 +1188,18 @@ const now = new Date();
 const seconds = now.getSeconds();
 console.log(`Current seconds: ${seconds}`);
 ```
+
+
 ### 6. `getMilliseconds()`
+
 - **Description:** Returns the milliseconds (0-999).
 ```javascript
 const now = new Date();
 const milliseconds = now.getMilliseconds();
 console.log(`Current milliseconds: ${milliseconds}`);
 ```
+
+
 ### 7. `getMonth()`
 - **Description:** Returns the month (0 for January, 1 for February, ..., 11 for December).
 ```javascript
@@ -1160,6 +1244,9 @@ console.log("December");
 break;
 }
 ```
+
+
+
 ### 8. `getFullYear()`
 - **Description:** Returns the full year (e.g., 2024).
 ```javascript
@@ -1167,6 +1254,8 @@ const now = new Date();
 const year = now.getFullYear();
 console.log(`Current year: ${year}`);
 ```
+
+
 Math methods:
 ### 1. `Math.cbrt()`
 - **Description:** Returns the cube root of a number.
@@ -1175,6 +1264,8 @@ const number = 27;
 const cubeRoot = Math.cbrt(number);
 console.log(`Cube root of ${number} is ${cubeRoot}`);
 ```
+
+
 ### 2. `Math.floor()`
 - **Description:** Returns the largest integer less than or equal to a given number.
 ```javascript
@@ -1182,6 +1273,9 @@ const number = 5.8;
 const flooredNumber = Math.floor(number);
 console.log(`Floor of ${number} is ${flooredNumber}`);
 ```
+
+
+
 ### 3. `Math.min()`
 - **Description:** Returns the smallest of zero or more numbers.
 ```javascript
@@ -1190,6 +1284,9 @@ const num2 = 5;
 const minNumber = Math.min(num1, num2);
 console.log(`Minimum of ${num1} and ${num2} is ${minNumber}`);
 ```
+
+
+
 ### 4. `Math.max()`
 - **Description:** Returns the largest of zero or more numbers.
 ```javascript
@@ -1198,6 +1295,9 @@ const num2 = 5;
 const maxNumber = Math.max(num1, num2);
 console.log(`Maximum of ${num1} and ${num2} is ${maxNumber}`);
 ```
+
+
+
 ### 5. `Math.pow()`
 - **Description:** Returns the base to the exponent power, that is, base^exponent.
 ```javascript
@@ -1206,12 +1306,18 @@ const exponent = 3;
 const result = Math.pow(base, exponent);
 console.log(`${base} raised to the power of ${exponent} is ${result}`);
 ```
+
+
+
 ### 6. `Math.random()`
 - **Description:** Returns a pseudo-random number between 0 (inclusive) and 1 (exclusive).
 ```javascript
 const randomNumber = Math.random();
 console.log(`Random number between 0 and 1: ${randomNumber}`);
 ```
+
+
+
 ### 7. `Math.sqrt()`
 - **Description:** Returns the square root of a number.
 ```javascript
@@ -1219,7 +1325,9 @@ const number = 16;
 const squareRoot = Math.sqrt(number);
 console.log(`Square root of ${number} is ${squareRoot}`);
 ```
-#Practice Questions
+
+
+### Practice Questions
 1. Write a program to find square and cube of a given number.
 2. Write a program to check if a given year is a leap year or not.
 3. Write a program to calculate the sum of the first 100 natural numbers.
@@ -1248,12 +1356,19 @@ five, print 'FizzBuzz.'
 23. Print numbers up to 500 that are divided by 7 and end with 7.
 24. Write a program to print the factors of a number and also print the number of factors of that
 number.
-#Lexical Scope/Scope Chain
+
+
+
+
+# Lexical Scope/Scope Chain
 1. The ability of js engine to search for a variable in the outer scope when variable is not available in local
 scope is known as
 lexical scope or scope chain.
 2. It is ability of child to access variable from outside if its not present in local scope
 3. Lexical scope : A function and global object.
+
+
+```
 let a = 10;
 function test() {
 a++;
@@ -1261,9 +1376,13 @@ console.log( a );
 }
 test();
 Output : 11
+```
 When test function is executed js engine looks for ' a ' in local scope. Since it will not available it will look
 for a in outer scope that is global window object .
 4. Lexical scope : The child function and parent function with a help of closure.
+
+
+```
 function outer() {
 let a = 10;
 function inner() {
@@ -1274,11 +1393,17 @@ return inner;
 let res = outer();
 res();
 Output : 10
+
+```
+
+
 When the function inner is executed and console.log a is encountered, js engine looks for a in the local
 scope of function inner.
 Since, a is not present and function inner is child of function outer js engine will search for a in the
 parent function outer scope with the help of closure.
-#Closure
+
+
+# Closure
 1. A closure is created when a function is defined within another function and inner function need to
 access variables in the outer function's scope.
 2. Closure helps to achieve lexical scope from child function to parent function.
@@ -1287,7 +1412,7 @@ completed.
 4. A child function will have reference to the closure.
 5. Every time a parent function is called the new closure is created.
 6. Disadvantage : High memory consumption.
-#Interview Questions
+# Interview Questions
 1. What is JavaScript? (Write 6 points)
 2. What is JRE? Name two JRE?
 3. Write the names of JavaScript engines for Chrome, Firefox, Edge, and Safari.
@@ -1300,7 +1425,10 @@ completed.
 10. What is a higher-order function and a callback function?
 11. What is explicit and implicit return in arrow functions? Provide an example.
 12. What is closure? When is a closure created? Explain with an example.
-#Array
+
+
+
+# Array
 1. Array is object in javascript.
 2. It is non-primitive type of literal.
 3. It is a block of memory which is used to store multiple type of value (any type of literal) in same
@@ -1315,38 +1443,59 @@ last index will be 4).
 array_object_ref[index] ).
 8. If we try to access the index that it greater than the array length we will get undefined.
 9. Array elements should be separated by comma(,)
-#Ways To Create Array
+
+
+# Ways To Create Array
 1.
-By using square brackets [] and literals.
+- By using square brackets [] and literals.
+```
 let arr = [];
-// empty array
+
+```
+- empty array
+```
 let arr = [10,20,30];
-// array with literals
+```
+array with literals
 2.
-By using new keyword and Array() constructor.
+- By using new keyword and Array() constructor.
+
+```
 let arr = new Array();
-//empty array
+```
+- empty array
+```
 let arr = new Array(10,20,30)
-//array with literals -> [10,20,30]
+```
+- array with literals -> [10,20,30]
+
 NOTE : Here , 'arr' is a variable which holds the reference of array object. To access array element at
+```
 index -> 1Syntax : array_object_ref[index]Example : console.log(arr[1]); // 20
-#Array Methods
+```
+
+
+# Array Methods
 1. push(value) method
 1. It is used to insert element at last of array.
 2. It returns the length of array.
 3.
 Example:
+```
 let arr=[10,20,30,40,50];
 arr.push(100);
 output: [10,20,30,40,50,100]
+```
 2. pop() method
 1. It is used to delete element from last index of array.
 2. It returns deleted element.
 3.
 Example:
+```
 let arr=[10,20,30,40,50];
 arr.pop();
 output: [10,20,30,40]
+```
 3. unshift(value)
 1. It is used to insert element at first index of array.
 2. It returns array length
@@ -1763,7 +1912,7 @@ console.log(result);
 4. JSON keys must be strings enclosed in double quotes.
 5. It supports six data types: object, array, string, number, boolean, and null.
 6. It supports nested structures, allowing objects and arrays to be nested within each other.
-#JSON Methods
+# JSON Methods
 1. JSON.stringify(value)
 - JSON.stringify() is a method that converts a JavaScript object or value into a JSON string.
 - Returns JSON.
@@ -2246,7 +2395,7 @@ Example: Insert the section tag inside div tag having class 'container'.
 let sec = document.createElement("section");
 let pdiv = document.getElementsByClassName("container")[0];
 pdiv.appendChild(sec);
-.
+
 3. insertAdjacentElement('posiiton',element)
 1. It is used to insert an element as a child or sibling.
 2. Positions : beforebegin ,afterbegin , beforeend , afterend.
