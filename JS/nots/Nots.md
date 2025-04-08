@@ -247,6 +247,241 @@ JavaScript has **two main categories** of data types:
 
 
 
+# Keywords
+1. These are reserved words that have a special meaning in the language.
+2. Examples like if, else, for, while, function, and return,etc.
+# Identifiers
+1. These are user given names to variables, functions, and other objects in the code.
+2. Identifier name can not start with number.
+3. Identifier name should not be a keyword
+4. If Identifier is of multiple word, instead of using space, we have to use underscore.
+5. identifier name should not have special character but can start with underscore(_) and dollar($).
+
+
+
+# Literals
+1. These are values used in our program like number(2),string('hello world') , etc.
+
+
+
+# Types Of Literals / Datatypes
+1. Primitive
+2. Non-Primitive
+
+
+# Primitive Literals
+1. In JavaScript, a primitive data type is a data type that represents a single value.
+2. JavaScript treats primitive values as immutable values, means that their value cannot be changed. Instead, when you perform an operation that appears to modify a primitive value, you are actually creating a new object with new value and assigning it to a variable. Here , variable will hold the reference of latest object with new value and the previous object with it's value will garbage collected.
+3. We have 8 primitive types of literals -number , bigint , boolean , nan , undefined , null , symbol , string..
+
+
+
+# Primitive Datatypes
+1. Number
+1. This data type represents a numeric value. It can store both integers and floating-point values.
+2. It's range is from -253-1 to 2 53-1 .
+2. BigInt
+1. It is used to represent integers that are larger than the Number data type
+2. It's range is more than -253-1 and more than 253-1 .
+3. To represent the given integer as bigint , we have to suffix 'n' after the integer. Example : 10 is number type and 10n is bigint type.
+3. Boolean
+1. This datatype represents a logical entity and can only have two values: true or false.
+4. Null
+1. This datatype represents a null or empty value.
+2. It is used to mark the memory block empty intentionally.
+5. Undefined
+1. This datatype represents an uninitialized value.
+2. When memory block is unintialized , js engine implicitly initialize that memory block with 'undefined' in variable phase.
+3. For variable declared with 'var' it will initialize it in variable phase
+4. For variable declared with 'let' and 'const' it will not initialize it in variable phase.
+6. NaN
+1. It stands for 'not a number'.
+2. It represents computational error.
+3. When js engine is not able compute result it returns 'NaN'.
+4. Example : "Hello" + 1 = Hello1 and "Hello" - 1 = NaN In first case , js engine concatnated the string with number. In second case , js engine is able to compute anything because we can not subtract 1 from "Hello" string therefore it returns NaN.
+7. Symbol
+1. It represents a unique identifier.
+2. We have Symbol function which is used to generate unique idenitifiers in our program.
+8. String
+1. It represents collection of characters.
+2. We have two types of strings :- single line and multi line string.
+3. Single line string : - It is enclosed by single quotes (' ') and double quotes (" ") . - It doesnot allow line breaks and whitespaces.
+4. Multi line string : - It is enclosed by backticks (` `). - It allow line breaks and whitespaces. - It is also called as template string. - Template strings allow us to insert variables and expressions directly in the string using ` ${ variable_name } ` notation.
+
+
+# Non-Primitive Literals
+1. In JavaScript, a non primitive data type is a data type that represents multi value.
+2. JavaScript treats non-primitive values as mutable values, means that their value can be changed. When we try to update a value , new object is not created . Here value is changed in the same memory block.
+3. Non-primitive datatype : object ,array , etc
+
+
+
+# Scope
+1. Scope defines the visibility or accessibility of a variable.1. The variable declared in global scope can be accessed anywhere in the program.
+2. Global scope has the highest accessibility.
+3. Variable declared with var goes in Global scope.
+
+
+# We Have Two Scopes
+1. Global Scope
+2. Local Scope
+
+# Local Scope
+1. Local/block scope/function scope
+2. The variable declared in local scope can be accessed in that block only i.e. we can not access the variable from outside.
+3. JS engine creates local scope for functions and blocks.
+4.
+Function's Local Scope
+- Local scope created for function is refered as function scope. - Variable's declared in function's scope can not be accessed from outside.
+
+Block's Local Scope
+- Local scope created for block is refered as block scope. - Variable's declared in block scope can not be accessed from outside. - But only variables declared with var are accessible from outside of block. Note: Variables declared with let and const are also locally scoped. Firefox represent it as - Block scope. Chrome represent it as - Script scope.
+
+
+# Global Execution Context
+1. When we give JS code to the browser, JS Engine will allocate (create) a global memory block for the execution of JavaScript code, called Global Execution Context.
+2. Here, we have a window variable which have reference of Global Execution Context.
+
+
+# Window Variable
+1. Window variable or window object -> everything is object in js.
+2. Window is a global variable which store the reference of Global Execution Context
+3. Window object is also known as Global Object because it is available anywhere in the program.
+4. Window object have pre-defined state and behaviour.
+5. Variable declared with var always goes to global scope and can be accessible by window object.
+6. Any variable created in global scope will be addes in Window object implicitly by JS Engine.
+
+
+# JavaScript Code Run In Two Phases
+1. Variable phase
+2. Execution phase
+
+
+# Variable Phase
+1. In variable phase, JS Engine will check the complete JS Code and it will search for variable declaration statement.
+2. If variable is declared then JS Engine allocate (provide) memory for them.
+3. Variable declared with var will be initialized storing "undefined" at the time of memory block creation. Variable declared with let and const will remain uninitialized (empty) at the time of memory block creation.
+#Execution Phase
+1. In Execution phase, JS Engine will execute the instruction line-by-line.
+
+
+# Var
+1. Variable declared with var goes to global scope.
+2. We can redeclare variable with same name in same scope.
+3. We can update the value of variable.
+4. We can declare variable without initialization.
+5. Variable declared with var , can be hoisted.
+6. Variable declared inside block , will go to global scope.
+7. Variable declared inside function , will not go to global scope. It will be accessible inside function only.
+
+
+# Let
+1. Variable declared with let is block scoped.
+2. We cannot redeclare variable with same name in same scope.
+3. We can update the value of variable.
+4. We can declare variable using let without initialization. But js engine will keep that memory block uninitialized (empty) untill js engine reads declaration statement in execution phase.
+5. Because let variable is uninitialized (empty) in variable phase , it belongs to Temporal Dead Zone.
+6. The variable declared using let does not belongs to global scope , we cannot access them with the help of window variable.
+7. The variable declared using let is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
+8. Variable declared inside function will be accessible inside function only.
+
+
+# Const
+1. Variable declared with const is block scope.
+2. We cannot redeclare variable with same name in same scope.
+3. The value of variable can not be modified.
+4. We can not declare const without initialization.
+5. The variable declared using const is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
+6. The variable declared using const inside block ,does not belongs to global scope we cannot use them with the help of window.
+7. Variable declared inside function will be accessible inside function only.
+# Practice Questions
+1.
+```javascript
+console.log("start");
+let a = 10;
+var b = 20;
+const c = 30;
+
+{
+let a = 100;
+var b = 200;
+const c = 300;
+console.log(a);
+console.log(b);
+console.log(c);
+}
+
+console.log(a);
+console.log(b);
+console.log(c);
+console.log("end");
+
+```
+
+2.
+
+```javascript
+console.log("start");
+let a = 10;
+console.log(b);
+{
+var b = 200;
+}
+console.log(a);
+console.log(b);
+console.log("end");
+
+```
+3.
+
+```
+console.log("start");
+let a = 10;
+{
+console.log(a);
+let a = 10;
+}
+console.log(a);
+console.log(b);
+console.log("end");
+```
+4.
+
+```
+console.log("start");
+var b = 20;
+const c = 30;
+{
+let a = 100;
+console.log(a);
+console.log(b);
+console.log(c);
+}
+console.log(a);
+console.log(b);
+console.log("end");
+```
+5.
+```
+console.log("start");
+let a = 10;
+var b = 20;
+const c = 30;
+{
+let a = 10;
+console.log(a);
+const c = 300;
+console.log(b);
+b = 200;
+c = 30;
+console.log(b);
+}
+console.log(a);
+console.log(b);
+console.log("end");
+```
+
+
 
 ## Operators
 In JavaScript, operators are used to perform operations on variables and values. Here are the main types of operators in JavaScript, along with examples and brief descriptions:
@@ -484,37 +719,112 @@ output : Good Morning
 
 
 # Types Of Functions
-1. Function decalaration statement : Using function keyword
 
-## Named Function or Regular Function
+## 1. Function Declaration Statement
+Using function keyword to declare a function:
+
 ```javascript
-function demo(){
-    // Function body
+// Function declaration
+function greet(name) {
+  return `Hello ${name}!`;
 }
+
+// Function call
+console.log(greet("John")); // Output: Hello John!
 ```
 
-## Arrow Function
-```javascript
-let a = () => {
-    // Function body
+## 2. Function Expression
+Assigning a function to a variable:
+
+```javascript 
+// Function expression
+const add = function(a, b) {
+  return a + b;
 };
+
+// Function call
+console.log(add(5, 3)); // Output: 8
 ```
 
-## Anonymous Function
+## 3. Immediate Invoke Function (IIFE)
+Function that executes as soon as it's defined:
+
+```javascript
+// IIFE
+(function() {
+  console.log("I run immediately!");
+})();
+
+// IIFE with parameters
+(function(name) {
+  console.log(`Hello ${name}!`);
+})("John");
+```
+
+
 ```javascript
 (function(){
     console.log("Hello from Anonymous Function");
 })();
 ```
-## Another Way
+
 
 ```javascript
 ((a, b) => {
     console.log(a + b);
 })(1, 2);
 ```
+## 4. Arrow Function
+Shorter syntax for writing functions:
 
-## Higher-Order Function and Callback Function
+```javascript
+// Single parameter with implicit return
+const square = x => x * x;
+console.log(square(5)); // Output: 25
+
+// Multiple parameters with block
+const multiply = (a, b) => {
+  return a * b;
+};
+console.log(multiply(2, 3)); // Output: 6
+
+// No parameters
+const sayHello = () => "Hello!";
+console.log(sayHello()); // Output: Hello!
+```
+
+
+```javascript
+let a = () => {
+    // Function body
+};
+```
+
+## 5. Higher Order Function
+Function that takes another function as parameter or returns a function:
+
+```javascript
+// Higher order function example
+function operate(a, b, operation) {
+  return operation(a, b);
+}
+
+// Usage
+const sum = (x, y) => x + y;
+console.log(operate(5, 3, sum)); // Output: 8
+
+// Returns a function
+function multiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+}
+
+const double = multiplier(2);
+console.log(double(5)); // Output: 10
+```
+
+
 ```javascript
 // Higher-Order Function
 let hiof = (cbf) => {
@@ -522,7 +832,25 @@ let hiof = (cbf) => {
 };
 ```
 
-## Callback Function
+## 6. Callback Function 
+Function passed as argument to another function:
+
+```javascript
+// Function with callback
+function processUser(callback) {
+  const user = {name: "John", age: 30};
+  callback(user);
+}
+
+// Callback function
+function displayUser(user) {
+  console.log(`Name: ${user.name}, Age: ${user.age}`);
+}
+
+// Usage
+processUser(displayUser); // Output: Name: John, Age: 30
+```
+
 
 ```java
 let a = () => {
@@ -532,28 +860,6 @@ let a = () => {
 hiof(a);
 
 ```
-
-
-2. Function as expression / expression function
-3. Immediate Invoke Function (IIF)
-1. when a function is called as soon as it's object is created is known as Immediate Invoke Function.
-2. We have to write the function inside the paranthesis to group it. [using Group operator -> (function code) ].
-3. The function is not visible(available) outside the scope.
-4. After grouping it, we have to use paranthesis to call this function.
-5. Immediate Invoke Function execute only once.
-4. Arrow Function
-1. The main function of arrow function is to reduce the function syntax.
-2. Arrow Function is introduced in ES6.
-3. If we have only single parameter, it is not necessary to use paranthesis for paramenter.
-4. If function have single statement, then block (curly braces) is optional.
-5. It does not have its own 'this' property.
-6. Implicit return :- If there is only one statement and If block is not created then JS Engine will return that statement automatically.
-7. Explicit return :- If block is created and function is not returning any value, JS Engine will return undefined. To return a value Explicitly from block, we have to use return keyword.If block is created then we have to use return keyword to return value otherwise JS Engine will return undefined.
-5. Higher Order Function
-1. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
-6. Callback Function
-1. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
-
 
 # Nested Function
 1. The function inside another function is called as nested function.
@@ -842,239 +1148,7 @@ console.log(str.endsWith("p"));   // false
 
 
 
-# Keywords
-1. These are reserved words that have a special meaning in the language.
-2. Examples like if, else, for, while, function, and return,etc.
-# Identifiers
-1. These are user given names to variables, functions, and other objects in the code.
-2. Identifier name can not start with number.
-3. Identifier name should not be a keyword
-4. If Identifier is of multiple word, instead of using space, we have to use underscore.
-5. identifier name should not have special character but can start with underscore(_) and dollar($).
 
-
-
-# Literals
-1. These are values used in our program like number(2),string('hello world') , etc.
-
-
-
-# Types Of Literals / Datatypes
-1. Primitive
-2. Non-Primitive
-
-
-# Primitive Literals
-1. In JavaScript, a primitive data type is a data type that represents a single value.
-2. JavaScript treats primitive values as immutable values, means that their value cannot be changed. Instead, when you perform an operation that appears to modify a primitive value, you are actually creating a new object with new value and assigning it to a variable. Here , variable will hold the reference of latest object with new value and the previous object with it's value will garbage collected.
-3. We have 8 primitive types of literals -number , bigint , boolean , nan , undefined , null , symbol , string..
-
-
-
-# Primitive Datatypes
-1. Number
-1. This data type represents a numeric value. It can store both integers and floating-point values.
-2. It's range is from -253-1 to 2 53-1 .
-2. BigInt
-1. It is used to represent integers that are larger than the Number data type
-2. It's range is more than -253-1 and more than 253-1 .
-3. To represent the given integer as bigint , we have to suffix 'n' after the integer. Example : 10 is number type and 10n is bigint type.
-3. Boolean
-1. This datatype represents a logical entity and can only have two values: true or false.
-4. Null
-1. This datatype represents a null or empty value.
-2. It is used to mark the memory block empty intentionally.
-5. Undefined
-1. This datatype represents an uninitialized value.
-2. When memory block is unintialized , js engine implicitly initialize that memory block with 'undefined' in variable phase.
-3. For variable declared with 'var' it will initialize it in variable phase
-4. For variable declared with 'let' and 'const' it will not initialize it in variable phase.
-6. NaN
-1. It stands for 'not a number'.
-2. It represents computational error.
-3. When js engine is not able compute result it returns 'NaN'.
-4. Example : "Hello" + 1 = Hello1 and "Hello" - 1 = NaN In first case , js engine concatnated the string with number. In second case , js engine is able to compute anything because we can not subtract 1 from "Hello" string therefore it returns NaN.
-7. Symbol
-1. It represents a unique identifier.
-2. We have Symbol function which is used to generate unique idenitifiers in our program.
-8. String
-1. It represents collection of characters.
-2. We have two types of strings :- single line and multi line string.
-3. Single line string : - It is enclosed by single quotes (' ') and double quotes (" ") . - It doesnot allow line breaks and whitespaces.
-4. Multi line string : - It is enclosed by backticks (` `). - It allow line breaks and whitespaces. - It is also called as template string. - Template strings allow us to insert variables and expressions directly in the string using ` ${ variable_name } ` notation.
-
-
-# Non-Primitive Literals
-1. In JavaScript, a non primitive data type is a data type that represents multi value.
-2. JavaScript treats non-primitive values as mutable values, means that their value can be changed. When we try to update a value , new object is not created . Here value is changed in the same memory block.
-3. Non-primitive datatype : object ,array , etc
-
-
-
-# Scope
-1. Scope defines the visibility or accessibility of a variable.1. The variable declared in global scope can be accessed anywhere in the program.
-2. Global scope has the highest accessibility.
-3. Variable declared with var goes in Global scope.
-
-
-# We Have Two Scopes
-1. Global Scope
-2. Local Scope
-
-# Local Scope
-1. Local/block scope/function scope
-2. The variable declared in local scope can be accessed in that block only i.e. we can not access the variable from outside.
-3. JS engine creates local scope for functions and blocks.
-4.
-Function's Local Scope
-- Local scope created for function is refered as function scope. - Variable's declared in function's scope can not be accessed from outside.
-
-Block's Local Scope
-- Local scope created for block is refered as block scope. - Variable's declared in block scope can not be accessed from outside. - But only variables declared with var are accessible from outside of block. Note: Variables declared with let and const are also locally scoped. Firefox represent it as - Block scope. Chrome represent it as - Script scope.
-
-
-# Global Execution Context
-1. When we give JS code to the browser, JS Engine will allocate (create) a global memory block for the execution of JavaScript code, called Global Execution Context.
-2. Here, we have a window variable which have reference of Global Execution Context.
-
-
-# Window Variable
-1. Window variable or window object -> everything is object in js.
-2. Window is a global variable which store the reference of Global Execution Context
-3. Window object is also known as Global Object because it is available anywhere in the program.
-4. Window object have pre-defined state and behaviour.
-5. Variable declared with var always goes to global scope and can be accessible by window object.
-6. Any variable created in global scope will be addes in Window object implicitly by JS Engine.
-
-
-# JavaScript Code Run In Two Phases
-1. Variable phase
-2. Execution phase
-
-
-# Variable Phase
-1. In variable phase, JS Engine will check the complete JS Code and it will search for variable declaration statement.
-2. If variable is declared then JS Engine allocate (provide) memory for them.
-3. Variable declared with var will be initialized storing "undefined" at the time of memory block creation. Variable declared with let and const will remain uninitialized (empty) at the time of memory block creation.
-#Execution Phase
-1. In Execution phase, JS Engine will execute the instruction line-by-line.
-
-
-# Var
-1. Variable declared with var goes to global scope.
-2. We can redeclare variable with same name in same scope.
-3. We can update the value of variable.
-4. We can declare variable without initialization.
-5. Variable declared with var , can be hoisted.
-6. Variable declared inside block , will go to global scope.
-7. Variable declared inside function , will not go to global scope. It will be accessible inside function only.
-
-
-# Let
-1. Variable declared with let is block scoped.
-2. We cannot redeclare variable with same name in same scope.
-3. We can update the value of variable.
-4. We can declare variable using let without initialization. But js engine will keep that memory block uninitialized (empty) untill js engine reads declaration statement in execution phase.
-5. Because let variable is uninitialized (empty) in variable phase , it belongs to Temporal Dead Zone.
-6. The variable declared using let does not belongs to global scope , we cannot access them with the help of window variable.
-7. The variable declared using let is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
-8. Variable declared inside function will be accessible inside function only.
-
-
-# Const
-1. Variable declared with const is block scope.
-2. We cannot redeclare variable with same name in same scope.
-3. The value of variable can not be modified.
-4. We can not declare const without initialization.
-5. The variable declared using const is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
-6. The variable declared using const inside block ,does not belongs to global scope we cannot use them with the help of window.
-7. Variable declared inside function will be accessible inside function only.
-# Practice Questions
-1.
-```javascript
-console.log("start");
-let a = 10;
-var b = 20;
-const c = 30;
-
-{
-let a = 100;
-var b = 200;
-const c = 300;
-console.log(a);
-console.log(b);
-console.log(c);
-}
-
-console.log(a);
-console.log(b);
-console.log(c);
-console.log("end");
-
-```
-
-2.
-
-```javascript
-console.log("start");
-let a = 10;
-console.log(b);
-{
-var b = 200;
-}
-console.log(a);
-console.log(b);
-console.log("end");
-
-```
-3.
-
-```
-console.log("start");
-let a = 10;
-{
-console.log(a);
-let a = 10;
-}
-console.log(a);
-console.log(b);
-console.log("end");
-```
-4.
-
-```
-console.log("start");
-var b = 20;
-const c = 30;
-{
-let a = 100;
-console.log(a);
-console.log(b);
-console.log(c);
-}
-console.log(a);
-console.log(b);
-console.log("end");
-```
-5.
-```
-console.log("start");
-let a = 10;
-var b = 20;
-const c = 30;
-{
-let a = 10;
-console.log(a);
-const c = 300;
-console.log(b);
-b = 200;
-c = 30;
-console.log(b);
-}
-console.log(a);
-console.log(b);
-console.log("end");
-```
 
 ### JavaScript Closures Explained Simply
 Closure
@@ -1123,6 +1197,7 @@ Summary
 - How : Defined inside another function, accessing the outer function's variables.
 - Use : Useful for maintaining state or creating private variables and functions.
 Javascript Date() object and its methods
+
 ### 1. `getDay()`
 - **Description:** Returns the day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday).
 
