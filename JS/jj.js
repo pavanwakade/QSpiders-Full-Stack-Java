@@ -3,10 +3,9 @@
 function magicMirror(word, callback) {
     console.log(callback(word));
 }
-magicMirror( "hello", (w) => w.split('').reverse().join('') );
 
+let word = "    hello   ";
+// console.log(word);
+// console.log(word.trim()); // "hello"
 
-
-// regulr functionget voicestate
-
-
+magicMirror( word, (w) => w.split('').reverse().join('').trim() ); // "olleh"
