@@ -1,8 +1,32 @@
 
-## 🔗 JavaScript Contents
+# JavaScript Contents
+1. [History of JavaScript](#history-of-javascript-3-2-25)
+2. Introduction
+3. [JavaScript Features](#javascript-features)
+3. [Javascript Runtime Environment](#javascript-runtime-environment)
+4. [Token](#token)
+5. Scope
+6. Global Execution Context
+7. Var Let Const
+8. Function
+9. Practice Questions
+10. Lexical Scope
+11. Closure
+12. Interview Questions
+13. Array
+14. Object
+15. Json
+16. Call Apply Bind
+17. Constructor Function
+18. This Keyword
+19. Destructuring
+20. Rest And Spread
+21. Prototype
+22. Dom
+23. Event
+24. Exception Handling
 
-- [History of JavaScript](#history-of-javascript-3-2-25)
-- [JavaScript Features](#javascript-features)
+
 - [Additional Concepts](#additional-concepts)
 - [AST (Abstract Syntax Tree)](#what-is-ast-abstract-syntax-tree)
 - [Script Tag](#script-tag)
@@ -23,17 +47,66 @@
   - Initially called **Mocha**, then renamed **LiveScript**, and finally **JavaScript** in the same year.
 - **1997**: JavaScript was handed over to **ECMA (European Computer Manufacturers Association)** for standardization.
   - ECMA released the first official specification, **ECMAScript (ES1)**, in 1997.
-  - ECMA is a **non-profit organization** responsible for maintaining and evolving the **ECMAScript standard**.
+  - ECMA is a **non-profit organization** responsible for maintaining and evolving the **ECMAScript standard**.1. JavaScript was first created by Brendan Eich in just 10 days in May 1995 while he was working at Netscape Communications Corporation.
+2. The initial release was called Mocha and later renamed to LiveScript, and finally JavaScript.
+3. Initially, JavaScript was designed to be a lightweight scripting language for adding interactivity to web pages.
+4. At the time, web pages were mostly static and lacked interactivity, and the only way to add dynamic content to a web page was to use a server-side programming language like PHP or Perl.
+5. However, this approach had limitations and was not well-suited to creating responsive, interactive user interfaces.
+6. The idea behind JavaScript was to create a scripting language that could be executed on the client-side (in the user's web browser) and could be used to add interactivity to web pages.
+7. This allowed web developers to create more engaging and interactive websites, without having to rely on server-side programming languages.
+8. Its popularity grew rapidly as it was one of the few languages that could be executed directly in web browsers, without the need for additional plugins or software.
+9. In 1996, Microsoft released JScript as a competitor to JavaScript, which was their own implementation of the language for their Internet Explorer browser.
+10. However, JScript was very similar to JavaScript, and the two languages were largely interchangeable.
+11. Over time, JavaScript has evolved and grown to become a full-fledged programming language, capable of creating complex applications on both the client and server-side.
+12. The development of JavaScript has been heavily influenced by a number of factors, including the emergence of new web technologies, changes in programming paradigms, and the rise of new development frameworks and libraries.
+13. Today, JavaScript is one of the most widely used programming languages in the world, powering many of the most popular websites and web applications.
+14. It continues to evolve and adapt to the changing needs of the web, with new features and capabilities being added on a regular basis.
+#Introduction
+1. Javascript is scripting and programming language.
+2. It is purely object based language.This means that variables, functions, and even primitive data types like numbers and strings are object,everything is object in javascript.
+3. It is dynamically typed language , it means type of value stored in memory block is checked at runtime because of this nature we can store any type of value in variable.
+4. It is object oriented programming language , it means we can create our own object. (It is not purely object oriented programming language)
+5. It is interepreted language
+6. It is synchronous language , it has single threaded architecture. Instructions get executed line by line.
+7. It is single call stack
+8. Mainly introduced to instruct the browser
+9. Js helps to provide behavior and functionality to webpage and helps to develop dynamic webpage
+10. Every browser have js engine to run js code. Therefore browser become environment to run js code.
+11. To run Js code outside browser we just need Javascript runtime environment (Node).
+12. Js is used to add functionality to website.
 
-## JavaScript Features
-
-- **High-Level**: portability,readabilitya,writyabiloty,Simplifies low-level operations for ease of use.
-- **Object-Oriented & Object-Based**: Supports **prototype-based inheritance**.
-- **Single-Threaded**: Executes one Task(operation) at a time.
-- **Synchronous (by default)**: Executes code sequentially.
-- **Interpreted & Just-in-Time (JIT) Compiled**:
-  - Initially, JavaScript was interpreted.
-  - Modern JavaScript engines use **JIT compilation** for better performance.
+---
+## Features of JavaScript
+1. **Scripting Language**:
+- **What it means**: JavaScript is used to write small programs that automate tasks in web pages.
+- **Why we call it that**: It helps make web pages interactive. For example, it can change text when you click a button or show a pop-up message.
+2. **High-Level Language**:
+- **What it means**: JavaScript is easy for humans to read and write.
+- **Why we call it that**: You don’t need to know the details of how the computer works to use JavaScript. It uses simple commands and is close to human language, making it accessible for beginners.
+3. **Interpreted Language**:
+- **What it means**: JavaScript code runs directly in the web browser without needing to be converted into another form first. It has interpretor which runs the code line by line.
+- **Why we call it that**: You can see the results of your code immediately in the browser. This makes it easy to test and fix your code quickly.
+4. **Synchronous Language**:
+- **What it means**: JavaScript runs commands one after another, in order.
+- **Why we call it that**: When you write JavaScript code, it does each task step by step, making it easier to understand what’s happening in your program.
+5. **Object-Based Language**:
+- **What it means**: JavaScript uses objects to store and organize data and functions.
+- **Why we call it that**: In javaScript most of the things are are internally objects. Objects help keep related code together. For example, you can have an object for a car that includes properties like color and methods like drive.
+6. **Object-Oriented Language**:
+- **What it means**: JavaScript supports creating complex structures using classes and objects.
+- **Why we call it that**:We can create our own objects using classes in javascript.
+7. **Loosely Typed Language**:
+- **What it means**: In JavaScript, you don’t have to specify what type of data (like a number or text) a variable holds. Also we don’t need to follow the syntax very strictly eg. No need to write semicolons.
+- **Why we call it that**: This makes writing code faster and easier because you don’t have to worry about declaring data types and don’t need to strictly follow the syntax. You can just start using variables right away.
+8. **Dynamically Typed Language**:
+- **What it means**: The type of data a variable holds can change as your program runs.
+- **Why we call it that**: You can have a variable that starts as a number and then later hold a string (text) without any extra work. This flexibility makes JavaScript powerful for writing dynamic programs.
+9. **Single-Threaded Language**:
+- **What it means**: JavaScript can only do one thing at a time.
+- **Why we call it that**: This simplicity makes it easier to write and understand JavaScript code. Even though it does one task at a time, JavaScript can handle many tasks quickly by using techniques like callbacks and promises.
+  
+  
+  performance.
 
 ## Additional Concepts
 
@@ -51,44 +124,56 @@
 - After parsing the code, it is converted into an **AST**.
 - The AST breaks the code into small parts to identify **syntactical errors and mistakes** efficiently.
 
-## Script Tag
+### Script Tag
 
 - Used to write **JavaScript** code in an HTML file.
 
-## NoScript
+### NoScript
 
 - If the JavaScript engine is disabled, the **NoScript** tag can be used to display alternative content.
 
-## Ways to Add JavaScript
+### Ways to Add JavaScript
 
 1. **Internal** - Write JavaScript code inside the **script** tag within an HTML file.
 
 2. **External** - Create a separate file with a **.js** extension and link it to the HTML file using the **script** tag.
 
-## Tokens
 
-- Tokens are the smallest unit of a programming language.(;,...)
 
-### Types of Tokens
 
-1. **Keywords** - Reserved words or pre defined words recognized by the JavaScript engine (e.g., `let`, `var`, `const`, `function`).
 
-2. **Identifiers** - Names given by the programmer to JavaScript members like variables, objects, and functions.
+## Javascript Runtime Environment
 
-3. **Literals** - Fixed values or data in JavaScript.
+1. JavaScript Runtime Enviroment provides the enviroment where we can run our JavaScript code.
+2. Two javascript runtime enviroments are : I. Browser II. Node.js
 
-   - **Primitive Literals**: Numbers, Booleans, Undefined, Null, Strings, NaN, Symbols.
-   - **Non-Primitive Literals**: Objects, Arrays, Functions.
+- Browser
+1. A browser is a software application that is used to access and view information on the World Wide Web (WWW).
+2. It allows users to interact with web pages, view multimedia content, and surf the internet.
+3. The Browser acts as a JavaScript runtime environment because it includes a JavaScript engine that interprets and executes JavaScript code
 
-4. **Operators** - Symbols that perform operations on operands (e.g., `+`, `-`, `*`, `/`).
+- JavaScript Engine
+1. A JavaScript engine is a computer program that executes JavaScript code.
+2. It is a core component of web browsers, server-side JavaScript platforms, and other JavaScript-based environments.
 
-5. **Separators** - Symbols used to separate code elements (e.g., `{}`, `()`, `,`, `;`).
+## Some Popular JavaScript Engines Include:
+1. V8 (fastest Js engine): developed by Google, used in Google Chrome and Node.js
+2. SpiderMonkey : developed by Mozilla, used in Firefox
+3. JavaScriptCore : developed by Apple, used in Safari
+4. Chakra : developed by Microsoft, used in Microsoft Edge and Internet Explorer (legacy)
 
-6. **Comments** - Used to add explanations or disable code execution (e.g., `// single-line`, `/* multi-line */`).
+- Node.Js
+1. The main reason of javascript popularity.
+2. Node.js is a software application that executes JavaScript code. It is not a framework or a library.
+3. It allows developers to run JavaScript code outside of a web browser, such as on a server or command-line interface.
+4. Node.js uses the V8 JavaScript engine, which is also used in Google Chrome.
+5. It is built on top of an event-driven, non-blocking I/O model, which allows it to handle large numbers of simultaneous connections without blocking the execution of other code.
+6. This makes it well-suited for building scalable, high-performance applications that can handle a large amount of traffic.
+7. Because after introduction of Nodejs, we were able to run javascript anywhere like in web servers, as command-line tools, desktop applications, and even IoT (Internet of Things) devices.
 
-7. **Punctuators** - Symbols that define structure (e.g., `[]`, `{}`, `()`).
 
-**4-2-25**
+
+
 
 ## variavles
 
@@ -125,6 +210,192 @@ JavaScript has **two main categories** of data types:
 10. **Function** – Block of reusable code
 11. **Date** – Represents date & time
 12. **RegExp** – Regular expressions for pattern matching
+
+
+
+
+
+## Token
+1. It is the smallest unit of programming language.
+2. We have 5 types of operators,punctuators,keywords ,identifiers , literals.
+
+
+
+
+
+### Types of Tokens
+
+1. **Keywords** - Reserved words or pre defined words recognized by the JavaScript engine (e.g., `let`, `var`, `const`, `function`).
+
+2. **Identifiers** - Names given by the programmer to JavaScript members like variables, objects, and functions.
+
+3. **Literals** - Fixed values or data in JavaScript.
+
+   - **Primitive Literals**: Numbers, Booleans, Undefined, Null, Strings, NaN, Symbols.
+   - **Non-Primitive Literals**: Objects, Arrays, Functions.
+
+4. **Operators** - Symbols that perform operations on operands (e.g., `+`, `-`, `*`, `/`).
+
+5. **Separators** - Symbols used to separate code elements (e.g., `{}`, `()`, `,`, `;`).
+
+6. **Comments** - Used to add explanations or disable code execution (e.g., `// single-line`, `/* multi-line */`).
+
+7. **Punctuators** - Symbols that define structure (e.g., `[]`, `{}`, `()`).
+
+
+
+
+
+
+## Operators
+In JavaScript, operators are used to perform operations on variables and values. Here are the main types of operators in JavaScript, along with examples and brief descriptions:
+
+### 1. *Arithmetic Operators*
+Arithmetic operators are used to perform arithmetic calculations.
+-  (Addition + ): Adds two values.
+javascript
+let sum = 5 + 3; // sum is 8
+- (Subtraction - ): Subtracts the second value from the first.
+javascript
+let difference = 10 - 4; // difference is 6
+- (Multiplication * ): Multiplies two values.
+javascript
+let product = 6 * 7; // product is 42
+- (Division /): Divides the first value by the second.
+javascript
+let quotient = 20 / 5; // quotient is 4
+- (Modulus %): Returns the remainder of a division.
+javascript
+let remainder = 10 % 3; // remainder is 1
+- (Exponentiation ** ): Raises the first value to the power of the second.
+javascript
+let power = 2 ** 3; // power is 8
+
+
+
+
+### 2. *Assignment Operators*
+Assignment operators are used to assign values to variables.
+- =: Assigns a value to a variable.
+javascript
+let x = 10;
+- +=: Adds and assigns the result.
+javascript
+x += 5; // x is now 15
+- -=: Subtracts and assigns the result.
+javascript
+x -= 3; // x is now 12
+- *=: Multiplies and assigns the result.
+javascript
+x *= 2; // x is now 24
+- /=: Divides and assigns the result.
+javascript
+x /= 4; // x is now 6
+- %=: Takes modulus and assigns the result.
+javascript
+x %= 5; // x is now 1
+- **=: Raises to power and assigns the result.
+javascript
+x **= 3; // x is now 1
+
+
+### 3. *Comparison Operators*
+Comparison operators are used to compare two values.
+- == (Equal to): Checks if two values are equal.
+javascript
+5 == '5'; // true
+- === (Strict equal to): Checks if two values are equal and of the same type.
+javascript
+5 === '5'; // false
+- != (Not equal to): Checks if two values are not equal.
+javascript
+5 != '5'; // false
+- !== (Strict not equal to): Checks if two values are not equal and/or not of the same type.
+javascript
+5 !== '5'; // true
+- > (Greater than): Checks if the left value is greater than the right.
+javascript
+10 > 5; // true
+- < (Less than): Checks if the left value is less than the right.
+javascript
+10 < 5; // false
+- >= (Greater than or equal to): Checks if the left value is greater than or equal to the right.
+javascript
+10 >= 10; // true
+- <= (Less than or equal to): Checks if the left value is less than or equal to the right.
+javascript
+10 <= 5; // false
+
+
+
+### 4. *Logical Operators*
+Logical operators are used to combine multiple boolean expressions.
+- && (Logical AND): Returns true if both operands are true.
+javascript
+true && false; // false
+- || (Logical OR): Returns true if at least one operand is true.
+javascript
+true || false; // true
+- ! (Logical NOT): Inverts the boolean value.
+javascript
+!true; // false
+
+
+
+### 5. *Bitwise Operators*
+Bitwise operators are used to perform bit-level operations.
+- & (AND): Returns a 1 in each bit position for which the corresponding bits of both operands are 1.
+javascript
+5 & 1; // 1 (0101 & 0001)
+- | (OR): Returns a 1 in each bit position for which the corresponding bits of either or both operands are 1.
+javascript
+5 | 1; // 5 (0101 | 0001)
+- ^ (XOR): Returns a 1 in each bit position for which the corresponding bits of either but not both operands are 1.
+javascript
+5 ^ 1; // 4 (0101 ^ 0001)
+- ~ (NOT): Inverts the bits of its operand.
+javascript
+~5; // -6 (not 0101)
+- << (Left shift): Shifts bits to the left by the specified number of positions.
+javascript
+5 << 1; // 10 (0101 << 1)
+- >> (Sign-propagating right shift): Shifts bits to the right, preserving the sign.
+javascript
+5 >> 1; // 2 (0101 >> 1)
+- >>> (Zero-fill right shift): Shifts bits to the right, filling with zeros.
+javascript
+5 >>> 1; // 2 (0101 >>> 1)
+
+
+### 6. *String Operators*
+String operators are used to manipulate strings.
+- + (Concatenation): Joins two or more strings.
+javascript
+let greeting = 'Hello' + ' ' + 'World'; // "Hello World"
+- +=: Appends the right operand to the left operand.
+javascript
+let text = 'Hello';
+text += ' World'; // "Hello World"
+### 7. *Conditional (Ternary) Operator*
+The ternary operator is a shorthand for an if-else statement.
+- condition ? expr1 : expr2: Returns expr1 if the condition is true, otherwise returns expr2.
+javascript
+let result = (5 > 3) ? 'Greater' : 'Lesser'; // "Greater"
+### 8. *Type Operators*
+Type operators are used to determine the type of a variable or value.
+- typeof: Returns the type of a variable or expression.
+javascript
+typeof 42; // "number"
+- instanceof: Tests whether an object is an instance of a particular class or constructor.
+javascript
+let arr = [];
+arr instanceof Array; // true
+These operators are essential for performing various operations in JavaScript, from simple arithmetic to complex logical expressions.
+#Punctuators
+1. These are symbols used to group, separate, or punctuate code.
+2. Examples include parentheses (), curly braces {}, square brackets [], commas ,, semicolons ;, and the period . (used to access object properties).
+
+
 
 # Functions
 
@@ -307,273 +578,36 @@ console.log(str.endsWith("p"));   // false
 
 
 
-### JavaScript Topics ###
-1. History
-2. Introduction
-3. Javascript Runtime Environment
-4. Token
-5. Scope
-6. Global Execution Context
-7. Var Let Const
-8. Function
-9. Practice Questions
-10. Lexical Scope
-11. Closure
-12. Interview Questions
-13. Array
-14. Object
-15. Json
-16. Call Apply Bind
-17. Constructor Function
-18. This Keyword
-19. Destructuring
-20. Rest And Spread
-21. Prototype
-22. Dom
-23. Event
-24. Exception Handling
-
-###JavaScript Notes###
-##History
-
-1. JavaScript was first created by Brendan Eich in just 10 days in May 1995 while he was working at Netscape Communications Corporation.
-2. The initial release was called Mocha and later renamed to LiveScript, and finally JavaScript.
-3. Initially, JavaScript was designed to be a lightweight scripting language for adding interactivity to web pages.
-4. At the time, web pages were mostly static and lacked interactivity, and the only way to add dynamic content to a web page was to use a server-side programming language like PHP or Perl.
-5. However, this approach had limitations and was not well-suited to creating responsive, interactive user interfaces.
-6. The idea behind JavaScript was to create a scripting language that could be executed on the client-side (in the user's web browser) and could be used to add interactivity to web pages.
-7. This allowed web developers to create more engaging and interactive websites, without having to rely on server-side programming languages.
-8. Its popularity grew rapidly as it was one of the few languages that could be executed directly in web browsers, without the need for additional plugins or software.
-9. In 1996, Microsoft released JScript as a competitor to JavaScript, which was their own implementation of the language for their Internet Explorer browser.
-10. However, JScript was very similar to JavaScript, and the two languages were largely interchangeable.
-11. Over time, JavaScript has evolved and grown to become a full-fledged programming language, capable of creating complex applications on both the client and server-side.
-12. The development of JavaScript has been heavily influenced by a number of factors, including the emergence of new web technologies, changes in programming paradigms, and the rise of new development frameworks and libraries.
-13. Today, JavaScript is one of the most widely used programming languages in the world, powering many of the most popular websites and web applications.
-14. It continues to evolve and adapt to the changing needs of the web, with new features and capabilities being added on a regular basis.
-#Introduction
-1. Javascript is scripting and programming language.
-2. It is purely object based language.This means that variables, functions, and even primitive data types like numbers and strings are object,everything is object in javascript.
-3. It is dynamically typed language , it means type of value stored in memory block is checked at runtime because of this nature we can store any type of value in variable.
-4. It is object oriented programming language , it means we can create our own object. (It is not purely object oriented programming language)
-5. It is interepreted language
-6. It is synchronous language , it has single threaded architecture. Instructions get executed line by line.
-7. It is single call stack
-8. Mainly introduced to instruct the browser
-9. Js helps to provide behavior and functionality to webpage and helps to develop dynamic webpage
-10. Every browser have js engine to run js code. Therefore browser become environment to run js code.
-11. To run Js code outside browser we just need Javascript runtime environment (Node).
-12. Js is used to add functionality to website.
-
-#Javascript Runtime Environment
-
-1. JavaScript Runtime Enviroment provides the enviroment where we can run our JavaScript code.
-2. Two javascript runtime enviroments are : I. Browser II. Node.js
-
-#Browser
-1. A browser is a software application that is used to access and view information on the World Wide Web (WWW).
-2. It allows users to interact with web pages, view multimedia content, and surf the internet.
-3. The Browser acts as a JavaScript runtime environment because it includes a JavaScript engine that interprets and executes JavaScript code
-
-#JavaScript Engine
-1. A JavaScript engine is a computer program that executes JavaScript code.
-2. It is a core component of web browsers, server-side JavaScript platforms, and other JavaScript-based environments.
-
-#Some Popular JavaScript Engines Include:
-1. V8 (fastest Js engine): developed by Google, used in Google Chrome and Node.js
-2. SpiderMonkey : developed by Mozilla, used in Firefox
-3. JavaScriptCore : developed by Apple, used in Safari
-4. Chakra : developed by Microsoft, used in Microsoft Edge and Internet Explorer (legacy)
-
-#Node.Js
-1. The main reason of javascript popularity.
-2. Node.js is a software application that executes JavaScript code. It is not a framework or a library.
-3. It allows developers to run JavaScript code outside of a web browser, such as on a server or command-line interface.
-4. Node.js uses the V8 JavaScript engine, which is also used in Google Chrome.
-5. It is built on top of an event-driven, non-blocking I/O model, which allows it to handle large numbers of simultaneous connections without blocking the execution of other code.
-6. This makes it well-suited for building scalable, high-performance applications that can handle a large amount of traffic.
-7. Because after introduction of Nodejs, we were able to run javascript anywhere like in web servers, as command-line tools, desktop applications, and even IoT (Internet of Things) devices.
-Features of JavaScript
-1. **Scripting Language**:
-- **What it means**: JavaScript is used to write small programs that automate tasks in web pages.
-- **Why we call it that**: It helps make web pages interactive. For example, it can change text when you click a button or show a pop-up message.
-2. **High-Level Language**:
-- **What it means**: JavaScript is easy for humans to read and write.
-- **Why we call it that**: You don’t need to know the details of how the computer works to use JavaScript. It uses simple commands and is close to human language, making it accessible for beginners.
-3. **Interpreted Language**:
-- **What it means**: JavaScript code runs directly in the web browser without needing to be converted into another form first. It has interpretor which runs the code line by line.
-- **Why we call it that**: You can see the results of your code immediately in the browser. This makes it easy to test and fix your code quickly.
-4. **Synchronous Language**:
-- **What it means**: JavaScript runs commands one after another, in order.
-- **Why we call it that**: When you write JavaScript code, it does each task step by step, making it easier to understand what’s happening in your program.
-5. **Object-Based Language**:
-- **What it means**: JavaScript uses objects to store and organize data and functions.
-- **Why we call it that**: In javaScript most of the things are are internally objects. Objects help keep related code together. For example, you can have an object for a car that includes properties like color and methods like drive.
-6. **Object-Oriented Language**:
-- **What it means**: JavaScript supports creating complex structures using classes and objects.
-- **Why we call it that**:We can create our own objects using classes in javascript.
-7. **Loosely Typed Language**:
-- **What it means**: In JavaScript, you don’t have to specify what type of data (like a number or text) a variable holds. Also we don’t need to follow the syntax very strictly eg. No need to write semicolons.
-- **Why we call it that**: This makes writing code faster and easier because you don’t have to worry about declaring data types and don’t need to strictly follow the syntax. You can just start using variables right away.
-8. **Dynamically Typed Language**:
-- **What it means**: The type of data a variable holds can change as your program runs.
-- **Why we call it that**: You can have a variable that starts as a number and then later hold a string (text) without any extra work. This flexibility makes JavaScript powerful for writing dynamic programs.
-9. **Single-Threaded Language**:
-- **What it means**: JavaScript can only do one thing at a time.
-- **Why we call it that**: This simplicity makes it easier to write and understand JavaScript code. Even though it does one task at a time, JavaScript can handle many tasks quickly by using techniques like callbacks and promises.
-#Token
-1. It is the smallest unit of programming language.
-2. We have 5 types of operators,punctuators,keywords ,identifiers , literals.
-#Operators
-In JavaScript, operators are used to perform operations on variables and values. Here are the main types of operators in JavaScript, along with examples and brief descriptions:
-### 1. *Arithmetic Operators*
-Arithmetic operators are used to perform arithmetic calculations.
-- + (Addition): Adds two values.
-javascript
-let sum = 5 + 3; // sum is 8
-- - (Subtraction): Subtracts the second value from the first.
-javascript
-let difference = 10 - 4; // difference is 6
-- * (Multiplication): Multiplies two values.
-javascript
-let product = 6 * 7; // product is 42
-- / (Division): Divides the first value by the second.
-javascript
-let quotient = 20 / 5; // quotient is 4
-- % (Modulus): Returns the remainder of a division.
-javascript
-let remainder = 10 % 3; // remainder is 1
-- ** (Exponentiation): Raises the first value to the power of the second.
-javascript
-let power = 2 ** 3; // power is 8
-### 2. *Assignment Operators*
-Assignment operators are used to assign values to variables.
-- =: Assigns a value to a variable.
-javascript
-let x = 10;
-- +=: Adds and assigns the result.
-javascript
-x += 5; // x is now 15
-- -=: Subtracts and assigns the result.
-javascript
-x -= 3; // x is now 12
-- *=: Multiplies and assigns the result.
-javascript
-x *= 2; // x is now 24
-- /=: Divides and assigns the result.
-javascript
-x /= 4; // x is now 6
-- %=: Takes modulus and assigns the result.
-javascript
-x %= 5; // x is now 1
-- **=: Raises to power and assigns the result.
-javascript
-x **= 3; // x is now 1
-### 3. *Comparison Operators*
-Comparison operators are used to compare two values.
-- == (Equal to): Checks if two values are equal.
-javascript
-5 == '5'; // true
-- === (Strict equal to): Checks if two values are equal and of the same type.
-javascript
-5 === '5'; // false
-- != (Not equal to): Checks if two values are not equal.
-javascript
-5 != '5'; // false
-- !== (Strict not equal to): Checks if two values are not equal and/or not of the same type.
-javascript
-5 !== '5'; // true
-- > (Greater than): Checks if the left value is greater than the right.
-javascript
-10 > 5; // true
-- < (Less than): Checks if the left value is less than the right.
-javascript
-10 < 5; // false
-- >= (Greater than or equal to): Checks if the left value is greater than or equal to the right.
-javascript
-10 >= 10; // true
-- <= (Less than or equal to): Checks if the left value is less than or equal to the right.
-javascript
-10 <= 5; // false
-### 4. *Logical Operators*
-Logical operators are used to combine multiple boolean expressions.
-- && (Logical AND): Returns true if both operands are true.
-javascript
-true && false; // false
-- || (Logical OR): Returns true if at least one operand is true.
-javascript
-true || false; // true
-- ! (Logical NOT): Inverts the boolean value.
-javascript
-!true; // false
-### 5. *Bitwise Operators*
-Bitwise operators are used to perform bit-level operations.
-- & (AND): Returns a 1 in each bit position for which the corresponding bits of both operands are 1.
-javascript
-5 & 1; // 1 (0101 & 0001)
-- | (OR): Returns a 1 in each bit position for which the corresponding bits of either or both operands are 1.
-javascript
-5 | 1; // 5 (0101 | 0001)
-- ^ (XOR): Returns a 1 in each bit position for which the corresponding bits of either but not both operands are 1.
-javascript
-5 ^ 1; // 4 (0101 ^ 0001)
-- ~ (NOT): Inverts the bits of its operand.
-javascript
-~5; // -6 (not 0101)
-- << (Left shift): Shifts bits to the left by the specified number of positions.
-javascript
-5 << 1; // 10 (0101 << 1)
-- >> (Sign-propagating right shift): Shifts bits to the right, preserving the sign.
-javascript
-5 >> 1; // 2 (0101 >> 1)
-- >>> (Zero-fill right shift): Shifts bits to the right, filling with zeros.
-javascript
-5 >>> 1; // 2 (0101 >>> 1)
-### 6. *String Operators*
-String operators are used to manipulate strings.
-- + (Concatenation): Joins two or more strings.
-javascript
-let greeting = 'Hello' + ' ' + 'World'; // "Hello World"
-- +=: Appends the right operand to the left operand.
-javascript
-let text = 'Hello';
-text += ' World'; // "Hello World"
-### 7. *Conditional (Ternary) Operator*
-The ternary operator is a shorthand for an if-else statement.
-- condition ? expr1 : expr2: Returns expr1 if the condition is true, otherwise returns expr2.
-javascript
-let result = (5 > 3) ? 'Greater' : 'Lesser'; // "Greater"
-### 8. *Type Operators*
-Type operators are used to determine the type of a variable or value.
-- typeof: Returns the type of a variable or expression.
-javascript
-typeof 42; // "number"
-- instanceof: Tests whether an object is an instance of a particular class or constructor.
-javascript
-let arr = [];
-arr instanceof Array; // true
-These operators are essential for performing various operations in JavaScript, from simple arithmetic to complex logical expressions.
-#Punctuators
-1. These are symbols used to group, separate, or punctuate code.
-2. Examples include parentheses (), curly braces {}, square brackets [], commas ,, semicolons ;, and the period . (used to access object properties).
-#Keywords
+# Keywords
 1. These are reserved words that have a special meaning in the language.
 2. Examples like if, else, for, while, function, and return,etc.
-#Identifiers
+# Identifiers
 1. These are user given names to variables, functions, and other objects in the code.
 2. Identifier name can not start with number.
 3. Identifier name should not be a keyword
 4. If Identifier is of multiple word, instead of using space, we have to use underscore.
 5. identifier name should not have special character but can start with underscore(_) and dollar($).
-#Literals
+
+
+
+# Literals
 1. These are values used in our program like number(2),string('hello world') , etc.
-#Types Of Literals / Datatypes
+
+
+
+# Types Of Literals / Datatypes
 1. Primitive
 2. Non-Primitive
-#Primitive Literals
+
+
+# Primitive Literals
 1. In JavaScript, a primitive data type is a data type that represents a single value.
 2. JavaScript treats primitive values as immutable values, means that their value cannot be changed. Instead, when you perform an operation that appears to modify a primitive value, you are actually creating a new object with new value and assigning it to a variable. Here , variable will hold the reference of latest object with new value and the previous object with it's value will garbage collected.
 3. We have 8 primitive types of literals -number , bigint , boolean , nan , undefined , null , symbol , string..
-#Primitive Datatypes
+
+
+
+# Primitive Datatypes
 1. Number
 1. This data type represents a numeric value. It can store both integers and floating-point values.
 2. It's range is from -253-1 to 2 53-1 .
@@ -604,20 +638,29 @@ These operators are essential for performing various operations in JavaScript, f
 2. We have two types of strings :- single line and multi line string.
 3. Single line string : - It is enclosed by single quotes (' ') and double quotes (" ") . - It doesnot allow line breaks and whitespaces.
 4. Multi line string : - It is enclosed by backticks (` `). - It allow line breaks and whitespaces. - It is also called as template string. - Template strings allow us to insert variables and expressions directly in the string using ` ${ variable_name } ` notation.
-#Non-Primitive Literals
+
+
+# Non-Primitive Literals
 1. In JavaScript, a non primitive data type is a data type that represents multi value.
 2. JavaScript treats non-primitive values as mutable values, means that their value can be changed. When we try to update a value , new object is not created . Here value is changed in the same memory block.
 3. Non-primitive datatype : object ,array , etc
-#Scope
+
+
+
+# Scope
 1. Scope defines the visibility or accessibility of a variable.
-#We Have Two Scopes
+
+# We Have Two Scopes
 1. Global Scope
 2. Local Scope
-#Global Scope
+
+
+#  Scope
 1. The variable declared in global scope can be accessed anywhere in the program.
 2. Global scope has the highest accessibility.
 3. Variable declared with var goes in Global scope.
-#Local Scope
+
+# Local Scope
 1. Local/block scope/function scope
 2. The variable declared in local scope can be accessed in that block only i.e. we can not access the variable from outside.
 3. JS engine creates local scope for functions and blocks.
@@ -627,26 +670,36 @@ Function's Local Scope
 
 Block's Local Scope
 - Local scope created for block is refered as block scope. - Variable's declared in block scope can not be accessed from outside. - But only variables declared with var are accessible from outside of block. Note: Variables declared with let and const are also locally scoped. Firefox represent it as - Block scope. Chrome represent it as - Script scope.
-#Global Execution Context
+
+
+# Global Execution Context
 1. When we give JS code to the browser, JS Engine will allocate (create) a global memory block for the execution of JavaScript code, called Global Execution Context.
 2. Here, we have a window variable which have reference of Global Execution Context.
-#Window Variable
+
+
+# Window Variable
 1. Window variable or window object -> everything is object in js.
 2. Window is a global variable which store the reference of Global Execution Context
 3. Window object is also known as Global Object because it is available anywhere in the program.
 4. Window object have pre-defined state and behaviour.
 5. Variable declared with var always goes to global scope and can be accessible by window object.
 6. Any variable created in global scope will be addes in Window object implicitly by JS Engine.
-#JavaScript Code Run In Two Phases
+
+
+# JavaScript Code Run In Two Phases
 1. Variable phase
 2. Execution phase
-#Variable Phase
+
+
+# Variable Phase
 1. In variable phase, JS Engine will check the complete JS Code and it will search for variable declaration statement.
 2. If variable is declared then JS Engine allocate (provide) memory for them.
 3. Variable declared with var will be initialized storing "undefined" at the time of memory block creation. Variable declared with let and const will remain uninitialized (empty) at the time of memory block creation.
 #Execution Phase
 1. In Execution phase, JS Engine will execute the instruction line-by-line.
-#Var
+
+
+# Var
 1. Variable declared with var goes to global scope.
 2. We can redeclare variable with same name in same scope.
 3. We can update the value of variable.
@@ -654,7 +707,9 @@ Block's Local Scope
 5. Variable declared with var , can be hoisted.
 6. Variable declared inside block , will go to global scope.
 7. Variable declared inside function , will not go to global scope. It will be accessible inside function only.
-#Let
+
+
+# Let
 1. Variable declared with let is block scoped.
 2. We cannot redeclare variable with same name in same scope.
 3. We can update the value of variable.
@@ -663,7 +718,9 @@ Block's Local Scope
 6. The variable declared using let does not belongs to global scope , we cannot access them with the help of window variable.
 7. The variable declared using let is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
 8. Variable declared inside function will be accessible inside function only.
-#Const
+
+
+# Const
 1. Variable declared with const is block scope.
 2. We cannot redeclare variable with same name in same scope.
 3. The value of variable can not be modified.
@@ -671,12 +728,14 @@ Block's Local Scope
 5. The variable declared using const is hoisted and belongs to temporal deadzone. Therefore it cannot be used before initialization (because at that moment it is uninitialized - TDZ) .
 6. The variable declared using const inside block ,does not belongs to global scope we cannot use them with the help of window.
 7. Variable declared inside function will be accessible inside function only.
-#Practice Questions
+# Practice Questions
 1.
+```javascript
 console.log("start");
 let a = 10;
 var b = 20;
 const c = 30;
+
 {
 let a = 100;
 var b = 200;
@@ -685,11 +744,17 @@ console.log(a);
 console.log(b);
 console.log(c);
 }
+
 console.log(a);
 console.log(b);
 console.log(c);
 console.log("end");
+
+```
+
 2.
+
+```javascript
 console.log("start");
 let a = 10;
 console.log(b);
@@ -699,7 +764,11 @@ var b = 200;
 console.log(a);
 console.log(b);
 console.log("end");
+
+```
 3.
+
+```
 console.log("start");
 let a = 10;
 {
@@ -709,7 +778,10 @@ let a = 10;
 console.log(a);
 console.log(b);
 console.log("end");
+```
 4.
+
+```
 console.log("start");
 var b = 20;
 const c = 30;
@@ -722,7 +794,9 @@ console.log(c);
 console.log(a);
 console.log(b);
 console.log("end");
+```
 5.
+```
 console.log("start");
 let a = 10;
 var b = 20;
@@ -739,7 +813,9 @@ console.log(b);
 console.log(a);
 console.log(b);
 console.log("end");
-#Functions
+```
+
+# Functions
 1. Function is object.
 2. Function is a block of instruction which is used to perform a specific task.
 3. A function get executed only when it is called.
@@ -755,17 +831,17 @@ console.log("end");
 13. Variable written inside function even using var have local scope.
 14. Inside a function we can use the members of global scope.
 15. In javascript 'this' is a property of every function.(every function will have 'this' Keyword except arrow function)
-#Parameter
+# Parameter
 1. The variables declared in the function defination is known as parameters.
 2. The parameters have local scope (can be used only inside function body).
 3. Parameters are used to hold the values passed by caller (or calling statement).
-#Arguments
+# Arguments
 1. The values passed in the method call statement is known as arguments.
 2. Note : An argument can be a literal, variable or an expression which gives a results.
-#Return Keyword
+# Return Keyword
 1. It is a keyword used as control transfer statement in a function.
 2. Return will stop the execution of the function and transfer control along with data to the caller.
-#Ways To Create Functions
+# Ways To Create Functions
 1. Function declaration statement : Create using function keyword
 1.
 Syntax :
@@ -792,12 +868,12 @@ output : Good Morning
 1. Function which is passed to an variable as a value is called as first class function.
 2. Function can not be Hoisted because it is object is created in execution phase.
 3. Function does not belongs to temporal dead zone
-#Functional Programming
+# Functional Programming
 1. Functional Programming is a programming technique where we pass a function along with a value to another function.
 2. In this approach, we generate Generic Function. Here function task is not predefined. It perform multiple task not only single task
 3. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
 4. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
-#Types Of Functions
+# Types Of Functions
 1. Function decalaration statement : Using function keyword
 2. Function as expression / expression function
 3. Immediate Invoke Function (IIF)
@@ -818,7 +894,9 @@ output : Good Morning
 1. The Function which accept another function as a parameter or return a function is known as 'Higher Order Function'.
 6. Callback Function
 1. The Function which is passed to another function or the function which is returned by another function is known as 'Callback Function'.
-#Nested Function
+
+
+# Nested Function
 1. The function inside another function is called as nested function.
 2.
 Example :
