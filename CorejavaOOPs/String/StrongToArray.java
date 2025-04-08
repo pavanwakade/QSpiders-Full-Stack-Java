@@ -14,11 +14,18 @@ public class StrongToArray {
 
 			a[i] = str.charAt(i);
 		}
-
+		char c[]=new char[a.length];
+		
+//		for(int j=a.length;j>0;j--) {
+//			
+//			c[j]=a[j];
+//		}
+		
+		
 		System.out.println(Arrays.toString(a));
 
-		String[] c = str.split("");
-		System.out.println(Arrays.toString(c));
+//		String[] c = str.split("");
+//		System.out.println(Arrays.toString(c));
 
 	}
 }
