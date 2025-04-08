@@ -15,8 +15,6 @@ console.log(str);
 console.log(str1);
 console.log(str3);
 
-
-
 console.log(str.toLowerCase());
 console.log(str.toUpperCase());
 
@@ -34,6 +32,9 @@ console.log(str.startsWith("p"));
 console.log(str.endsWith("llo"));
 console.log(str.endsWith("o"));
 console.log(str.endsWith("p"));
+
+console.log();
+
 
 
 
