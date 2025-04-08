@@ -65,9 +65,50 @@ let n=null;
 
 
 
-let move="bahubali";
-console.log(move.replace("b","P")); 
-console.log(move.replace('i')); 
+// let move="bahubali";
+// console.log(move.replace("b","P")); 
+// console.log(move.replace('i','I'));
+// console.log(move.replace("bahubali","a")); 
+
+
+
+// let c=move.replace("b","kh");
+// console.log(c);
+
+// let d=c.replace('b','g');
+// console.log(d);
+
+// let e=d.replace('l','ll');
+// console.log(e);
+
+
+
+
+
+// let a=move.replace("b","kh").replace("b","g")
+// console.log(a);
+
+
+
+
+
+// let strs="Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci veniam earum impedit corrupti consectetur eius provident molestiae ab deleniti cumque debitis obcaecati, amet aspernatur veritatis distinctio at eligendi doloribus! Omnis!";
+
+// console.log(strs.includes("impedit"));   //true
+
+// console.log(strs.includes("!"));
+
+// console.log(strs.includes("Adipisci veniam earum"));
+
+
+//slice()   //extract part of the string
+
+// syntax   slice(start index,end index) it will not include end index
+
+// console.log(move.slice(0,5)); 
+
+// console.log("pavan".slice(1,5));
+
 
 
 
