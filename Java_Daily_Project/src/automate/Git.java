@@ -172,10 +172,9 @@ public class Git {
 
 	private static boolean isInternetAvailable() {
 		// Multiple reliable hosts for redundancy
-		String[] checkUrls = { "https://www.google.com", "https://www.microsoft.com",
-	        "https://www.cloudflare.com",
-	        "https://1.1.1.1", // Cloudflare DNS
-	        "https://8.8.8.8"  // Google DNS
+		String[] checkUrls = { "https://www.google.com", "https://www.microsoft.com", "https://www.cloudflare.com",
+				"https://1.1.1.1", // Cloudflare DNS
+				"https://8.8.8.8" // Google DNS
 		};
 
 		// Timeout settings
