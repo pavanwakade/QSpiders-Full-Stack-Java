@@ -27,7 +27,6 @@ public class Git {
 	private static final String DEFAULT_COMMIT_MESSAGE = "Updated";
 
 	// Logging
-	
 	private static final Logger LOGGER = Logger.getLogger(Git.class.getName());
 	private static FileHandler fileHandler;
 
