@@ -6,7 +6,7 @@ import java.util.List;
 public class Driver {
 
 	public static void main(String[] args) {
-		
+
 		List<Students> students = new ArrayList<>();
 
 		students.add(new Students("pavan", "latur", 67867868));
@@ -17,6 +17,5 @@ public class Driver {
 
 			System.out.println(students2);
 		}
-
 	}
 }
