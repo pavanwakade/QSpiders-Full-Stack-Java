@@ -21,10 +21,11 @@ public class Driver {
 
 			Students students2 = iterator.next();
 
-			if (students2.name.equals("pavan") || students2.name.equals("sp")) {
+			if (students2.name.equals("pavan")) {
 				iterator.remove();
 				System.out.println("removed");
-//				return;
+				
+				break;
 			} else {
 				System.out.println("not found");
 			}
