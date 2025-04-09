@@ -428,7 +428,7 @@ public class Git {
 				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
 				runCommand(new String[] { gitPath, "push" }, repoPath);
 
-				showPopup("Git Commit", "Committed and pushed changes in " + repoPath);
+				showPopup("Commit", "Committed and pushed changes in " + repoPath);
 				LOGGER.info("Committed and pushed changes in " + repoPath);
 			} catch (IOException | InterruptedException e) {
 				// Handle potential push failures
