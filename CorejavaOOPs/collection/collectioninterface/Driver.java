@@ -21,7 +21,7 @@ public class Driver {
 
 			Students students2 = iterator.next();
 
-			if (students2.name.equals("pavan")) {
+			if (students2.name.equals("pavan") || students2.name.equals("sp")) {
 				iterator.remove();
 				System.out.println("removed");
 //				return;
