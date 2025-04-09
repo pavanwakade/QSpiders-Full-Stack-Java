@@ -7,10 +7,7 @@ public class collectionInterfaceMethods {
 		
 		String[] string2=string.split(" ");
 		
-		for (String string3 : string2) {
-			System.out.println(string3);
-		}
-		
+				
 //		System.out.println();
 		
 	}
