@@ -86,24 +86,64 @@
 
 
 
+//,map with return
+
+// let num = [1, 2, 3, 7, 6, 8, 9,];
+
+// apnamap = (callback, arr) => {
+
+//     let tremparr = [];
+//     for (let i = 0; i < arr.length; i++) {
+
+//         let a = callback(arr[i], i, arr)
+//         tremparr.push(a);
+//     }
+
+//     return tremparr;
+// }
+
+// let b = apnamap((val, index, arr) => {
+//     return val;
+// }, num)
+
+// console.log(b);
 
 
-let num = [1, 2, 3, 7, 6, 8, 9,];
 
-apnamap = (callback, arr) => {
+//Filter method
 
-    let tremparr = [];
-    for (let i = 0; i < arr.length; i++) {
+// let nume = [3, 5, 6, 7, 8, 9, 0];
 
-        let a = callback(arr[i], i, arr)
-        tremparr.push(a);
-    }
+// let apanaFilter = (callback, num) => {
 
-    return tremparr;
-}
+//     let aaa = [];
 
-let b = apnamap((val, index, arr) => {
-    return val;
-}, num)
+//     for (let i = 0; i < num.length; i++) {
 
-console.log(b);
+//         let a = callback(num[i], i, num)
+
+//         if (a) {
+//             aaa.push(num[i]);
+//         }
+//     }
+//     return aaa
+// }
+
+// let final = apanaFilter((val, i, nume) => {
+//     return val > 5
+// }, nume)
+
+// console.log(final);
+
+
+//actual filter
+
+
+let nummm=[2,3,4,5,7,8]
+
+let ff=nummm.filter((val){
+    return val
+})
+
+
+nummm.reduce
