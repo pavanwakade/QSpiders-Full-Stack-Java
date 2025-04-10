@@ -11,6 +11,9 @@
 9. [String](#strings)
 10. [String methods](#string-methods)
 
+11. [Array](#array)
+12. [Arrays methods](#array-methods)
+
  <!-- Practice Questions
 . Lexical Scope
 . Closure
@@ -1550,6 +1553,7 @@ console.log(`Square root of ${number} is ${squareRoot}`);
 
 
 ### Practice Questions
+
 1. Write a program to find square and cube of a given number.
 2. Write a program to check if a given year is a leap year or not.
 3. Write a program to calculate the sum of the first 100 natural numbers.
@@ -1582,7 +1586,7 @@ number.
 
 
 
-# Lexical Scope/Scope Chain
+## Lexical Scope/Scope Chain
 1. The ability of js engine to search for a variable in the outer scope when variable is not available in local
 scope is known as
 lexical scope or scope chain.
@@ -1635,9 +1639,9 @@ completed.
 5. Every time a parent function is called the new closure is created.
 6. Disadvantage : High memory consumption.
 
+## Array
 
-
-# Ways To Create Array
+### Ways To Create Array
 1.
 - By using square brackets [] and literals.
 ```
@@ -1667,7 +1671,7 @@ index -> 1Syntax : array_object_ref[index]Example : console.log(arr[1]); // 20
 ```
 
 
-# Array Methods
+## Array Methods
 1. push(value) method
 1. It is used to insert element at last of array.
 2. It returns the length of array.
@@ -1693,101 +1697,127 @@ output: [10,20,30,40]
 2. It returns array length
 3.
 Example:
+```
 let arr=[10,20,30,40,50];
 arr.unshift(200);
 output: [200,10,20,30,40,50]
+```
 4. shift() method
 1. It is used to delete element from first index of array.
 2. It returns deleted element.
 3.
 Example:
+```
 let arr=[10,20,30,40,50];
 arr.shift();
 output: [20,30,40,50]
+```
 5. splice() method
 1. It is used to perform insertion , deletion and updation in array.
 2. It will modify the original array.
 3. It returns array of deleted elements.
 4.
 Example:
+```
 arr_ref.splice(a,b,c)
+```
 a - starting index
 b - number of elements to be deleted
 c - elements to be inserted
 5.
 Example : Delete three elements from index 1.
+```
 let arr=[10,20,30,40,50];
 arr.splice(1,3); // deleted: [20,30,40]
 console.log(arr);
 Output : [10,50]
+```
 6.
 Example : Update value at index 3 to 500.
+```
 let arr=[10,20,30,40,50];
 arr.splice(3,1,500);
 console.log(arr);
 Output : [10,20,30,500,50]
+```
 7.
 Example : Insert 100,200,and 300 from index 2.
+```
 let arr=[10,20,30,40,50];
 arr.splice(2,0,100,200,300);
 console.log(arr);
 Output : [10,20,100,200,300,30,40,50]
+```
 6. slice() method
 1. It is used to copy array elements.
 2. It will not modify the original array
 3. It returns array of copied elements.
 4.
 Syntax :
+```
 arr.slice(a,b);
+```
 a - starting index
 b - last index
 Here, last index is excluded -> last index -1
 5.
 Example : Copy array from index 0 to 2.
+```
 let arr=[10,20,30,40,50];
 let copy_elements = arr.slice(0,3);
 console.log(copy_elements);
 Output: [10,20,30]
+```
 7. indexOf() methods
 1. It used to get the index of array element.
 2. If element is available -> it returns element's index.
 3. If element is not available -> it returns -1.
 4.
 Syntax :
+```
 arr.indexOf(a,b)
+```
 a - value to be searched
 b - search starting index
 If we does not pass last argument , it will 0 by default.
 5.
 Example : Check given array has element 30 or not and search from index 0 and 3 , if present
 print index.
+```
 let arr=[10,20,30,40,50];
 console.log(arr.indexOf(30)); // 2
 console.log(arr.indexOf(30,3)); // -1
+```
 8. includes() method
 1. It is used to check element is available or not.
 2. If element is available -> returns true.
 3. If element is not available -> returns false.
 4.
 Syntax :
+```
 arr_ref.includes(a,b);
+```
 a - value to be searched
 b - search starting index
 If we does not pass last argument , it will 0 by default.
 5.
 Example : Check given array has element 30 or not and search from index 0 and 3 , if present
 print true.
+```
 let arr=[10,20,30,40,50];
 console.log(arr.includes(30)); // true
 console.log(arr.includes(30,3)); // false
+```
 9. reverse() method
 1. It is used to reverse the array.
 2. It will modify the original array.
 3.
 Example:
+```
 let arr=[10,20,30,40,50];
 console.log(arr.reverse());
 Output: [50,40,30,20,10]
+```
 10. sort(callback) method
 1. It will modify the original array
 2. If callback returns -ve value -> it will sort in ascending order
@@ -1795,14 +1825,167 @@ Output: [50,40,30,20,10]
 4. If callback returns 0 value -> it will not sort.
 5.
 Example : Sort array in ascending order.
+```
 let arr = [100, 2000, 380, 940, 50, 0, 2];
 console.log(arr.sort((a, b) => a - b));
 Output: [ 0, 2, 50, 100, 380, 940, 2000 ]
+```
 6.
 Example : Sort array in descending order.
+```
 let arr = [100, 2000, 380, 940, 50, 0, 2];
 console.log(arr.sort((a, b) => b - a));
 Output: [ 2000, 940, 380, 100, 50, 2, 0 ]
+```
+
+
+### all methods in one 
+
+
+```
+
+
+let str = "hello";
+let str1 = 'hello';
+let str3 = new String("hello");
+
+console.log(str);
+console.log(str1);
+console.log(str3);
+
+console.log(str.toLowerCase());
+console.log(str.toUpperCase());
+
+console.log(str.charAt(0));
+console.log(str.charCodeAt(0));
+
+console.log(str.padStart(10, "X"));
+console.log(str.padEnd(10, "X"));
+
+
+console.log(str.startsWith("h"));
+console.log(str.startsWith("he"));
+console.log(str.startsWith("p"));
+
+console.log(str.endsWith("llo"));
+console.log(str.endsWith("o"));
+console.log(str.endsWith("p"));
+
+
+
+console.log(str.indexOf("l"));
+console.log(str.indexOf("e"));
+console.log("pavan".indexOf("n"));
+
+
+let nam = "pavan";
+console.log(nam.lastIndexOf("a"));
+
+let num = 1000;
+console.log(num.toString());
+
+
+let b = true;
+console.log(b.toString());
+
+let un = undefined;
+console.log(un.toString()); // TypeError: Cannot read properties of undefined (reading 'toString')
+
+let n = null;
+console.log(n.toString()); // TypeError: Cannot read properties of null (reading 'toString')
+
+let arr=[1,2,3,4,5];
+console.log(arr.toString()); // "1,2,3,4,5"
+
+
+
+
+
+
+let move="bahubali";
+console.log(move.replace("b","P")); 
+console.log(move.replace('i','I'));
+console.log(move.replace("bahubali","a")); 
+
+
+
+let c=move.replace("b","kh");
+console.log(c);
+
+let d=c.replace('b','g');
+console.log(d);
+
+let e=d.replace('l','ll');
+console.log(e);
+
+
+
+
+
+let a=move.replace("b","kh").replace("b","g")
+console.log(a);
+
+
+
+
+
+let strs = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci veniam earum impedit corrupti consectetur eius provident molestiae ab deleniti cumque debitis obcaecati, amet aspernatur veritatis distinctio at eligendi doloribus! Omnis!";
+
+console.log(strs.includes("impedit"));   //true
+
+console.log(strs.includes("!"));
+
+console.log(strs.includes("Adipisci veniam earum"));
+
+
+slice()   //extract part of the string
+
+syntax   slice(start index,end index) it will not include end index
+
+console.log(move.slice(0,5)); 
+
+console.log("pavan".slice(1,5));
+
+
+let nn = "pavan";
+
+console.log(nn.split('a'));
+console.log(nn.split(''));
+
+console.log(strs.split(''));
+
+let strArray = strs.split(' ');
+
+console.log(strArray);
+
+let inp = "pavan";
+let check = () => strArray.includes(inp) ? console.log(inp) : console.log(`${inp} not present`);
+
+
+console.log(check());
+
+
+
+
+isFinite(arg)
+
+let numbr=10;
+
+console.log(isFinite(numbr));
+
+console.log(isFinite("10"));
+console.log(Number.isInteger(numbr));
+console.log(Number.isNaN("10"));
+console.log(Number.isNaN(10));
+console.log(Number.isNaN(NaN));
+console.log(Number.parseInt("1000 year old")); //only 1000
+console.log(Number.parseInt("10.5")); //only 10
+console.log(Number.parseInt("10.5abc")); //only 10
+console.log(Number.parseFloat("10.5abc")); //10.5
+
+```
+
+
 11. foreach(callback)
 1. It is a higher order function.
 2. It is used to iterate over array elements and index.
@@ -1828,6 +2011,8 @@ console.log(val+" "+"is even number;");
 }
 });
 ```
+
+### map
 12. map(callback)
 1. It is a higher order function.
 2. It is used to iterate over array.
@@ -1837,15 +2022,92 @@ console.log(val+" "+"is even number;");
 'undefined' will be stored.
 6.
 Syntax :
+
+```
 arr_ref.map((value,index,array)=>{
 // statements
 })
+```
 7.
 Example: Create new array where each element of given array is multiple of 8.
+```
 let arr=[10,20,30,40,50];
 let new_arr = arr.map(value => value * 8 );
 console.log(new_arr);
 Output: [80,160,240,320,400]
+```
+```
+
+//MAP
+//Working of map
+let num = [1, 3, 4, 6, 8, 0, 2];
+let apnamap = (cbf, arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        cbf(arr[i])
+    }
+}
+
+apnamap((val) => {
+    // console.log(val)
+}, num)
+
+
+
+//map
+num.map((val) => {
+    // console.log(val)
+}
+);
+
+let friends = ["pavan", "shashi", "kedar", "sandip"]
+
+friends.map((val) => {
+    if (val === "pavan") {
+        // console.log(val)
+        return;
+    }
+}
+);
+
+
+let numbers = [8, 5, 7, 9, 2, 6, 8];
+numbers.map((val, i) => console.log(val * 100 + 5 + 10, i));
+
+
+
+
+
+
+
+
+
+
+
+//Map practice 
+
+let arr = [94, 3, 5, 6, 3, 3, 5, 6, 6,]
+
+//work of map
+
+let mapcaoncept = (callback, arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        callback(arr[i]);
+    }
+}
+
+mapcaoncept((val) => {
+    // console.log(val);
+
+}, arr)
+
+
+// map
+arr.map((val) => console.log(val))
+
+```
+
+
+
 13. filter(callback)
 1. It is a higher order function.
 2. It is used to iterate over array.
@@ -1854,11 +2116,14 @@ Output: [80,160,240,320,400]
 5. Here, element will be inserted in new array only when callback function returns true.
 6.
 Syntax :
+```
 arr_ref.filter((value,index,array)=>{
 // statements
 })
+```
 7.
 Example: Create new array where elements are greater than 40.
+```
 let arr=[10,20,30,40,50,60,70];
 let new_arr = arr.filter(value => {
 if(value > 30)
@@ -1866,6 +2131,7 @@ return true;
 });
 console.log(new_arr);
 Output: [40,50,60,70]
+```
 14. reduce(callback,initial_value)
 1. It is a higher order function.
 2. It is used to iterate and conclude result to a single value.
@@ -1875,13 +2141,16 @@ Output: [40,50,60,70]
 is used to result , we refer it as accumulator.
 6.
 Syntax :
+```
 arr_ref.reduce((accumulator,value,index,array)=>{
 // statements
 },initial_value_of_accumulator)
+```
 If we does not pass initial value of accumulator first element of array will be stored
 automatically.
 7.
 Example : Find the sum of all elements of array.
+```
 let arr=[10,20,30,40,50,60,70];
 let result = arr.reduce((acc,value) => {
 acc = acc + value;
@@ -1889,26 +2158,31 @@ return acc;
 },0);
 console.log("Sum of all elements : ",result);
 Output: Sum of all elements : 280
+```
 15. Array.isArray(literal)
 1. It is used to check given literal is array or not.
 2. If it is array -> it will return true.
 3. if it is not array -> it will return false.
 5.
 Example: Check given literal is array or not.
+```
 console.log(Array.isArray({})); //false
 console.log(Array.isArray(10)); //false
 console.log(Array.isArray([10,20,30])); //true
+```
 16. Array.from(literal)
 1. It is used to convert iterable literals (like object or string) to array.
 2. If literal is iterable -> it returns new array of elements.
 3. If literal is not iterable -> it returns empty array.
 4.
 Example : Convert string to Array.
+``
 const str = "hello";
 const arr = Array.from(str);
 console.log(arr);
 Output: ["h", "e", "l", "l", "o"]
-#Object
+```
+# Object
 1. An Object is a block of memory which has state(variable) , behaviour(methods) and where we can
 store heterogenous data.
 2. An object is a collection of key-value pairs that can contain various data types, such as numbers,
@@ -2480,7 +2754,8 @@ Output: { name: "Chombu", age: 21, };
 3.
 If we do not pass literals to three dots (...) , it will unpack all
 literals and behave as a spread parameter.
-#Introduction to Prototype
+
+## Introduction to Prototype
 1. In JavaScript, every function is associated with an object called as prototype.
 2. It serves as a blueprint or a template from which other objects can inherit properties and methods.
 3. Prototypes are used to achieve inheritance in JavaScript.
@@ -2490,15 +2765,16 @@ continues up the prototype chain until it either finds the property/method or re
 chain (where the prototype is null).
 5. This allows us to define common properties and methods in a prototype, and all objects that inherit
 from that prototype will have access to those properties and methods.
-#_ _proto_ _
+- _ _proto_ _
+
 1. The reference of prototype object is stored in _ _proto_ _
 2. When an object is created a prototype object is not created instead the object will have reference of
 the prototype object (from which properties are to be inherited) referred using _ _proto_ _.
-#Prototypal Inheritance
+#### Prototypal Inheritance
 1. Prototypal inheritance is a fundamental concept in JavaScript's object-oriented programming model.
 2. It allows objects to inherit properties and methods from other objects, forming a prototype chain.
 3. In JavaScript inheritance is achieved using prototype hence it is known as Prototypal Inheritance.
-#Prototype Chain
+#### Prototype Chain
 1. The prototype chain is a mechanism in JavaScript that allows objects to inherit properties and
 methods from other objects.
 2. The prototype chain forms a hierarchy of objects, where each object's prototype is linked to its parent
@@ -2513,15 +2789,16 @@ structure and content.
 3. Each node in the tree is represented as js object , which we can access and manipulate using the DOM
 API.
 4. Here , Html elements , comments , text , content , etc are refered as nodes of DOM tree.
-#Dom Api
+# Dom Api
 1. The DOM API (Application Programming Interface) is a set of programming interfaces and methods
 that allow developers to interact with the DOM tree and manipulate the content and structure of web
 documents.
 2. The DOM API provides a standardized way to create, modify, and delete elements and attributes,
 change styles and classes, handle events, and more.
-#Html Structure
+### Html Structure
 1.
 Reference Html structure
+```
 <body>
 <h1>Falling In Love With Javascript</h1>
 <div class="container">
@@ -2533,6 +2810,7 @@ Reference Html structure
 </div>
 <p>hello i'm paragraph</p>
 </body>
+```
 #Target Elements
 1. getElementById('id_name')
 1. It returns reference of single element object where id_name matches
@@ -2544,12 +2822,16 @@ console.log(divone);
 1. It returns htmlcollection all elements matches with class name.
 2.
 Example: Apply backgroundColor,margin,fontsize and padding on each div.
+```
 let div_child = document.getElementsByClassName("item");
 console.log(div_child);
+```
 3. getElementsByTagName('tag_name')
 1. It returns htmlcollection all elements matches with tag name.
 2.
 Example: Display parent div as flexbox.
+
+```
 let divs = document.getElementsByTagName("div");
 console.log(divs)
 divs[0].style.backgroundColor = "yellow";
@@ -2563,6 +2845,7 @@ divs[i].style.fontSize = "32px";
 divs[i].style.padding = "10px";
 divs[i].style.color = "white";
 }
+```
 4. querySelector('css_selector')
 1. It returns reference of the first element that matches a specified CSS selector.
 2.
@@ -2678,33 +2961,36 @@ p.remove();
 1. Actions performed by user on browser are refered as events.
 2. Whenever event occurs browser creats an object which contains all information about the event and
 object on which event occured.
-3. Example: Like if user click on <h1> tag , browser automatically creates an object which have
+3. Example: Like if user click on h1 tag , browser automatically creates an object which have
 information about h1 tag and type of event occured (here , type is 'click').
 ### What Is Event Object?
 1. Event object is a object created by the browser when user perform some action , which holds all
 information about type of event occured and the element on which the event occurred.
 2. Event object is passed to respective event handler , every time event occured.
 3. So, we can access event object in callback function.
+
 #### What Are Event Listeners?
 1. Event listeners are functions that wait for a specific event to occur and then execute js code
 (callbacks) assigned to it.
 2. By writting logic in callback , we can control what to do when event occurs like change text color, hide
 or show, etc.
-#How To Attach Event Listeners?
+### How To Attach Event Listeners?
 1. We can attach event listeners by three ways :
 1. As an HTML attribute
 - In this approach , we attach event listener as a attribute in opening tag.
-- Syntax : <tag onevent_name='function_reference()'>
+- Syntax :< tag onevent_name='function_reference()'>
 - We have to prefix 'on' before the event name.
 - When we pass a function , we have to function_reference and parenthesis.
 - Example : When user clicks on div , it's color should change to red.
-<div onclick="handleButtonClick()">Hello Honney Bunny🐰</div>
+```
+< div onclick="handleButtonClick()">Hello Honney Bunny🐰</ div>
 <script>
 function handleButtonClick() {
 let div = document.querySelector('div');
 div.style.backgroundColor='red';
 }
 </script>
+```
 2. As a JS Property
 - In this approach , first we need the reference of element then we attach listener to it (the way we add
 property to an object).
@@ -2713,6 +2999,7 @@ property to an object).
 - At the time of attaching listener to element , we just need to pass function reference to it.(listener will
 automatically call that function).
 - Example : When user clicks on div , it's color should change to red.
+```
 <div>Hello Honney Bunny🐰</div>
 <script>
 let div = document.querySelector('div');
@@ -2721,12 +3008,14 @@ function handleButtonClick() {
 div.style.backgroundColor='red';
 }
 </script>
+```
 3. Using addEventListener Method
 - In this approach , first we need the reference of element then we attach listener to it (the way we add
 property to an object).
 - Syntax : element.addEventListener(event_name,function_reference)
 - First argument will be the event name (no need prefix 'on') and pass function reference.
 - Example : When user clicks on div , it's color should change to red.
+```
 <div>Hello Honney Bunny🐰</div>
 <script>
 let div = document.querySelector('div');
@@ -2735,6 +3024,7 @@ function handleButtonClick() {
 div.style.backgroundColor='red';
 }
 </script>
+```
 #Type Of Events
 1.
 Keyboard Events
