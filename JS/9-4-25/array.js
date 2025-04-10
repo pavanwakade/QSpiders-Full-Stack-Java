@@ -52,4 +52,35 @@ friends.map((val) => {
 
 
 let numbers = [8, 5, 7, 9, 2, 6, 8];
-numbers.map((val, i) => console.log(val * 100 + 5 + 10, i));
+// numbers.map((val, i) => console.log(val * 100 + 5 + 10, i));
+
+
+
+
+
+
+
+
+
+
+
+//Map practice 
+
+let arr = [94, 3, 5, 6, 3, 3, 5, 6, 6,]
+
+//work of map
+
+let mapcaoncept = (callback, arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        callback(arr[i]);
+    }
+}
+
+mapcaoncept((val) => {
+    // console.log(val);
+
+}, arr)
+
+
+// map
+arr.map((val) => console.log(val))

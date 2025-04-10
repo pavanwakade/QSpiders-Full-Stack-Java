@@ -10,6 +10,7 @@
 8. [Function](#functions)
 9. [String](#strings)
 10. [String methods](#string-methods)
+
  <!-- Practice Questions
 . Lexical Scope
 . Closure
@@ -40,7 +41,7 @@
 - [Strings](#strings)
 
 ---
-[Questions]()
+- [Questions](#questions)
 ---
 
 ## History of JavaScript
@@ -1633,37 +1634,7 @@ completed.
 4. A child function will have reference to the closure.
 5. Every time a parent function is called the new closure is created.
 6. Disadvantage : High memory consumption.
-# Interview Questions
-1. What is JavaScript? (Write 6 points)
-2. What is JRE? Name two JRE?
-3. Write the names of JavaScript engines for Chrome, Firefox, Edge, and Safari.
-4. What is a JS engine?
-5. What are the differences between Var, let, and const?
-6. What is hoisting?
-7. What is the temporal dead zone?
-8. What is a function? (Write 6 points)
-9. Write the types of functions with syntax.
-10. What is a higher-order function and a callback function?
-11. What is explicit and implicit return in arrow functions? Provide an example.
-12. What is closure? When is a closure created? Explain with an example.
 
-
-
-# Array
-1. Array is object in javascript.
-2. It is non-primitive type of literal.
-3. It is a block of memory which is used to store multiple type of value (any type of literal) in same
-memory block.
-4. Array size is dynamic (size is not fixed like JAVA) , it means we can store 'N' number of elements and
-JS engine will handle memory usage automatically.
-5. Values stored inside array are refered as array elements.
-6. Array elements are arranged in a sequence that is represented by integer number called as index.
-Array index starts from zero to array size - 1 (suppose array has 5 elements it's first index will be - 0 and
-last index will be 4).
-7. We can access the array element with the help of array object reference , square brackets and index (
-array_object_ref[index] ).
-8. If we try to access the index that it greater than the array length we will get undefined.
-9. Array elements should be separated by comma(,)
 
 
 # Ways To Create Array
@@ -1836,13 +1807,19 @@ Output: [ 2000, 940, 380, 100, 50, 2, 0 ]
 1. It is a higher order function.
 2. It is used to iterate over array elements and index.
 3. It doesnot return anything , so js engine implicitly returns undefined.
+
 4.
 Syntax :
+```
 arr_ref.foreach((value,index,array)=>{
 // statements
 })
+
+```
+
 5.
 Example : Print Even numbers from given array.
+```
 const arr = [1, 2, 3, 4, 5];
 arr.forEach((val)=> {
 if(val % 2 === 0)
@@ -1850,6 +1827,7 @@ if(val % 2 === 0)
 console.log(val+" "+"is even number;");
 }
 });
+```
 12. map(callback)
 1. It is a higher order function.
 2. It is used to iterate over array.
@@ -2696,18 +2674,18 @@ console.log(pdiv.childNodes);
 Example: Remove p element from DOM.
 let p = document.getElementsByTagName("p")[0];
 p.remove();
-#What Are Events In Javascript?
+### What Are Events In Javascript?
 1. Actions performed by user on browser are refered as events.
 2. Whenever event occurs browser creats an object which contains all information about the event and
 object on which event occured.
 3. Example: Like if user click on <h1> tag , browser automatically creates an object which have
 information about h1 tag and type of event occured (here , type is 'click').
-#What Is Event Object?
+### What Is Event Object?
 1. Event object is a object created by the browser when user perform some action , which holds all
 information about type of event occured and the element on which the event occurred.
 2. Event object is passed to respective event handler , every time event occured.
 3. So, we can access event object in callback function.
-#What Are Event Listeners?
+#### What Are Event Listeners?
 1. Event listeners are functions that wait for a specific event to occur and then execute js code
 (callbacks) assigned to it.
 2. By writting logic in callback , we can control what to do when event occurs like change text color, hide
@@ -2836,14 +2814,39 @@ and transfer control to the nearest catch block that can handle the exception.
 
 ## Questions
 
-- 1. diffrance between var/const/let ?
+1. diffrance between var/const/let ?
+2. NULL vs Undefined
+3. what is NAN
+4. what is symbol
+5. what is bigint? range?
+6. what is hoistning
+7. what is TDZ
+8. what is truthly,falsly
+9. What is JavaScript? (Write 6 points)
+10. What is JRE? Name two JRE?
+11. Write the names of JavaScript engines for Chrome, Firefox, Edge, and Safari.
+12. What is a JS engine?
+13. What are the differences between Var, let, and const?
+14. What is hoisting?
+15. What is the temporal dead zone?
+16. What is a function? (Write 6 points)
+17. Write the types of functions with syntax.
+18. What is a higher-order function and a callback function?
+19. What is explicit and implicit return in arrow functions? Provide an example.
+20. What is closure? When is a closure created? Explain with an example.
 
-- 2. NULL vs Undefined
-
-- 3. what is NAN
-
-- 4. symbol
-bigint? range?
-hoistning
-TDZ
-truthly,falsly
+### Array
+21. Array is object in javascript.
+22. It is non-primitive type of literal.
+23. It is a block of memory which is used to store multiple type of value (any type of literal) in same
+memory block.
+24. Array size is dynamic (size is not fixed like JAVA) , it means we can store 'N' number of elements and
+JS engine will handle memory usage automatically.
+25. Values stored inside array are refered as array elements.
+26. Array elements are arranged in a sequence that is represented by integer number called as index.
+Array index starts from zero to array size - 1 (suppose array has 5 elements it's first index will be - 0 and
+last index will be 4).
+27. We can access the array element with the help of array object reference , square brackets and index (
+array_object_ref[index] ).
+28. If we try to access the index that it greater than the array length we will get undefined.
+29. Array elements should be separated by comma(,)
