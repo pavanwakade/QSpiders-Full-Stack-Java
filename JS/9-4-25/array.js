@@ -139,11 +139,16 @@
 //actual filter
 
 
-let nummm=[2,3,4,5,7,8]
+// let nummm = [2, 3, 4, 5, 7, 8]
 
-let ff=nummm.filter((val){
-    return val
-})
+// let ff=nummm.filter((val){
+//     return val
+// })
 
 
-nummm.reduce
+//reduce
+// let addition = nummm.reduce((acc, val, i, arr) => {
+//     return acc += val;   //need to add/write every time  acc & val
+// }, 10)
+
+// console.log(addition);
