@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Search</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .search-box {
+                text-align: center;
+                margin: 20px auto;
+                max-width: 600px;
+            }
+
+            #searchInput {
+                width: 100%;
+                padding: 15px;
+                border: none;
+                border-radius: 25px;
+                font-size: 16px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+            }
+
+            #searchInput:focus {
+                outline: none;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            }
+
+            #userContainer {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .user-card {
+                background: white;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .user-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .user-card h3 {
+                margin: 0 0 15px 0;
+                color: #333;
+                font-size: 1.2em;
+            }
+
+            .user-card p {
+                margin: 8px 0;
+                color: #666;
+            }
+
+            .user-card p:last-child {
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search by name..."
+                onkeyup="searchUsers()"
+            >
+        </div>
+        <div id="userContainer"></div>
+
+        <script>
+            let userdata = [
+    {
+        "id": 1,
+        "firstname": "Frederique",
+        "lastname": "Claibourn",
+        "email": "fclaibourn0@opensource.org",
+        "gender": "Female",
+        "contact": "554-123-9026"
+    },
+    {
+        "id": 2,
+        "firstname": "Cesaro",
+        "lastname": "Lendrem",
+        "email": "clendrem1@ucoz.ru",
+        "gender": "Male",
+        "contact": "889-402-9013"
+    },
+    {
+        "id": 3,
+        "firstname": "Merry",
+        "lastname": "Wurst",
+        "email": "mwurst2@smugmug.com",
+        "gender": "Male",
+        "contact": "220-856-3003"
+    },
+    {
+        "id": 4,
+        "firstname": "Iver",
+        "lastname": "Stormont",
+        "email": "istormont3@wikia.com",
+        "gender": "Male",
+        "contact": "947-245-9158"
+    },
+    {
+        "id": 5,
+        "firstname": "Berke",
+        "lastname": "Alphonso",
+        "email": "balphonso4@gmpg.org",
+        "gender": "Male",
+        "contact": "597-994-3017"
+    },
+    {
+        "id": 6,
+        "firstname": "Ev",
+        "lastname": "Turn",
+        "email": "eturn5@admin.ch",
+        "gender": "Male",
+        "contact": "859-107-0216"
+    },
+    {
+        "id": 7,
+        "firstname": "Natividad",
+        "lastname": "Janovsky",
+        "email": "njanovsky6@google.fr",
+        "gender": "Female",
+        "contact": "230-374-7379"
+    },
+    {
+        "id": 8,
+        "firstname": "Josh",
+        "lastname": "Maslen",
+        "email": "jmaslen7@zdnet.com",
+        "gender": "Male",
+        "contact": "847-881-9761"
+    },
+    {
+        "id": 9,
+        "firstname": "Corbet",
+        "lastname": "Brabham",
+        "email": "cbrabham8@wp.com",
+        "gender": "Male",
+        "contact": "765-213-7312"
+    },
+    {
+        "id": 10,
+        "firstname": "Vania",
+        "lastname": "Gringley",
+        "email": "vgringley9@nih.gov",
+        "gender": "Female",
+        "contact": "116-937-9747"
+    }
+];
+
+            function displayUsers(users) {
+                const container = document.getElementById('userContainer');
+                container.innerHTML = '';
+                
+                users.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.className = 'user-card';
+                    userDiv.innerHTML = `
+                        <h3>${user.firstname} ${user.lastname}</h3>
+                        <p>Email: ${user.email}</p>
+                        <p>Gender: ${user.gender}</p>
+                        <p>Contact: ${user.contact}</p>
+                    `;
+                    container.appendChild(userDiv);
+                });
+            }
+
+            function searchUsers() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const filteredUsers = userdata.filter(user => {
+                    return user.firstname.toLowerCase().includes(searchTerm) ||
+                                 user.lastname.toLowerCase().includes(searchTerm)||
+                                 user.email.toLowerCase().includes(searchTerm);;
+                });
+                displayUsers(filteredUsers);
+            }
+
+            // Initial display of all users
+            displayUsers(userdata);
+        </script>
+    </body>
+</html>

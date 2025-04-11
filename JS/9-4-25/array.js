@@ -220,15 +220,15 @@ let arr = [100, 2000, 380, 940, 50, 0, 2];
 
 //forin  
 //it will print index
-let aryr=[3,7,3,2,4,6,8,9,0];
-for(const i in aryr){
+let aryr = [3, 7, 3, 2, 4, 6, 8, 9, 0];
+for (const i in aryr) {
     // console.log(i);
 }
 
 // foroff 
 //it will print value
 
-for(const i of aryr){
+for (const i of aryr) {
     // console.log(i);
 }
 
@@ -245,7 +245,7 @@ let arr2 = arr1.reverse();
 //push
 //it will add the value at the end of the array
 //it will change the original array
-let arrrr=[1,2,3,4,5,6,7,8,9];
+let arrrr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 arrrr.push(10);
 // console.log(arrrr);
 
