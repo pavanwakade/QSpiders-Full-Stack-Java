@@ -174,7 +174,7 @@ console.log(fin);
 
 
 let userdata = [
-    [{ "id": 1, "firstname": "Frederique", "lastname": "Claibourn", "email": "fclaibourn0@opensource.org", "gender": "Female", "contact": "554-123-9026" },
+    { "id": 1, "firstname": "Frederique", "lastname": "Claibourn", "email": "fclaibourn0@opensource.org", "gender": "Female", "contact": "554-123-9026" },
     { "id": 2, "firstname": "Cesaro", "lastname": "Lendrem", "email": "clendrem1@ucoz.ru", "gender": "Male", "contact": "889-402-9013" },
     { "id": 3, "firstname": "Merry", "lastname": "Wurst", "email": "mwurst2@smugmug.com", "gender": "Male", "contact": "220-856-3003" },
     { "id": 4, "firstname": "Iver", "lastname": "Stormont", "email": "istormont3@wikia.com", "gender": "Male", "contact": "947-245-9158" },
@@ -183,18 +183,24 @@ let userdata = [
     { "id": 7, "firstname": "Natividad", "lastname": "Janovsky", "email": "njanovsky6@google.fr", "gender": "Female", "contact": "230-374-7379" },
     { "id": 8, "firstname": "Josh", "lastname": "Maslen", "email": "jmaslen7@zdnet.com", "gender": "Male", "contact": "847-881-9761" },
     { "id": 9, "firstname": "Corbet", "lastname": "Brabham", "email": "cbrabham8@wp.com", "gender": "Male", "contact": "765-213-7312" },
-    { "id": 10, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" }]
+    { "id": 10, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" },
+    { "id": 1, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" }
 
 ]
 
 
 // filter
 let users = userdata.filter((val) => {
-    return val.id == 1;
+    return val.id === 1;
 })
 
-console.log(users);
+// console.log(users);
 
 
 //find
 
+let user=userdata.find((val) => {
+    return val.id === 1;
+}
+)
+// console.log(user);

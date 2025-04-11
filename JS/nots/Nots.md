@@ -1257,6 +1257,39 @@ console.log("123".valueOf());          // "123"
 
 
 
+🌟 **JavaScript Array Methods - Reference Table** 🌟
+
+| Method Name    | Syntax                                      | Use / Purpose                          | Reduces Anything | Return Value         | Modifies Original Array |
+|----------------|---------------------------------------------|----------------------------------------|------------------|-----------------------|--------------------------|
+| **map()**      | `arr.map((val, index, arr) => {})`          | Transforms each element in array       | ✅               | New transformed array | ❌ No                    |
+| **filter()**   | `arr.filter((val, index, arr) => {})`       | Filters elements based on condition    | ✅               | Filtered array        | ❌ No                    |
+| **reduce()**   | `arr.reduce((acc, val, index, arr) => {}, initialValue)` | Reduces array to a single value | ✅               | Single value           | ❌ No                    |
+| **forEach()**  | `arr.forEach((val, index, arr) => {})`      | Executes a function for each element   | ❌               | `undefined`           | ❌ No                    |
+| **find()**     | `arr.find((val, index, arr) => {})`         | Finds the first matching element       | ✅               | First matched value   | ❌ No                    |
+| **findIndex()**| `arr.findIndex((val, index, arr) => {})`    | Finds index of first matching element  | ✅               | Index (or -1)         | ❌ No                    |
+| **some()**     | `arr.some((val, index, arr) => {})`         | Checks if *any* element passes test    | ✅               | Boolean (true/false)  | ❌ No                    |
+| **every()**    | `arr.every((val, index, arr) => {})`        | Checks if *all* elements pass test     | ✅               | Boolean (true/false)  | ❌ No                    |
+| **includes()** | `arr.includes(valueToFind)`                 | Checks if array includes a value       | ❌               | Boolean               | ❌ No                    |
+| **indexOf()**  | `arr.indexOf(value)`                        | Finds index of a value                 | ❌               | Index (or -1)         | ❌ No                    |
+| **push()**     | `arr.push(element)`                         | Adds element to the end                | ❌               | New length of array   | ✅ Yes                   |
+| **pop()**      | `arr.pop()`                                 | Removes last element                   | ❌               | Removed element       | ✅ Yes                   |
+| **shift()**    | `arr.shift()`                               | Removes first element                  | ❌               | Removed element       | ✅ Yes                   |
+| **unshift()**  | `arr.unshift(element)`                      | Adds element at the start              | ❌               | New length of array   | ✅ Yes                   |
+| **splice()**   | `arr.splice(start, deleteCount, ...items)`  | Add/remove elements anywhere           | ✅               | Removed elements      | ✅ Yes                   |
+| **slice()**    | `arr.slice(start, end)`                     | Returns a part of the array            | ✅               | New array             | ❌ No                    |
+| **concat()**   | `arr.concat(array2)`                        | Merges arrays                          | ✅               | New merged array      | ❌ No                    |
+| **flat()**     | `arr.flat(depth)`                           | Flattens nested arrays                 | ✅               | Flattened array       | ❌ No                    |
+| **sort()**     | `arr.sort(a-b)`                 | Sorts array elements                   | ✅               | Sorted array          | ✅ Yes                   |
+| **reverse()**  | `arr.reverse()`                             | Reverses the order of elements         | ✅               | Reversed array        | ✅ Yes                   |
+| **fill()**     | `arr.fill(value, start, end)`               | Fills array with a static value        | ✅               | Modified array        | ✅ Yes                   |
+| **join()**     | `arr.join(separator)`                       | Joins array into a string              | ✅               | String                | ❌ No                    |
+| **toString()** | `arr.toString()`                            | Converts array to string               | ✅               | String                | ❌ No                    |
+
+
+## JavaScript Data Types
+
+
+
 
 
 
@@ -1990,6 +2023,8 @@ console.log(Number.parseFloat("10.5abc")); //10.5
 1. It is a higher order function.
 2. It is used to iterate over array elements and index.
 3. It doesnot return anything , so js engine implicitly returns undefined.
+4. we can not get updated array
+
 
 4.
 Syntax :
