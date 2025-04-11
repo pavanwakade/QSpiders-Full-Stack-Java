@@ -2024,7 +2024,7 @@ console.log(Number.parseFloat("10.5abc")); //10.5
 2. It is used to iterate over array elements and index.
 3. It doesnot return anything , so js engine implicitly returns undefined.
 4. we can not get updated array
-
+5. it not return anything
 
 4.
 Syntax :

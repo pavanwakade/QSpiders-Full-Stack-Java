@@ -144,7 +144,7 @@ let nummm = [2, 3, 4, 5, 7, 8]
 let ff = nummm.filter((val) => {
     return val > 4
 })
-console.log(ff);
+// console.log(ff);
 
 
 //find
@@ -153,7 +153,7 @@ let fin = nummm.find((val) => {
     return val > 4
 }
 )
-console.log(fin);
+// console.log(fin);
 
 
 
@@ -199,8 +199,99 @@ let users = userdata.filter((val) => {
 
 //find
 
-let user=userdata.find((val) => {
+let user = userdata.find((val) => {
     return val.id === 1;
 }
 )
 // console.log(user);
+
+
+//sort 
+//assending
+
+let arr = [100, 2000, 380, 940, 50, 0, 2];
+// console.log(arr.sort((a, b) => a - b));
+
+//descending
+
+// console.log(arr.sort((a, b) => b - a));
+
+
+
+//forin  
+//it will print index
+let aryr=[3,7,3,2,4,6,8,9,0];
+for(const i in aryr){
+    // console.log(i);
+}
+
+// foroff 
+//it will print value
+
+for(const i of aryr){
+    // console.log(i);
+}
+
+
+// reverse
+//it will reverse the array
+//it will change the original array
+let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// console.log(arr1);
+let arr2 = arr1.reverse();
+// console.log(arr2);
+
+
+//push
+//it will add the value at the end of the array
+//it will change the original array
+let arrrr=[1,2,3,4,5,6,7,8,9];
+arrrr.push(10);
+// console.log(arrrr);
+
+//pop
+//it will remove the last value of the array
+//it will change the original array
+arrrr.pop();
+//  console.log(arrrr);
+
+//unshift
+//it will add the value at the beginning of the array
+//it will change the original array
+arrrr.unshift(1000);
+// console.log(arrrr);
+
+//shift
+//it will remove the first value of the array
+//it will change the original array
+arrrr.shift();
+// console.log(arrrr);
+
+//delete
+//it will remove the value at the given index
+//it will not change the original array
+//it will not change the length of the array
+// it will give empty value at the deleted index
+//not recomded to use
+let arr3 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// console.log(arr3);
+delete arr3[2];
+//  console.log(arr3);
+
+//indexof
+//it will give the index of the given value
+let arr4 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// console.log(arr4.indexOf(3));
+
+//lastIndexof
+//it will give the last index of the given value
+let arr5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 3];
+// console.log(arr5.lastIndexOf(3));
+
+//firstIndexof
+//it will give the first index of the given value
+console.log(arr5.at(1));
+
+
+
+
