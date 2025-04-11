@@ -139,19 +139,36 @@
 //actual filter
 
 
-// let nummm = [2, 3, 4, 5, 7, 8]
+let nummm = [2, 3, 4, 5, 7, 8]
 
-// let ff=nummm.filter((val){
-//     return val
-// })
+let ff = nummm.filter((val) => {
+    return val > 4
+})
+console.log(ff);
 
 
-reduce
-let addition = nummm.reduce((acc, val, i, arr) => {
-    return acc += val;   //need to add/write every time  acc & val
-}, 10)
+//find
 
-console.log(addition);
+let fin = nummm.find((val) => {
+    return val > 4
+}
+)
+console.log(fin);
+
+
+
+
+
+// reduce
+// let addition = nummm.reduce((acc, val, i, arr) => {
+//     return acc += val;   //need to add/write every time  acc & val
+// }, 10)
+
+// console.log(addition);
+
+
+
+
 
 
 
@@ -169,3 +186,15 @@ let userdata = [
     { "id": 10, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" }]
 
 ]
+
+
+// filter
+let users = userdata.filter((val) => {
+    return val.id == 1;
+})
+
+console.log(users);
+
+
+//find
+
