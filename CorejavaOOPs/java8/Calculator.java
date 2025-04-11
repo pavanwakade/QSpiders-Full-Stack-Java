@@ -6,7 +6,6 @@ interface calculate {
 }
 
 public class Calculator {
-
 	public static void main(String[] args) {
 
 		calculate add = (a, b) -> a + b;
