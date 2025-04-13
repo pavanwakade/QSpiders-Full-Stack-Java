@@ -28,9 +28,12 @@ public class Split {
 
 		// second way to use
 
-		List<String> data = Arrays.asList("1,John Doe,john.doe@example.com,29,USA",
-				"2,Jane Smith,jane.smith@example.com,34,Canada", "3,Akira Tanaka,akira.t@example.jp,41,Japan",
-				"4,Maria Garcia,maria.garcia@example.es,25,Spain", "5,Chen Wei,chen.wei@example.cn,38,China");
+		List<String> data = Arrays.asList(
+				"1,John Doe,john.doe@example.com,29,USA",
+				"2,Jane Smith,jane.smith@example.com,34,Canada", 
+				"3,Akira Tanaka,akira.t@example.jp,41,Japan",
+				"4,Maria Garcia,maria.garcia@example.es,25,Spain", 
+				"5,Chen Wei,chen.wei@example.cn,38,China");
 
 		for (String line : data) {
 			String[] fields = line.split(",");
@@ -43,9 +46,27 @@ public class Split {
 			System.out.println(
 					"id: " + id + ", Name: " + name + ", Email: " + email + ", Age: " + age + ", Country: " + country);
 		}
-		
+
 		System.out.println();
 
-		 
+		String[] data2 = { "1,John Doe,john.doe@example.com,29,USA", 
+				"2,Jane Smith,jane.smith@example.com,34,Canada",
+				"3,Akira Tanaka,akira.t@example.jp,41,Japan", 
+				"4,Maria Garcia,maria.garcia@example.es,25,Spain" };
+
+		for (String string : data2) {
+
+			String[] fields2 = string.split(",");
+			String id = fields2[0];
+			String name = fields2[1];
+			String email = fields2[2];
+			String age = fields2[3];
+			String country = fields2[4];
+
+			System.out.println(
+					"id: " + id + ", Name: " + name + ", Email: " + email + ", Age: " + age + ", Country: " + country);
+
+		}
 	}
+
 }
