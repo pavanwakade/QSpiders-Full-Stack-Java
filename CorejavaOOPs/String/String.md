@@ -1,9 +1,3 @@
-# Java String Class Methods Cheat Sheet
-
-The `String` class in Java provides a rich set of methods to manipulate and work with string data.
-
----
-
 ## 1. Basic Methods
 
 ### `length()`
