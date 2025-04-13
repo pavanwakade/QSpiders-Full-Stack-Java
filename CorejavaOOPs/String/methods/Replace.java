@@ -16,14 +16,16 @@ public class Replace {
 
 		System.out.println(s1);
 
-		String para = "hello my name is pavan i am from latur i have completed my BE in Electronics and telecommunication and also i have completed my Diploma in computer engg";
+		String para = "hello my name is pavan Wakade";
+
+		System.out.println("Orignal String               : " + para);
 
 		String newpara = para.replace('a', '-');
 
-		System.out.println(newpara);
+		System.out.println("single replace String        : " + newpara);
 
 		String moreReplacePara = para.replace('a', '-').replace('e', '/');
 
-		System.out.println(moreReplacePara);
+		System.out.println("more than one replace String : " + moreReplacePara);
 	}
 }
