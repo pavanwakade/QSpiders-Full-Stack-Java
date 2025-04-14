@@ -15,7 +15,7 @@ public class SingleThread_Runneble implements Runnable {
 		// 2. Thread with anonymous Runnable class
 		Thread t2 = new Thread(new Runnable() {
 			public void run() {
-				System.out.println("Thread using anonymous Runnable is running  ..........2");
+				System.out.println("Thread using anonymous Runnable is running..........2");
 			}
 		});
 		t2.start();
@@ -24,7 +24,6 @@ public class SingleThread_Runneble implements Runnable {
 		Thread t3 = new Thread(() -> System.out.println("Thread using Lambda Runnable is running...........3"));
 		t3.start();
 
-		
 		Thread t4 = new Thread(() -> count());
 		t4.start();
 	}
@@ -36,5 +35,4 @@ public class SingleThread_Runneble implements Runnable {
 			System.out.println(countt);
 		}
 	}
-
 }
