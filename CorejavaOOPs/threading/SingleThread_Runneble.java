@@ -23,10 +23,13 @@ public class SingleThread_Runneble implements Runnable {
 		// 3. Thread with Lambda
 		Thread t3 = new Thread(() -> System.out.println("Thread using Lambda Runnable is running...........3"));
 		t3.start();
+
+		
+		Thread t4 = new Thread(() -> count());
+		t4.start();
 	}
 
-	public void count() {
-
+	public static void count() {
 		int countt = 0;
 		for (int i = 0; countt < 20; i++) {
 			countt++;
