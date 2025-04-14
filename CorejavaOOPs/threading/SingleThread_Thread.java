@@ -15,6 +15,7 @@ public class SingleThread_Thread extends Thread {
 	}
 
 	public static void main(String[] args) {
+		
 		SingleThread_Thread t1 = new SingleThread_Thread();
 		t1.start(); // starts a new thread
 	}
