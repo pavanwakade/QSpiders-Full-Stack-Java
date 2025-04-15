@@ -82,48 +82,79 @@ namesofplayer.map((namesofplayer) => {
     let playernameLength = namesofplayer.length;
     newlengthArray.push(playernameLength);
 });
+// console.log(newlengthArray);
 
-console.log(lengthArray);
+
+
 // ________________________________________
-// 8. Sab item names ko UPPERCASE mein convert karo
-// "biryani" → "BIRYANI"
-// const foodItems = ["biryani", "paneer", "samosa", "jalebi"];
+//! 8. Sab item names ko UPPERCASE mein convert karo
+//! "biryani" → "BIRYANI"
+const foodItems = ["biryani", "paneer", "samosa", "jalebi"];
+
+foodItems.map((foodItems) => {
+    let newaa = foodItems.toUpperCase()
+    // console.log(newaa);
+}
+)
+
+
 // ________________________________________
-// 9. Har student's roll number ke aage "Roll No." jod do
-// Output hona chahiye: Roll No. 101, Roll No. 102, etc.
-// const rollNumbers = [101, 102, 103, 104];
+//! 9. Har student's roll number ke aage "Roll No." jod do
+//! Output hona chahiye: Roll No. 101, Roll No. 102, etc.
+const rollNumbers = [101, 102, 103, 104];
+
+// rollNumbers.forEach(element=> console.log(`ROLL NO. ${element}`))
+
+
 // ________________________________________
-// 🔍 filter – Sirf kaam ki cheezein bacha lo
+//! 🔍 filter – Sirf kaam ki cheezein bacha lo
 // ________________________________________
-// 10. Sab odd numbers filter karo (filter)
-// Array mein se sirf odd numbers chahiye.
-// const numbers = [2, 5, 8, 11, 14, 17];
+// !10. Sab odd numbers filter karo (filter)
+// !Array mein se sirf odd numbers chahiye.
+const numbers = [2, 5, 8, 11, 14, 17];
+// console.log(numbers.filter((num)=>num%2!==0))
+
 // ________________________________________
-// 11. Sirf bade log (age > 18) ko bacha lo (filter)
-// Bas adult log hi filter karo (string/number nahi, sirf logic!)
-// const ages = [12, 22, 17, 30, 19];
+//! 11. Sirf bade log (age > 18) ko bacha lo (filter)
+//! Bas adult log hi filter karo (string/number nahi, sirf logic!)
+const ages = [12, 22, 17, 30, 19, 1, 2, 3];
+//  console.log(ages.filter((age)=>age>18));
+
 // ________________________________________
-// 12. Sab long naam (length > 6) filter karo
-// Chhote naam hata do.
-// const names = ["Amit", "Abhishek", "Parthiban", "Ramesh"];
+//! 12. Sab long naam (length > 6) filter karo
+//! Chhote naam hata do.
+const nams = ["Amit", "Abhishek", "Parthiban", "Ramesh", "ram"];
+// console.log(nams.filter((nam) => nam.length < 6));
+
 // ________________________________________
-// 13. Sab items jinke naam "p" se shuru ho rahe hain, filter karo
-// Case-insensitive check karo.
-// const snacks = ["Pani Puri", "Bhel", "Poha", "Pizza", "Samosa"];
+//! 13. Sab items jinke naam "p" se shuru ho rahe hain, filter karo
+//! Case-insensitive check karo.
+const snacks = ["Pani Puri", "Bhel", "Poha", "Pizza", "Samosa"];
+// console.log(snacks.filter((nam) => nam.startsWith('P')));
+
+
 // ________________________________________
-// 14. ₹100 se kam wale items nikaalo (filter)
-// Budget friendly list chahiye bhai!
-// const prices = [150, 80, 60, 120, 200, 40];
+//! 14. ₹100 se kam wale items nikaalo (filter)
+//! Budget friendly list chahiye bhai!
+const pricess = [150, 80, 60, 120, 200, 40];
+// console.log(pricess.filter((pri)=>pri<100));
+
 // ________________________________________
 // 🔢 reduce – Total ka king
 // ________________________________________
-// 15. Sab item prices ka total nikaalo (reduce)
-// Kirana store ki total bill banana hai.
-// const itemPrices = [40, 80, 60, 30, 100];
+//! 15. Sab item prices ka total nikaalo (reduce)
+//! Kirana store ki total bill banana hai.
+const itemPrices = [40, 80, 60, 30, 100];
+const total = itemPrices.reduce((acc, val) => acc + val, 0);
+console.log(total);
+
+
 // ________________________________________
-// 16. Sentence banao words se (reduce)
-// Ek array of words diya hai, poora sentence banado.
-// const words = ["India", "is", "my", "country"];
+//! 16. Sentence banao words se (reduce)
+//! Ek array of words diya hai, poora sentence banado.
+ const words = ["India", "is", "my", "country"];
+
+ words.reduce(acc,var)=>acc+val
 // ________________________________________
 // 17. Har word ki total length milaake ek number banao (reduce)
 // Jaise ek hi string mein sab milakar length.
@@ -187,5 +218,3 @@ console.log(lengthArray);
 // ________________________________________
 // 33. Convert string to array using split() and back to string using join()
 // const sentence = "Chai peene chalein?"; 
-
-
