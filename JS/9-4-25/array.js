@@ -99,6 +99,7 @@
 //         tremparr.push(a);
 //     }
 
+
 //     return tremparr;
 // }
 
@@ -279,7 +280,7 @@ arrrr.shift();
 // console.log(arrrr);
 
 
-//delete
+//delete operate
 //it will remove the value at the given index
 //it will not change the original array
 //it will not change the length of the array
@@ -339,4 +340,36 @@ let modifiedArr7=arr7.splice(2, 3, 100, 200, 300, 400, 500, 2000);
 //it will reverse the array
 //it will change the original array
 let arr8 = "hello pavan";
-console.log(arr8.reverse());
+// console.log(arr8.split('').reverse().join(''));
+
+
+// from
+//it will create a new array from the given value
+//it will convert the string to array
+//it will change the original array
+let arr9 = Array.from("hello pavan");
+// console.log(arr9);
+
+
+// reverse using form
+
+let arr10 = Array.from("hello pavan").reverse().join('')
+// console.log(arr10);
+
+// At
+//it will give the value at the given index
+let arr11 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// console.log(arr11.at(2));
+// console.log(arr11.at(6));
+// console.log(arr11.at(-2));
+// console.log(arr11.at(-1));
+
+
+//concat
+//it will join two arrays
+let arr12 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let arr13 = [1, 2, 12, 13, 14, 15, 16, 17, 18];
+let arr14 = arr12.concat(arr13);
+console.log(arr14);
+
+
