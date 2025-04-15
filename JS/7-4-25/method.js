@@ -51,12 +51,12 @@ let b = true;
 console.log(b.toString());
 
 let un = undefined;
-console.log(un.toString()); // TypeError: Cannot read properties of undefined (reading 'toString')
+// console.log(un.toString()); // TypeError: Cannot read properties of undefined (reading 'toString')
 
 let n = null;
-console.log(n.toString()); // TypeError: Cannot read properties of null (reading 'toString')
+// console.log(n.toString()); // TypeError: Cannot read properties of null (reading 'toString')
 
-let arr=[1,2,3,4,5];
+let arr = [1, 2, 3, 4, 5];
 console.log(arr.toString()); // "1,2,3,4,5"
 
 
@@ -64,27 +64,27 @@ console.log(arr.toString()); // "1,2,3,4,5"
 
 
 
-let move="bahubali";
-console.log(move.replace("b","P")); 
-console.log(move.replace('i','I'));
-console.log(move.replace("bahubali","a")); 
+let move = "bahubali";
+console.log(move.replace("b", "P"));
+console.log(move.replace('i', 'I'));
+console.log(move.replace("bahubali", "a"));
 
 
 
-let c=move.replace("b","kh");
+let c = move.replace("b", "kh");
 console.log(c);
 
-let d=c.replace('b','g');
+let d = c.replace('b', 'g');
 console.log(d);
 
-let e=d.replace('l','ll');
+let e = d.replace('l', 'll');
 console.log(e);
 
 
 
 
 
-let a=move.replace("b","kh").replace("b","g")
+let a = move.replace("b", "kh").replace("b", "g")
 console.log(a);
 
 
@@ -121,17 +121,27 @@ let strArray = strs.split(' ');
 console.log(strArray);
 
 let inp = "pavan";
-let check = () => strArray.includes(inp) ? console.log(inp) : console.log(`${inp} not present`);
+let check = (p) => strArray.includes(p) ? console.log(p) : console.log(`${p} not present`);
+console.log(check(inp));
 
 
-console.log(check());
+// let check = (p) => {
+//     if (strArray.includes(p)) {
+//         console.log(p);
+
+//     }
+//     else {
+//         console.log(`${p} not present`);
+//     }
+// }
+// check("pavan");
 
 
 
 
-isFinite(arg)
+// isFinite(arg)
 
-let numbr=10;
+let numbr = 10;
 
 console.log(isFinite(numbr));
 
@@ -144,3 +154,5 @@ console.log(Number.parseInt("1000 year old")); //only 1000
 console.log(Number.parseInt("10.5")); //only 10
 console.log(Number.parseInt("10.5abc")); //only 10
 console.log(Number.parseFloat("10.5abc")); //10.5
+
+
