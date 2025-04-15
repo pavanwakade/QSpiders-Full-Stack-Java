@@ -121,8 +121,11 @@ let strArray = strs.split(' ');
 console.log(strArray);
 
 let inp = "pavan";
-let check = (p) => strArray.includes(p) ? console.log(p) : console.log(`${p} not present`);
-console.log(check(inp));
+let check = (p) => {
+    return strArray.includes(p) ? console.log(p) : console.log(`${p} not present`);
+
+}
+check(inp)
 
 
 // let check = (p) => {
