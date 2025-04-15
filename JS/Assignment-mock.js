@@ -65,11 +65,25 @@ const pricesWithGST = prices.map(price => price + (price * 0.18));
 //! Jaise: "Sachin Tendulkar" → "S. Tendulkar"
 const names = ["Sachin Tendulkar", "Rahul Dravid", "MS Dhoni"];
 
-names.map(())
+names.map((names) => {
+    // let first = names[0];
+    let lastName = names.split(" ")
+    // console.log(`${names[0]}. ${lastName[1]}`);
+}
+)
+
+
 // ________________________________________
-// 7. Har naam ki length nikaalo (map)
-// Array ke har string ki length ka array banao.
-// const names = ["Delhi", "Jaipur", "Chandigarh", "Mumbai"];
+//! 7. Har naam ki length nikaalo (map)
+// !Array ke har string ki length ka array banao.
+const namesofplayer = ["Delhi", "Jaipur", "Chandigarh", "Mumbai"];
+const newlengthArray = [];
+namesofplayer.map((namesofplayer) => {
+    let playernameLength = namesofplayer.length;
+    newlengthArray.push(playernameLength);
+});
+
+console.log(lengthArray);
 // ________________________________________
 // 8. Sab item names ko UPPERCASE mein convert karo
 // "biryani" → "BIRYANI"
