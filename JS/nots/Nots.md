@@ -1978,17 +1978,17 @@ console.log(strs.includes("Adipisci veniam earum"));
 //syntax: arr.slice(start index, end index)
 //it will give the new array from start index to end index
 ```
+```
 let arr6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 console.log(arr6.slice(2, 5));
 ```
 
 ### Difference between slice() and substring()
-
-| Feature | slice() | substring() |
-|---------|---------|-------------|
-| **Negative Indices** | Supports negative indices to count from end | Treats negative indices as 0 |
-| **Order of Arguments** | Maintains order (start < end) | Swaps if start > end |
-| **Invalid Numbers** | Converts to 0 if NaN | Converts to 0 if NaN |
+| Feature              | slice()                                        | substring()                  |
+|----------------------|-----------------------------------------------|------------------------------|
+| **Negative Indices** | Supports negative indices to count from end   | Treats negative indices as 0 |
+| **Order of Args**    | Maintains order (start < end)                 | Swaps if start > end        |
+| **Invalid Numbers**  | Converts to 0 if NaN                          | Converts to 0 if NaN        |
 
 #### Examples:
 

@@ -317,6 +317,26 @@ let arr5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 3];
 //it will give the new array from start index to end index
 
 let arr6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log(arr6[10]);
+// console.log(arr6[10]);
 
-console.log(arr6.slice(2, 5));
+// console.log(arr6.slice(2, 5));
+
+
+//splice
+//it will change the original array
+//it will add the value at the given index
+//it will remove the value from the given index
+//it will take the given index and the number of values to be removed
+let arr7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// console.log(arr7.splice(2, 3));
+
+let modifiedArr7=arr7.splice(2, 3, 100, 200, 300, 400, 500, 2000);
+// console.log(modifiedArr7);
+// console.log(arr7);
+
+//reverse
+//it will reverse the array
+//it will change the original array
+let arr8 = "hello pavan";
+console.log(arr8.reverse());
