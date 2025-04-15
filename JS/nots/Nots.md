@@ -1971,14 +1971,51 @@ console.log(strs.includes("!"));
 console.log(strs.includes("Adipisci veniam earum"));
 
 
-slice()   //extract part of the string
+//slice
+//it will give the new array from the given index to the given index
+//it will not change the original array
+// it wil not take last index
+//syntax: arr.slice(start index, end index)
+//it will give the new array from start index to end index
+```
+let arr6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(arr6.slice(2, 5));
+```
 
-syntax   slice(start index,end index) it will not include end index
+### Difference between slice() and substring()
 
-console.log(move.slice(0,5)); 
+| Feature | slice() | substring() |
+|---------|---------|-------------|
+| **Negative Indices** | Supports negative indices to count from end | Treats negative indices as 0 |
+| **Order of Arguments** | Maintains order (start < end) | Swaps if start > end |
+| **Invalid Numbers** | Converts to 0 if NaN | Converts to 0 if NaN |
 
-console.log("pavan".slice(1,5));
+#### Examples:
 
+```javascript
+let str = "Hello World";
+
+// With positive indices
+console.log(str.slice(0, 5));      // "Hello"
+console.log(str.substring(0, 5));   // "Hello"
+
+// With negative indices
+console.log(str.slice(-5));         // "World"
+console.log(str.substring(-5));     // "Hello World"
+
+// With swapped arguments
+console.log(str.slice(5, 0));       // ""
+console.log(str.substring(5, 0));   // "Hello"
+```
+
+Key differences:
+1. slice() accepts negative indices, substring() treats them as 0
+2. substring() swaps arguments if start > end, slice() returns empty string
+3. slice() is more predictable with negative values
+
+
+
+```
 
 let nn = "pavan";
 

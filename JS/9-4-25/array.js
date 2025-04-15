@@ -185,8 +185,8 @@ let userdata = [
     { "id": 9, "firstname": "Corbet", "lastname": "Brabham", "email": "cbrabham8@wp.com", "gender": "Male", "contact": "765-213-7312" },
     { "id": 10, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" },
     { "id": 1, "firstname": "Vania", "lastname": "Gringley", "email": "vgringley9@nih.gov", "gender": "Female", "contact": "116-937-9747" }
-
 ]
+
 
 
 // filter
@@ -197,6 +197,7 @@ let users = userdata.filter((val) => {
 // console.log(users);
 
 
+
 //find
 
 let user = userdata.find((val) => {
@@ -204,6 +205,7 @@ let user = userdata.find((val) => {
 }
 )
 // console.log(user);
+
 
 
 //sort 
@@ -225,12 +227,15 @@ for (const i in aryr) {
     // console.log(i);
 }
 
+
+
 // foroff 
 //it will print value
 
 for (const i of aryr) {
     // console.log(i);
 }
+
 
 
 // reverse
@@ -242,6 +247,8 @@ let arr2 = arr1.reverse();
 // console.log(arr2);
 
 
+
+
 //push
 //it will add the value at the end of the array
 //it will change the original array
@@ -249,11 +256,14 @@ let arrrr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 arrrr.push(10);
 // console.log(arrrr);
 
+
+
 //pop
 //it will remove the last value of the array
 //it will change the original array
 arrrr.pop();
 //  console.log(arrrr);
+
 
 //unshift
 //it will add the value at the beginning of the array
@@ -261,11 +271,13 @@ arrrr.pop();
 arrrr.unshift(1000);
 // console.log(arrrr);
 
+
 //shift
 //it will remove the first value of the array
 //it will change the original array
 arrrr.shift();
 // console.log(arrrr);
+
 
 //delete
 //it will remove the value at the given index
@@ -278,20 +290,33 @@ let arr3 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 delete arr3[2];
 //  console.log(arr3);
 
+
 //indexof
 //it will give the index of the given value
 let arr4 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // console.log(arr4.indexOf(3));
+
 
 //lastIndexof
 //it will give the last index of the given value
 let arr5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 3];
 // console.log(arr5.lastIndexOf(3));
 
+
 //firstIndexof
 //it will give the first index of the given value
-console.log(arr5.at(1));
+// console.log(arr5.at(1));
 
 
 
+//slice
+//it will give the new array from the given index to the given index
+//it will not change the original array
+// it wil not take last index
+//syntax: arr.slice(start index, end index)
+//it will give the new array from start index to end index
 
+let arr6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(arr6[10]);
+
+console.log(arr6.slice(2, 5));
