@@ -139,6 +139,7 @@ const snacks = ["Pani Puri", "Bhel", "Poha", "Pizza", "Samosa"];
 const pricess = [150, 80, 60, 120, 200, 40];
 // console.log(pricess.filter((pri)=>pri<100));
 
+
 // ________________________________________
 // 🔢 reduce – Total ka king
 // ________________________________________
@@ -146,7 +147,7 @@ const pricess = [150, 80, 60, 120, 200, 40];
 //! Kirana store ki total bill banana hai.
 const itemPrices = [40, 80, 60, 30, 100];
 const total = itemPrices.reduce((acc, val) => acc + val, 0);
-console.log(total);
+// console.log(total);
 
 
 // ________________________________________
@@ -154,67 +155,112 @@ console.log(total);
 //! Ek array of words diya hai, poora sentence banado.
  const words = ["India", "is", "my", "country"];
 
- words.reduce(acc,var)=>acc+val
+// console.log(words.reduce((acc, word) => acc + " " + word, ""));
+
+
+
 // ________________________________________
-// 17. Har word ki total length milaake ek number banao (reduce)
-// Jaise ek hi string mein sab milakar length.
-// const states = ["Goa", "Kerala", "Punjab", "Gujarat"];
+//! 17. Har word ki total length milaake ek number banao (reduce)
+//! Jaise ek hi string mein sab milakar length.
+const states = ["Goa", "Kerala", "Punjab", "Gujarat"];
+// console.log(states.reduce((acc, le) => acc + le.length, 0));
+
+
 // ________________________________________
-// 🔍 find – Pehla mil jaaye toh kaafi hai
+//? 🔍 find – Pehla mil jaaye toh kaafi hai
 // ________________________________________
-// 18. Pehla naam find karo jo "M" se start hota ho (find)
-// Bhai "M" se hero chahiye.
-// const names = ["Amit", "Manish", "Vikas", "Mehul"];
+//! 18. Pehla naam find karo jo "M" se start hota ho (find)
+//! Bhai "M" se hero chahiye.
+ const namees = ["Amit", "Manish", "Vikas", "Mehul"];
+//  console.log(namees.find((val)=>val[0]==="M"));
+
+
 // ________________________________________
-// 19. Pehla bada number find karo jo 500 se upar ho (find)
-// Bas pehla mil jaaye, baaki chhodo.
-// const prices = [120, 300, 550, 800];
+//! 19. Pehla bada number find karo jo 500 se upar ho (find)
+//! Bas pehla mil jaaye, baaki chhodo.
+ const prics = [120, 300, 550, 800];
+// console.log( prics.find((val)=>val>500)  );
+
+
+
+
 // ________________________________________
-// 🔃 sort & reverse – Thoda arrange, thoda ulta
+//? 🔃 sort & reverse – Thoda arrange, thoda ulta
 // ________________________________________
-// 20. Sab numbers ascending mein sort karo
-// Chhota se bada.
-// const marks = [88, 45, 76, 90, 69];
+//! 20. Sab numbers ascending mein sort karo
+//! Chhota se bada.
+ const marks = [88, 45, 76, 90, 69];
+//  console.log(marks.sort((a, b) => a - b));
+ 
 // ________________________________________
-// 21. Sab words ko reverse order mein print karo
-// Last word pehle aayega.
-// const fruits = ["Banana", "Mango", "Apple", "Guava"];
+//! 21. Sab words ko reverse order mein print karo
+//! Last word pehle aayega.
+const fruits = ["Banana", "Mango", "Apple", "Guava"];
+// console.log(fruits.reverse());
+
+
 // ________________________________________
-// 22. Sab strings ko alphabetical order mein lagao (sort)
-// const items = ["Jalebi", "Barfi", "Rasgulla", "Gulab Jamun"];
+//! 22. Sab strings ko alphabetical order mein lagao (sort)
+const itm = ["Jalebi", "Barfi", "Rasgulla", "Gulab Jamun"];
+// console.log(itm.sort());
+
+
 // ________________________________________
-// 23. Dates ko sort karo (string format)
-// "2023-05-01" jaisi dates ko sahi order mein lagao.
-// const dates = ["2024-01-01", "2023-12-12", "2024-03-01"];
+//! 23. Dates ko sort karo (string format)
+//! "2023-05-01" jaisi dates ko sahi order mein lagao.
+const dates = ["2024-01-01", "2023-12-12", "2024-03-01"];
+// console.log(dates.sort());
+
 // ________________________________________
-// 🔤 String methods only – Bas string se kheloge ab!
+//? 🔤 String methods only – Bas string se kheloge ab!
 // ________________________________________
-// 24. Har naam ka pehla character nikaalo (charAt / [0])
-// const names = ["Ankita", "Bhavesh", "Chandan", "Divya"];
+//! 24. Har naam ka pehla character nikaalo (charAt / [0])
+const namaas = ["Ankita", "Bhavesh", "Chandan", "Divya"];
+// console.log(namaas.map(name => name.charAt(0)));
+
 // ________________________________________
-// 25. Sab strings ko lowercase mein convert karo (toLowerCase)
-// const cities = ["DELHI", "MUMBAI", "CHENNAI"];
+//! 25. Sab strings ko lowercase mein convert karo (toLowerCase)
+const cities = ["DELHI", "MUMBAI", "CHENNAI"];
+// console.log(cities.map(city => city.toLowerCase()));
+
 // ________________________________________
-// 26. Har string ke aage "Mr./Ms." jod do (concat)
-// const names = ["Ravi", "Sneha", "Arjun"];
+//! 26. Har string ke aage "Mr./Ms." jod do (concat)
+const namess = ["Ravi", "Sneha", "Arjun"];
+// console.log(namess.map(name => "Mr./Ms. ".concat(name)));
+
 // ________________________________________
-// 27. Sab strings ke starting/trailing spaces hata do (trim)
-// const messyNames = ["  Raju  ", "   Meena", "Tarun   "];
+//! 27. Sab strings ke starting/trailing spaces hata do (trim)
+const messyNames = ["  Raju  ", "   Meena", "Tarun   "];
+// console.log(messyNames.map(name => name.trim()));
+
 // ________________________________________
-// 28. Check karo kaunse string "Singh" se end ho rahe hain (endsWith)
-// const surnames = ["Ram Singh", "Ajay", "Rohit Singh"];
+//! 28. Check karo kaunse string "Singh" se end ho rahe hain (endsWith)
+const surnames = ["Ram Singh", "Ajay", "Rohit Singh"];
+// console.log(surnames.filter(name => name.endsWith("Singh")));
+
 // ________________________________________
-// 29. Sab string ko 10 characters tak padStart karo (padStart)
-// const numbers = ["45", "6", "123", "9999"];
+//! 29. Sab string ko 10 characters tak padStart karo (padStart)
+const number = ["45", "6", "123", "9999"];
+// console.log(number.map(num => num.padStart(10, '0')));
+
 // ________________________________________
-// 30. "Delhi" ko "New Delhi" bana do (replace)
-// const city = "Delhi";
+//! 30. "Delhi" ko "New Delhi" bana do (replace)
+const city = "Delhi";
+// console.log(city.replace("Delhi", "New Delhi"));
+
 // ________________________________________
-// 31. Substring nikalo first 3 characters ka (substring / slice)
-// const names = ["Amitabh", "Shahrukh", "Salman"];
+//! 31. Substring nikalo first 3 characters ka (substring / slice)
+const namesa = ["Amitabh", "Shahrukh", "Salman"];
+// console.log(namesa.map(name => name.substring(0, 3)));
+
 // ________________________________________
-// 32. Har string ka last character print karo
-// const foods = ["Poha", "Upma", "Idli", "Dosa"];
+//! 32. Har string ka last character print karo
+const foods = ["Poha", "Upma", "Idli", "Dosa"];
+// console.log(foods.map(food => food.charAt(food.length - 1)));
+
 // ________________________________________
-// 33. Convert string to array using split() and back to string using join()
-// const sentence = "Chai peene chalein?"; 
+//! 33. Convert string to array using split() and back to string using join()
+const sentence = "Chai peene chalein?"; 
+console.log(sentence.split(" ").join("-"));
+
+
