@@ -17,50 +17,55 @@ indiancities.forEach(element => {
 // ________________________________________
 //! 2. Sab even PIN codes print karo (for...of)
 //! Pin codes ka array hai. Sirf even wale print karo.
- const pinCodes = [110001, 560034, 400001, 700019, 600005,232330];
+const pinCodes = [110001, 560034, 400001, 700019, 600005, 232330];
 
- for (const element of pinCodes) {
-    if(element%2==0){
+for (const element of pinCodes) {
+    if (element % 2 == 0) {
         // console.log(element);
-        
+
     }
- }
+}
 
 
 
 // ________________________________________
 //! 3. IPL players ka naam aur unka index print karo (forEach)
 // !Jaise: "0 - Dhoni", "1 - Kohli", etc.
- const players = ["Dhoni", "Kohli", "Rohit", "Pandya"];
- players.forEach(element => {
-    
-    console.log(`index : ${players.indexOf(element)}  ${players.} `)
-    
- });
+const players = ["Dhoni", "Kohli", "Rohit", "Pandya"];
+players.forEach(element => {
+
+    // console.log(`index : ${players.indexOf(element)}  ${players.} `)
+
+});
 
 
 
 
 // ________________________________________
 //! 4. Har item ko ek message ke saath print karo (for...of)
-//! Jaise: "Item mil gaya: [item]"
+//! Jaise:  [item]"
 const items = ["Dahi", "Pani Puri", "Lassi", "Aloo Paratha"];
 for (const element of items) {
-    
-    
 
+    // console.log(`"Item mil gaya: ${element}`)
 }
 
+
 // ________________________________________
-// 🔄 map – Naye array banane ka magician
+//! 🔄 map – Naye array banane ka magician
+//! 5. Sab price pe 18% GST jod do (map ka use)
+//! ₹ ke prices ka array diya hai. Har ek pe GST lagake naya array banao.
+const prices = [100, 250, 500, 750];
+const pricesWithGST = prices.map(price => price + (price * 0.18));
+// console.log(pricesWithGST);
+
+
 // ________________________________________
-// 5. Sab price pe 18% GST jod do (map ka use)
-// ₹ ke prices ka array diya hai. Har ek pe GST lagake naya array banao.
-// const prices = [100, 250, 500, 750];
-// ________________________________________
-// 6. Naam ko short form mein convert karo (map)
-// Jaise: "Sachin Tendulkar" → "S. Tendulkar"
-// const names = ["Sachin Tendulkar", "Rahul Dravid", "MS Dhoni"];
+//! 6. Naam ko short form mein convert karo (map)
+//! Jaise: "Sachin Tendulkar" → "S. Tendulkar"
+const names = ["Sachin Tendulkar", "Rahul Dravid", "MS Dhoni"];
+
+names.map(())
 // ________________________________________
 // 7. Har naam ki length nikaalo (map)
 // Array ke har string ki length ka array banao.
