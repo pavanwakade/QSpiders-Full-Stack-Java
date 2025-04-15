@@ -332,7 +332,7 @@ let arr7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // console.log(arr7.splice(2, 3));
 
-let modifiedArr7=arr7.splice(2, 3, 100, 200, 300, 400, 500, 2000);
+let modifiedArr7 = arr7.splice(2, 3, 100, 200, 300, 400, 500, 2000);
 // console.log(modifiedArr7);
 // console.log(arr7);
 
@@ -370,6 +370,30 @@ let arr11 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let arr12 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let arr13 = [1, 2, 12, 13, 14, 15, 16, 17, 18];
 let arr14 = arr12.concat(arr13);
-console.log(arr14);
+// console.log(arr14);
+
+
+// Array.of
+//it will create a new array from the given value
+let arr15 = Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+console.log(arr15);
+
+
+
+
+
+//ways to create arrays
+
+//1.let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+//2 let arr16 = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+//3.arr.splice(2, 3, 100, 200, 300)
+
+//4. Array.of(value)
+
+//5. Array.from("hello pavan")
+
+//6. split str.split('')
 
 
