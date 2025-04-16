@@ -261,6 +261,16 @@ const foods = ["Poha", "Upma", "Idli", "Dosa"];
 // ________________________________________
 //! 33. Convert string to array using split() and back to string using join()
 const sentence = "Chai peene chalein?"; 
-console.log(sentence.split(" ").join("-"));
+// console.log(sentence.split(" ").join("-"));
 
 
+
+
+let num1=10;
+let num2=20;
+
+let swap=(a,b)=>{
+    let temp=0;
+    temp=a;
+
+}
