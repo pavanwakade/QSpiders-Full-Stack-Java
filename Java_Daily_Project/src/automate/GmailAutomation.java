@@ -3,13 +3,13 @@ package automate;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Clipboard;
 
-public class GmailChromeAutomation extends JFrame {
+public class GmailAutomation extends JFrame {
     private JTextField recipientsField;
     private JTextField subjectField;
     private JTextArea bodyArea;
@@ -20,6 +20,9 @@ public class GmailChromeAutomation extends JFrame {
     private File selectedFile;
     private Robot robot;
     private JTextField chromePathField;
+    private JTextField recipientsFileField;
+    private JLabel recipientsFileLabel;
+    private File selectedRecipientsFile;
     
     // Hardcoded coordinates as per user request
     private final int COMPOSE_BUTTON_X = 95;
@@ -29,7 +32,7 @@ public class GmailChromeAutomation extends JFrame {
     private final int SEND_BUTTON_X = 841;
     private final int SEND_BUTTON_Y = 692;
 
-    public GmailChromeAutomation() {
+    public GmailAutomation() {
         super("Gmail Chrome Automation Tool");
         initUI();
         initRobot();
@@ -48,7 +51,7 @@ public class GmailChromeAutomation extends JFrame {
     private void initUI() {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 650);
+        setSize(700, 700);
         setLocationRelativeTo(null);
 
         // Create tabbed pane for organization
@@ -92,11 +95,29 @@ public class GmailChromeAutomation extends JFrame {
         chromePanel.add(browseChromeButton, BorderLayout.EAST);
         panel.add(chromePanel, gbc);
 
-        // Recipients
+        // Recipients File
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0.0;
-        panel.add(new JLabel("Recipients (comma separated):"), gbc);
+        panel.add(new JLabel("Recipients File:"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        recipientsFileField = new JTextField(30);
+        recipientsFileField.setEditable(false);
+        JPanel recipientsFilePanel = new JPanel(new BorderLayout());
+        recipientsFileLabel = new JLabel("No file selected");
+        JButton browseRecipientsButton = new JButton("Browse");
+        browseRecipientsButton.addActionListener(e -> selectRecipientsFile());
+        recipientsFilePanel.add(recipientsFileLabel, BorderLayout.CENTER);
+        recipientsFilePanel.add(browseRecipientsButton, BorderLayout.EAST);
+        panel.add(recipientsFilePanel, gbc);
+
+        // Recipients Text Field (Optional)
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.0;
+        panel.add(new JLabel("Or enter recipients (comma separated):"), gbc);
         
         gbc.gridx = 1;
         gbc.weightx = 1.0;
@@ -105,7 +126,7 @@ public class GmailChromeAutomation extends JFrame {
 
         // Subject
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.weightx = 0.0;
         panel.add(new JLabel("Subject:"), gbc);
         
@@ -116,7 +137,7 @@ public class GmailChromeAutomation extends JFrame {
 
         // Body
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.weightx = 0.0;
         panel.add(new JLabel("Body:"), gbc);
         
@@ -132,7 +153,7 @@ public class GmailChromeAutomation extends JFrame {
 
         // Attachment
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.weightx = 0.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(new JLabel("Attachment:"), gbc);
@@ -148,7 +169,7 @@ public class GmailChromeAutomation extends JFrame {
         
         // Coordinates Information
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         JTextArea coordsInfo = new JTextArea(
             "Using hardcoded coordinates:\n" +
@@ -170,7 +191,6 @@ public class GmailChromeAutomation extends JFrame {
         fileChooser.setDialogTitle("Select Chrome Executable");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         
-        // Set initial directory to common Chrome locations
         File defaultDir = new File("C:\\Program Files\\Google\\Chrome\\Application");
         if (defaultDir.exists()) {
             fileChooser.setCurrentDirectory(defaultDir);
@@ -192,6 +212,20 @@ public class GmailChromeAutomation extends JFrame {
         }
     }
 
+    private void selectRecipientsFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Recipients Text File");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Text files", "txt"));
+        
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            selectedRecipientsFile = fileChooser.getSelectedFile();
+            recipientsFileField.setText(selectedRecipientsFile.getAbsolutePath());
+            recipientsFileLabel.setText(selectedRecipientsFile.getName());
+        }
+    }
+
     private void sendEmails() {
         String chromePath = chromePathField.getText().trim();
         String recipientsText = recipientsField.getText().trim();
@@ -204,61 +238,51 @@ public class GmailChromeAutomation extends JFrame {
             return;
         }
 
-        if (recipientsText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter at least one recipient email.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        List<String> recipients = new ArrayList<>();
+        if (selectedRecipientsFile != null) {
+            recipients = readRecipientsFromFile();
+        }
+        if (recipients.isEmpty() && !recipientsText.isEmpty()) {
+            recipients = parseRecipients(recipientsText);
         }
 
-        List<String> recipients = parseRecipients(recipientsText);
         if (recipients.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No valid recipients found.",
+            JOptionPane.showMessageDialog(this, "Please select a recipients file or enter at least one recipient email.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
-            // Launch Chrome with Gmail
             openChromeWithGmail(chromePath);
-            
-            // Allow time for Gmail to load
             updateStatus("Waiting for Gmail to load in Chrome...");
-            sleepSafe(10000);  // Increased wait time for Gmail to fully load
+            sleepSafe(10000);
             
             for (int i = 0; i < recipients.size(); i++) {
                 String recipient = recipients.get(i);
                 updateStatus("Sending email to " + recipient + " (" + (i+1) + "/" + recipients.size() + ")");
                 
-                // Click compose button using fixed coordinates
                 clickComposeButton();
                 sleepSafe(2000);
                 
-                // Fill recipient
                 pasteText(recipient);
                 robot.keyPress(KeyEvent.VK_TAB);
                 robot.keyRelease(KeyEvent.VK_TAB);
                 sleepSafe(500);
                 
-                // Fill subject
                 pasteText(subject);
                 robot.keyPress(KeyEvent.VK_TAB);
                 robot.keyRelease(KeyEvent.VK_TAB);
                 sleepSafe(500);
                 
-                // Fill body
                 pasteText(body);
                 sleepSafe(500);
                 
-                // Attach file if any
                 if (selectedFile != null) {
                     attachFile();
-                    sleepSafe(3000); // Wait longer for attachment to upload
+                    sleepSafe(3000);
                 }
                 
-                // Send email using fixed coordinates
                 clickSendButton();
-                
-                // Wait before starting next email
                 sleepSafe(3000);
             }
             
@@ -266,6 +290,23 @@ public class GmailChromeAutomation extends JFrame {
         } catch (Exception e) {
             updateStatus("Error: " + e.getMessage());
         }
+    }
+    
+    private List<String> readRecipientsFromFile() {
+        List<String> recipients = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(selectedRecipientsFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (!trimmed.isEmpty()) {
+                    recipients.add(trimmed);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading recipients file: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return recipients;
     }
     
     private void openChromeWithGmail(String chromePath) throws Exception {
@@ -276,7 +317,6 @@ public class GmailChromeAutomation extends JFrame {
             }
             
             updateStatus("Opening Gmail in Chrome...");
-            // Launch Chrome with Gmail URL
             String command = "\"" + chromePath + "\" https://mail.google.com";
             Runtime.getRuntime().exec(command);
             
@@ -287,7 +327,6 @@ public class GmailChromeAutomation extends JFrame {
     
     private void clickComposeButton() {
         updateStatus("Clicking compose button...");
-        // Use fixed coordinates for compose button
         robot.mouseMove(COMPOSE_BUTTON_X, COMPOSE_BUTTON_Y);
         sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -297,7 +336,6 @@ public class GmailChromeAutomation extends JFrame {
     private void attachFile() {
         updateStatus("Attaching file: " + selectedFile.getName());
         
-        // Click on attachment button using fixed coordinates
         robot.mouseMove(ATTACH_BUTTON_X, ATTACH_BUTTON_Y);
         sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -305,21 +343,17 @@ public class GmailChromeAutomation extends JFrame {
         
         sleepSafe(1000);
         
-        // Type the file path in the file dialog
         pasteText(selectedFile.getAbsolutePath());
         sleepSafe(500);
         
-        // Press Enter to confirm file selection
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
         
-        // Wait for upload to complete
         sleepSafe(3000);
     }
     
     private void clickSendButton() {
         updateStatus("Clicking send button...");
-        // Use fixed coordinates for send button
         robot.mouseMove(SEND_BUTTON_X, SEND_BUTTON_Y);
         sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -327,12 +361,10 @@ public class GmailChromeAutomation extends JFrame {
     }
     
     private void pasteText(String text) {
-        // Copy text to clipboard
         StringSelection selection = new StringSelection(text);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
         
-        // Paste using Ctrl+V
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_V);
@@ -367,14 +399,13 @@ public class GmailChromeAutomation extends JFrame {
 
     public static void main(String[] args) {
         try {
-            // Set Windows look and feel
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         SwingUtilities.invokeLater(() -> {
-            GmailChromeAutomation app = new GmailChromeAutomation();
+            GmailAutomation app = new GmailAutomation();
             app.setVisible(true);
         });
     }
