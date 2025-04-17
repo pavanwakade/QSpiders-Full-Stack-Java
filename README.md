@@ -64,10 +64,7 @@ public class AboutMe {
   
   
 </div>
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pavanwakade&layout=compact&theme=neon&hide_border=true" width="42%" />
-  <img src="https://github-readme-stats.vercel.app/api?username=pavanwakade&show_icons=true&theme=synthwave&hide_border=true" width="50%" />
-</p>
+
 
 ## 🌟 Professional Journey
 
@@ -88,13 +85,19 @@ public class AboutMe {
 
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=pavanwakade&theme=github-compact&hide_border=true" width="800">
+<!--   <img src="https://github-readme-activity-graph.vercel.app/graph?username=pavanwakade&theme=github-compact&hide_border=true" width="800"> -->
 </div>
 
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=pavanwakade&color=blue" alt="Profile views">
+<!--   <img src="https://komarev.com/ghpvc/?username=pavanwakade&color=blue" alt="Profile views"> -->
 </p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pavanwakade&layout=compact&theme=neon&hide_border=true" width="42%" />
+<!--   <img src="https://github-readme-stats.vercel.app/api?username=pavanwakade&show_icons=true&theme=synthwave&hide_border=true" width="50%" /> -->
+</p>
+
 <div align="center">
   ⭐️ Created with precision by <a href="https://github.com/pavanwakade">Pavan Wakade</a> 💻
 </div>
