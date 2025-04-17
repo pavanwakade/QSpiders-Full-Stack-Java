@@ -32,6 +32,9 @@ public class GmailAutomation extends JFrame {
     private final int SEND_BUTTON_X = 841;
     private final int SEND_BUTTON_Y = 692;
 
+    // File path for logging sent emails
+    private static final String SENT_EMAILS_FILE = "C:\\Users\\Admin\\Desktop\\Gmails\\Gmails_sended.txt";
+
     public GmailAutomation() {
         super("Gmail Chrome Automation Tool");
         initUI();
@@ -167,22 +170,6 @@ public class GmailAutomation extends JFrame {
         attachmentPanel.add(attachmentButton, BorderLayout.EAST);
         panel.add(attachmentPanel, gbc);
         
-        // Coordinates Information
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        JTextArea coordsInfo = new JTextArea(
-            "Using hardcoded coordinates:\n" +
-            "- Compose Button: X=" + COMPOSE_BUTTON_X + ", Y=" + COMPOSE_BUTTON_Y + "\n" +
-            "- Attachment Button: X=" + ATTACH_BUTTON_X + ", Y=" + ATTACH_BUTTON_Y + "\n" +
-            "- Send Button: X=" + SEND_BUTTON_X + ", Y=" + SEND_BUTTON_Y
-        );
-        coordsInfo.setEditable(false);
-        coordsInfo.setLineWrap(true);
-        coordsInfo.setWrapStyleWord(true);
-        coordsInfo.setBackground(panel.getBackground());
-        panel.add(coordsInfo, gbc);
-        
         return panel;
     }
 
@@ -284,6 +271,13 @@ public class GmailAutomation extends JFrame {
                 
                 clickSendButton();
                 sleepSafe(3000);
+                
+                // Log the sent recipient to the file
+                try (PrintWriter writer = new PrintWriter(new FileWriter(SENT_EMAILS_FILE, true))) {
+                    writer.println(recipient);
+                } catch (IOException e) {
+                    updateStatus("Error writing to file: " + e.getMessage());
+                }
             }
             
             updateStatus("All emails sent successfully!");
