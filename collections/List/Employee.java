@@ -2,7 +2,7 @@ package List;
 
 public class Employee {
 
-    int id;
+     int id;
 
     String name;
 
@@ -11,18 +11,18 @@ public class Employee {
     String position;
 
     public Employee(int id, String name, double sal, String position) {
-        id = this.id;
-        name = this.name;
-        sal = this.sal;
-        position = this.position;
-    }
-
-    public Employee(Employee emp) {
-        this.id = emp.id;
-        this.name = emp.name;
-        this.sal = emp.sal;
-        this.position = emp.position;
+        this.id = id;
+        this.name = name;
+        this.sal = sal;
+        this.position = position;
     }
 
 
+    @Override
+    public String toString() {
+        return "Employee [ID=" + id + ", Name=" + name + ", Salary=" + sal + ", Designation=" + position + "]";
+    }
+
+    
 }
+
