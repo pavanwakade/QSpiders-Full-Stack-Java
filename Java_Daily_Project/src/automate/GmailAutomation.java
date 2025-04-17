@@ -458,6 +458,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package automate;
 
 import javax.swing.*;
@@ -504,7 +526,7 @@ public class GmailAutomation extends JFrame {
     private void initRobot() {
         try {
             robot = new Robot();
-            robot.setAutoDelay(50); // Reduced from 100ms
+            robot.setAutoDelay(100);
         } catch (AWTException e) {
             JOptionPane.showMessageDialog(this, "Robot initialization failed: " + e.getMessage(), 
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -533,7 +555,7 @@ public class GmailAutomation extends JFrame {
         
         sendButton = new JButton("Open Gmail in Chrome & Send Emails");
         sendButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        sendButton.setBackground(new Color(0, 122, 255));
+        sendButton.setBackground(new Color(0, 122, 255)); // Blue color
         sendButton.setForeground(Color.WHITE);
         sendButton.addActionListener(e -> {
             sendButton.setEnabled(false);
@@ -708,66 +730,57 @@ public class GmailAutomation extends JFrame {
 
         try {
             openChromeWithGmail(chromePath);
-            updateStatus("Waiting for Gmail to load...");
-            sleepSafe(6000); // Reduced from 10000ms
+            updateStatus("Waiting for Gmail to load in Chrome...");
+            sleepSafe(11000);
             
-            StringBuilder logBuilder = new StringBuilder(); // Batch file writes
             for (int i = 0; i < recipients.size(); i++) {
                 String recipient = recipients.get(i);
                 updateStatus("Sending email to " + recipient + " (" + (i+1) + "/" + recipients.size() + ")");
                 
-                composeEmail(recipient, subject, body); // Combined method for efficiency
-                sleepSafe(1500); // Reduced from 3000ms
+                clickComposeButton();
+                sleepSafe(2000);
                 
-                logBuilder.append(recipient).append("\n");
-            }
-            
-            // Write all recipients to file at once
-            try (PrintWriter writer = new PrintWriter(new FileWriter(SENT_EMAILS_FILE, true))) {
-                writer.print(logBuilder.toString());
-            } catch (IOException e) {
-                updateStatus("<html><font color='red'>Error writing to file: " + e.getMessage() + "</font></html>");
+                pasteText(recipient);
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                sleepSafe(800);
+                
+                pasteText(subject);
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                sleepSafe(500);
+                
+                pasteText(body);
+                sleepSafe(500);
+                
+                if (selectedFile != null) {
+                    attachFile();
+                    sleepSafe(3000);
+                }
+                
+                clickSendButton();
+                sleepSafe(3000);
+                
+                // Log the sent recipient to the file
+                try (PrintWriter writer = new PrintWriter(new FileWriter(SENT_EMAILS_FILE, true))) {
+                    writer.println(recipient);
+                } catch (IOException e) {
+                    updateStatus("Error writing to file: " + e.getMessage());
+                }
             }
             
             SwingUtilities.invokeLater(() -> {
                 updateStatus("<html><font color='green'>All emails sent successfully!</font></html>");
-                JOptionPane.showMessageDialog(this, "All emails have been sent successfully!", 
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "All emails have been sent successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 sendButton.setEnabled(true);
             });
         } catch (Exception e) {
             SwingUtilities.invokeLater(() -> {
                 updateStatus("<html><font color='red'>Error: " + e.getMessage() + "</font></html>");
-                JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), 
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 sendButton.setEnabled(true);
             });
         }
-    }
-    
-    private void composeEmail(String recipient, String subject, String body) {
-        clickComposeButton();
-        sleepSafe(1000); // Reduced from 2000ms
-        
-        pasteText(recipient);
-        robot.keyPress(KeyEvent.VK_TAB);
-        robot.keyRelease(KeyEvent.VK_TAB);
-        sleepSafe(300); // Reduced from 500ms
-        
-        pasteText(subject);
-        robot.keyPress(KeyEvent.VK_TAB);
-        robot.keyRelease(KeyEvent.VK_TAB);
-        sleepSafe(300); // Reduced from 500ms
-        
-        pasteText(body);
-        sleepSafe(300); // Reduced from 500ms
-        
-        if (selectedFile != null) {
-            attachFile();
-            sleepSafe(2000); // Reduced from 3000ms
-        }
-        
-        clickSendButton();
     }
     
     private List<String> readRecipientsFromFile() {
@@ -787,64 +800,78 @@ public class GmailAutomation extends JFrame {
     }
     
     private void openChromeWithGmail(String chromePath) throws Exception {
-        File chromeFile = new File(chromePath);
-        if (!chromeFile.exists() || !chromeFile.canExecute()) {
-            throw new Exception("Chrome executable not found or cannot be executed");
+        try {
+            File chromeFile = new File(chromePath);
+            if (!chromeFile.exists() || !chromeFile.canExecute()) {
+                throw new Exception("Chrome executable not found or cannot be executed");
+            }
+            
+            updateStatus("Opening Gmail in Chrome...");
+            String command = "\"" + chromePath + "\" https://mail.google.com";
+            Runtime.getRuntime().exec(command);
+            
+        } catch (Exception e) {
+            throw new Exception("Failed to open Chrome: " + e.getMessage());
         }
-        
-        updateStatus("Opening Gmail in Chrome...");
-        String command = "\"" + chromePath + "\" https://mail.google.com";
-        Runtime.getRuntime().exec(command);
     }
     
     private void clickComposeButton() {
         updateStatus("Clicking compose button...");
         robot.mouseMove(COMPOSE_BUTTON_X, COMPOSE_BUTTON_Y);
+        sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        sleepSafe(300); // Reduced from 500ms
     }
     
     private void attachFile() {
         updateStatus("Attaching file: " + selectedFile.getName());
+        
         robot.mouseMove(ATTACH_BUTTON_X, ATTACH_BUTTON_Y);
+        sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        sleepSafe(500); // Reduced from 1000ms
+        
+        sleepSafe(1000);
         
         pasteText(selectedFile.getAbsolutePath());
+        sleepSafe(500);
+        
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-        sleepSafe(1000); // Reduced from 3000ms
+        
+        sleepSafe(3000);
     }
     
     private void clickSendButton() {
         updateStatus("Clicking send button...");
         robot.mouseMove(SEND_BUTTON_X, SEND_BUTTON_Y);
+        sleepSafe(500);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        sleepSafe(300); // Reduced from 500ms
     }
     
     private void pasteText(String text) {
         StringSelection selection = new StringSelection(text);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+        
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_CONTROL);
-        sleepSafe(100); // Added minimal delay for reliability
     }
     
     private List<String> parseRecipients(String recipientsText) {
         String[] emails = recipientsText.split(",");
         List<String> recipients = new ArrayList<>();
+        
         for (String email : emails) {
             String trimmed = email.trim();
             if (!trimmed.isEmpty()) {
                 recipients.add(trimmed);
             }
         }
+        
         return recipients;
     }
     
@@ -853,8 +880,7 @@ public class GmailAutomation extends JFrame {
     }
     
     private void showErrorDialog(String message) {
-        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, message, 
-            "Error", JOptionPane.ERROR_MESSAGE));
+        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE));
     }
     
     private void sleepSafe(long millis) {
