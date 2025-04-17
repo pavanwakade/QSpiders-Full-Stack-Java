@@ -1,9 +1,6 @@
 package List;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class List1 {
@@ -25,20 +22,20 @@ public class List1 {
         list.add(new Employee(10, "Anjali", 13000, "Intern"));
         list.add(new Employee(10, "Anjali", 13000, "Intern"));
 
-        for (Employee emp : list) {
-//            if(emp.name.contains("Anjali")) {
-//                System.out.println(emp);
-//                return;
-//            }
-            System.out.println(emp);
+        // Printing list of employees before converting to TreeSet
+//        System.out.println("List of Employees:");
+//        for (Employee emp : list) {
+//            System.out.println(emp);
+//        }
+//
+//        System.out.println();
 
-        }
+        // Converting to TreeSet to remove duplicates and sort by id
+        TreeSet<Employee> empl = new TreeSet<>(list);
 
-        System.out.println();
-
-        HashSet<Employee>empl=new HashSet<>(list);
-
-        for (Employee e: list){
+        // Printing employees from TreeSet (duplicates will be removed)
+        System.out.println("Employees after removing duplicates and sorting:");
+        for (Employee e : empl) {
             System.out.println(e);
         }
     }
