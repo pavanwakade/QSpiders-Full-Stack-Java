@@ -15,6 +15,7 @@ public class GmailAutomation extends JFrame {
     private JTextArea bodyArea;
     private JButton attachmentButton;
     private JButton sendButton;
+    private JButton stopButton;
     private JLabel statusLabel;
     private JLabel attachmentLabel;
     private File selectedFile;
@@ -40,6 +41,9 @@ public class GmailAutomation extends JFrame {
     private JSlider inputDelaySlider;
     private JSlider attachmentDelaySlider;
     private JSlider sendDelaySlider;
+
+    // Flag to control automation
+    private volatile boolean isRunning = false;
 
     public GmailAutomation() {
         super("Gmail Chrome Automation Tool");
@@ -75,9 +79,18 @@ public class GmailAutomation extends JFrame {
         statusLabel = new JLabel("Ready");
         statusPanel.add(statusLabel, BorderLayout.CENTER);
         
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         sendButton = new JButton("Open Gmail in Chrome & Send Emails");
         sendButton.addActionListener(e -> new Thread(this::sendEmails).start());
-        statusPanel.add(sendButton, BorderLayout.SOUTH);
+        
+        stopButton = new JButton("Stop Automation");
+        stopButton.setEnabled(false);
+        stopButton.addActionListener(e -> stopAutomation());
+        
+        buttonPanel.add(sendButton);
+        buttonPanel.add(stopButton);
+        statusPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         add(tabbedPane, BorderLayout.CENTER);
         add(statusPanel, BorderLayout.SOUTH);
@@ -309,6 +322,15 @@ public class GmailAutomation extends JFrame {
         }
     }
 
+    private void stopAutomation() {
+        isRunning = false;
+        updateStatus("Automation stopped by user");
+        JOptionPane.showMessageDialog(this, "Email automation has been stopped.",
+                "Stopped", JOptionPane.INFORMATION_MESSAGE);
+        sendButton.setEnabled(true);
+        stopButton.setEnabled(false);
+    }
+
     private void sendEmails() {
         String chromePath = chromePathField.getText().trim();
         String recipientsText = recipientsField.getText().trim();
@@ -340,11 +362,15 @@ public class GmailAutomation extends JFrame {
                 "Warning", JOptionPane.WARNING_MESSAGE);
 
         try {
+            isRunning = true;
+            sendButton.setEnabled(false);
+            stopButton.setEnabled(true);
+
             openChromeWithGmail(chromePath);
             updateStatus("Waiting for Gmail to load in Chrome...");
             sleepSafe(initialDelaySlider.getValue());
             
-            for (int i = 0; i < recipients.size(); i++) {
+            for (int i = 0; i < recipients.size() && isRunning; i++) {
                 String recipient = recipients.get(i);
                 updateStatus("Sending email to " + recipient + " (" + (i+1) + "/" + recipients.size() + ")");
                 
@@ -379,13 +405,21 @@ public class GmailAutomation extends JFrame {
                 }
             }
             
-            updateStatus("All emails sent successfully!");
-            JOptionPane.showMessageDialog(this, "All emails sent successfully!",
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            if (isRunning) {
+                updateStatus("All emails sent successfully!");
+                JOptionPane.showMessageDialog(this, "All emails sent successfully!",
+                        "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (Exception e) {
-            updateStatus("Error: " + e.getMessage());
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            if (isRunning) {
+                updateStatus("Error: " + e.getMessage());
+                JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } finally {
+            isRunning = false;
+            sendButton.setEnabled(true);
+            stopButton.setEnabled(false);
         }
     }
     
@@ -495,7 +529,7 @@ public class GmailAutomation extends JFrame {
     }
 
     public static void main(String[] args) {
-        try  {
+        try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
