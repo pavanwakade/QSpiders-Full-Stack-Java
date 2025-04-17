@@ -85,13 +85,11 @@ public class AboutMe {
 
 
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" width="80%">
+</div>
 <br>
 
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pavanwakade&layout=compact&theme=neon&hide_border=true" width="42%" />
-<!--   <img src="https://github-readme-stats.vercel.app/api?username=pavanwakade&show_icons=true&theme=synthwave&hide_border=true" width="50%" /> -->
-</p>
 
 <div align="center">
   ⭐️ Created with precision by <a href="https://github.com/pavanwakade">Pavan Wakade</a> 💻
