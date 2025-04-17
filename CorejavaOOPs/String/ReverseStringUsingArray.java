@@ -19,8 +19,7 @@ public class ReverseStringUsingArray {
 			c[temp] = str.charAt(i);
 
 		}
-
-//		String ss = new String(c);
+		
 		String ss = "";
 		for (int j = 0; j < c.length; j++) {
 			ss = ss + c[j];
