@@ -92,5 +92,9 @@ public class AboutMe {
 
 
 <div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer&animation=twinkling"/>
+</div>
+
+<div align="center">
   ⭐️ Created with precision by <a href="https://github.com/pavanwakade">Pavan Wakade</a> 💻
 </div>
