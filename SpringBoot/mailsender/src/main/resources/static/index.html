@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff9500;
+            --primary-hover: #e08500;
+            --dark-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --light-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-dark-bg: rgba(255, 255, 255, 0.1);
+            --card-light-bg: rgba(255, 255, 255, 0.9);
+            --text-dark: #e0e0e0;
+            --text-light: #333;
+        }
+
+        body {
+            background: var(--dark-bg);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            transition: all 0.5s ease;
+        }
+
+        .container-fluid {
+            padding: 0 15px;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 15px;
+        }
+
+        .card {
+            background: var(--card-dark-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: fadeIn 1s ease-in;
+            border: none;
+        }
+
+        .card-header {
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 149, 0, 0.3);
+            font-weight: 700;
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 149, 0, 0.2);
+            color: #fff;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 149, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 149, 0, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            background: var(--primary-hover);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            border: none;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .alert {
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            display: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner-border {
+            display: none;
+            margin-right: 8px;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-brand i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .table {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-dark {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .table-dark th {
+            border-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        .table-dark td {
+            border-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 0.75rem;
+        }
+
+        .theme-toggle {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            border-radius: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-toggle-handle {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            left: 5px;
+        }
+
+        .light-mode .theme-toggle-handle {
+            left: 45px;
+            background: var(--primary-color);
+        }
+
+        .theme-toggle i {
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            opacity: 0;
+            right: 12px;
+            color: var(--primary-color);
+        }
+
+        .theme-toggle .fa-moon {
+            opacity: 1;
+            left: 40px;
+            color: #fff;
+        }
+
+        .light-mode .theme-toggle .fa-sun {
+            opacity: 1;
+        }
+
+        .light-mode .theme-toggle .fa-moon {
+            opacity: 0;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-input-label:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .file-input-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        #file {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            word-break: break-all;
+            display: none;
+        }
+
+        /* Light mode styles */
+        .light-mode {
+            background: var(--light-bg);
+            color: var(--text-light);
+        }
+
+        .light-mode .card {
+            background: var(--card-light-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .card-header {
+            background: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .form-label {
+            color: var(--text-light);
+        }
+
+        .light-mode .form-control {
+            background: #fff;
+            color: var(--text-light);
+            border: 1px solid #ddd;
+        }
+
+        .light-mode .form-control:focus {
+            background: #fff;
+            color: var(--text-light);
+        }
+
+        .light-mode .form-control::placeholder {
+            color: #999;
+        }
+
+        .light-mode h1 {
+            text-shadow: none;
+        }
+
+        .light-mode .navbar {
+            background: rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .light-mode .nav-link {
+            color: var(--text-light) !important;
+        }
+
+        .light-mode .table-dark {
+            background: #f8f9fa;
+            color: var(--text-light);
+        }
+
+        .light-mode .table-dark th {
+            background: #f1f1f1;
+            color: var(--text-light);
+            border-color: #ddd;
+        }
+
+        .light-mode .table-dark td {
+            border-color: #ddd;
+            color: var(--text-light);
+        }
+
+        .light-mode .theme-toggle {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .file-input-label {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px dashed rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode .section-title {
+            color: var(--primary-color);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .navbar {
+                padding: 0.75rem 1rem;
+            }
+
+            .main-container {
+                margin: 1rem auto;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+
+            .form-control {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .theme-toggle {
+                width: 70px;
+                height: 35px;
+            }
+
+            .theme-toggle-handle {
+                width: 25px;
+                height: 25px;
+            }
+
+            .light-mode .theme-toggle-handle {
+                left: 40px;
+            }
+            
+            .file-input-label {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-envelope"></i> Email Sender</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://your-portfolio.com"><i class="fas fa-user-circle"></i> Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://linkedin.com/in/your-profile"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-paper-plane"></i> Send Email</h1>
+                <div class="theme-toggle" id="themeToggle">
+                    <div class="theme-toggle-handle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success" id="successAlert" role="alert">
+                    <i class="fas fa-check-circle me-2"></i> Email sent successfully!
+                </div>
+                <div class="alert alert-danger" id="errorAlert" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i> Failed to send email.
+                </div>
+
+                <form id="emailForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="recipient" class="form-label"><i class="fas fa-user me-2"></i>Recipient Emails (comma-separated)</label>
+                        <input type="text" class="form-control" id="recipient" placeholder="e.g., user1@example.com,user2@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label"><i class="fas fa-heading me-2"></i>Subject</label>
+                        <input type="text" class="form-control" id="subject" placeholder="e.g., Hello!" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="body" class="form-label"><i class="fas fa-align-left me-2"></i>Email Body</label>
+                        <textarea class="form-control" id="body" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="file" class="form-label"><i class="fas fa-paperclip me-2"></i>Attachment (Optional)</label>
+                        <div class="file-input-wrapper">
+                            <label for="file" class="file-input-label">
+                                <div class="text-center">
+                                    <div class="file-input-icon">
+                                        <i class="fas fa-file-upload"></i>
+                                    </div>
+                                    <div>Drag files here or click to browse</div>
+                                    <div class="text-muted small mt-1">Maximum file size: 25MB</div>
+                                    <div class="file-name" id="fileName"></div>
+                                </div>
+                            </label>
+                            <input type="file" class="form-control" id="file">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100" id="sendButton">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fas fa-paper-plane me-2"></i>Send Email
+                    </button>
+                </form>
+
+                <h2 class="section-title mt-5"><i class="fas fa-history"></i> Sent Emails</h2>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Recipient</th>
+                                <th>Subject</th>
+                                <th>Body</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="emailHistory"></tbody>
+                    </table>
+                </div>
+                <button class="btn btn-danger mt-3" id="clearHistory">
+                    <i class="fas fa-trash-alt me-2"></i>Clear History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const recipientInput = document.getElementById('recipient').value;
+            const subject = document.getElementById('subject').value;
+            const body = document.getElementById('body').value;
+            const fileInput = document.getElementById('file');
+            const sendButton = document.getElementById('sendButton');
+            const spinner = sendButton.querySelector('.spinner-border');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+
+            // Reset alerts
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+
+            // Split and validate recipients
+            const recipients = recipientInput.split(',').map(email => email.trim()).filter(email => email);
+            if (recipients.length === 0) {
+                errorAlert.textContent = 'Please enter at least one email address';
+                errorAlert.style.display = 'block';
+                return;
+            }
+            for (const recipient of recipients) {
+                if (!recipient.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                    errorAlert.textContent = `Invalid email address: ${recipient}`;
+                    errorAlert.style.display = 'block';
+                    return;
+                }
+            }
+
+            // Validate file size (25MB limit)
+            if (fileInput.files.length > 0 && fileInput.files[0].size > 25 * 1024 * 1024) {
+                errorAlert.textContent = 'File size exceeds 25MB limit';
+                errorAlert.style.display = 'block';
+                return;
+            }
+
+            // Show loading spinner
+            sendButton.disabled = true;
+            spinner.style.display = 'inline-block';
+
+            try {
+                const formData = new FormData();
+                const emailBlob = new Blob([JSON.stringify({ to: recipients, subject: subject, text: body })], { type: 'application/json' });
+                formData.append('email', emailBlob, 'email.json');
+                if (fileInput.files.length > 0) {
+                    formData.append('file', fileInput.files[0]);
+                }
+
+                const response = await fetch('http://localhost:8080/maile', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.text();
+
+                if (response.ok && result.includes('successfully')) {
+                    successAlert.textContent = result;
+                    successAlert.style.display = 'block';
+                    document.getElementById('emailForm').reset();
+                    document.getElementById('fileName').style.display = 'none';
+                    recipients.forEach(recipient => {
+                        saveEmailHistory({ to: recipient, subject: subject, text: body });
+                    });
+                } else {
+                    errorAlert.textContent = `Failed to send email: ${result}`;
+                    errorAlert.style.display = 'block';
+                }
+            } catch (error) {
+                errorAlert.textContent = `Failed to send email: ${error.message}`;
+                errorAlert.style.display = 'block';
+            } finally {
+                sendButton.disabled = false;
+                spinner.style.display = 'none';
+            }
+        });
+
+        function saveEmailHistory(emailData) {
+            let history = JSON.parse(localStorage.getItem('emailHistory') || '[]');
+            history.push({ ...emailData, timestamp: new Date().toISOString() });
+            localStorage.setItem('emailHistory', JSON.stringify(history));
+            displayEmailHistory();
+        }
+
+        function displayEmailHistory() {
+            const history = JSON.parse(localStorage.getItem('emailHistory') || '[]');
+            const tbody = document.getElementById('emailHistory');
+            tbody.innerHTML = '';
+            history.forEach(email => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${email.to}</td>
+                    <td>${email.subject}</td>
+                    <td>${email.text.substring(0, 50)}${email.text.length > 50 ? '...' : ''}</td>
+                    <td>${new Date(email.timestamp).toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayEmailHistory();
+            
+            // Update file name display when file is selected
+            document.getElementById('file').addEventListener('change', function() {
+                const fileName = document.getElementById('fileName');
+                if (this.files.length > 0) {
+                    fileName.textContent = this.files[0].name;
+                    fileName.style.display = 'block';
+                } else {
+                    fileName.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        document.getElementById('clearHistory').addEventListener('click', () => {
+            localStorage.removeItem('emailHistory');
+            displayEmailHistory();
+        });
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+</body>
+</html>

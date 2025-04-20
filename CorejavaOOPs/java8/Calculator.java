@@ -2,7 +2,10 @@ package java8;
 
 @FunctionalInterface
 interface calculate {
-	double a(double a, double b);
+	int a(int a, int b);
+    static double a(double a,double b) {
+		return a+b;
+	} 
 }
 
 public class Calculator {
@@ -18,5 +21,6 @@ public class Calculator {
 		System.out.println("Multiplication: " + mul.a(4, 5));
 		System.out.println("division      : " + div.a(4, 5));
 		System.out.println("division      : " + div.a(4, 0));
+		
 	}
 }
