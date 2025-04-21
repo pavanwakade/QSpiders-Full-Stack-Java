@@ -8,7 +8,7 @@ console.log(a === b);
 
 let data=[{
 
-    name:"pavan",
+    name:"savan",
     name:"Ravan"
 },
 {
