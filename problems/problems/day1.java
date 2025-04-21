@@ -28,6 +28,7 @@ Testcase Output
 Black
 Explanation
 We can clearly see a1 is black in the diagram.*/
+package problems;
 
 import java.util.*;
 
