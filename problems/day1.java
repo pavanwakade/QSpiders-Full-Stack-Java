@@ -19,31 +19,38 @@ class day1 {
 			System.out.println("invalid input");
 		}
 
-//		String BW = "";
-//		int hight = 8;
-//		int width = 8;
-//
-//		for (int i = 1; i <= hight; i++) {
-//
-//			for (int j = 1; j <= width; j++) {
-////				System.out.println(j);
-//				if (j % 2 == 0) {
-//
-//					BW = i + " " + " " + j;
-//					
-//					System.out.println(" " + BW);
-//
-//				} else {
-//					System.out.print(" white");
-//				}
-//
-//			}
-//			System.out.println();
-//
-//		}
+		String BW = "";
+		int hight = 8;
+		char width = 'h';
 		
-		for (char cc = 'a';  cc<= 'z'; cc++) {
-			System.out.println(cc);
+		boolean found=false;
+
+		for (int i = 1; i <= hight; i++) {
+
+			for (char jj = 'a'; jj <= width; jj++) {
+
+				BW = jj + "" + "" + i;
+				if (input.equals(BW)) {
+//					System.out.println(BW);
+					found=true;
+
+					break;
+				}
+			}
+			
+			if (found) {
+				break;
+			}
+
 		}
-	}
+
+		 int colIndex = col - 'a';       // e.g. 'a' = 0, 'b' = 1, ...
+	        int rowIndex = row - '1';       // e.g. '1' = 0, '2' = 1, ...
+
+	        if ((colIndex + rowIndex) % 2 == 0) {
+	            System.out.println("Black");
+	        } else {
+	            System.out.println("White");
+	        }
+	    }
 }
