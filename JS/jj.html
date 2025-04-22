@@ -1,64 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Search</title>
-</head>
-<body>
-    <h1>User Directory</h1>
-    <p>Search users by name or email</p>
+    <title>innomatics</title>
+  </head>
+  <body>
+    <h1>innomatics</h1>
 
-    <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Search..." 
-        onkeyup="searchUsers()"
-    />
-
-    <div id="userContainer"></div>
+    <div class="di"></div>
 
     <script>
-        const userdata = [
-            { firstname: "Frederique", email: "fclaibourn0@opensource.org", gender: "Female" },
-            { firstname: "Cesaro", email: "clendrem1@ucoz.ru", gender: "Male" },
-            { firstname: "Merry", email: "mwurst2@smugmug.com", gender: "Male" },
-            { firstname: "Natividad", email: "njanovsky6@google.fr", gender: "Female" },
-            { firstname: "Vania", email: "pavan9@nih.gov", gender: "Male" }
-        ];
+      let num = parseInt(prompt("enter a number : "));
 
-        function displayUsers(users) {
-            const container = document.getElementById('userContainer');
-            container.innerHTML = '';
-
-            if (users.length === 0) {
-                container.innerHTML = '<p>No users found.</p>';
-                return;
-            }
-
-            users.forEach(user => {
-                const userDiv = document.createElement('div');
-                userDiv.innerHTML = `
-                    <p><strong>Name:</strong> ${user.firstname}</p>
-                    <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Gender:</strong> ${user.gender}</p>
-                    <hr/>
-                `;
-                container.appendChild(userDiv);
-            });
+     while (num) {
+        
+        if (num!=25) {
+            document.write("not currect");
+            
+            
         }
-
-        function searchUsers() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = userdata.filter(user =>
-                user.firstname.toLowerCase().includes(input) ||
-                user.email.toLowerCase().includes(input)
-            );
-            displayUsers(filtered);
-        }
-
-        // Initial display
-        displayUsers(userdata);
+     }
+      console.log("ok");
     </script>
-</body>
+  </body>
 </html>
