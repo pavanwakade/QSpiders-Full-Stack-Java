@@ -1066,6 +1066,19 @@ let str1='hello';
 let str3=new String("hello");
 ```
 
+
+**Interpolation**
+
+Interpolation in JavaScript is the process of embedding variables or expressions inside a string using template literals, which are strings enclosed by backticks ( ```   ` `   ``` ). Interpolation allows dynamic values to be inserted into a string.
+
+
+```
+let user = "Pavan";
+let greeting = `Welcome, ${user}!`;
+
+```
+
+
 ## String Methods
 
 Assume:
@@ -1073,6 +1086,7 @@ Assume:
 ```javascript
 let str = "hello";
 ```
+
 
 ### 🔠 `toUpperCase()`
 Converts all characters to uppercase.
