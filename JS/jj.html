@@ -1,143 +1,64 @@
-<script>
-    let userdata = [
-        {
-            "id": 1,
-            "firstname": "Frederique",
-            "lastname": "Claibourn",
-            "email": "fclaibourn0@opensource.org",
-            "gender": "Female",
-            "contact": "554-123-9026"
-        },
-        {
-            "id": 2,
-            "firstname": "Cesaro",
-            "lastname": "Lendrem",
-            "email": "clendrem1@ucoz.ru",
-            "gender": "Male",
-            "contact": "889-402-9013"
-        },
-        {
-            "id": 3,
-            "firstname": "Merry",
-            "lastname": "Wurst",
-            "email": "mwurst2@smugmug.com",
-            "gender": "Male",
-            "contact": "220-856-3003"
-        },
-        {
-            "id": 4,
-            "firstname": "Iver",
-            "lastname": "Stormont",
-            "email": "istormont3@wikia.com",
-            "gender": "Male",
-            "contact": "947-245-9158"
-        },
-        {
-            "id": 5,
-            "firstname": "Berke",
-            "lastname": "Alphonso",
-            "email": "balphonso4@gmpg.org",
-            "gender": "Male",
-            "contact": "597-994-3017"
-        },
-        {
-            "id": 6,
-            "firstname": "Ev",
-            "lastname": "Turn",
-            "email": "eturn5@admin.ch",
-            "gender": "Male",
-            "contact": "859-107-0216"
-        },
-        {
-            "id": 7,
-            "firstname": "Natividad",
-            "lastname": "Janovsky",
-            "email": "njanovsky6@google.fr",
-            "gender": "Female",
-            "contact": "230-374-7379"
-        },
-        {
-            "id": 8,
-            "firstname": "Josh",
-            "lastname": "Maslen",
-            "email": "jmaslen7@zdnet.com",
-            "gender": "Male",
-            "contact": "847-881-9761"
-        },
-        {
-            "id": 9,
-            "firstname": "Corbet",
-            "lastname": "Brabham",
-            "email": "cbrabham8@wp.com",
-            "gender": "Male",
-            "contact": "765-213-7312"
-        },
-        {
-            "id": 10,
-            "firstname": "Vania",
-            "lastname": "Gringley",
-            "email": "pavan9@nih.gov",
-            "gender": "Male",
-            "contact": "116-937-9747"
-        }
-    ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Search</title>
+</head>
+<body>
+    <h1>User Directory</h1>
+    <p>Search users by name or email</p>
 
-    // Function to render users
-    function displayUsers(users) {
-        const container = document.getElementById('userContainer');
-        container.innerHTML = '';
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search..." 
+        onkeyup="searchUsers()"
+    />
 
-        if (users.length === 0) {
-            const emptyMsg = document.createElement('div');
-            emptyMsg.className = 'empty-results';
-            emptyMsg.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="8" y1="15" x2="16" y2="15"></line>
-                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                </svg>
-                <p>No users found matching your search.</p>
-            `;
-            container.appendChild(emptyMsg);
-            return;
+    <div id="userContainer"></div>
+
+    <script>
+        const userdata = [
+            { firstname: "Frederique", email: "fclaibourn0@opensource.org", gender: "Female" },
+            { firstname: "Cesaro", email: "clendrem1@ucoz.ru", gender: "Male" },
+            { firstname: "Merry", email: "mwurst2@smugmug.com", gender: "Male" },
+            { firstname: "Natividad", email: "njanovsky6@google.fr", gender: "Female" },
+            { firstname: "Vania", email: "pavan9@nih.gov", gender: "Male" }
+        ];
+
+        function displayUsers(users) {
+            const container = document.getElementById('userContainer');
+            container.innerHTML = '';
+
+            if (users.length === 0) {
+                container.innerHTML = '<p>No users found.</p>';
+                return;
+            }
+
+            users.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${user.firstname}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Gender:</strong> ${user.gender}</p>
+                    <hr/>
+                `;
+                container.appendChild(userDiv);
+            });
         }
 
-        users.forEach(user => {
-            const card = document.createElement('div');
-            card.className = 'user-card';
-            card.innerHTML = `
-                <div class="user-name">
-                    ${user.firstname} ${user.lastname}
-                    <span class="gender-badge ${user.gender.toLowerCase() === 'female' ? 'female' : 'male'}">
-                        ${user.gender}
-                    </span>
-                </div>
-                <div class="user-info">
-                    <span class="info-icon">📧</span>
-                    <span class="info-text">${user.email}</span>
-                </div>
-                <div class="user-info">
-                    <span class="info-icon">📞</span>
-                    <span class="info-text">${user.contact}</span>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
+        function searchUsers() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = userdata.filter(user =>
+                user.firstname.toLowerCase().includes(input) ||
+                user.email.toLowerCase().includes(input)
+            );
+            displayUsers(filtered);
+        }
 
-    // Search function
-    function searchUsers() {
-        const input = document.getElementById('searchInput').value.toLowerCase();
-        const filteredUsers = userdata.filter(user =>
-            `${user.firstname} ${user.lastname}`.toLowerCase().includes(input) ||
-            user.email.toLowerCase().includes(input)
-        );
-        displayUsers(filteredUsers);
-    }
-
-    // Load users on page load
-    window.onload = () => {
+        // Initial display
         displayUsers(userdata);
-    };
-</script>
+    </script>
+</body>
+</html>
