@@ -40,5 +40,7 @@ public class AllMethodsInOne {
 		int codePointBefour =s.codePointBefore(1);
 		
 		System.out.println("codePointBefore : "+codePointBefour);
+		
+		
 	}
 }
