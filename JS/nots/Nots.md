@@ -1712,9 +1712,9 @@ let arr = new Array(10,20,30)
 ```
 - array with literals -> [10,20,30]
 
-NOTE : Here , 'arr' is a variable which holds the reference of array object. To access array element at
+**NOTE** : Here , 'arr' is a variable which holds the reference of array object. To access array element at
 ```
-index -> 1Syntax : array_object_ref[index]Example : console.log(arr[1]); // 20
+index -> Syntax : array_object_ref[index]Example : console.log(arr[1]); // 20
 ```
 
 
@@ -2262,12 +2262,13 @@ console.log(Array.isArray([10,20,30])); //true
 3. If literal is not iterable -> it returns empty array.
 4.
 Example : Convert string to Array.
-``
+```
 const str = "hello";
 const arr = Array.from(str);
 console.log(arr);
 Output: ["h", "e", "l", "l", "o"]
 ```
+
 # Object
 1. An Object is a block of memory which has state(variable) , behaviour(methods) and where we can
 store heterogenous data.
@@ -2276,7 +2277,7 @@ strings, arrays, functions, and other objects.
 3. In one object we can have multiple key value pair and it should be separated by ',' comma.
 4. We can access value of object using (.) Operator or square bracket [] , object reference and
 key_name.
-#Object Key (Property)
+## Object Key (Property)
 1. Object key (property) will be automatically converted into string by js engine.
 2. If keys name are in Number , js engine will convert them into string and arrange them in ascending
 order.
@@ -2291,7 +2292,7 @@ let obj = {
 phone,
 // phone:phone
 };
-#Ways To Create Object
+## Ways To Create Object
 1.
 By using curly braces { } and literals.
 let obj = {}
@@ -2306,7 +2307,7 @@ let obj=new Object({ name:"chombi"});
 // { name:"chombi"} object with literals
 3. By using new keyword and Constructor function
 4. By using class
-#Access Object Value
+## Access Object Value
 1.
 By using dot operator ( . ) and key name.
 let obj = { name:"chombi",age:16}
@@ -2318,7 +2319,7 @@ let obj = { name:"chombi",age:16}
 console.log(obj["name"])// chombi
 console.log(obj["age"])// 16
 3. If we try to access property which is not available in object we will get undefined.
-#Object Methods
+## Object Methods
 1. In JavaScript, object methods are functions that are attached to the object, and can be called on that
 object reference.
 2. To call a function , we use square brackets instead dot operator.
@@ -2359,7 +2360,7 @@ console.log(obj1["speak"]());
 // Here, we can access object property, by using object reference.
 Here , we can can access object property , by using object reference because arrow function is not
 having 'this' property.
-#Add Key Value In Object
+## Add Key Value In Object
 1. To add key-value pair we can using dot operator and square brackets
 2.
 By using dot operator ( . ) and key name
@@ -2380,7 +2381,7 @@ obj.age = 18;
 name:"chombi",
 age:18,
 }
-#Check Property Is Available In Object Or Not
+## Check Property Is Available In Object Or Not
 1.
 We can check using "in" operator.
 Syntax : "property name" in object_name
@@ -2397,7 +2398,7 @@ let obj = { name:"chombi",age:16}
 console.log("name" in obj )// true
 console.log("age" in obj )// true
 console.log("city" in obj )// false
-#Copy Of Object
+## Copy Of Object
 1. We can create copy of two types :
 1. Shallow copy
 2. Deep Copy
@@ -2437,7 +2438,7 @@ console.log(obj2);
 //{ name:"chombi",age:20 }
 console.log(obj1);
 //{ name:"chombi",age:16 }
-#Object In-Built Methods
+## Object In-Built Methods
 1. Object.keys(obj_ref)
 1. Returns an array of given object's property names.
 2.
@@ -2464,14 +2465,14 @@ const source = { c: 4, d: 5 };
 const result = Object.assign(target, source);
 console.log(result);
 // Output: { a: 1, b: 2, c: 4, d: 5 }
-#What Is JSON?
+# What Is JSON?
 1. JSON stands for javascript object notation.
 2. It is data only format to represent values and objects.
 3. It is used to transfer data between applications through apis.
 4. JSON keys must be strings enclosed in double quotes.
 5. It supports six data types: object, array, string, number, boolean, and null.
 6. It supports nested structures, allowing objects and arrays to be nested within each other.
-# JSON Methods
+## JSON Methods
 1. JSON.stringify(value)
 - JSON.stringify() is a method that converts a JavaScript object or value into a JSON string.
 - Returns JSON.
@@ -2479,7 +2480,7 @@ console.log(result);
 2. JSON.parse(value)
 - JSON.parse() is a method that converts JSON string into JavaScript object or value.
 - Returns plain javascript object.
-#Introduction
+## Introduction
 1. Call , Apply and Bind methods are used to store the object reference in 'this' keyword of function.
 2. When function's 'this' have reference of object, then we can access states and behaviours of that
 object.
@@ -2505,7 +2506,7 @@ console.log("value of a : " + a);
 console.log("value of b : " + b);
 console.log("value of c : " + c);
 }
-#Call
+## Call
 1. Call method accepts object reference as first argument And accepts 'n' number of arguments.
 2. Here, arguments are passed to the function's parameter list.
 3. It will call the function Immediately.
@@ -2518,7 +2519,7 @@ Age : 20
 value of a : 10
 value of b : 20
 value of c : 30
-#Apply
+## Apply
 1. Apply method accepts of 2 arguments where object reference is first argument and 2nd argument is
 the array of arguments.
 2. Here arguments are passed to the function's parameters list.
@@ -2532,7 +2533,7 @@ Age : 19
 value of a : 11
 value of b : 22
 value of c : 33
-#Bind
+## Bind
 1. Bind method accepts object reference as 1st argument and excepts 'n' number of arguments.
 2. Here 'n' number of arguments are passed to the function's parameter list.
 3. It will not call the function immediately.
@@ -2548,7 +2549,7 @@ Age : 18
 value of a : 77
 value of b : 88
 value of c : 99
-#Constructor Function
+## Constructor Function
 1. A function which is used to create an object is known as constructor function.
 2. A constructor function behaves like blueprint or template for object , and there is no need to write
 code again and again
@@ -2701,7 +2702,7 @@ console.log(country );
 Here , we are trying extract name , age and country from obj. name and age is present in obj but
 country is not , so inside country js engine stored undefined and for name , and age we have
 respective values.
-#Array Destructuring
+## Array Destructuring
 1. The process of extracting the values from the array into the variables is known as array destructuring.
 2. All the key names provided on LHS are consider as variable and should bewritten inside square
 brackets.
@@ -2729,7 +2730,7 @@ Here , we are trying to extract value from array into variables a,b,c,d,e,f. As 
 values will be extracted and stored into variable in the same sequence they are available inside
 array , so we have value inside a,b,c,d,e but not inside f because at sixth position no value is
 present and js engine stored undefined in it.
-#Destructuring In Function
+## Destructuring In Function
 1. We can destructure array or object in function parameter so that we can access value directly.
 2.
 Destructuring object in function parameter
@@ -2768,7 +2769,7 @@ let arr = [10,20,30,40,50];
 details(arr) // function call
 Here , we have passed array as an argument to details function , and we have destructured values
 in parameter only.
-#Rest And Spread
+## Rest And Spread
 1. Rest parameter
 1. Rest parameter is used to accept multiple values , stored them in an array and array's reference will
 stored the variable that we have used for rest.
@@ -2866,7 +2867,7 @@ methods from other objects.
 2. The prototype chain forms a hierarchy of objects, where each object's prototype is linked to its parent
 object's ptototype, creating a chain of inheritance.
 3. By following this chain, objects can inherit properties and methods from their prototype objects.
-#Dom
+## Dom
 1. The Document Object Model (DOM) is a programming interface for web documents that represents
 the HTML or XML document as a tree structure, where each node represents an element, attribute, or
 piece of text in the document.
@@ -2897,7 +2898,7 @@ Reference Html structure
 <p>hello i'm paragraph</p>
 </body>
 ```
-#Target Elements
+## Target Elements
 1. getElementById('id_name')
 1. It returns reference of single element object where id_name matches
 2.
@@ -2948,7 +2949,7 @@ for (ref of eles) {
 ref.style.fontWeight = "bold";
 }
 console.log(ele);
-#Create And Insert Element
+## Create And Insert Element
 1. createElement('tag_name')
 1. It is used to create a new html element of the specified type and returns a reference to it as a
 javascript object.
@@ -3005,7 +3006,7 @@ divs[2].setAttribute("id", "chombi");
 Example: Remove id attribute from third div of container.
 let divs = document.getElementsByClassName("item");
 divs[2].removeAttribute("id");
-#Traverse Html Nodes
+## Traverse Html Nodes
 1. parentElement
 1. It returns the reference of parent html element.
 2.
@@ -3111,7 +3112,7 @@ div.style.backgroundColor='red';
 }
 </script>
 ```
-#Type Of Events
+## Type Of Events
 1.
 Keyboard Events
 Event Name Info
@@ -3132,17 +3133,17 @@ Event Name Info
 submit Triggered when a form is submitted.
 reset Triggered when a form is reset.
 change Triggered when the value of a form element changes.
-#Exception
+## Exception
 1. Exception is an unwanted or unexpected problem, which occurs during the execution of a program.
 2. If unexpected problem occurs at runtime , program execution will be disrupted.
 3. Example: file input/output errors, or network communication errors.
-#Exception Handling
+## Exception Handling
 1. The process of handling unwanted or unexpected problem at runtime without affecting program
 execution is called as
 Exception handling
 .
 2. We can handle these exceptions using try, catch and finally.
-#Try , Catch And Finally
+## Try , Catch And Finally
 1. try
 1. The try block contains the code that might throw an exception.
 2. If an exception occurs within the try block, control is immediately transferred to the corresponding
@@ -3174,7 +3175,7 @@ console.error("An error occurred: "+err.message);
 or not
 console.log("Execution complete");
 }
-#Throw
+## Throw
 1. throw is a keyword used to manually trigger an exception.
 2. When throw is used, it causes the JavaScript interpreter to stop executing the current block of code
 and transfer control to the nearest catch block that can handle the exception.
