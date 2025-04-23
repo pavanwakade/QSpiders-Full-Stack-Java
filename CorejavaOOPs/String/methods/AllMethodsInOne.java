@@ -3,6 +3,8 @@
  */
 package String.methods;
 
+import java.util.Arrays;
+
 /**
  * 
  */
@@ -75,9 +77,9 @@ public class AllMethodsInOne {
 
 		System.out.println(s1.equalsIgnoreCase(s2));
 
-		String p=s1.intern();
+		byte[] p=s1.getBytes();
 
-		System.out.println(p);
+		System.out.println(Arrays.toString(p));
 		
 	}
 }
