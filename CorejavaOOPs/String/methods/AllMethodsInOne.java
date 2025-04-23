@@ -12,6 +12,7 @@ public class AllMethodsInOne {
 
 		String s = "Hello 56 good Morning myname is pavan i have my BE in Electronics and Telecommunications";
 		String s1 = "Hello good Morning myname is pavan i have my BE in Electronics and Telecommunications";
+		String s2 = "Hello good Morning myname is pavan i have my BE in Electronics and Telecommunications";
 		/**
 		 * 1) Length() --> int it print length of String
 		 */
@@ -47,11 +48,36 @@ public class AllMethodsInOne {
 		 * string are equal else it return another int value if String not equel
 		 */
 		System.out.println(s.compareTo(s1));
-		
-		
-		String String=s.concat(s1);
-		
+
+		String String = s.concat(s1);
+
 		System.out.println(String);
 
+		/**
+		 * endsWith-->boolean Checks whether a string ends with the specified
+		 * character(s)
+		 */
+
+		System.out.println(s.endsWith("s"));
+
+		/**
+		 * equals-->boolean Compares two strings. Returns true if the strings are equal,
+		 * and false if not
+		 * 
+		 */
+
+		System.out.println(s1.equals(s2));
+
+		/**
+		 * equalsIgnoreCase -->boolean Compares two strings, ignoring Uppercase and
+		 * lowercase
+		 */
+
+		System.out.println(s1.equalsIgnoreCase(s2));
+
+		String p=s1.intern();
+
+		System.out.println(p);
+		
 	}
 }
