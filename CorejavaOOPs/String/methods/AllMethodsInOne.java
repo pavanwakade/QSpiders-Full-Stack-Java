@@ -77,9 +77,38 @@ public class AllMethodsInOne {
 
 		System.out.println(s1.equalsIgnoreCase(s2));
 
-		byte[] p=s1.getBytes();
+		/**
+		 * getBytes-->byte[] method converts a string into an array of bytes.
+		 */
+		byte[] p = s1.getBytes();
 
 		System.out.println(Arrays.toString(p));
+
+		/**
+		 * indexOf()-->int
+		 * 
+		 * Returns the position of the first found occurrence of specified characters in
+		 * a string
+		 */
+
+		System.out.println(s.indexOf('g'));
+
+		/**
+		 * hashcode-->int Returns the hash code of a string
+		 */
+		System.out.println(s.hashCode());
+
+		/**
+		 * isEmpty()-->boolean Checks whether a string is empty or not
+		 */
+
+		System.out.println(s.isEmpty());
+
+		/**
+		 * join --> String Joins one or more strings with a specified separator
+		 */
 		
+		String []ssString= {"hello","my", "name is pavan"}
+		System.out.println(String.join(" ",ss));
 	}
 }
