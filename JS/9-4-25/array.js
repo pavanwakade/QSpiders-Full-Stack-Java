@@ -392,7 +392,7 @@ let arr15 = Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 //1.let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-//2 let arr16 = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+// let arr16 = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 //3.arr.splice(2, 3, 100, 200, 300)
 
@@ -402,4 +402,5 @@ let arr15 = Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 //6. split str.split('')
 
-
+//include
+// console.log(arr6.includes(9));
