@@ -94,14 +94,12 @@ public class AllMethodsInOne {
 		System.out.println(s.indexOf('g'));
 
 		/**
-		 * hashcode-->int  
-		 * Returns the hash code of a string
+		 * hashcode-->int Returns the hash code of a string
 		 */
 		System.out.println(s.hashCode());
 
 		/**
-		 * isEmpty()-->boolean 
-		 * Checks whether a string is empty or not
+		 * isEmpty()-->boolean Checks whether a string is empty or not
 		 */
 
 		System.out.println(s.isEmpty());
@@ -137,16 +135,50 @@ public class AllMethodsInOne {
 		System.out.println(Arrays.toString(sp));
 
 		/**
-		 * split() --> char[] 
-		 * convert string to char Array
+		 * split() --> char[] convert string to char Array
 		 */
 
 		char[] cc = s.toCharArray();
 
 		System.out.println(Arrays.toString(cc));
+
+		/**
+		 * format -->String Returns a formatted string using the specified locale,
+		 * format string, and arguments here %s place with string %d place with integer
+		 * value
+		 * 
+		 * 
+		 */
+
+		String myString = "Hello %s your Age is %d";
+		System.out.println(myString.format(myString, "pavan", 25)); // Hello pavan your Age is 25
+
+		/**
+		 * substring--> String Returns a new string which is the substring of a
+		 * specified string it avoid last vaue which is you put
+		 */
+
+		String pavan = "hello pavan";
+
+		System.out.println(pavan.substring(0, 3));
+
+		/**
+		 * contains--> boolean Checks whether a string contains a sequence of characters
+		 */
+
+		System.out.println(s.contains("Hello"));
+
+		/**
+		 * trim()-->string
+		 * 
+		 * remove the start and end space of string
+		 * 
+		 */
+
+		String trim = "     hello    ";
+		System.out.println(trim.trim());
 		
-		
-		System.out.println("Hello pavan".toString());
+//		System.out.println(String.valueOf(pavan));
 
 	}
 }
