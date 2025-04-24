@@ -12,8 +12,8 @@ public class AllMethodsInOne {
 
 	public static void main(String[] args) {
 
-		String s = "Hello 56 good Morning myname is pavan i have my BE in Electronics and Telecommunications";
-		String s1 = "Hello good Morning myname is pavan i have my BE in Electronics and Telecommunications";
+		String s = "Hello 56 good Morning myname - Hello - is pavan i have my BE in Electronics and Telecommunications";
+		String s1 = "Hello good Morning myname is pavan i have completed  my BE in Electronics and Telecommunications";
 		String s2 = "Hello good Morning myname is pavan i have my BE in Electronics and Telecommunications";
 		/**
 		 * 1) Length() --> int it print length of String
@@ -107,11 +107,18 @@ public class AllMethodsInOne {
 		/**
 		 * join --> String Joins one or more strings with a specified separator
 		 */
+
+		String[] ss = { "hello", "my", "name", "is", "pavan" };
+		System.out.println(String.join("", ss));
 		
-		String []ss= {"hello","my", "name" ,"is" ,"pavan"};
-		System.out.println(String.join("",ss));
+		/**
+		 * replace() -->String
+		 * Searches a string for a specified value, and returns a new string where the specified values are replaced
+		 * 
+		 */
+
+		System.out.println(s.replace('a', 'd'));
 		
-	System.out.println("hello".matches(s));
-		
+		System.out.println(s.replaceAll("Hello", "gh"));
 	}
 }
