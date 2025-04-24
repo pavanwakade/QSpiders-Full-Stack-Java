@@ -111,11 +111,7 @@ public class AllMethodsInOne {
 		String []ss= {"hello","my", "name" ,"is" ,"pavan"};
 		System.out.println(String.join("",ss));
 		
-		String regex = "cat|dog|fish";
-
-		System.out.println("cat".matches(regex));
-		System.out.println("dog".matches(regex));
-		System.out.println("catfish".matches(regex));
-		System.out.println("doggy bag".matches(regex));		
+	System.out.println("hello".matches(s));
+		
 	}
 }
