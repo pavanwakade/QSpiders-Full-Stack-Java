@@ -323,7 +323,11 @@ let arr6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // console.log(arr6.slice(2, 5));
 
 
+
+
 //splice
+
+// syntax splice(startindex,how many remove,add)
 //it will change the original array
 //it will add the value at the given index
 //it will remove the value from the given index
@@ -332,9 +336,11 @@ let arr7 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // console.log(arr7.splice(2, 3));
 
-let modifiedArr7 = arr7.splice(2, 3, 100, 200, 300, 400, 500, 2000);
+// let modifiedArr7 = arr7.splice(2, 4, 100, 200, 300, 400, 500, 2000);
+// let modifiedArr8 = arr7.splice(2, 0, 100, 200, 300, 400, 500, 2000);
+
 // console.log(modifiedArr7);
-// console.log(arr7);
+console.log(arr7);
 
 //reverse
 //it will reverse the array
@@ -376,7 +382,7 @@ let arr14 = arr12.concat(arr13);
 // Array.of
 //it will create a new array from the given value
 let arr15 = Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-console.log(arr15);
+// console.log(arr15);
 
 
 
