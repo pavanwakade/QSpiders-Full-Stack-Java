@@ -108,7 +108,14 @@ public class AllMethodsInOne {
 		 * join --> String Joins one or more strings with a specified separator
 		 */
 		
-		String []ssString= {"hello","my", "name is pavan"}
-		System.out.println(String.join(" ",ss));
+		String []ss= {"hello","my", "name" ,"is" ,"pavan"};
+		System.out.println(String.join("",ss));
+		
+		String regex = "cat|dog|fish";
+
+		System.out.println("cat".matches(regex));
+		System.out.println("dog".matches(regex));
+		System.out.println("catfish".matches(regex));
+		System.out.println("doggy bag".matches(regex));		
 	}
 }
