@@ -94,12 +94,14 @@ public class AllMethodsInOne {
 		System.out.println(s.indexOf('g'));
 
 		/**
-		 * hashcode-->int Returns the hash code of a string
+		 * hashcode-->int  
+		 * Returns the hash code of a string
 		 */
 		System.out.println(s.hashCode());
 
 		/**
-		 * isEmpty()-->boolean Checks whether a string is empty or not
+		 * isEmpty()-->boolean 
+		 * Checks whether a string is empty or not
 		 */
 
 		System.out.println(s.isEmpty());
@@ -110,15 +112,41 @@ public class AllMethodsInOne {
 
 		String[] ss = { "hello", "my", "name", "is", "pavan" };
 		System.out.println(String.join("", ss));
-		
+
 		/**
-		 * replace() -->String
-		 * Searches a string for a specified value, and returns a new string where the specified values are replaced
+		 * replace() -->String Searches a string for a specified value, and returns a
+		 * new string where the specified values are replaced
 		 * 
 		 */
 
 		System.out.println(s.replace('a', 'd'));
-		
+
+		/**
+		 * replaceAll() -->String Replaces each substring of this string that matches
+		 * the given regular expression with the given replacement
+		 */
+
 		System.out.println(s.replaceAll("Hello", "gh"));
+
+		/**
+		 * split() --String[] Splits a string into an array of substring
+		 */
+
+		String[] sp = s.split("");
+
+		System.out.println(Arrays.toString(sp));
+
+		/**
+		 * split() --> char[] 
+		 * convert string to char Array
+		 */
+
+		char[] cc = s.toCharArray();
+
+		System.out.println(Arrays.toString(cc));
+		
+		
+		System.out.println("Hello pavan".toString());
+
 	}
 }
