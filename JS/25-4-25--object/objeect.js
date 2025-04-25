@@ -114,27 +114,32 @@ let arr = [{
 // arr.map((val) => console.log(val.id));
 // arr.map((val) => console.log(val));
 
+const objDiv = document.getElementById("obj");
+arr.map((val) => {
+    const paragraph = document.createElement("div");
+    paragraph.innerHTML = `<p>ID: ${val.id}</p>
+   <p>Name: ${val.name}</p>
+   <p>YOP: ${val.yop}</p>`;
+    objDiv.appendChild(paragraph);
+});
 
-let pavan={
-    education:"BE",
-    yop:2024,
-    collage:"SBPCOE",
-    certificates:"Java Full Stack"
+
+
+//! methods of object
+
+let pavan = {
+    education: "BE",
+    yop: 2024,
+    collage: "SBPCOE",
+    certificates: "Java Full Stack"
 }
 
 
 // console.log("Keys :"+Object.keys(pavan));  //?print all keys
 // console.log("values :"+Object.values(pavan)); //?print all values
-// console.log("entries:"+Object.entries(pavan));//print all
+// console.log("entries:"+Object.entries(pavan));//?print all
 
 
 
 
-// const objDiv = document.getElementById("obj");
-// arr.map((val) => {
-//     const paragraph = document.createElement("p");
-//     paragraph.textContent = `ID: ${val.id}, 
-//     Name: ${val.name}, 
-//     YOP: ${val.yop}`;
-//     objDiv.appendChild(paragraph);
-// });
+
