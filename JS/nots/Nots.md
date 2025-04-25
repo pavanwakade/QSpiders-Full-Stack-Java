@@ -13,6 +13,7 @@
 
 11. [Array](#array)
 12. [Arrays methods](#array-methods)
+13. [Object](#object)
 
  <!-- Practice Questions
 . Lexical Scope
@@ -67,7 +68,7 @@
 12. The development of JavaScript has been heavily influenced by a number of factors, including the emergence of new web technologies, changes in programming paradigms, and the rise of new development frameworks and libraries.
 13. Today, JavaScript is one of the most widely used programming languages in the world, powering many of the most popular websites and web applications.
 14. It continues to evolve and adapt to the changing needs of the web, with new features and capabilities being added on a regular basis.
-#Introduction
+## Introduction
 1. Javascript is scripting and programming language.
 2. It is purely object based language.This means that variables, functions, and even primitive data types like numbers and strings are object,everything is object in javascript.
 3. It is dynamically typed language , it means type of value stored in memory block is checked at runtime because of this nature we can store any type of value in variable.
@@ -2269,7 +2270,7 @@ console.log(arr);
 Output: ["h", "e", "l", "l", "o"]
 ```
 
-# Object
+## Object
 1. An Object is a block of memory which has state(variable) , behaviour(methods) and where we can
 store heterogenous data.
 2. An object is a collection of key-value pairs that can contain various data types, such as numbers,
