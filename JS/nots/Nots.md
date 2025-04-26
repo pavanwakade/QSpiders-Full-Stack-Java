@@ -14,6 +14,7 @@
 11. [Array](#array)
 12. [Arrays methods](#array-methods)
 13. [Object](#object)
+14. [this](#this-keyword)
 
  <!-- Practice Questions
 . Lexical Scope
@@ -2587,7 +2588,8 @@ this.engine = engine;
 let car1 = new Car(1021,"red","V8");
 console.log(car1);
 // { model:1021,color:"red",engine:"V8" }
-#This Keyword
+```
+## This Keyword
 1. It is a keyword.
 2. It is a variable , which holds the reference.
 3. In GEC it holds the address of window object.
@@ -2595,6 +2597,7 @@ console.log(car1);
 function (for arrow function is stores undefined).
 5. Inside object methods, 'this' holds the reference of current object(not in arrow function).
 This keyword notes
+
 ### Global Context
 In javascript this keyword refers to the object that executes the current function.
 In the global execution context (outside of any function), `this` refers to the global object. In a web

@@ -137,7 +137,7 @@ let pavan = {
 
 // console.log("Keys :"+Object.keys(pavan));  //!print all keys
 // console.log("values :"+Object.values(pavan)); //!print all values
-console.log("entries:"+Object.entries(pavan));//!print all / convert object to Array
+// console.log("entries:"+Object.entries(pavan));//!print all / convert object to Array
 
 let car = [
     ["id", 1],
@@ -147,4 +147,3 @@ let car = [
 // console.log(Object.fromEntries(car));   //!conver Array to object
 
 
-console.log(`Object.fromEntries(car)`);
