@@ -114,14 +114,14 @@ let arr = [{
 // arr.map((val) => console.log(val.id));
 // arr.map((val) => console.log(val));
 
-const objDiv = document.getElementById("obj");
-arr.map((val) => {
-    const paragraph = document.createElement("div");
-    paragraph.innerHTML = `<p>ID: ${val.id}</p>
-   <p>Name: ${val.name}</p>
-   <p>YOP: ${val.yop}</p>`;
-    objDiv.appendChild(paragraph);
-});
+// const objDiv = document.getElementById("obj");
+// arr.map((val) => {
+//     const paragraph = document.createElement("div");
+//     paragraph.innerHTML = `<p>ID: ${val.id}</p>
+//    <p>Name: ${val.name}</p>
+//    <p>YOP: ${val.yop}</p>`;
+//     objDiv.appendChild(paragraph);
+// });
 
 
 
@@ -135,11 +135,16 @@ let pavan = {
 }
 
 
-// console.log("Keys :"+Object.keys(pavan));  //?print all keys
-// console.log("values :"+Object.values(pavan)); //?print all values
-// console.log("entries:"+Object.entries(pavan));//?print all
+// console.log("Keys :"+Object.keys(pavan));  //!print all keys
+// console.log("values :"+Object.values(pavan)); //!print all values
+console.log("entries:"+Object.entries(pavan));//!print all / convert object to Array
+
+let car = [
+    ["id", 1],
+    ["name", "innova"],
+    ["speed", 120]
+]
+// console.log(Object.fromEntries(car));   //!conver Array to object
 
 
-
-
-
+console.log(`Object.fromEntries(car)`);

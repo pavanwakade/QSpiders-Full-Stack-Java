@@ -2326,6 +2326,8 @@ object reference.
 2. To call a function , we use square brackets instead dot operator.
 3.
 Here, speak is a variable which holds the function reference.
+
+```
 let obj1 = { name: "chombi",
 age: 16,
 speak: function () {
@@ -2333,8 +2335,10 @@ console.log('i can speak');
 } }
 console.log(obj1["speak"]());
 //i can speak
+```
 4.
 Access object property inside function - function declared with function keyword.
+```
 let obj1 = { name: "chombi",
 age: 16,
 speak: function () {
@@ -2342,10 +2346,13 @@ console.log('My name is' + this.name+',age' + this.age+' and i can
 speak');
 } }
 console.log(obj1["speak"]());
-//My name is chombi , age 16 and i can speak
+//My name is 
+chombi , age 16 and i can speak
 Here, we can access object property, by using 'this' keyword.
+```
 5.
 Access object property inside function - Arrow function.
+```
 let obj1 = {
 name: "chombi",
 age: 16,
@@ -2365,6 +2372,7 @@ having 'this' property.
 1. To add key-value pair we can using dot operator and square brackets
 2.
 By using dot operator ( . ) and key name
+```
 let obj = { name:"chombi",age:16}
 obj.country = "india";
 //new key-value added in object
@@ -2373,8 +2381,10 @@ name:"chombi",
 age:16,
 country:"india",
 }
+```
 NOTE : If property is already available with same name it will updated with new value.
 Example:
+```
 let obj = { name:"chombi",age:16 }
 obj.age = 18;
 //age property value is updated
@@ -2382,10 +2392,12 @@ obj.age = 18;
 name:"chombi",
 age:18,
 }
+```
 ## Check Property Is Available In Object Or Not
 1.
 We can check using "in" operator.
 Syntax : "property name" in object_name
+```
 let obj = { name:"chombi",age:16}
 obj.country = "india";
 //new key-value added in object
@@ -2394,6 +2406,7 @@ name:"chombi",
 age:16,
 country:"india",
 }
+```
 We can check using "in" operator.
 let obj = { name:"chombi",age:16}
 console.log("name" in obj )// true
