@@ -1,37 +1,48 @@
-// // --- Array Tasks ---
+// --- Array Tasks ---
 
-// //! 1. Reverse an Array
-// let array1 = [1, 2, 3, 4, 5];
-// function reverseArray(arr) {
-//     return arr.slice().reverse(); 
-// }
+//! 1. Reverse an Array
+let array1 = [1, 2, 3, 4, 5];
+function reverseArray(arr) {
+    return arr.slice().reverse();
+}
 // console.log("1. Reverse Array:", reverseArray(array1));
 
 
 
 //! 2. Find Max and Min
-let array2 = [10, 5, 20, 8, 15];
-function findMaxMin(arr) {
-    // let max = Math.max(...arr);
-    // let min = Math.min(...arr);
-    arr.sort((a,b)=>a-b);
-    let max=arr[arr.l]
-    console.log(arr);
-    
-    // return { max, min };
-}
-console.log("2. Max and Min:",findMaxMin(array2));
-
-
-// //! 3. Check if Array is Palindrome
-// function isArrayPalindrome(arr) {
-//     return arr.join('') === arr.slice().reverse().join('');
+// let array2 = [10, 5, 20, 8, 15];
+// function findMaxMin(arr) {
+//     arr.sort((a, b) => a - b);
+//     let min = arr[0];
+//     let max = arr[arr.length - 1];
+//     // console.log(arr);
+//     return { max, min };
 // }
+// console.log("2. Max and Min:", findMaxMin(array2));
+
+
+//! 3. Check if Array is Palindrome
+let array3 = [1, 2, 3, 2, 1];
+function isArrayPalindrome(arr) {
+    for (let i = 0, j = arr.length - 1; i < j; i++, j--) {
+        if (arr[i] == arr[j]) {
+            i++;
+            j--;
+        }
+        else {
+            return "not palinfrome";
+        }
+    }
+    return "palindrome";
+}
+// console.log(isArrayPalindrome(array3));
+
+
 
 // //! 4. Remove Duplicates
-// function removeDuplicates(arr) {
-//     return [...new Set(arr)];
-// }
+function removeDuplicates(arr) {
+    return [...new Set(arr)];
+}
 
 // //! 5. Sum of All Elements
 // function sumArray(arr) {
@@ -70,7 +81,7 @@ console.log("2. Max and Min:",findMaxMin(array2));
 // }
 
 
-// let array3 = [1, 2, 3, 2, 1];
+
 // let array4 = [1, 2, 2, 3, 4, 4, 5];
 // let array5 = [5, 10, 15];
 
@@ -82,7 +93,6 @@ console.log("2. Max and Min:",findMaxMin(array2));
 // let str5a = "listen";
 // let str5b = "silent";
 
-// console.log("3. Is Array Palindrome:", isArrayPalindrome(array3));
 // console.log("4. Remove Duplicates:", removeDuplicates(array4));
 // console.log("5. Sum of Array:", sumArray(array5));
 
