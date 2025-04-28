@@ -2688,12 +2688,12 @@ boundGreet(); // Logs 'Alice'
 - **Arrow functions**: `this` is inherited from the surrounding lexical context.
 - **Event handlers**: `this` is the element that received the event.
 - **`call`, `apply`, `bind`**: Methods to explicitly set `this`.
-#Destructuring
+## Destructuring
 1. The process of extracting the values from the array or object into the variables is known as
 destructuring.
 2. The two most used data structures in JavaScript are Object and Array, both allows us to unpack
 individual values into variables.
-#Object Destructuring
+## Object Destructuring
 1. The process of extracting the values from the object into the variables is known as object
 destructuring.
 2. All the key names provided on LHS are consider as variable and these variables should be declared
@@ -2704,6 +2704,7 @@ and written inside curly braces.
 6. If the key is not present , undefined is store in the variable.
 7. After destructuring , we can directly access variable names , without using object reference.
 8.
+```
 Example :
 let obj = {
 name:"chombi" ,
@@ -2716,6 +2717,7 @@ console.log(age);
 // 16
 console.log(country );
 // undefined
+```
 Here , we are trying extract name , age and country from obj. name and age is present in obj but
 country is not , so inside country js engine stored undefined and for name , and age we have
 respective values.
