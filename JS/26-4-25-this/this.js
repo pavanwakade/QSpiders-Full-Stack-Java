@@ -59,13 +59,13 @@ check.call(student3)
 //!apply
 
 
-function funn(fees) { 
+// function funn(fees) {
 
-    console.log(`${this.name} paid ${fees} RS`);
-}
-funn.apply(student3, 1000)
+//     console.log(`${this.name} paid ${fees} RS`);
+// }
+// funn.apply(student3, 1000)
 
-document
+// document
 
 
 // !bind
@@ -75,3 +75,23 @@ document
 
 
 //! Destructur
+
+let students = {
+    id: 1,
+    name: "pavan",
+    add: "latur",
+    address: {
+        city: "latur",
+        pin: 411947
+    }
+}
+console.log(students.add);
+
+
+let { name, add } = students;
+console.log(name);
+console.log(add);
+
+
+
+
