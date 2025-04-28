@@ -2,14 +2,14 @@ let obj = {
     name: "pavan",
     add: "latur",
     fun1: () => {
-        console.log(this);
+        // console.log(this);
     }
 
     ,
     fun2: function () {
         console.log(this);
         let fun = () => {
-            console.log(this);
+            // console.log(this);
         }
         fun();
     }
@@ -42,10 +42,30 @@ let student3 = {
     add: "latur"
 }
 
-
+//!call
 function check() {
-    console.log(this);
+    // console.log(this);
 }
 
-
 check.call(student3)
+
+// function funn(fees) { //? no need to write object in call function
+
+//     console.log(`${this.name} paid ${fees} RS`);
+// }
+// funn.call(student3, 1000)
+
+
+//!apply
+
+
+function funn(fees) { 
+
+    console.log(`${this.name} paid ${fees} RS`);
+}
+funn.apply(student3, 1000)
+
+document
+
+
+// !bind
