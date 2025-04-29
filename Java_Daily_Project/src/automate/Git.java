@@ -539,7 +539,6 @@ public class Git {
 
 				return;
 			}
-
 			// Schedule repository monitoring
 			scheduleRepositoryMonitoring();
 
