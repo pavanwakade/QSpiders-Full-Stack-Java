@@ -1,14 +1,1 @@
-/**
- * 
- */
-package problems;
-
-/**
- * 
- */
-public class hh {
-
-	public static void main(String[] args) {
-		System.out.println("hello");
-	}
-}
+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
