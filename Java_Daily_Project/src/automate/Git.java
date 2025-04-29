@@ -379,9 +379,6 @@ public class Git {
 			throw new IOException("Command failed with exit code: " + exitCode);
 		}
 	}
-	
-	
-	
 
 	// Commit and Push Changes
 	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
@@ -423,12 +420,6 @@ public class Git {
 				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
 				return;
 			}
-			try {
-				// First pull changes from remote
-				pullChanges(gitPath, repoPath);
-				
-				// Then check if there are local changes to commit
-				if (hasChanges(gitPath, repoPath)) {
 
 			// Proceed with commit and push
 			try {
@@ -443,42 +434,12 @@ public class Git {
 				// Handle potential push failures
 				showPopup("Commit Error", "Failed to push changes. Check internet connection.");
 				LOGGER.severe("Failed to push changes: " + e.getMessage());
-				
 			}
-			
 		} else {
 			LOGGER.info("No changes to commit for " + repoPath);
 		}
-				
-	}catch (IOException | InterruptedException e) {
-        // Handle pull failures
-        showPopup("Pull Error", "Failed to pull changes from remote. Check network connectivity.");
-        LOGGER.severe("Failed to pull changes: " + e.getMessage());
 	}
-    }
-	}
-	
-			
-			
-			
-			
-			
-			
-			
-		
-	
-	private static void pullChanges(String gitPath, String repoPath) throws IOException, InterruptedException {
-	    LOGGER.info("Pulling changes from remote repository: " + repoPath);
-	    try {
-	        // Git pull command
-	        runCommand(new String[] { gitPath, "pull" }, repoPath);
-	        LOGGER.info("Successfully pulled changes from remote for " + repoPath);
-	    } catch (IOException | InterruptedException e) {
-	        LOGGER.severe("Failed to pull changes: " + e.getMessage());
-	        throw e; // Re-throw to handle in calling method
-	    }
-	}
-	
+
 	// Schedule Repository Monitoring
 	private static void scheduleRepositoryMonitoring() {
 		if (monitoredRepositories == null || monitoredRepositories.isEmpty()) {
