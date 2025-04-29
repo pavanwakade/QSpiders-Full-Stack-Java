@@ -36,7 +36,23 @@ let [,,,,[d,r]]=bagpak2;
 let bagpak3=["ram","sham","Yudhishthira", "Bhima", "Arjuna", "Nakula", "Sahadeva"];
 let [a1,b2,...pandav]=bagpak3;
 // console.log(pandav);
-console.log(...pandav);
+// console.log(...pandav);
+
+
+let addd=(a,b,c,d)=> console.log(a+b+c+d);
+
+addd(1,2,3,4);
+
+let restadd = (...addall) => {
+    return addall.reduce((acc, value) => acc + value);
+    
+}
+
+console.log(restadd(1,2,3,4,5,6,6,7));
+
+
+
+
 
 
 
