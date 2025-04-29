@@ -379,151 +379,89 @@ public class Git {
 			throw new IOException("Command failed with exit code: " + exitCode);
 		}
 	}
+	
+	
+	
 
-	// Commit and Push Changes
-//	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
-//
-//		File lockFile = new File(repoPath + File.separator + ".git" + File.separator + "index.lock");
-//		if (lockFile.exists()) {
-//			LOGGER.warning("Git lock file found. Attempting to remove: " + lockFile.getPath());
-//			if (lockFile.delete()) {
-//				LOGGER.info("Successfully removed lock file");
-//			} else {
-//				LOGGER.severe("Could not remove lock file");
-//				showPopup("Git Error", "Unable to remove repository lock file. Manual intervention required.");
-//				return;
-//			}
-//		}
-//
-//		File repoDir = new File(repoPath);
-//		File gitDir = new File(repoPath + File.separator + ".git");
-//
-//		if (!repoDir.exists() || !repoDir.isDirectory()) {
-//			throw new IOException("Repository directory does not exist: " + repoPath);
-//		}
-//
-//		if (!gitDir.exists() || !gitDir.isDirectory()) {
-//			throw new IOException("Not a git repository: " + repoPath);
-//		}
-//
-//		String gitPath = findGitExecutable();
-//		if (gitPath == null) {
-//			throw new IOException("Git executable not found!");
-//		}
-//
-//		// Check if there are changes to commit
-//		if (hasChanges(gitPath, repoPath)) {
-//			// Check internet connectivity
-//			if (!isInternetAvailable()) {
-//				// Show popup about no internet connection
-//				showPopup("No Internet", "Unable to push changes. Internet connection is offline.");
-//				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
-//				return;
-//			}
-//			try {
-//				// First pull changes from remote
-//				pullChanges(gitPath, repoPath);
-//				
-//				// Then check if there are local changes to commit
-//				if (hasChanges(gitPath, repoPath)) {
-//
-//			// Proceed with commit and push
-//			try {
-//				// Git commands
-//				runCommand(new String[] { gitPath, "add", "." }, repoPath);
-//				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
-//				runCommand(new String[] { gitPath, "push" }, repoPath);
-//
-//				showPopup("Commited", "Committed and pushed changes in " + repoPath);
-//				LOGGER.info("Committed and pushed changes in " + repoPath);
-//			} catch (IOException | InterruptedException e) {
-//				// Handle potential push failures
-//				showPopup("Commit Error", "Failed to push changes. Check internet connection.");
-//				LOGGER.severe("Failed to push changes: " + e.getMessage());
-//				
-//			}
-//			
-//		} else {
-//			LOGGER.info("No changes to commit for " + repoPath);
-//		}
-//				
-//	}
-//			
-//			
-			
-			
 	// Commit and Push Changes
 	private static void commitAndPushChanges(String repoPath) throws IOException, InterruptedException {
 
-	    File lockFile = new File(repoPath + File.separator + ".git" + File.separator + "index.lock");
-	    if (lockFile.exists()) {
-	        LOGGER.warning("Git lock file found. Attempting to remove: " + lockFile.getPath());
-	        if (lockFile.delete()) {
-	            LOGGER.info("Successfully removed lock file");
-	        } else {
-	            LOGGER.severe("Could not remove lock file");
-	            showPopup("Git Error", "Unable to remove repository lock file. Manual intervention required.");
-	            return;
-	        }
-	    }
+		File lockFile = new File(repoPath + File.separator + ".git" + File.separator + "index.lock");
+		if (lockFile.exists()) {
+			LOGGER.warning("Git lock file found. Attempting to remove: " + lockFile.getPath());
+			if (lockFile.delete()) {
+				LOGGER.info("Successfully removed lock file");
+			} else {
+				LOGGER.severe("Could not remove lock file");
+				showPopup("Git Error", "Unable to remove repository lock file. Manual intervention required.");
+				return;
+			}
+		}
 
-	    File repoDir = new File(repoPath);
-	    File gitDir = new File(repoPath + File.separator + ".git");
+		File repoDir = new File(repoPath);
+		File gitDir = new File(repoPath + File.separator + ".git");
 
-	    if (!repoDir.exists() || !repoDir.isDirectory()) {
-	        throw new IOException("Repository directory does not exist: " + repoPath);
-	    }
+		if (!repoDir.exists() || !repoDir.isDirectory()) {
+			throw new IOException("Repository directory does not exist: " + repoPath);
+		}
 
-	    if (!gitDir.exists() || !gitDir.isDirectory()) {
-	        throw new IOException("Not a git repository: " + repoPath);
-	    }
+		if (!gitDir.exists() || !gitDir.isDirectory()) {
+			throw new IOException("Not a git repository: " + repoPath);
+		}
 
-	    String gitPath = findGitExecutable();
-	    if (gitPath == null) {
-	        throw new IOException("Git executable not found!");
-	    }
+		String gitPath = findGitExecutable();
+		if (gitPath == null) {
+			throw new IOException("Git executable not found!");
+		}
 
-	    // Check internet connectivity first
-	    if (!isInternetAvailable()) {
-	        // Show popup about no internet connection
-	        showPopup("No Internet", "Unable to push changes. Internet connection is offline.");
-	        LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
-	        return;
-	    }
+		// Check if there are changes to commit
+		if (hasChanges(gitPath, repoPath)) {
+			// Check internet connectivity
+			if (!isInternetAvailable()) {
+				// Show popup about no internet connection
+				showPopup("No Internet", "Unable to push changes. Internet connection is offline.");
+				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
+				return;
+			}
+			try {
+				// First pull changes from remote
+				pullChanges(gitPath, repoPath);
+				
+				// Then check if there are local changes to commit
+				if (hasChanges(gitPath, repoPath)) {
 
-	    try {
-	        // First pull changes from remote
-	        LOGGER.info("Pulling changes from remote repository: " + repoPath);
-	        runCommand(new String[] { gitPath, "pull" }, repoPath);
-	        LOGGER.info("Successfully pulled changes from remote for " + repoPath);
+			// Proceed with commit and push
+			try {
+				// Git commands
+				runCommand(new String[] { gitPath, "add", "." }, repoPath);
+				runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
+				runCommand(new String[] { gitPath, "push" }, repoPath);
 
-	        // Then check if there are local changes to commit
-	        if (hasChanges(gitPath, repoPath)) {
-	            // Proceed with commit and push
-	            try {
-	                // Git commands
-	                runCommand(new String[] { gitPath, "add", "." }, repoPath);
-	                runCommand(new String[] { gitPath, "commit", "-m", commitMessage }, repoPath);
-	                runCommand(new String[] { gitPath, "push" }, repoPath);
-
-	                showPopup("Commited", "Committed and pushed changes in " + repoPath);
-	                LOGGER.info("Committed and pushed changes in " + repoPath);
-	            } catch (IOException | InterruptedException e) {
-	                // Handle potential push failures
-	                showPopup("Commit Error", "Failed to push changes. Check internet connection.");
-	                LOGGER.severe("Failed to push changes: " + e.getMessage());
-	                throw e;
-	            }
-	        } else {
-	            LOGGER.info("No changes to commit for " + repoPath);
-	        }
-	    } catch (IOException | InterruptedException e) {
-	        // Handle pull failures
-	        showPopup("Pull Error", "Failed to pull changes from remote. Check network connectivity.");
-	        LOGGER.severe("Failed to pull changes: " + e.getMessage());
-	        throw e;
-	    }
+				showPopup("Commited", "Committed and pushed changes in " + repoPath);
+				LOGGER.info("Committed and pushed changes in " + repoPath);
+			} catch (IOException | InterruptedException e) {
+				// Handle potential push failures
+				showPopup("Commit Error", "Failed to push changes. Check internet connection.");
+				LOGGER.severe("Failed to push changes: " + e.getMessage());
+				
+			}
+			
+		} else {
+			LOGGER.info("No changes to commit for " + repoPath);
+		}
+				
+	}catch (IOException | InterruptedException e) {
+        // Handle pull failures
+        showPopup("Pull Error", "Failed to pull changes from remote. Check network connectivity.");
+        LOGGER.severe("Failed to pull changes: " + e.getMessage());
 	}
+    }
+	}
+	
+			
+			
+			
+			
 			
 			
 			
