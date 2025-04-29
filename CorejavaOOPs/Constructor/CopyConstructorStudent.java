@@ -20,7 +20,6 @@ public class CopyConstructorStudent {
 		this.mo = mo;
 	}
 	
-	
 
 	public CopyConstructorStudent(CopyConstructorStudent stu) {
 		this.id = stu.id;
