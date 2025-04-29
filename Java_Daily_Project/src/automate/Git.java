@@ -500,7 +500,6 @@ public class Git {
 
 				return;
 			}
-
 			// Schedule repository monitoring
 			scheduleRepositoryMonitoring();
 
@@ -512,4 +511,30 @@ public class Git {
 			System.exit(1);
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 }
