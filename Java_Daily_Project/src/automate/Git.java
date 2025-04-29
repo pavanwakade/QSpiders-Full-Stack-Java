@@ -420,6 +420,7 @@ public class Git {
 				LOGGER.warning("No internet connection. Skipping push for repository: " + repoPath);
 				return;
 			}
+			
 
 			// Proceed with commit and push
 			try {
