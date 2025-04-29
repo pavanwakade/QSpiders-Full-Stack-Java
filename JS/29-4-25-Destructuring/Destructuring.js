@@ -11,7 +11,7 @@ let students = {
         pin: 411947
     }
 }
-console.log(students.add);
+// console.log(students.add);
 
 
 let { name, add } = students;
@@ -19,6 +19,27 @@ let { name, add } = students;
 // console.log(add);
 
 
-let bagpak2
+let bagpak2=[1,2,3,"pavan",["latur","indapur"]]
+
+let [a,b]=bagpak2;
+
+// console.log(a);
+// console.log(b);
+
+let [,,,,[d,r]]=bagpak2;
+// console.log(d);
+// console.log(r);
+
+
+//!rest and Spread
+
+let bagpak3=["ram","sham","Yudhishthira", "Bhima", "Arjuna", "Nakula", "Sahadeva"];
+let [a1,b2,...pandav]=bagpak3;
+// console.log(pandav);
+console.log(...pandav);
+
+
+
+
 
 
