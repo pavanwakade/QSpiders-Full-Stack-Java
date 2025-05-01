@@ -146,4 +146,45 @@ let car = [
 ]
 // console.log(Object.fromEntries(car));   //!conver Array to object
 
+let emp1 = {
+    name: "pavan"
+}
+
+let emp2 = {
+    age: 26
+}
+
+let emp3 = {
+   add:"lature"
+}
+
+
+let newaobj = Object.assign(emp1, emp2);//(target,sourse)
+
+// console.log(newaobj);//concate objects
+
+// console.log(emp1); //all sourse store in target
+
+// console.log(emp2);//sourse not changed
+
+
+
+
+let newaobj1 = Object.assign(emp1, emp2,emp3);//we can have n no of sourse
+// console.log(newaobj1);
+
+
+
+//when we want dont change any object than
+
+let newobj3=Object.assign({},emp1,emp2,emp3)//it strore all value in new object  here store in {}   , here {} is a target
+// console.log(newobj3);
+
+newobj3=Object.assign({aa:77},emp1,emp2,emp3)
+// console.log(newobj3);  //we can also add extra values directly
+
+//! in operator
+console.log("add" in newobj3); ///it check weither proparty present in that object or not
+
+console.log();
 

@@ -110,19 +110,26 @@ console.log(arr5); // [ 5, 6 ]
 let arr6 = new Array(5, 6, 7); // Array
 console.log(arr6); // [ 5, 6, 7 ]
 
+
+
+
 //!Object
 //?used to store multiple values in a single variable in key-value pair
-let obj1 = { 
-    name: "John", 
-    age: 30 
+//object literal way
+let obj1 = {
+    name: "John",
+    age: 30
 }; // Object
 
-console.log(obj1); // { name: 'John', age: 30 }
+// console.log(obj1); // { name: 'John', age: 30 }
 
+
+//create object 
 let obj2 = new Object(); // Object
 obj2.name = "John"; // Object
 obj2.age = 30; // Object
 console.log(obj2); // { name: 'John', age: 30 }
+
 
 let obj3 = new Object({
     name: "John",
