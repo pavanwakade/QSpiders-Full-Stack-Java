@@ -225,10 +225,35 @@ let a=JSON.stringify(ketan); //it convert js object into JSON object
 let copy=JSON.parse(a); // 
 copy.location="jalgaon";
 
-console.log(ketan);
-console.log(copy);
+// console.log(ketan);
+// console.log(copy);
 
 // shalo copy vs deep copy
 // in shalow copy
 
 
+// !Exception handeling
+
+// try {
+//     console.log("tinku nikla pinku ke ghar");
+//     throw new Error("tonku ne boot dekha");
+    
+// } catch (error) {
+    console.log(error);
+// }
+// finally{
+//     console.log("Zut bolta hai sala");
+    
+// }
+
+// try {
+//     printkaro(a)
+//     console.log("Executing try block");
+// } catch (error) {
+    
+//     console.log("An error occurred:", error);
+// }
+// finally{
+//     console.log("hahaha");
+    
+// }
