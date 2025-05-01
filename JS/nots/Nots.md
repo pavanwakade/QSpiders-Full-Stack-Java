@@ -3211,6 +3211,9 @@ and transfer control to the nearest catch block that can handle the exception.
 ## Questions
 
 1. diffrance between var/const/let ?
+--> **var** 
+
+
 2. NULL vs Undefined
 3. what is NAN
 4. what is symbol
