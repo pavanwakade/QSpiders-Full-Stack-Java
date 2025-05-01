@@ -124,7 +124,7 @@ let obj1 = {
 // console.log(obj1); // { name: 'John', age: 30 }
 
 
-//create object 
+//create object using new  
 let obj2 = new Object(); // Object
 obj2.name = "John"; // Object
 obj2.age = 30; // Object
@@ -137,7 +137,15 @@ let obj3 = new Object({
 }); // Object
 console.log(obj3); // { name: 'John', age: 30 }
 
-
+//by using class constuctor
+class namee {
+    constructor(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+}
+let objj=new namee("pavan",25);
+console.log(objj);
 
 
 

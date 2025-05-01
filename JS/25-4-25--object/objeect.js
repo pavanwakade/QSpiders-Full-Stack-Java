@@ -11,6 +11,17 @@
 //     name: "pavan"
 // }
 
+//by using class constuctor
+class namee {
+    constructor(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+}
+let objj=new namee("pavan",25);
+// console.log(objj);
+
+
 
 //? example
 
@@ -184,7 +195,37 @@ newobj3=Object.assign({aa:77},emp1,emp2,emp3)
 // console.log(newobj3);  //we can also add extra values directly
 
 //! in operator
-console.log("add" in newobj3); ///it check weither proparty present in that object or not
+// console.log("add" in newobj3); ///it check weither proparty present in that object or not
 
-console.log();
+// console.log();
+
+
+// for (const key in pavan) {
+//    console.log(key);
+// }
+
+let ketan={
+    education: "BE",
+    yop: 2024,
+    collage: "SBPCOE",
+    certificates: "Java Full Stack"
+}
+
+// let b=ketan;
+// b.loc="jalgaon";
+
+// console.log(b);
+// console.log(ketan);
+
+
+
+let a=JSON.stringify(ketan);
+let copy=JSON.parse(a);
+copy.location="jalgaon";
+
+console.log(ketan);
+console.log(copy);
+
+
+
 
