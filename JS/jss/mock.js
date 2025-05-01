@@ -131,3 +131,8 @@ let obj3 = new Object({
 console.log(obj3); // { name: 'John', age: 30 }
 
 
+
+
+
+
+

@@ -3204,48 +3204,77 @@ and transfer control to the nearest catch block that can handle the exception.
 
 
 
+# JavaScript Knowledge Check Questions
+
+## JavaScript Basics & History
+1. Who created JavaScript and in which year?
+2. What was JavaScript initially called before being renamed?
+3. Why was JavaScript created? Explain its initial purpose.
+4. What are the key features of JavaScript?
+5. Explain what makes JavaScript a high-level language.
+6. Why is JavaScript considered both synchronous and single-threaded?
+7. What makes JavaScript an object-based language?
+8. Explain the difference between loosely typed and dynamically typed in JavaScript.
+
+## JavaScript Runtime & Environment
+9. What is JavaScript Runtime Environment?
+10. Name the popular JavaScript engines and their respective browsers.
+11. What is V8 engine and where is it used?
+12. How does Node.js differ from browser JavaScript?
+
+## Variables & Scope
+13. Compare var, let, and const with examples.
+14. What is temporal dead zone in JavaScript?
+15. Explain the concept of hoisting in JavaScript.
+16. What are the different types of scope in JavaScript?
+17. How does lexical scope work in JavaScript?
+
+## Data Types
+18. List and explain all primitive data types in JavaScript.
+19. What are the non-primitive data types in JavaScript?
+20. What's the difference between null and undefined?
+21. Explain the concept of BigInt with an example.
+22. How does type coercion work in JavaScript?
+
+## Functions
+23. What are the different ways to create functions in JavaScript?
+24. Explain the concept of closure with an example.
+25. What is IIFE and when should we use it?
+26. How do arrow functions differ from regular functions?
+27. What is function hoisting?
+
+## Arrays & Objects
+28. What are the different ways to create arrays in JavaScript?
+29. List and explain common array methods.
+30. How does array destructuring work?
+31. What are the ways to create objects in JavaScript?
+32. Explain the concept of object destructuring.
 
 
+## DOM Manipulation
+33. What is DOM and why is it important?
+34. List different ways to select DOM elements.
+35. How can you create and insert elements in DOM?
+36. Explain event bubbling and event capturing.
+37. What are event listeners and how do you attach them?
 
+## Error Handling
+38. What is exception handling in JavaScript?
+39. Explain try, catch, and finally blocks.
+40. When should you use throw statement?
 
-## Questions
+## Advanced Concepts
+41. Explain prototypal inheritance in JavaScript.
+42. What is the 'this' keyword and how does it behave in different contexts?
+43. What are call, apply, and bind methods?
+44. Explain rest and spread operators.
+45. What is JSON and how is it different from a regular JavaScript object?
 
-1. diffrance between var/const/let ?
---> **var** 
+## Practical Problems
+46. Write a program to reverse a string without using built-in methods.
+47. Create a function to check if a number is prime.
+48. Implement a function to flatten a nested array.
+49. Write a program to find the factorial of a number using recursion.
+50. Create a debounce function implementation.
 
-
-2. NULL vs Undefined
-3. what is NAN
-4. what is symbol
-5. what is bigint? range?
-6. what is hoistning
-7. what is TDZ
-8. what is truthly,falsly
-9. What is JavaScript? (Write 6 points)
-10. What is JRE? Name two JRE?
-11. Write the names of JavaScript engines for Chrome, Firefox, Edge, and Safari.
-12. What is a JS engine?
-13. What are the differences between Var, let, and const?
-14. What is hoisting?
-15. What is the temporal dead zone?
-16. What is a function? (Write 6 points)
-17. Write the types of functions with syntax.
-18. What is a higher-order function and a callback function?
-19. What is explicit and implicit return in arrow functions? Provide an example.
-20. What is closure? When is a closure created? Explain with an example.
-
-### Array
-21. Array is object in javascript.
-22. It is non-primitive type of literal.
-23. It is a block of memory which is used to store multiple type of value (any type of literal) in same
-memory block.
-24. Array size is dynamic (size is not fixed like JAVA) , it means we can store 'N' number of elements and
-JS engine will handle memory usage automatically.
-25. Values stored inside array are refered as array elements.
-26. Array elements are arranged in a sequence that is represented by integer number called as index.
-Array index starts from zero to array size - 1 (suppose array has 5 elements it's first index will be - 0 and
-last index will be 4).
-27. We can access the array element with the help of array object reference , square brackets and index (
-array_object_ref[index] ).
-28. If we try to access the index that it greater than the array length we will get undefined.
-29. Array elements should be separated by comma(,)
+These questions cover the main topics from the markdown and test both theoretical knowledge and practical implementation skills.
