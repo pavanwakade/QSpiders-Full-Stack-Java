@@ -211,21 +211,24 @@ let ketan={
     certificates: "Java Full Stack"
 }
 
-// let b=ketan;
+
+//!shalo copy here if we changes any in copy object  chnged in orignal object
+// let b=ketan;  
 // b.loc="jalgaon";
 
 // console.log(b);
 // console.log(ketan);
 
 
-
-let a=JSON.stringify(ketan);
-let copy=JSON.parse(a);
+//!deepcopy //here if we changes any in copy object not chnge in orignal object
+let a=JSON.stringify(ketan); //it convert js object into JSON object
+let copy=JSON.parse(a); // 
 copy.location="jalgaon";
 
 console.log(ketan);
 console.log(copy);
 
-
+// shalo copy vs deep copy
+// in shalow copy
 
 
