@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promises</title>
+  </head>
+  <body>
+    <script>
+      let promise = new Promise((resolve, reject) => {
+        if (a == 10) {
+          resolve("a is 10");
+        } else {
+          reject("a is not 10");
+        }
+      });
+
+      promise.then((msg) => console.log(msg));
+      promise.catch((msg) => console.log(msg));
+      promise.finally((msg) => console.log("end"));
+    </script>
+  </body>
+</html>
