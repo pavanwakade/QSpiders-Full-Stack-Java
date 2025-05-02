@@ -18,7 +18,7 @@ public class ShuffleString {
 		}
 		Collections.shuffle(cc);
 
-//		System.out.println(cc);
+		System.out.println(cc);
 		String shu = "";
 		for (char cccc : cc) {
 
