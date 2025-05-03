@@ -33,8 +33,24 @@ p2.then((api) => {
 });
 
 
-fetch("https://api.github.com/users").then((res) => res.json()).then((api) => console.log(api)).finally(console.log("hello")
-);
+// fetch("https://api.github.com/users").then((res) => res.json()).then((api) => console.log(api));
+
+fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m").then((res) => res.json()).then((api) => {
+    // console.log(api);
+
+    // console.log(api.current.time)
+
+});
 
 
+let funnn = async () => {
 
+    let resobj = await fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
+
+    let data = await resobj.json()
+
+    console.log(data);
+}
+funnn()
+
+// async,await is a advance wait to handle promises
