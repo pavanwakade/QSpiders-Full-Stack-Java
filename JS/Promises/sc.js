@@ -1,9 +1,10 @@
-//promise in js
+//!promise in js
 //promises are the objects that represent the eventual completion 
 // (or failure) of an asynchronous operation and its resulting value.
 //promise is a placeholder for a value that we don't have yet but
 //promise is an object that may produce a single value some time in the future
-
+//promisees are introduce to avoid callback hell
+//!callback hell: its a complex situation when we use multiple callback function
 
 //!js syntax
 //   let a = 10;
@@ -35,22 +36,37 @@ p2.then((api) => {
 
 // fetch("https://api.github.com/users").then((res) => res.json()).then((api) => console.log(api));
 
-fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m").then((res) => res.json()).then((api) => {
-    // console.log(api);
+// fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m").then((res) => res.json()).then((api) => {
+//     // console.log(api);
+    
+//     console.log("Current time :" +api.current.time);
+    
+//     console.log("Current temperature : " + api.current.temperature_2m + api.current_units.temperature_2m);
+// });
 
-    // console.log(api.current.time)
 
-});
-
-
-let funnn = async () => {
-
-    let resobj = await fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
-
-    let data = await resobj.json()
-
-    console.log(data);
-}
-funnn()
 
 // async,await is a advance wait to handle promises
+// async function is a function that returns a promise
+// await is a keyword that can only be used inside an async function
+// await makes the function wait for a promise to be resolved or rejected
+
+// let funnn = async () => {
+
+//     let resobj = await fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
+
+//     let data = await resobj.json()
+
+//     console.log(data);
+// }
+// funnn()
+
+
+
+//!timer   
+
+//setInterval: it is used to execute a function repeatedly at a specified interval of time
+
+
+
+
