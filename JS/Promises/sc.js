@@ -38,9 +38,9 @@ p2.then((api) => {
 
 // fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m").then((res) => res.json()).then((api) => {
 //     // console.log(api);
-    
+
 //     console.log("Current time :" +api.current.time);
-    
+
 //     console.log("Current temperature : " + api.current.temperature_2m + api.current_units.temperature_2m);
 // });
 
@@ -65,8 +65,25 @@ p2.then((api) => {
 
 //!timer   
 
+//setTimeout: it is used to execute a function after a specified interval of time
+
+// console.log("start");
+// setTimeout(() => {
+//     console.log("Timeout executed");
+// }, 1000);
+
+
+
 //setInterval: it is used to execute a function repeatedly at a specified interval of time
+let count = 0;
+// setInterval(() => {
+//     console.log(count++);
+// }, 1000);
 
 
-
-
+let count2 = 10;
+// let interval = setInterval(() => {
+//     console.log(count2);
+//     if (count2 > 0) count2 -= 1;
+//     else clearInterval(interval);
+// }, 1000);
