@@ -35,7 +35,7 @@ import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-public class DiscreteApp {
+public class jj {
     private static JWindow frame;
     private static float opacity = 0.4f;
     private static Point initialClick;

@@ -1,3 +1,4 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -8,168 +9,137 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Base64;
 import java.util.Scanner;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
 public class ScreenshotToGemini {
-    private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "AIzaSyA5jMq0-7oGxEA6vWLJurDoiT4DcELuTao";
-    private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
-    private static final String MODELS_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
-    private static final int SCREENSHOT_INTERVAL_MS = 10000; // 10 seconds
+   private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "siYDAXuulx4ZElYnTkzuYNoG3MKKY6Q";
+   private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+   private static final String MODELS_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
+   private static final int SCREENSHOT_INTERVAL_MS = 10000;
 
-    public static void main(String[] args) {
-        System.out.println("Using API Key: " + (System.getenv("GEMINI_API_KEY") != null ? "Environment Variable" : API_KEY));
-        System.out.println("To use a different key, set GEMINI_API_KEY environment variable.");
-        System.out.println("Commands: Type a prompt to send to Gemini, 'exit' to stop, or press Enter to skip.");
+   public ScreenshotToGemini() {
+   }
 
-        // Validate API key
-        try {
-            validateApiKey();
-        } catch (Exception e) {
-            System.err.println("API Key Validation Failed: " + e.getMessage());
-            System.exit(1);
-        }
+   public static void main(String[] var0) {
+      System.out.println("Using API Key: " + (System.getenv("GEMINI_API_KEY") != null ? "Environment Variable" : API_KEY));
+      System.out.println("To use a different key, set the GEMINI_API_KEY environment variable.");
+      System.out.println("Commands: Type a prompt to send to Gemini, 'exit' to stop, or press Enter to skip.");
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    BufferedImage screenshot = takeScreenshot();
-                    String base64Image = convertToBase64(screenshot);
-                    String response = sendImageToGemini(base64Image);
-                    System.out.println("Screenshot Analysis: " + response);
-                } catch (Exception e) {
-                    System.err.println("Screenshot Error: " + e.getMessage());
-                }
-            }
-        };
-        timer.schedule(task, 0, SCREENSHOT_INTERVAL_MS);
+      try {
+         validateApiKey();
+      } catch (Exception var7) {
+         System.err.println("API Key Validation Failed: " + var7.getMessage());
+         System.exit(1);
+      }
 
-        // Handle console input for text prompts or exit
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
+      Timer var1 = new Timer();
+      ScreenshotToGemini var2 = new ScreenshotToGemini();
+      var1.schedule(var2, 0L, 10000L);
+      Scanner var3 = new Scanner(System.in);
+
+      while(true) {
+         while(true) {
             System.out.print("Enter prompt (or 'exit'): ");
-            String input = scanner.nextLine();
-            if ("exit".equalsIgnoreCase(input)) {
-                timer.cancel();
-                System.out.println("Program stopped.");
-                scanner.close();
-                System.exit(0);
-            } else if (!input.trim().isEmpty()) {
-                try {
-                    String response = sendTextToGemini(input);
-                    System.out.println("Text Prompt Response: " + response);
-                } catch (Exception e) {
-                    System.err.println("Text Prompt Error: " + e.getMessage());
-                }
+            String var4 = var3.nextLine();
+            if ("exit".equalsIgnoreCase(var4)) {
+               var1.cancel();
+               System.out.println("Program stopped.");
+               var3.close();
+               System.exit(0);
+            } else if (!var4.trim().isEmpty()) {
+               try {
+                  String var5 = sendTextToGemini(var4);
+                  System.out.println("Text Prompt Response: " + var5);
+               } catch (Exception var6) {
+                  System.err.println("Text Prompt Error: " + var6.getMessage());
+               }
             }
-        }
-    }
+         }
+      }
+   }
 
-    private static void validateApiKey() throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        String url = MODELS_API_URL + "?key=" + API_KEY;
-        System.out.println("Validating API key with URL: " + url);
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .header("Content-Type", "application/json")
-            .GET()
-            .build();
+   private static void validateApiKey() throws IOException, InterruptedException {
+      HttpClient var0 = HttpClient.newHttpClient();
+      HttpRequest var1 = HttpRequest.newBuilder().uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models?key=" + API_KEY)).header("Content-Type", "application/json").GET().build();
+      HttpResponse var2 = var0.send(var1, BodyHandlers.ofString());
+      if (var2.statusCode() == 200) {
+         System.out.println("API Key validated successfully.");
+      } else {
+         int var10000 = var2.statusCode();
+         String var3 = "HTTP Error " + var10000 + ": " + (String)var2.body();
+         if (var2.statusCode() == 400 && ((String)var2.body()).contains("API_KEY_INVALID")) {
+            var3 = var3 + "\nInvalid API key. Verify in Google Cloud Console (https://console.cloud.google.com/apis/credentials) or Google AI Studio (https://aistudio.google.com/). Ensure the Generative Language API is enabled (https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com).";
+         } else if (var2.statusCode() == 403) {
+            var3 = var3 + "\nPermission denied. Check API key access or project billing/quota.";
+         } else if (var2.statusCode() == 429) {
+            var3 = var3 + "\nRate limit exceeded. Check quota in Google Cloud Console.";
+         }
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Validation Response Headers: " + response.headers());
-        if (response.statusCode() != 200) {
-            String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
-            if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
-                errorMessage += "\nInvalid API key. Steps to fix:\n1. Verify key in Google Cloud Console (https://console.cloud.google.com/apis/credentials) or Google AI Studio (https://aistudio.google.com/).\n2. Ensure Generative Language API is enabled (https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com).\n3. Regenerate a new key if invalid.\n4. Check project billing and restrictions.";
-            } else if (response.statusCode() == 403) {
-                errorMessage += "\nPermission denied. Verify API key access, project billing, or IAM permissions (roles/serviceusage.apiKeysAdmin).";
-            } else if (response.statusCode() == 429) {
-                errorMessage += "\nRate limit exceeded. Check quota in Google Cloud Console.";
-            }
-            throw new IOException(errorMessage);
-        }
-        System.out.println("API Key validated successfully.");
-    }
+         throw new IOException(var3);
+      }
+   }
 
-    private static BufferedImage takeScreenshot() throws AWTException {
-        Robot robot = new Robot();
-        Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-        return robot.createScreenCapture(screenRect);
-    }
+   private static BufferedImage takeScreenshot() throws AWTException {
+      Robot var0 = new Robot();
+      Rectangle var1 = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+      return var0.createScreenCapture(var1);
+   }
 
-    private static String convertToBase64(BufferedImage image) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.getEncoder().encodeToString(imageBytes);
-    }
+   private static String convertToBase64(BufferedImage var0) throws IOException {
+      ByteArrayOutputStream var1 = new ByteArrayOutputStream();
+      ImageIO.write(var0, "png", var1);
+      byte[] var2 = var1.toByteArray();
+      return Base64.getEncoder().encodeToString(var2);
+   }
 
-    private static String sendImageToGemini(String base64Image) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        String requestBody = String.format(
-            "{\"contents\":[{\"parts\":[{\"text\":\"Analyze this image\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
-            base64Image
-        );
+   private static String sendImageToGemini(String var0) throws IOException, InterruptedException {
+      HttpClient var1 = HttpClient.newHttpClient();
+      String var2 = String.format("{\"contents\":[{\"parts\":[{\"text\":\"Analyze this image\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}", var0);
+      HttpRequest var3 = HttpRequest.newBuilder().uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY)).header("Content-Type", "application/json").POST(BodyPublishers.ofString(var2)).build();
+      HttpResponse var4 = var1.send(var3, BodyHandlers.ofString());
+      if (var4.statusCode() == 200) {
+         return (String)var4.body();
+      } else {
+         int var10000 = var4.statusCode();
+         String var5 = "HTTP Error " + var10000 + ": " + (String)var4.body();
+         if (var4.statusCode() == 400 && ((String)var4.body()).contains("API_KEY_INVALID")) {
+            var5 = var5 + "\nInvalid API key. Verify in Google Cloud Console or Google AI Studio.";
+         } else if (var4.statusCode() == 403) {
+            var5 = var5 + "\nPermission denied. Check API key access or project billing/quota.";
+         } else if (var4.statusCode() == 429) {
+            var5 = var5 + "\nRate limit exceeded. Check quota in Google Cloud Console.";
+         }
 
-        String url = GEMINI_API_URL + "?key=" + API_KEY;
-        System.out.println("Sending image to URL: " + url);
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-            .build();
+         throw new IOException(var5);
+      }
+   }
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Image Response Headers: " + response.headers());
-        if (response.statusCode() != 200) {
-            String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
-            if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
-                errorMessage += "\nInvalid API key. Verify in Google Cloud Console or Google AI Studio.";
-            } else if (response.statusCode() == 403) {
-                errorMessage += "\nPermission denied. Check API key access or project billing/quota.";
-            } else if (response.statusCode() == 429) {
-                errorMessage += "\nRate limit exceeded. Check quota in Google Cloud Console.";
-            }
-            throw new IOException(errorMessage);
-        }
-        return response.body();
-    }
+   private static String sendTextToGemini(String var0) throws IOException, InterruptedException {
+      HttpClient var1 = HttpClient.newHttpClient();
+      String var2 = String.format("{\"contents\":[{\"parts\":[{\"text\":\"%s\"}]}]}", var0.replace("\"", "\\\""));
+      HttpRequest var3 = HttpRequest.newBuilder().uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY)).header("Content-Type", "application/json").POST(BodyPublishers.ofString(var2)).build();
+      HttpResponse var4 = var1.send(var3, BodyHandlers.ofString());
+      if (var4.statusCode() == 200) {
+         return (String)var4.body();
+      } else {
+         int var10000 = var4.statusCode();
+         String var5 = "HTTP Error " + var10000 + ": " + (String)var4.body();
+         if (var4.statusCode() == 400 && ((String)var4.body()).contains("API_KEY_INVALID")) {
+            var5 = var5 + "\nInvalid API key. Verify in Google Cloud Console or Google AI Studio.";
+         } else if (var4.statusCode() == 403) {
+            var5 = var5 + "\nPermission denied. Check API key access or project billing/quota.";
+         } else if (var4.statusCode() == 429) {
+            var5 = var5 + "\nRate limit exceeded. Check quota in Google Cloud Console.";
+         }
 
-    private static String sendTextToGemini(String text) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        String requestBody = String.format(
-            "{\"contents\":[{\"parts\":[{\"text\":\"%s\"}]}]}",
-            text.replace("\"", "\\\"")
-        );
-
-        String url = GEMINI_API_URL + "?key=" + API_KEY;
-        System.out.println("Sending text to URL: " + url);
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-            .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Text Response Headers: " + response.headers());
-        if (response.statusCode() != 200) {
-            String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
-            if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
-                errorMessage += "\nInvalid API key. Verify in Google Cloud Console or Google AI Studio.";
-            } else if (response.statusCode() == 403) {
-                errorMessage += "\nPermission denied. Check API key access or project billing/quota.";
-            } else if (response.statusCode() == 429) {
-                errorMessage += "\nRate limit exceeded. Check quota in Google Cloud Console.";
-            }
-            throw new IOException(errorMessage);
-        }
-        return response.body();
-    }
+         throw new IOException(var5);
+      }
+   }
 }
