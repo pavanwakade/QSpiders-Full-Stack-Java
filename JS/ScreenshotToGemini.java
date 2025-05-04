@@ -17,14 +17,14 @@ import java.util.TimerTask;
 import javax.imageio.ImageIO;
 
 public class ScreenshotToGemini {
-    private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "siYDAXuulx4ZElYnTkzuYNoG3MKKY6Q";
+    private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "AIzaSyA5jMq0-7oGxEA6vWLJurDoiT4DcELuTao";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static final String MODELS_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
     private static final int SCREENSHOT_INTERVAL_MS = 10000; // 10 seconds
 
     public static void main(String[] args) {
         System.out.println("Using API Key: " + (System.getenv("GEMINI_API_KEY") != null ? "Environment Variable" : API_KEY));
-        System.out.println("To use a different key, set the GEMINI_API_KEY environment variable.");
+        System.out.println("To use a different key, set GEMINI_API_KEY environment variable.");
         System.out.println("Commands: Type a prompt to send to Gemini, 'exit' to stop, or press Enter to skip.");
 
         // Validate API key
@@ -74,19 +74,22 @@ public class ScreenshotToGemini {
 
     private static void validateApiKey() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
+        String url = MODELS_API_URL + "?key=" + API_KEY;
+        System.out.println("Validating API key with URL: " + url);
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(MODELS_API_URL + "?key=" + API_KEY))
+            .uri(URI.create(url))
             .header("Content-Type", "application/json")
             .GET()
             .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Validation Response Headers: " + response.headers());
         if (response.statusCode() != 200) {
             String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
             if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
-                errorMessage += "\nInvalid API key. Verify in Google Cloud Console (https://console.cloud.google.com/apis/credentials) or Google AI Studio (https://aistudio.google.com/). Ensure the Generative Language API is enabled (https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com).";
+                errorMessage += "\nInvalid API key. Steps to fix:\n1. Verify key in Google Cloud Console (https://console.cloud.google.com/apis/credentials) or Google AI Studio (https://aistudio.google.com/).\n2. Ensure Generative Language API is enabled (https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com).\n3. Regenerate a new key if invalid.\n4. Check project billing and restrictions.";
             } else if (response.statusCode() == 403) {
-                errorMessage += "\nPermission denied. Check API key access or project billing/quota.";
+                errorMessage += "\nPermission denied. Verify API key access, project billing, or IAM permissions (roles/serviceusage.apiKeysAdmin).";
             } else if (response.statusCode() == 429) {
                 errorMessage += "\nRate limit exceeded. Check quota in Google Cloud Console.";
             }
@@ -115,13 +118,16 @@ public class ScreenshotToGemini {
             base64Image
         );
 
+        String url = GEMINI_API_URL + "?key=" + API_KEY;
+        System.out.println("Sending image to URL: " + url);
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(GEMINI_API_URL + "?key=" + API_KEY))
+            .uri(URI.create(url))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
             .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Image Response Headers: " + response.headers());
         if (response.statusCode() != 200) {
             String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
             if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
@@ -143,13 +149,16 @@ public class ScreenshotToGemini {
             text.replace("\"", "\\\"")
         );
 
+        String url = GEMINI_API_URL + "?key=" + API_KEY;
+        System.out.println("Sending text to URL: " + url);
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(GEMINI_API_URL + "?key=" + API_KEY))
+            .uri(URI.create(url))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
             .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Text Response Headers: " + response.headers());
         if (response.statusCode() != 200) {
             String errorMessage = "HTTP Error " + response.statusCode() + ": " + response.body();
             if (response.statusCode() == 400 && response.body().contains("API_KEY_INVALID")) {
