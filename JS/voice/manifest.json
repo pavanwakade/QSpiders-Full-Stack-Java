@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Simple Voice Typing",
+    "version": "1.0",
+    "description": "A simple voice typing extension for Chrome",
+    "permissions": [
+      "activeTab",
+      "storage"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
