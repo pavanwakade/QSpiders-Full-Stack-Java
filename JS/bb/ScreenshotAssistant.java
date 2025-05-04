@@ -43,6 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -65,6 +66,7 @@ public class ScreenshotAssistant {
     private static JPanel codeBlocksPanel;
     private static String currentResponse = "";
     private static JLabel statusBar;
+    private static JTextField promptField;
 
     public static void main(String[] args) {
         if (API_KEY == null || API_KEY.isEmpty()) {
@@ -143,6 +145,16 @@ public class ScreenshotAssistant {
 
         titleBar.add(controlPanel, BorderLayout.EAST);
         mainPanel.add(titleBar, BorderLayout.NORTH);
+
+        // Prompt input field
+        JPanel promptPanel = new JPanel(new BorderLayout());
+        promptPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        JLabel promptLabel = new JLabel("Prompt: ");
+        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image.'");
+        promptField.setFont(new Font("Arial", Font.PLAIN, 12));
+        promptPanel.add(promptLabel, BorderLayout.WEST);
+        promptPanel.add(promptField, BorderLayout.CENTER);
+        mainPanel.add(promptPanel, BorderLayout.SOUTH);
 
         // Create tabbed pane for markdown, preview, and code blocks
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -437,8 +449,12 @@ public class ScreenshotAssistant {
 
     private static String sendImageToGemini(String base64Image) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
+        String customPrompt = promptField.getText().isEmpty() ? 
+            "Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image.'" 
+            : promptField.getText();
         String requestBody = String.format(
-            "{\"contents\":[{\"parts\":[{\"text\":\"Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image.'\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
+            "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
+            customPrompt.replace("\"", "\\\""),
             base64Image
         );
 
