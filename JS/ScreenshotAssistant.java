@@ -33,13 +33,14 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JWindow;
@@ -57,13 +58,20 @@ public class ScreenshotAssistant {
     private static boolean isMinimized = false;
     private static final Dimension NORMAL_SIZE = new Dimension(500, 600);
     private static final Dimension MINIMIZED_SIZE = new Dimension(20, 20);
-    private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "AIzaSyA5jMq0-7oGxEA6vWLJurDoiT4DcELuTao";
+    private static final String API_KEY = "AIzaSyC3D9EUIYEadH6tBtyxvwB6NK9GCAFYTt4";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
     private static JEditorPane htmlPreview;
+    private static JPanel codeBlocksPanel;
     private static String currentResponse = "";
+    private static JLabel statusBar;
 
     public static void main(String[] args) {
+        if (API_KEY == null || API_KEY.isEmpty()) {
+            System.err.println("Error: GEMINI_API_KEY environment variable is not set.");
+            System.exit(1);
+        }
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -136,7 +144,7 @@ public class ScreenshotAssistant {
         titleBar.add(controlPanel, BorderLayout.EAST);
         mainPanel.add(titleBar, BorderLayout.NORTH);
 
-        // Create tabbed pane for markdown and preview
+        // Create tabbed pane for markdown, preview, and code blocks
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setFocusable(false);
 
@@ -151,8 +159,9 @@ public class ScreenshotAssistant {
         markdownArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                // Update preview when markdown is edited
-                updateHtmlPreview(markdownArea.getText());
+                String currentText = markdownArea.getText();
+                updateHtmlPreview(currentText);
+                updateCodeBlocks(currentText);
             }
         });
         
@@ -165,20 +174,22 @@ public class ScreenshotAssistant {
         htmlPreview.setContentType("text/html");
         htmlPreview.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         
-        // Set up HTML styling
         HTMLEditorKit kit = new HTMLEditorKit();
         htmlPreview.setEditorKit(kit);
         StyleSheet styleSheet = kit.getStyleSheet();
         styleSheet.addRule("body { font-family: Arial, sans-serif; margin: 8px; }");
-        styleSheet.addRule("pre, code { background-color: #f0f0f0; border-radius: 3px; padding: 2px; font-family: Consolas, monospace; }");
-        styleSheet.addRule("pre { padding: 10px; border: 1px solid #ddd; }");
-        styleSheet.addRule("h1 { color: #333; }");
-        styleSheet.addRule("h2 { color: #444; }");
-        styleSheet.addRule("h3 { color: #555; }");
+        styleSheet.addRule("pre, code { background-color: #f0f0f0; padding: 2px; font-family: Consolas, monospace; }");
+        styleSheet.addRule("h1, h2, h3 { color: #333; }");
         styleSheet.addRule("ul, ol { margin-left: 20px; }");
         
         JScrollPane htmlScrollPane = new JScrollPane(htmlPreview);
         tabbedPane.addTab("Preview", htmlScrollPane);
+
+        // Code Blocks tab
+        codeBlocksPanel = new JPanel();
+        codeBlocksPanel.setLayout(new BoxLayout(codeBlocksPanel, BoxLayout.Y_AXIS));
+        JScrollPane codeBlocksScrollPane = new JScrollPane(codeBlocksPanel);
+        tabbedPane.addTab("Code Blocks", codeBlocksScrollPane);
 
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
 
@@ -186,7 +197,7 @@ public class ScreenshotAssistant {
         addResizeCapability(mainPanel);
         
         // Add status bar
-        JLabel statusBar = new JLabel(" Ready");
+        statusBar = new JLabel(" Ready");
         statusBar.setFont(new Font("Arial", Font.PLAIN, 10));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
         statusBar.setOpaque(true);
@@ -201,54 +212,105 @@ public class ScreenshotAssistant {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                // Alt+Shift+T to toggle always on top
                 if (e.isAltDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_T) {
                     frame.setAlwaysOnTop(!frame.isAlwaysOnTop());
                     statusBar.setText(" Always on top: " + (frame.isAlwaysOnTop() ? "Enabled" : "Disabled"));
                 }
-                // Alt+Shift+H to minimize/restore
                 if (e.isAltDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_H) {
                     toggleMinimize();
                 }
-                // Ctrl+C to copy when focused on the window but not in the text area
                 if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C && !markdownArea.isFocusOwner()) {
                     copyToClipboard();
+                }
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
+                    saveAsHtml();
                 }
             }
         });
 
-        // Update initial preview
+        // Update initial preview and code blocks
         updateHtmlPreview(markdownArea.getText());
+        updateCodeBlocks(markdownArea.getText());
     }
 
     private static void takeAndAnalyzeScreenshot() {
         try {
-            frame.setVisible(false); // Hide window before capturing
-            try {
-                Thread.sleep(200); // Brief pause to ensure window is hidden
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-            }
-            
+            frame.setVisible(false);
+            Thread.sleep(200);
             BufferedImage screenshot = takeScreenshot();
-            frame.setVisible(true); // Show window again
+            frame.setVisible(true);
             
             String base64Image = convertToBase64(screenshot);
+            statusBar.setText(" Analyzing screenshot...");
             String response = sendImageToGemini(base64Image);
             currentResponse = extractResponseText(response);
             markdownArea.setText(currentResponse);
             updateHtmlPreview(currentResponse);
+            updateCodeBlocks(currentResponse);
+            statusBar.setText(" Analysis complete.");
         } catch (Exception e) {
-            frame.setVisible(true); // Ensure window is visible on error
+            frame.setVisible(true);
             markdownArea.setText("Error: " + e.getMessage());
             updateHtmlPreview("<p style='color:red'>Error: " + e.getMessage() + "</p>");
+            updateCodeBlocks("");
+            statusBar.setText(" Error occurred.");
+            System.err.println("Error: " + e.getMessage());
         }
     }
 
     private static void updateHtmlPreview(String markdown) {
-        String html = convertMarkdownToHtml(markdown);
-        htmlPreview.setText(html);
-        htmlPreview.setCaretPosition(0);
+        SwingUtilities.invokeLater(() -> {
+            try {
+                String html = convertMarkdownToHtml(markdown);
+                htmlPreview.setText(html);
+                htmlPreview.setCaretPosition(0);
+            } catch (Exception e) {
+                System.err.println("Error updating HTML preview: " + e.getMessage());
+                htmlPreview.setText("<p style='color:red'>Error rendering preview: " + e.getMessage() + "</p>");
+            }
+        });
+    }
+
+    private static void updateCodeBlocks(String markdown) {
+        codeBlocksPanel.removeAll();
+        Pattern pattern = Pattern.compile("```([a-zA-Z0-9]+)?\\n([\\s\\S]*?)\\n```", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(markdown);
+        java.util.List<JPanel> codePanels = new java.util.ArrayList<>();
+        while (matcher.find()) {
+            String language = matcher.group(1);
+            String code = matcher.group(2).trim();
+            String labelText = language != null ? language + " Code" : "Code";
+            JLabel label = new JLabel(labelText);
+            JTextArea codeArea = new JTextArea(code);
+            codeArea.setFont(new Font("Consolas", Font.PLAIN, 14));
+            codeArea.setEditable(false);
+            codeArea.setLineWrap(true);
+            codeArea.setWrapStyleWord(true);
+            JScrollPane codeScrollPane = new JScrollPane(codeArea);
+            codeScrollPane.setPreferredSize(new Dimension(400, 100));
+            JButton copyButton = new JButton("Copy");
+            copyButton.addActionListener(e -> {
+                StringSelection selection = new StringSelection(codeArea.getText());
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
+            });
+            JPanel codePanel = new JPanel(new BorderLayout());
+            codePanel.add(label, BorderLayout.NORTH);
+            codePanel.add(codeScrollPane, BorderLayout.CENTER);
+            codePanel.add(copyButton, BorderLayout.EAST);
+            codePanels.add(codePanel);
+        }
+        if (codePanels.isEmpty()) {
+            codeBlocksPanel.add(new JLabel("No code blocks found."));
+        } else {
+            for (int i = 0; i < codePanels.size(); i++) {
+                if (i > 0) {
+                    codeBlocksPanel.add(Box.createVerticalStrut(10));
+                }
+                codeBlocksPanel.add(codePanels.get(i));
+            }
+        }
+        codeBlocksPanel.revalidate();
+        codeBlocksPanel.repaint();
     }
 
     private static String convertMarkdownToHtml(String markdown) {
@@ -256,14 +318,10 @@ public class ScreenshotAssistant {
             return "<html><body><p>No content</p></body></html>";
         }
 
-        // This is a basic markdown to HTML converter without external dependencies
-        // It handles the most common markdown elements
-        
         StringBuilder html = new StringBuilder();
         html.append("<html><body>");
         
-        // Replace code blocks with <pre><code>
-        Pattern codePattern = Pattern.compile("```(?:([a-zA-Z0-9]+)\\n)?([\\s\\S]*?)```");
+        Pattern codePattern = Pattern.compile("```(?:([a-zA-Z0-9]+)?\\n)?([\\s\\S]*?)```");
         Matcher codeMatcher = codePattern.matcher(markdown);
         StringBuffer codeBuffer = new StringBuffer();
         
@@ -276,25 +334,17 @@ public class ScreenshotAssistant {
         codeMatcher.appendTail(codeBuffer);
         markdown = codeBuffer.toString();
         
-        // Inline code
         markdown = markdown.replaceAll("`([^`]+)`", "<code>$1</code>");
-        
-        // Headers
         markdown = markdown.replaceAll("(?m)^# (.+)$", "<h1>$1</h1>");
         markdown = markdown.replaceAll("(?m)^## (.+)$", "<h2>$1</h2>");
         markdown = markdown.replaceAll("(?m)^### (.+)$", "<h3>$1</h3>");
         markdown = markdown.replaceAll("(?m)^#### (.+)$", "<h4>$1</h4>");
-        
-        // Bold and italic
-        markdown = markdown.replaceAll("\\*\\*([^*]+)\\*\\*", "<b>$1</b>");
-        markdown = markdown.replaceAll("\\*([^*]+)\\*", "<i>$1</i>");
-        markdown = markdown.replaceAll("__([^_]+)__", "<b>$1</b>");
-        markdown = markdown.replaceAll("_([^_]+)_", "<i>$1</i>");
-        
-        // Links
+        markdown = markdown.replaceAll("\\*\\*([^*]+)\\*\\*", "<strong>$1</strong>");
+        markdown = markdown.replaceAll("\\*([^*]+)\\*", "<em>$1</em>");
+        markdown = markdown.replaceAll("__([^_]+)__", "<strong>$1</strong>");
+        markdown = markdown.replaceAll("_([^_]+)_", "<em>$1</em>");
         markdown = markdown.replaceAll("\\[([^\\]]+)\\]\\(([^)]+)\\)", "<a href=\"$2\">$1</a>");
         
-        // Unordered lists
         Pattern ulPattern = Pattern.compile("(?m)^[*+-] (.+)$");
         Matcher ulMatcher = ulPattern.matcher(markdown);
         StringBuffer ulBuffer = new StringBuffer();
@@ -308,15 +358,12 @@ public class ScreenshotAssistant {
                 ulMatcher.appendReplacement(ulBuffer, "<li>$1</li>");
             }
         }
-        
         if (inUl) {
             ulBuffer.append("</ul>");
         }
-        
         ulMatcher.appendTail(ulBuffer);
         markdown = ulBuffer.toString();
         
-        // Ordered lists
         Pattern olPattern = Pattern.compile("(?m)^\\d+\\. (.+)$");
         Matcher olMatcher = olPattern.matcher(markdown);
         StringBuffer olBuffer = new StringBuffer();
@@ -330,15 +377,12 @@ public class ScreenshotAssistant {
                 olMatcher.appendReplacement(olBuffer, "<li>$1</li>");
             }
         }
-        
         if (inOl) {
             olBuffer.append("</ol>");
         }
-        
         olMatcher.appendTail(olBuffer);
         markdown = olBuffer.toString();
         
-        // Paragraphs - wrap non-tagged lines in <p> tags
         StringBuilder paragraphed = new StringBuilder();
         boolean inParagraph = false;
         String[] lines = markdown.split("\n");
@@ -353,7 +397,7 @@ public class ScreenshotAssistant {
                 paragraphed.append("\n");
             } else if (trimmed.startsWith("<h") || trimmed.startsWith("<pre") || 
                        trimmed.startsWith("<ul") || trimmed.startsWith("<ol") ||
-                       trimmed.startsWith("<li") || trimmed.startsWith("<table")) {
+                       trimmed.startsWith("<li")) {
                 if (inParagraph) {
                     paragraphed.append("</p>\n");
                     inParagraph = false;
@@ -369,7 +413,6 @@ public class ScreenshotAssistant {
                 }
             }
         }
-        
         if (inParagraph) {
             paragraphed.append("</p>");
         }
@@ -423,12 +466,10 @@ public class ScreenshotAssistant {
 
     private static String extractResponseText(String jsonResponse) {
         try {
-            // Use a proper regex to extract text from the JSON response
             Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"((?:\\\\\"|[^\"])*?)\"");
             Matcher matcher = pattern.matcher(jsonResponse);
             if (matcher.find()) {
                 String text = matcher.group(1);
-                // Unescape JSON string escapes
                 return text.replace("\\n", "\n")
                            .replace("\\\"", "\"")
                            .replace("\\\\", "\\")
@@ -438,24 +479,19 @@ public class ScreenshotAssistant {
                            .replace("\\f", "\f");
             }
         } catch (Exception e) {
-            // Fallback to raw response
         }
         return "Unable to parse response: " + jsonResponse;
     }
 
     private static void copyToClipboard() {
         try {
-            // Get the currently visible content (markdown or rendered HTML)
             String textToCopy = markdownArea.getText();
-            
-            // Copy to clipboard
             StringSelection selection = new StringSelection(textToCopy);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(selection, selection);
-            
-            // Visual feedback
             markdownArea.requestFocus();
             markdownArea.selectAll();
+            statusBar.setText(" Response copied to clipboard.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(frame, "Error copying to clipboard: " + e.getMessage(), "Copy Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -463,7 +499,6 @@ public class ScreenshotAssistant {
 
     private static void saveAsHtml() {
         try {
-            // Create a temporary HTML file
             File tempFile = File.createTempFile("screenshotAssistant_", ".html");
             try (FileWriter writer = new FileWriter(tempFile)) {
                 writer.write("<!DOCTYPE html>\n");
@@ -472,20 +507,16 @@ public class ScreenshotAssistant {
                 writer.write("<title>Screenshot Assistant Output</title>\n");
                 writer.write("<style>\n");
                 writer.write("body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }\n");
-                writer.write("pre, code { background-color: #f0f0f0; border-radius: 3px; padding: 2px; font-family: Consolas, monospace; }\n");
-                writer.write("pre { padding: 10px; border: 1px solid #ddd; overflow: auto; }\n");
-                writer.write("h1 { color: #333; }\n");
-                writer.write("h2 { color: #444; }\n");
-                writer.write("h3 { color: #555; }\n");
+                writer.write("pre, code { background-color: #f0f0f0; padding: 2px; font-family: Consolas, monospace; }\n");
+                writer.write("h1, h2, h3 { color: #333; }\n");
                 writer.write("ul, ol { margin-left: 20px; }\n");
                 writer.write("</style>\n");
                 writer.write("</head>\n<body>\n");
                 writer.write(convertMarkdownToHtml(markdownArea.getText()).replace("<html><body>", "").replace("</body></html>", ""));
                 writer.write("\n</body>\n</html>");
             }
-            
-            // Open the file in the default browser
             Desktop.getDesktop().browse(tempFile.toURI());
+            statusBar.setText(" HTML saved and opened.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(frame, "Error saving as HTML: " + e.getMessage(), "Save Error", JOptionPane.ERROR_MESSAGE);
         }
