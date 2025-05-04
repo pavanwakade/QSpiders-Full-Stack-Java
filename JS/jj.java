@@ -30,10 +30,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class jj {
     private static JWindow frame;
@@ -45,7 +49,7 @@ public class jj {
     private static final Dimension MINIMIZED_SIZE = new Dimension(20, 20);
     private static final String API_KEY = System.getenv("GEMINI_API_KEY") != null ? System.getenv("GEMINI_API_KEY") : "AIzaSyA5jMq0-7oGxEA6vWLJurDoiT4DcELuTao";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
-    private static JTextArea responseArea;
+    private static JTextPane responseArea;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> createAndShowGUI());
@@ -71,6 +75,12 @@ public class jj {
         JButton screenshotButton = createButton("📸", "Take Screenshot");
         screenshotButton.addActionListener(e -> takeAndAnalyzeScreenshot());
 
+        JButton copyButton = createButton("📋", "Copy response to clipboard");
+        copyButton.addActionListener(e -> {
+            String text = responseArea.getText();
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new java.awt.datatransfer.StringSelection(text), null);
+        });
+
         JButton closeButton = createButton("×", "Close application");
         closeButton.addActionListener(e -> System.exit(0));
 
@@ -81,19 +91,19 @@ public class jj {
         opacityButton.addActionListener(e -> toggleOpacity());
 
         controlPanel.add(screenshotButton);
+        controlPanel.add(copyButton);
         controlPanel.add(opacityButton);
         controlPanel.add(hideButton);
         controlPanel.add(closeButton);
 
         panel.add(controlPanel, BorderLayout.NORTH);
 
-        responseArea = new JTextArea("Click the 📸 button to capture a screenshot. Only the answer to any detected question will be shown in Markdown.\nSelect and copy (Ctrl+C) the response as needed.");
+        responseArea = new JTextPane();
         responseArea.setFont(new Font("Arial", Font.PLAIN, 14));
         responseArea.setForeground(Color.BLACK);
-        responseArea.setLineWrap(true);
-        responseArea.setWrapStyleWord(true);
         responseArea.setEditable(false); // Prevent editing, allow selection
         responseArea.setOpaque(false);
+        parseAndSetStyledText("Click the 📸 button to capture a screenshot. Only the answer to any detected question will be shown in Markdown.\nSelect and copy (Ctrl+C) the response as needed, or use the 📋 button to copy all.");
         JScrollPane scrollPane = new JScrollPane(responseArea);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
@@ -132,9 +142,65 @@ public class jj {
             String base64Image = convertToBase64(screenshot);
             String response = sendImageToGemini(base64Image);
             String responseText = extractResponseText(response);
-            responseArea.setText(responseText);
+            parseAndSetStyledText(responseText);
+            responseArea.setCaretPosition(0); // Scroll to top
         } catch (Exception e) {
-            responseArea.setText("Error: " + e.getMessage());
+            parseAndSetStyledText("Error: " + e.getMessage());
+        }
+    }
+
+    private static void parseAndSetStyledText(String text) {
+        responseArea.setText(""); // Clear existing text
+        StyledDocument doc = responseArea.getStyledDocument();
+
+        // Define styles
+        Style defaultStyle = doc.addStyle("default", null);
+        StyleConstants.setFontFamily(defaultStyle, "Arial");
+        StyleConstants.setFontSize(defaultStyle, 14);
+
+        // Header styles for different levels
+        for (int i = 1; i <= 6; i++) {
+            Style headerStyle = doc.addStyle("header" + i, defaultStyle);
+            StyleConstants.setBold(headerStyle, true);
+            int size = 24 - (i - 1) * 2; // e.g., 24, 22, 20, 18, 16, 14
+            StyleConstants.setFontSize(headerStyle, size);
+        }
+
+        Style codeStyle = doc.addStyle("code", defaultStyle);
+        StyleConstants.setFontFamily(codeStyle, "Monospaced");
+        StyleConstants.setFontSize(codeStyle, 14);
+
+        // Parse and insert text
+        String[] lines = text.split("\n");
+        boolean inCodeBlock = false;
+
+        for (String line : lines) {
+            if (line.trim().equals("```")) {
+                inCodeBlock = !inCodeBlock;
+                continue;
+            }
+
+            try {
+                if (inCodeBlock) {
+                    doc.insertString(doc.getLength(), line + "\n", codeStyle);
+                } else if (line.startsWith("#")) {
+                    int level = 0;
+                    while (level < line.length() && line.charAt(level) == '#') {
+                        level++;
+                    }
+                    if (level > 0 && level <= 6) {
+                        String headerText = line.substring(level).trim();
+                        Style headerStyle = doc.getStyle("header" + level);
+                        doc.insertString(doc.getLength(), headerText + "\n", headerStyle);
+                    } else {
+                        doc.insertString(doc.getLength(), line + "\n", defaultStyle);
+                    }
+                } else {
+                    doc.insertString(doc.getLength(), line + "\n", defaultStyle);
+                }
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
