@@ -4,7 +4,7 @@ console.log(Math.round(10.6));  //11
 
 console.log(1000*Math.random()+1000);
 
-let randomm=1000*Math.random()+1000;
-console.log(round(randomm));
+let randomm=1000*Math.random()+10.;
+console.log(randomm.f);
 
 
