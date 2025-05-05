@@ -24,14 +24,14 @@
 
 
 
-let p = fetch("https://api.github.com/users")
+// let p = fetch("https://api.github.com/users")
 
-let p2 = p.then((res) => {
-    return res.json()
-});
-p2.then((api) => {
+// let p2 = p.then((res) => {
+//     return res.json()
+// });
+// p2.then((api) => {
     // console.log(api);
-});
+// });
 
 
 // fetch("https://api.github.com/users").then((res) => res.json()).then((api) => console.log(api));
@@ -75,15 +75,16 @@ p2.then((api) => {
 
 
 //setInterval: it is used to execute a function repeatedly at a specified interval of time
-let count = 0;
+// let count = 0;
 // setInterval(() => {
 //     console.log(count++);
 // }, 1000);
 
 
-let count2 = 10;
+// let count2 = 10;
 // let interval = setInterval(() => {
 //     console.log(count2);
 //     if (count2 > 0) count2 -= 1;
 //     else clearInterval(interval);
 // }, 1000);
+
