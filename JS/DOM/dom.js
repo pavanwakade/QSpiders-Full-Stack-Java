@@ -43,18 +43,19 @@
 // console.log(classs);
 // classs.forEach((val)=>val.style.backgroundColor="yellow")
 
-let selection=document.createElement('section')
-selection.innerText="i am selection";
+let selection = document.createElement('section')
+selection.innerText = "i am selection";
 
-let para=document.createElement('p')
-para.innerText="i am patragraph";
+let para = document.createElement('p')
+para.innerText = "i am patragraph";
 selection.append(para)
 
-let m1=document.createElement('main')
-main.innerText="i am main";
+
+let main = document.createElement('main')
+main.innerText = "i am main";
 
 main.append(selection);
-let x=document.querySelector('body')
+let x = document.querySelector('body')
 x.append(main);
 console.log(main);
 
@@ -65,11 +66,12 @@ console.log(main);
 
 //! add  attribute
 
-let heading=document.createElement('h1')
-heading.innerText="hello from javaScript";
-heading.append('body')
+let heading = document.createElement('h1')
+heading.innerText = "hello from javaScript";
 
-heading.setAttribute("title","this is heading")
+let xx = document.querySelector('body')
+xx.append(heading)
+heading.setAttribute("title", "this is heading")
 
 
 
