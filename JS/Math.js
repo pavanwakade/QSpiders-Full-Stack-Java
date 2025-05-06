@@ -9,8 +9,19 @@
 
 
 
-let StringNum=["one","two","three","four","five","six","seven","eight","nine"];
-let num=10;
+// let StringNum = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+// let numm = 10756476;
+// let c = [];
+// while (numm > 0) {
+//     let b = numm % 10;
+//     c.unshift(StringNum[b]);
 
-let aa=num.toString();
+//     numm = Math.floor(numm / 10);
+// }
+// console.log(c.join(" "));
+
+
+
+
+
 
