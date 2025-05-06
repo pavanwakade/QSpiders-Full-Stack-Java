@@ -36,12 +36,42 @@
 //!querySelector
 //? querySelector is used to select the first element that matches the specified CSS selector(s) in the document.
 
-let ele=document.querySelector('#hh')
-console.log(ele);
+// let ele=document.querySelector('#hh')
+// console.log(ele);
 
-let classs=document.querySelectorAll('div')
-console.log(classs);
-classs.forEach((val)=>val.style.backgroundColor="yellow")
+// let classs=document.querySelectorAll('div')
+// console.log(classs);
+// classs.forEach((val)=>val.style.backgroundColor="yellow")
+
+let selection=document.createElement('section')
+selection.innerText="i am selection";
+
+let para=document.createElement('p')
+para.innerText="i am patragraph";
+selection.append(para)
+
+let m1=document.createElement('main')
+main.innerText="i am main";
+
+main.append(selection);
+let x=document.querySelector('body')
+x.append(main);
+console.log(main);
+
+
+// main.style.backgroundColor="red";
+// x.style.backgroundColor="yellow";
+
+
+//! add  attribute
+
+let heading=document.createElement('h1')
+heading.innerText="hello from javaScript";
+heading.append('body')
+
+heading.setAttribute("title","this is heading")
+
+
 
 
 
