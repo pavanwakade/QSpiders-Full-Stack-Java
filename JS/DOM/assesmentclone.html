@@ -20,27 +20,62 @@
         logo.href='#'
        
         let logoImg = document.createElement('img')
-        logoImg.src="logo.jpg"
-        logoImg.alt="logo"
+        // logoImg.src="logo.jpg"
+        // logoImg.alt="logo"
+        logo.textContent='logo'
+
 
         logo.appendChild(logoImg)
         let link1 = document.createElement('a')
         link1.href = '#'
-        link1.textContent = 'Navigation Link'
+        link1.textContent = 'profile'
 
         let link2 = document.createElement('a')
         link2.href = '#'
-        link2.textContent = 'Navigation Link'
+        link2.textContent = 'about'
+
+        let link3 = document.createElement('a')
+        link3.href = '#'
+        link3.textContent = 'plan'
+
+        let link4 = document.createElement('a')
+        link4.href = '#'
+        link4.textContent = 'contact'
         
         
         navbar.style.backgroundColor = 'yellow'
         navbar.style.display = 'flex'
-        navbar.style.gap = '10px'
+        navbar.style.gap = '15px'
+        navbar.style.justifyContent = "flex-end"
 
-        
-        navbar.append(logo, link1, link2)
+        let navvvv=[link1, link2,link3,link4]
+        navvvv.forEach((val)=>{
+            val.style.textDecoration = 'none'
+            val.style.color='black'
+        });
+
+        navbar.append(logo, link1, link2,link3,link4)
         body.append(navbar)
 
+    let div1=document.createElement('div')
+    div1.setAttribute("class","heading")
+    let h1=document.createElement("h1")
+    h1.textContent = "Explanation of"
+    let br = document.createElement('br')
+    h1.append(br)
+    h1.append("Business Design")
+    let p=document.createElement("p")
+    p.textContent = "a platform to bring new friends"
+    p1.append(br)
+    p.textContent = "around you in a away that is fun to all"
+
+    div1.append(h1)
+
+
+        let div2=document.createElement('div')
+        div2.setAttribute("class","img")
+
+        body.append(div1,div2)
         console.log(body);
         
 
