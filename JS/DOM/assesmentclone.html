@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom Assignment</title>
+</head>
+<body>
+    <!-- <nav><a href="hgg">hjb</a></nav>
+    <nav><a href="hgg">hjb</a></nav>
+    <nav><a href="hgg">hjb</a></nav>
+    <nav><a href="hgg">hjb</a></nav> -->
+    
+    <script>
+       
+
+        let body=document.querySelector('body')
+        let navbar = document.createElement('div')
+        let link = document.createElement('a')
+        link.href = '#'
+        link.textContent = 'Navigation Link'
+        navbar.appendChild(link)
+        body.append(navbar)
+
+        console.log(body);
+        
+
+    </script>
+</body>
+</html>
