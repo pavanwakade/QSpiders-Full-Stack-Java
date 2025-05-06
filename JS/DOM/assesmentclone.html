@@ -16,10 +16,29 @@
 
         let body=document.querySelector('body')
         let navbar = document.createElement('div')
-        let link = document.createElement('a')
-        link.href = '#'
-        link.textContent = 'Navigation Link'
-        navbar.appendChild(link)
+        let logo=document.createElement('a')
+        logo.href='#'
+       
+        let logoImg = document.createElement('img')
+        // logoImg.src="logo.jpg"
+        logoImg.alt="logo"
+
+        logo.appendChild(logoImg)
+        let link1 = document.createElement('a')
+        link1.href = '#'
+        link1.textContent = 'Navigation Link'
+
+        let link2 = document.createElement('a')
+        link2.href = '#'
+        link2.textContent = 'Navigation Link'
+        
+        
+        navbar.style.backgroundColor = 'yellow'
+        navbar.style.display = 'flex'
+        navbar.style.gap = '10px'
+
+        
+        navbar.append(logo, link1, link2)
         body.append(navbar)
 
         console.log(body);
