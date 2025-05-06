@@ -1,84 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dom Assignment</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- <nav><a href="hgg">hjb</a></nav>
     <nav><a href="hgg">hjb</a></nav>
     <nav><a href="hgg">hjb</a></nav>
     <nav><a href="hgg">hjb</a></nav> -->
-    
+
     <script>
-       
+      let bodys = document.querySelector("body");
+      let navbar = document.createElement("div");
+      let logo = document.createElement("a");
+      logo.href = "#";
 
-        let body=document.querySelector('body')
-        let navbar = document.createElement('div')
-        let logo=document.createElement('a')
-        logo.href='#'
-       
-        let logoImg = document.createElement('img')
-        // logoImg.src="logo.jpg"
-        // logoImg.alt="logo"
-        logo.textContent='logo'
+      let logoImg = document.createElement("img");
+      // logoImg.src="logo.jpg"
+      // logoImg.alt="logo"
+      logo.textContent = "logo";
 
+      logo.appendChild(logoImg);
+      let link1 = document.createElement("a");
+      link1.href = "#";
+      link1.textContent = "profile";
 
-        logo.appendChild(logoImg)
-        let link1 = document.createElement('a')
-        link1.href = '#'
-        link1.textContent = 'profile'
+      let link2 = document.createElement("a");
+      link2.href = "#";
+      link2.textContent = "about";
 
-        let link2 = document.createElement('a')
-        link2.href = '#'
-        link2.textContent = 'about'
+      let link3 = document.createElement("a");
+      link3.href = "#";
+      link3.textContent = "plan";
 
-        let link3 = document.createElement('a')
-        link3.href = '#'
-        link3.textContent = 'plan'
+      let link4 = document.createElement("a");
+      link4.href = "#";
+      link4.textContent = "contact";
 
-        let link4 = document.createElement('a')
-        link4.href = '#'
-        link4.textContent = 'contact'
-        
-        
-        navbar.style.backgroundColor = 'yellow'
-        navbar.style.display = 'flex'
-        navbar.style.gap = '15px'
-        navbar.style.justifyContent = "flex-end"
+      let button = document.createElement("button");
+      button.href = "#";
+      button.textContent = "login";
+      button.style.backgroundColor = "#4CAF50";
+      button.style.color = "white";
+      button.style.border = "none";
+      button.style.borderRadius = "50%";
+      button.style.padding = "10px";
 
-        let navvvv=[link1, link2,link3,link4]
-        navvvv.forEach((val)=>{
-            val.style.textDecoration = 'none'
-            val.style.color='black'
-        });
+      navbar.style.display = "flex";
+      navbar.style.gap = "15px";
+      navbar.style.justifyContent = "flex-end";
 
-        navbar.append(logo, link1, link2,link3,link4)
-        body.append(navbar)
+      let navvvv = [link1, link2, link3, link4];
+      navvvv.forEach((val) => {
+        val.style.textDecoration = "none";
+        val.style.color = "black";
+      });
 
-    let div1=document.createElement('div')
-    div1.setAttribute("class","heading")
-    let h1=document.createElement("h1")
-    h1.textContent = "Explanation of"
-    let br = document.createElement('br')
-    h1.append(br)
-    h1.append("Business Design")
-    let p=document.createElement("p")
-    p.textContent = "a platform to bring new friends"
-    p1.append(br)
-    p.textContent = "around you in a away that is fun to all"
+      navbar.append(logo, link1, link2, link3, link4, button);
+      bodys.append(navbar);
 
-    div1.append(h1)
+      let div1 = document.createElement("div");
+      div1.setAttribute("class", "heading");
+      let h1 = document.createElement("h1");
+      h1.textContent = "Explanation of";
+      h1.append(document.createElement("br"));
+      h1.append("Business Design");
 
+      let p1 = document.createElement("p");
+      p1.textContent = "a platform to bring new friends";
+      p1.append(document.createElement("br"));
+      p1.append("around you in a away that is fun to all");
 
-        let div2=document.createElement('div')
-        div2.setAttribute("class","img")
+      div1.append(h1, p1);
+      //   div1.style.backgroundColor = "yellow";
+      div1.style.width = "40%";
+      div1.style.padding = "40px";
 
-        body.append(div1,div2)
-        console.log(body);
-        
+      let div2 = document.createElement("div");
+      div2.setAttribute("class", "img");
 
+      let imgs = document.createElement("img");
+      imgs.src = "./ii.jpg";
+      imgs.alt = "logo";
+      imgs.style.height = "100%";
+      imgs.style.width = "100%";
+
+      div2.append(imgs);
+      let newdiv = document.createElement("div");
+      newdiv.append(div1, div2);
+      newdiv.style.marginTop = "20px";
+      newdiv.style.display = "flex";
+
+      bodys.append(newdiv);
+      console.log(bodys);
     </script>
-</body>
+  </body>
 </html>
