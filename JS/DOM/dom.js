@@ -1,33 +1,63 @@
 // console.log(Window.document);
-let heading = document.getElementsByTagName("h1");
-console.log(heading);
-let para=document.getElementsByTagName("p");
+// let heading = document.getElementsByTagName("h1");
+// console.log(heading);
+// let para=document.getElementsByTagName("p");
 
-document.body.style.backgroundColor = "yellow";
-for (let i = 0; i < heading.length; i++) {
-    heading[i].style.backgroundColor = "red";
-    heading[i].style.color = "white";
-}
+// document.body.style.backgroundColor = "yellow";
+// for (let i = 0; i < heading.length; i++) {
+//     heading[i].style.backgroundColor = "red";
+//     heading[i].style.color = "white";
+// }
 
-for (let i = 0; i < para.length; i++) {
-    para[i].style.backgroundColor = "blue";
-    para[i].style.color = "white";
-}
-
-
-let headingByid=document.getElementById("hh");
-
-headingByid.style.backgroundColor = "green";
-headingByid.style.color = "white";
+// for (let i = 0; i < para.length; i++) {
+//     para[i].style.backgroundColor = "blue";
+//     para[i].style.color = "white";
+// }
 
 
-let divclass=document.getElementsByClassName("dombackground")
-console.log(divclass);
+// let headingByid=document.getElementById("hh");
 
-for (let i = 0; i < divclass.length; i++) {
-    const element = array[i];
-    
-}
+// headingByid.style.backgroundColor = "green";
+// headingByid.style.color = "white";
+
+
+// let divclass=document.getElementsByClassName("dombackground") //target html element by class name 
+// console.log(divclass);
+
+// for (let i = 0; i < divclass.length; i++) { // loop through all the elements with the class name
+//     divclass[i].style.backgroundColor="pink"; // set the background color
+//     divclass[i].style.color="white";// set the text color
+//     divclass[i].style.fontSize="20px";// set the font size
+// }
+
+
+
+
+//!querySelector
+//? querySelector is used to select the first element that matches the specified CSS selector(s) in the document.
+
+let ele=document.querySelector('#hh')
+console.log(ele);
+
+let classs=document.querySelectorAll('div')
+console.log(classs);
+classs.forEach((val)=>val.style.backgroundColor="yellow")
+
+
+
+
+
+
+//!querySelectorAll
+//? querySelectorAll is used to select all elements that match the specified CSS selector(s) in the document.
+
+
+
+
+
+
+
+
 
 
 let userdata = [
@@ -193,11 +223,11 @@ let userdata = [
     }
 ];
 
-userdata.filter((user)=>{
-    if(user.firstname.startsWith("F")){
-        document.write(user.firstname+"<br>");
-    }
-})
+// userdata.filter((user)=>{
+//     if(user.firstname.startsWith("F")){
+//         document.write(user);
+//     }
+// })
 
 
 
