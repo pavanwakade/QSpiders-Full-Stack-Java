@@ -10,7 +10,8 @@
 
     <script>
       let bodys = document.querySelector("body");
-      bodys.style.background = "linear-gradient(to bottom, #ff6b6b, #4ecdc4)";
+      bodys.style.height="100%"
+      // bodys.style.background = "linear-gradient(to bottom, #ff6b6b, #4ecdc4)";
       let navbar = document.createElement("div");
       let logo = document.createElement("a");
       logo.href = "#";
@@ -47,10 +48,11 @@
       button.style.padding = "10px";
 
       navbar.style.display = "flex";
-      navbar.style.height="30px"
+      navbar.style.height="50px"
       navbar.style.gap = "15px";
+      
       navbar.style.justifyContent = "flex-end";
-      // navbar.style.backgroundColor="red";
+      // navbar.style.backgroundColor="green";
       navbar.style.alignItems="center";
 
       let navvvv = [link1, link2, link3, link4];
@@ -63,6 +65,7 @@
       bodys.append(navbar);
 
       let div1 = document.createElement("div");
+      // div1.style.backgroundColor="yellow"
       div1.setAttribute("class", "heading");
       let h1 = document.createElement("h1");
       h1.textContent = "Explanation of";
@@ -82,6 +85,8 @@
 
       let div2 = document.createElement("div");
       div2.setAttribute("class", "img");
+      div2.style.backgroundColor="yellow"
+
 
       let imgs = document.createElement("img");
       imgs.src = "./ii.jpg";
@@ -94,8 +99,10 @@
       newdiv.append(div1, div2);
       newdiv.style.marginTop = "20px";
       newdiv.style.display = "flex";
-      newdiv.style.height="90%"
-
+      newdiv.style.height="100%"
+      // newdiv.style.backgroundColor="yellow"
+      // newdiv.style.border="2px solid red"
+      // bodys.style.backgroundColor="red"
       bodys.append(newdiv);
       console.log(bodys);
     </script>
