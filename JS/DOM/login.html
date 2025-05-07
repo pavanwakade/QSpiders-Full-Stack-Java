@@ -9,20 +9,29 @@
         border-collapse: collapse;
         width: 50%;
       }
+      span {
+        color: red;
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <form onsubmit="click(event)">
-      <label for="name" id="nameinpute">Name</label>
-      <input type="text" name="nameinpute" value="" />
+    <form onsubmit="handleSubmit(event)">
+      <label for="name">Name</label>
+      <input type="text" id="nameinpute" value="" />
+      <br />
+      <span id="nameerror">name field should not be empty</span>
       <br />
       <br />
-      <label for="mobile" id="mobileinpute">Mobile</label>
-      <input type="tel" name="mobileinpute" value="" />
+      <label for="mobile">Mobile</label>
+      <input type="tel" id="mobileinpute" value="" />
+      <br />
+      <span id="mobileerror">mobile field should not be empty</span>
       <br />
       <br />
       <button type="submit">submit</button>
     </form>
+
     <br />
     <br />
     <table border="1" id="tableidd">
@@ -39,21 +48,33 @@
       let inputmobile = document.getElementById("mobileinpute");
       let tabledata = document.getElementById("tableidd");
 
-      let click = (e) => {
+      let nameerror = document.getElementById("nameerror");
+      let mobileerror = document.getElementById("mobileerror");
+
+      let handleSubmit = (e) => {
         e.preventDefault();
+        if (inpuitname === null && inputmobile === null) {
+          let tablerow = document.createElement("tr");
+          let namecell = document.createElement("td");
+          namecell.innerHTML = inpuitname.value;
 
-        let tablerow = document.createElement("tr");
-        let namecell = document.createElement("td");
-        namecell.innerHTML = inputmobile.value;
+          let mobilecell = document.createElement("td");
+          mobilecell.innerHTML = inputmobile.value;
+          console.log(inpuitname);
+          console.log(inputmobile);
 
-        let mobilecell = document.createElement("td");
-        mobilecell.innerHTML = inputmobile.value;
-        console.log(inpuitname);
-        console.log(inputmobile);
+          tablerow.appendChild(namecell);
+          tablerow.appendChild(mobilecell);
+          tabledata.appendChild(tablerow);
+        } else {
+          if (inpuitname === null) {
+            nameerror.style.display("contents");
+          }
 
-        tablerow.appendChild(namecell);
-        tablerow.appendChild(mobilecell);
-        tabledata.appendChild(tablerow);
+          if (mobileerror === null) {
+            mobileerror.style.display("contents");
+          }
+        }
       };
     </script>
   </body>
