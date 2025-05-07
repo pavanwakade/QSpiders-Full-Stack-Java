@@ -12,7 +12,7 @@
     </style>
   </head>
   <body>
-    <form >
+    <form onsubmit="click(event)">
       <label for="name" id="nameinpute">Name</label>
       <input type="text" name="nameinpute" value="" />
       <br />
@@ -25,7 +25,7 @@
     </form>
     <br />
     <br />
-    <table border="1">
+    <table border="1" id="tableidd">
       <thead>
         <tr>
           <th>name</th>
@@ -35,8 +35,26 @@
     </table>
 
     <script>
-        let name=document.getElementById("nameinpute")
-        
+      let inpuitname = document.getElementById("nameinpute");
+      let inputmobile = document.getElementById("mobileinpute");
+      let tabledata = document.getElementById("tableidd");
+
+      let click = (e) => {
+        e.preventDefault();
+
+        let tablerow = document.createElement("tr");
+        let namecell = document.createElement("td");
+        namecell.innerHTML = inputmobile.value;
+
+        let mobilecell = document.createElement("td");
+        mobilecell.innerHTML = inputmobile.value;
+        console.log(inpuitname);
+        console.log(inputmobile);
+
+        tablerow.appendChild(namecell);
+        tablerow.appendChild(mobilecell);
+        tabledata.appendChild(tablerow);
+      };
     </script>
   </body>
 </html>
