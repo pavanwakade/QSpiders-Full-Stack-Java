@@ -6,13 +6,11 @@
     <title>dom Assignment</title>
   </head>
   <body>
-    <!-- <nav><a href="hgg">hjb</a></nav>
-    <nav><a href="hgg">hjb</a></nav>
-    <nav><a href="hgg">hjb</a></nav>
-    <nav><a href="hgg">hjb</a></nav> -->
+
 
     <script>
       let bodys = document.querySelector("body");
+      bodys.style.background = "linear-gradient(to bottom, #ff6b6b, #4ecdc4)";
       let navbar = document.createElement("div");
       let logo = document.createElement("a");
       logo.href = "#";
@@ -22,7 +20,7 @@
       // logoImg.alt="logo"
       logo.textContent = "logo";
 
-      logo.appendChild(logoImg);
+      logo.append(logoImg);
       let link1 = document.createElement("a");
       link1.href = "#";
       link1.textContent = "profile";
@@ -45,12 +43,15 @@
       button.style.backgroundColor = "#4CAF50";
       button.style.color = "white";
       button.style.border = "none";
-      button.style.borderRadius = "50%";
+      button.style.borderRadius = "40%";
       button.style.padding = "10px";
 
       navbar.style.display = "flex";
+      navbar.style.height="30px"
       navbar.style.gap = "15px";
       navbar.style.justifyContent = "flex-end";
+      // navbar.style.backgroundColor="red";
+      navbar.style.alignItems="center";
 
       let navvvv = [link1, link2, link3, link4];
       navvvv.forEach((val) => {
@@ -67,6 +68,7 @@
       h1.textContent = "Explanation of";
       h1.append(document.createElement("br"));
       h1.append("Business Design");
+      h1.style.fontSize="60px"
 
       let p1 = document.createElement("p");
       p1.textContent = "a platform to bring new friends";
@@ -74,7 +76,7 @@
       p1.append("around you in a away that is fun to all");
 
       div1.append(h1, p1);
-      //   div1.style.backgroundColor = "yellow";
+        // div1.style.backgroundColor = "yellow";                                                
       div1.style.width = "40%";
       div1.style.padding = "40px";
 
@@ -92,6 +94,7 @@
       newdiv.append(div1, div2);
       newdiv.style.marginTop = "20px";
       newdiv.style.display = "flex";
+      newdiv.style.height=
 
       bodys.append(newdiv);
       console.log(bodys);
