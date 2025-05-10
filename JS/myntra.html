@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
       section {
         display: flex;
         flex-wrap: wrap;
@@ -14,7 +14,7 @@
         width: 100%;
       }
       #product-card {
-        height: 350px;
+        height: 400px;
         width: 300px;
         border: 2px solid black;
         box-shadow: 5px 5px 6px rgb(161, 155, 155);
@@ -23,6 +23,11 @@
       #prod-img {
         height: 170px;
         width: 200px;
+        justify-content: center;
+      }
+
+      h1 {
+        text-align: center;
       }
       button {
         height: 30px;
@@ -32,35 +37,33 @@
         border-radius: 5px;
         cursor: pointer;
         border: none;
-      
-       
-        
       }
     </style>
-    </head>
-    <body>
-        <button class="above500">above500</button>
-        <button class="below500">below500</button>
-        <button class="allProducts">All Products</button>
-        <section id="container"></section>
+  </head>
+  <body>
+    <button class="above500" onclick="above500()">above500</button>
+    <button class="below500" onclick="below500()">below500</button>
+    <button class="allProducts" onclick="allProducts()">All Products</button>
+    <section id="container"></section>
 
-        <script>
-            let product = document.getElementById("container");
-            
-            let fetchData = async () => {
-                let productApi = await fetch("https://dummyjson.com/products");
-                
-                // console.log(productApi);
-                
-                let data = await productApi.json();
-                
-                // console.log(data.products);
-                
-                displayProduct(data.products);
-            };
-            let allProducts=data.products;
+    <script>
+      let product = document.getElementById("container");
 
-      fetchData();
+      let allProducts = [];
+
+      let fetchData = async () => {
+        let productApi = await fetch("https://dummyjson.com/products");
+
+        // console.log(productApi);
+
+        let data = await productApi.json();
+
+        console.log(data.products);
+
+        displayProduct(data.products);
+
+        allProducts = data.products;
+      };
 
       let displayProduct = (items) => {
         console.log(items);
@@ -77,15 +80,15 @@
 
         <img src ="${e.images[0]}" id  = "prod-img" />
 
-        <h1> price : ${e.price}</h1>
-        <h1>
-            
-            ${e.title}
-            
-            </h1>
-            <button>Buy Now</button>
+        <h1>${e.price}$</h1>
 
-         </div>
+        <h1> ${e.title} </h1>
+                <h1> ⭐${e.rating} </h1>
+
+        
+        <button id ="card-bn"> Add To Card </button>
+
+        </div>
 
        
         `
@@ -97,6 +100,28 @@
 
         product.innerHTML = productData;
       };
+
+      let above500 = () => {
+        // console.log("data");
+
+        let filterProducts = allProducts.filter((e) => e.price > 500);
+
+        // console.log(filterProducts);
+
+        displayProduct(filterProducts);
+      };
+
+      let below500 = () => {
+        // console.log("data");
+
+        let filterProducts = allProducts.filter((e) => e.price < 500);
+
+        // console.log(filterProducts);
+
+        displayProduct(filterProducts);
+      };
+
+      fetchData();
     </script>
-    </body>
+  </body>
 </html>
