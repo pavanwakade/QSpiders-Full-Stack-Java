@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="cointainer"></section>
+
+    <script>
+      let recepies = document.getElementsByClassName(".cointainer");
+      let allrecipies = [];
+
+      let fetchapi = async () => {
+        let api = await fetch("https://dummyjson.com/recipes");
+        let reapi=await api.json()
+        console.log(reapi);
+        
+      };
+      fetchapi();
+    </script>
+  </body>
+</html>

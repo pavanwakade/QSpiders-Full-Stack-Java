@@ -12,22 +12,45 @@
         gap: 15px;
         height: 99vh;
         width: 100%;
+        align-items: center;
       }
       #product-card {
         height: 400px;
         width: 300px;
         border: 2px solid black;
-        box-shadow: 5px 5px 6px rgb(161, 155, 155);
+        box-shadow: 5px 5px 6px rgb(233, 225, 221);
         border-radius: 10px;
+        align-items: center;
       }
+      #product-card:hover {
+        box-shadow: 10px 10px 20px rgb(161, 155, 155);
+        transition: 0.5s;
+        transform: scale(1.05s);
+        background-color: rgb(0, 244, 41);
+        cursor: pointer;
+      }
+        #card-bn {
+            height: 30px;
+            width: 100px;
+            background-color: rgb(0, 139, 238);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
       #prod-img {
         height: 170px;
         width: 200px;
-        justify-content: center;
       }
 
       h1 {
         text-align: center;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
       button {
         height: 30px;
@@ -37,7 +60,8 @@
         border-radius: 5px;
         cursor: pointer;
         border: none;
-      }
+        margin: 10px;}
+
     </style>
   </head>
   <body>
