@@ -1,5 +1,4 @@
-import java.util.Arrays;
-class Arrays1{
+class CheckPalindrom{
 	public static void main(String[] args) {
 		
 		System.out.println(checkpalindrom("pavan"));
