@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 15px;
+        height: 99vh;
+        width: 100%;
+      }
+      #product-card {
+        height: 350px;
+        width: 300px;
+        border: 2px solid black;
+        box-shadow: 5px 5px 6px rgb(161, 155, 155);
+        border-radius: 10px;
+      }
+      #prod-img {
+        height: 170px;
+        width: 200px;
+      }
+      button {
+        height: 30px;
+        width: 100px;
+        background-color: rgb(0, 139, 238);
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+      
+       
+        
+      }
+    </style>
+    </head>
+    <body>
+        <button class="above500">above500</button>
+        <button class="below500">below500</button>
+        <button class="allProducts">All Products</button>
+        <section id="container"></section>
+
+        <script>
+            let product = document.getElementById("container");
+            
+            let fetchData = async () => {
+                let productApi = await fetch("https://dummyjson.com/products");
+                
+                // console.log(productApi);
+                
+                let data = await productApi.json();
+                
+                // console.log(data.products);
+                
+                displayProduct(data.products);
+            };
+            let allProducts=data.products;
+
+      fetchData();
+
+      let displayProduct = (items) => {
+        console.log(items);
+
+        // let productCard = document.createElement('div');
+
+        // productCard.id = "product-card"
+
+        let productData = items
+          .map(
+            (e, inx) => ` 
+
+        <div id = "product-card">
+
+        <img src ="${e.images[0]}" id  = "prod-img" />
+
+        <h1> price : ${e.price}</h1>
+        <h1>
+            
+            ${e.title}
+            
+            </h1>
+            <button>Buy Now</button>
+
+         </div>
+
+       
+        `
+          )
+          .join("");
+
+        // productCard.innerHTML = productData
+        // product.append(productCard);
+
+        product.innerHTML = productData;
+      };
+    </script>
+    </body>
+</html>
