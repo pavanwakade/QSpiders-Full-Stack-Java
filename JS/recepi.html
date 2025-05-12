@@ -12,12 +12,22 @@
       let containmer = document.getElementById("container");
 
       let fetch = async () => {
-        let api = await fetch("https://dummyjson.com/recipes");
-        let apiDisplay = await api.json();
+        let apii = await fetch("https://dummyjson.com/recipes");
+        let apiDisplay = await apii.json();
 
         console.log(apiDisplay);
-      };
-      fetch();
+      }
+
+
+        let fetchData = async () => {
+        let productApi = await fetch("https://dummyjson.com/products");
+
+        // console.log(productApi);
+
+        let data = await productApi.json();
+       }
+      fetch()
+      
     </script>
   </body>
 </html>
