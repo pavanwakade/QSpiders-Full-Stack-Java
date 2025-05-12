@@ -12,17 +12,19 @@ public class ZigZag {
 
 	public static void main(String[] args) {
 		int[] a = { 1, 2, 3, 4, 5 };
-		int[] b = { 6, 7, 8, 9, 10,4,5,6 };
-
+		int[] b = { 6, 7, 8, 9, 10, 4, 5, 6 };
 		int[] c = new int[a.length + b.length];
+		int max = a.length > b.length ? a.length : b.length;
+//		System.out.println(max);
 
 		int index = 0;
 
-		for (int i = 0; i < c.length; i++) {
+		for (int i = 0; i < max; i++) {
 
 			if (i < a.length && i < b.length) {
 
 				c[index++] = a[i];
+
 				c[index++] = b[i++];
 			}
 

@@ -11,12 +11,14 @@
     <script>
       let containmer = document.getElementById("container");
       let card = document.createElement("div");
+      let allrecipes=[];
       let fetchhh = async () => {
         let apii = await fetch("https://dummyjson.com/recipes");
         let apiDisplay = await apii.json();
-        // console.log(apiDisplay.recipes);
-        card.innerText(apiDisplay.recipes.name)
-        containmer.append(card);
+        console.log(apiDisplay.recipes);
+        
+        // card.innerText(apiDisplay.recipes.name)
+        // containmer.append(card);
       };
       fetchhh();
       
