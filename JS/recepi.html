@@ -10,23 +10,15 @@
 
     <script>
       let containmer = document.getElementById("container");
-
-      let fetch = async () => {
+      let card = document.createElement("div");
+      let fetchhh = async () => {
         let apii = await fetch("https://dummyjson.com/recipes");
         let apiDisplay = await apii.json();
-
-        console.log(apiDisplay);
-      }
-
-
-        let fetchData = async () => {
-        let productApi = await fetch("https://dummyjson.com/products");
-
-        // console.log(productApi);
-
-        let data = await productApi.json();
-       }
-      fetch()
+        // console.log(apiDisplay.recipes);
+        card.innerText(apiDisplay.recipes.name)
+        containmer.append(card);
+      };
+      fetchhh();
       
     </script>
   </body>
