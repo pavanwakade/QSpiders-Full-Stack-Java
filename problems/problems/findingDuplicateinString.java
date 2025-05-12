@@ -1,29 +1,23 @@
 package problems;
 
-public class findingDuplicateinString {
+class findingDuplicateinString {
 
-    public static void main(String[] args) {
-        int[] a = {1, 2, 3, 4, 5, 7, 7, 8};
-        findDuplicates(a);
-    }
+	public static void main(String[] args) {
+		int[] a = { 1, 2, 3, 4, 5, 7, 7, 8,7,7,7 };
+		findingDuplicate(a);
 
-    public static void findDuplicates(int[] arr) {
-        int count = 1; // Count of duplicate elements
-        boolean hasDuplicates = false;
+	}
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) { // Compare with all subsequent elements
-                if (arr[i] == arr[j]) {
-                    count++;
-                    System.out.println("Duplicate found: " + arr[i]);
-                    hasDuplicates = true;
-                }
-            }
-        }
-
-        System.out.println("Total duplicate pairs: " + count);
-        if (!hasDuplicates) {
-            System.out.println("No duplicates found.");
-        }
-    }
+	public static void findingDuplicate(int c[]) {
+		// char []c=str.toCharArray();
+		int count = 1;
+		for (int i = 0; i < c.length; i++) {
+			for (int j = i + 1; j < c.length - 1; j++) {
+				if (c[i] == c[j]) {
+				System.out.println(c[i]+" "+	count++);
+				}
+			}
+		}
+		System.out.println(count);
+	}
 }
