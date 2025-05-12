@@ -6,19 +6,18 @@
     <title>Document</title>
   </head>
   <body>
-    <section class="cointainer"></section>
+    <section id="cointainer"></section>
 
     <script>
-      let recepies = document.getElementsByClassName(".cointainer");
-      let allrecipies = [];
+      let containmer = document.getElementById("container");
 
-      let fetchapi = async () => {
+      let fetch = async () => {
         let api = await fetch("https://dummyjson.com/recipes");
-        let reapi=await api.json()
-        console.log(reapi);
-        
+        let apiDisplay = await api.json();
+
+        console.log(apiDisplay);
       };
-      fetchapi();
+      fetch();
     </script>
   </body>
 </html>
