@@ -9,16 +9,23 @@
     <section id="cointainer"></section>
 
     <script>
-      let containmer = document.getElementById("container");
+      let containmer = document.querySelector("container");
       let card = document.createElement("div");
       let allrecipes=[];
       let fetchhh = async () => {
         let apii = await fetch("https://dummyjson.com/recipes");
         let apiDisplay = await apii.json();
         console.log(apiDisplay.recipes);
+        apiDisplay.recipes.map((val)=>{
+
+        card.innerText=val.name;
         
+      // console.log();
+      
+        });
         // card.innerText(apiDisplay.recipes.name)
-        // containmer.append(card);
+        containmer.append(card);
+        
       };
       fetchhh();
       
