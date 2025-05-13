@@ -6,6 +6,7 @@
     <title>MouseEvent</title>
   </head>
   <body>
+    
     //! MouseEvents //? click //? hover //? dblclick //? scroll //? rightclick
     //!DragEvents //? drag //? dragstart //? dragend //? dragenter //? dragleave
     //? dragover //? drop //!WindowEvents //? resize //? scroll //? load //?
@@ -30,13 +31,26 @@
       let input2 = document.querySelector("#input2");
       let form = document.querySelector("form");
 
-      let userss=[];
+      let userss = [];
       let users = {
         username: null,
         password: null,
       };
 
-      input1.addEventListener("input",((eve>)
+      input1.addEventListener("input", (eve) => {
+        users.username = eve.target.value;
+      });
+
+      input2.addEventListener("input", (eve) => {
+        users.password = eve.target.value;
+      });
+
+      form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        console.log(users);
+        userss.push(users);
+        
+      })
     </script>
   </body>
 </html>
