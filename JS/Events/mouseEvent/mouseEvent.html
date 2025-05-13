@@ -6,7 +6,7 @@
     <title>MouseEvent</title>
   </head>
   <body>
-    
+    <!-- 
     //! MouseEvents //? click //? hover //? dblclick //? scroll //? rightclick
     //!DragEvents //? drag //? dragstart //? dragend //? dragenter //? dragleave
     //? dragover //? drop //!WindowEvents //? resize //? scroll //? load //?
@@ -18,7 +18,7 @@
     //? blur //? beforeinput //? compositionstart //? compositionupdate //?
     compositionend //? cut //? copy //? paste //? drag //? dragenter //?
     dragleave //? dragover //? drop //? focusin //? focusout //? search //?
-    touchstart
+    touchstart -->
 
     <form>
       <input type="text" id="input1" />
@@ -27,30 +27,35 @@
     </form>
 
     <script>
-      let input1 = document.querySelector("#input1");
-      let input2 = document.querySelector("#input2");
-      let form = document.querySelector("form");
+      //   let input1 = document.querySelector("#input1");
+      //   let input2 = document.querySelector("#input2");
+      //   let form = document.querySelector("form");
 
-      let userss = [];
-      let users = {
-        username: null,
-        password: null,
-      };
+      //   let userss = [];
+      //   let users = {
+      //     username: null,
+      //     password: null,
+      //   };
 
-      input1.addEventListener("input", (eve) => {
-        users.username = eve.target.value;
-      });
+      //   input1.addEventListener("input", (eve) => {
+      //     users.username = eve.target.value;
+      //   });
 
-      input2.addEventListener("input", (eve) => {
-        users.password = eve.target.value;
-      });
+      //   input2.addEventListener("input", (eve) => {
+      //     users.password = eve.target.value;
+      //   });
 
-      form.addEventListener('submit',(e)=>{
-        e.preventDefault();
-        console.log(users);
-        userss.push(users);
-        
-      })
+      //   form.addEventListener('submit',(e)=>{
+      //     e.preventDefault();
+      //     console.log(users);
+      //     userss.push(users);
+
+      //   })
+
+      let a = 10;
+      console.log(a.__proto__);
+      console.log(a.__proto__.__proto__);
+      console.log(a.__proto__.__proto__.__proto__);
     </script>
   </body>
 </html>

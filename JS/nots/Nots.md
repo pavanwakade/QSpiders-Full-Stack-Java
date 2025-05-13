@@ -2862,6 +2862,7 @@ If we do not pass literals to three dots (...) , it will unpack all
 literals and behave as a spread parameter.
 
 ## Introduction to Prototype
+
 1. In JavaScript, every function is associated with an object called as prototype.
 2. It serves as a blueprint or a template from which other objects can inherit properties and methods.
 3. Prototypes are used to achieve inheritance in JavaScript.
