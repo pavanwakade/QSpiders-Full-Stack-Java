@@ -3205,7 +3205,7 @@ and transfer control to the nearest catch block that can handle the exception.
 
 
 
-# JavaScript Knowledge Check Questions
+## Questions
 
 ## JavaScript Basics & History
 1. Who created JavaScript and in which year?
