@@ -15,7 +15,7 @@
 - declare only: let a;
 - declare and initialize: let a = 10;
 - update: a = 20;
-//?Cannot:
+//? Cannot:
 - redeclare: let a = 50; // SyntaxError in same scope
 */
 
@@ -23,7 +23,7 @@
 //? Stored in block scope/Temporal Dead Zone (TDZ) before initialization
 /* We can:
 - declare and initialize: const a = 10;
-//?Cannot:
+//? Cannot:
 - declare only: const a; // SyntaxError
 - update: a = 20; // TypeError
 - redeclare: const a = 50; // SyntaxError in same scope
@@ -51,6 +51,7 @@ let d = BigInt(100); // BigInt
 
 //!boolean
 //?used to indicate true or false
+//boolean default value is false
 let e = true; // boolean
 let f = false; // boolean
 
