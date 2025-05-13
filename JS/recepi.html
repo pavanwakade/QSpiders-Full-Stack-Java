@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 10px;
+      }
+      div{
+        margin: 10px;
+                background-color: aqua;
+
+      }
+    </style>
   </head>
   <body>
     <section id="container"></section>
@@ -14,15 +27,18 @@
       let fetchhh = async () => {
         let apii = await fetch("https://dummyjson.com/recipes");
         let apiDisplay = await apii.json();
-        console.log(apiDisplay.recipes);
+        // console.log(apiDisplay.recipes);
 
         apiDisplay.recipes.forEach((val) => {
            let card = document.createElement("div");
-           let h1 = document.createElement("h1");
-           h1.innerText = val.name;
+           
+           let h1 = document.createElement("h1")
+           h1=innerText = val.name;
            card.append(h1);
            container.append(card);
          });
+         
+
        
         // card.innerText(apiDisplay.recipes.name)
       };
