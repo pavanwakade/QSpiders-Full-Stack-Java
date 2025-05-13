@@ -6,29 +6,28 @@
     <title>Document</title>
   </head>
   <body>
-    <section id="cointainer"></section>
+    <section id="container"></section>
 
     <script>
-      let containmer = document.querySelector("container");
-      let card = document.createElement("div");
-      let allrecipes=[];
+      let container = document.querySelector("#container");
+      let allrecipes = [];
       let fetchhh = async () => {
         let apii = await fetch("https://dummyjson.com/recipes");
         let apiDisplay = await apii.json();
         console.log(apiDisplay.recipes);
-        apiDisplay.recipes.map((val)=>{
 
-        card.innerText=val.name;
-        
-      // console.log();
-      
-        });
+        apiDisplay.recipes.forEach((val) => {
+           let card = document.createElement("div");
+           let h1 = document.createElement("h1");
+           h1.innerText = val.name;
+           card.append(h1);
+           container.append(card);
+         });
+       
         // card.innerText(apiDisplay.recipes.name)
-        containmer.append(card);
-        
       };
+
       fetchhh();
-      
     </script>
   </body>
 </html>
