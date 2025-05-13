@@ -3278,4 +3278,530 @@ and transfer control to the nearest catch block that can handle the exception.
 49. Write a program to find the factorial of a number using recursion.
 50. Create a debounce function implementation.
 
-These questions cover the main topics from the markdown and test both theoretical knowledge and practical implementation skills.
+
+
+
+
+
+
+
+
+
+Variables and Data Types
+1.	What distinguishes let, const, and var in terms of scope, hoisting, and reassignment?
+2.	What are the different data types in JavaScript? List them with examples.
+3.	How can you determine the type of a variable in JavaScript?
+4.	What’s the difference between the == and === operators?
+5.	What are truthy and falsy values in JavaScript? Provide examples.
+6.	What does the typeof operator do, and how is it used?
+7.	How can you write a multi-line string in JavaScript?
+8.	What are template literals, and how do they enhance string manipulation?
+9.	How do primitive data types differ from non-primitive data types?
+10.	What’s the difference between null and undefined in JavaScript?
+11.	How do you convert a string to a number in JavaScript?
+________________________________________
+Control Structures
+12.	How do you construct an if-else statement in JavaScript?
+13.	What sets apart for, while, and do-while loops?
+14.	What’s the role of the switch statement in JavaScript?
+15.	How do you exit a loop prematurely in JavaScript?
+16.	How do continue and break statements differ in loop control?
+________________________________________
+Functions
+17.	What are the various ways to define a function in JavaScript?
+18.	How does a function declaration differ from a function expression?
+19.	What are arrow functions, and what benefits do they offer?
+20.	What is a callback function, and how is it applied?
+21.	How do you set default parameters in a JavaScript function?
+22.	What is the arguments object, and what’s its purpose?
+23.	How do function scope and block scope differ in JavaScript?
+24.	What defines a higher-order function? Give an example.
+25.	How do you return a value from a function in JavaScript?
+26.	What is an Immediately Invoked Function Expression (IIFE), and when is it useful?
+________________________________________
+Objects
+27.	What are the methods to create an object in JavaScript?
+28.	How do dot notation and bracket notation differ for accessing object properties?
+29.	What are prototypes, and how do they support inheritance in JavaScript?
+30.	How can you add a method to an existing object?
+31.	What is a constructor function, and how is it used?
+32.	How do you define a class in JavaScript?
+33.	How does inheritance work with classes in JavaScript?
+34.	What is the this keyword, and how does its context affect its value?
+35.	How can you simulate private properties in a JavaScript class?
+36.	What do Object.keys(), Object.values(), and Object.entries() do?
+37.	How do you verify if a property exists in an object?
+________________________________________
+Arrays
+38.	What are the ways to create an array in JavaScript?
+39.	How do push() and pop() methods differ in array manipulation?
+40.	What does the map() method do? Provide an example.
+41.	How do you delete an element from an array using splice()?
+42.	What’s the purpose of the filter() method in arrays?
+43.	How do you locate the index of an element in an array?
+44.	What is the reduce() method, and how does it work?
+45.	How do slice() and splice() differ in their effects on arrays?
+46.	How can you confirm a variable is an array?
+47.	What is array destructuring, and how is it used?
+________________________________________
+Asynchronous Programming
+48.	What is the event loop, and why is it critical in JavaScript?
+49.	How does synchronous code differ from asynchronous code?
+50.	What is callback hell, and how can you mitigate it?
+51.	How do you construct a promise in JavaScript?
+52.	What are the possible states of a promise?
+53.	What are the then() and catch() methods used for in promises?
+54.	How does Promise.all() manage multiple promises?
+55.	What is async/await, and how does it streamline asynchronous programming?
+56.	How do you manage errors with async/await?
+57.	What are setTimeout() and setInterval() used for?
+________________________________________
+DOM Manipulation
+58.	What is the DOM, and how does JavaScript manipulate it?
+59.	How do you select an element by its ID in the DOM?
+60.	What’s the difference between getElementById and querySelector?
+61.	How do you modify the content of an HTML element with JavaScript?
+62.	What is event delegation, and why is it advantageous?
+63.	How do you attach an event listener to a DOM element?
+64.	What are event bubbling and capturing phases?
+65.	How do you block an event’s default action?
+66.	How do innerHTML and textContent differ when updating elements?
+67.	How do you create and append a new HTML element to the DOM?
+________________________________________
+Error Handling
+68.	What’s the purpose of a try-catch block in JavaScript?
+69.	How do you throw a custom error in JavaScript?
+70.	What does the finally block do in error handling?
+71.	How does a generic Error differ from a SyntaxError?
+72.	How do you handle errors in promise-based code?
+________________________________________
+Advanced Topics
+73.	What is a closure, and how does it maintain state?
+74.	What is currying, and how can you implement it in a function?
+75.	How do call(), apply(), and bind() differ in JavaScript?
+76.	How do you create a module using export and import statements?
+77.	What is memoization, and how does it improve performance?
+78.	What’s the difference between a shallow copy and a deep copy?
+79.	How do you implement recursion in JavaScript?
+80.	What is the Symbol data type, and what’s its purpose?
+81.	What are generators, and how are they used in JavaScript?
+82.	What is strict mode, and how does it affect JavaScript code?
+83.	What’s the difference between localStorage and sessionStorage?
+84.	How do you perform an HTTP request using the Fetch API?
+85.	What does the async attribute do in a script tag?
+86.	What are debouncing and throttling, and when are they useful?
+87.	How do you handle cross-origin requests in JavaScript?
+________________________________________
+Practical Problems
+88.	Write a function to reverse a string without using built-in reverse methods.
+89.	Create a function to check if a number is prime.
+90.	Implement a function to flatten a nested array (e.g., [[1, 2], [3, 4]] → [1, 2, 3, 4]).
+91.	Write a recursive function to compute the factorial of a number.
+92.	Design a debounce function to limit the frequency of function calls.
+93.	Write a program to determine if a year is a leap year.
+94.	Calculate the sum of the first 100 natural numbers using a loop.
+95.	Create a function to count the digits in a given number.
+96.	Print the multiplication table for a number up to 10.
+97.	Solve the FizzBuzz problem for numbers 1 to 100 (Fizz for multiples of 3, Buzz for 5, FizzBuzz for both).
+________________________________________
+Historical and Conceptual Questions
+98.	Who developed JavaScript, and in what year?
+99.	What was JavaScript originally called before its current name?
+100.	Why was JavaScript created, and what was its initial goal?
+101.	What led to JavaScript’s standardization by ECMA, and when did it happen?
+102.	What was the importance of the first ECMAScript specification (ES1) in 1997?
+103.	How quickly did Brendan Eich develop the first version of JavaScript?
+104.	What shortcomings of static web pages drove JavaScript’s creation?
+105.	How did JavaScript’s browser execution without plugins boost its early adoption?
+106.	What was Microsoft’s reaction to JavaScript, and how did JScript fit in?
+107.	How has JavaScript transformed from a basic scripting language to a robust programming language?
+108.	What factors have shaped JavaScript’s evolution over the years?
+109.	Why is JavaScript one of the most popular programming languages today?
+________________________________________
+JavaScript Features and Runtime
+110.	What traits classify JavaScript as a scripting language?
+111.	Why is JavaScript considered a high-level language?
+112.	What does it mean that JavaScript is interpreted, and how does this impact execution?
+113.	How does JavaScript’s single-threaded nature affect its performance?
+114.	Why is JavaScript object-based rather than fully object-oriented?
+115.	What does loosely typed mean in JavaScript, and how does it contrast with strongly typed languages?
+116.	How does JavaScript’s dynamic typing function?
+117.	How does JavaScript ensure platform independence?
+118.	What enhances JavaScript’s readability and writability?
+119.	How does JavaScript’s single-threaded design simplify coding compared to multi-threaded languages?
+120.	Why was JavaScript introduced to control browser behavior?
+121.	How does JavaScript improve web page interactivity?
+122.	What is a JavaScript Runtime Environment, and why is it essential?
+123.	Name two JavaScript runtime environments and compare them.
+124.	What’s the role of a JavaScript engine in a browser?
+125.	What is the V8 engine, and where is it used?
+126.	How does Node.js expand JavaScript beyond browser use?
+127.	Why is Node.js a major milestone for JavaScript?
+128.	How does a browser serve as a runtime environment for JavaScript?
+129.	How does Node.js’s event-driven, non-blocking I/O model enhance performance?
+130.	List four JavaScript engines and their associated platforms or browsers.
+________________________________________
+Tokens and Syntax
+131.	What is a token in JavaScript, and why is it the smallest code unit?
+132.	What are the five main token types in JavaScript, with examples?
+133.	What rules govern naming identifiers in JavaScript?
+134.	How do keywords differ from identifiers?
+135.	What are literals, and how do they differ from identifiers?
+136.	What’s the difference between primitive and non-primitive literals?
+137.	What role do operators play in JavaScript, with examples?
+138.	What are punctuators, and how do they structure JavaScript code?
+139.	How do comments work as tokens, and what are their uses?
+140.	Why can’t identifiers begin with a number or use keywords?
+________________________________________
+Scope and Execution Context
+141.	What is scope in JavaScript, and why does it matter for variables?
+142.	How do global scope and local scope differ?
+143.	What is lexical scope, and how does it resolve variable lookups?
+144.	What is the scope chain, and how does it work?
+145.	How does function scope contrast with block scope?
+146.	How do var, let, and const influence variable scope?
+147.	What happens when you access a variable outside its scope?
+148.	How does JavaScript handle variable references in nested functions?
+149.	Why can var variables in a block be accessed outside it?
+150.	What is the Global Execution Context, and when is it established?
+151.	What’s the role of the window object in the Global Execution Context?
+152.	What are the two phases of JavaScript code execution?
+153.	How are var variables processed during the variable phase?
+154.	Why can’t let and const variables be accessed before declaration?
+________________________________________
+Variable Declaration and Hoisting
+155.	How do var, let, and const compare regarding scope, hoisting, and redeclaration?
+156.	What is the Temporal Dead Zone (TDZ), and how does it relate to let and const?
+157.	Why can’t let or const variables be redeclared in the same scope?
+158.	How does hoisting differ for var, let, and const?
+________________________________________
+Strings and String Methods
+159.	What are the ways to declare a string in JavaScript?
+160.	What is string interpolation, and how do template literals enable it?
+161.	List five string methods and their purposes.
+162.	How do you change a string to uppercase or lowercase?
+163.	How do charAt() and charCodeAt() differ?
+164.	What do padStart() and padEnd() do?
+165.	How do you check if a string begins or ends with a substring?
+166.	What’s the purpose of the includes() method?
+167.	How does replace() differ from replaceAll()?
+168.	How do you split a string into an array?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.	What is the difference between let, const, and var?
+2.	Explain the concept of hoisting in JavaScript.
+3.	What are the different data types in JavaScript?
+4.	How do you check the type of a variable in JavaScript?
+5.	What is the difference between = = and = = = operators?
+6.	Explain the concept of truthy and falsy values in JavaScript.
+7.	What is the purpose of the typeof operator?
+8.	How do you create a multi-line string in JavaScript?
+9.	What is template literal, and how is it used?
+10.	Explain the difference between primitive and non-primitive data types.
+11.	How do you write an if-else statement in JavaScript?
+12.	What is the difference between for, while, and do-while loops?
+13.	Explain the purpose of the switch statement.
+14.	How do you break out of a loop in JavaScript?
+15.	What is the difference between continue and break statements?
+16.	How do you declare a function in JavaScript?
+17.	What is the difference between a function declaration and a function expression?
+18.	Explain arrow functions and their advantages.
+19.	What is a callback function? Provide an example.
+20.	How do you define default parameters in a function?
+21.	What is the arguments object in a function?
+22.	Explain the concept of function scope and block scope.
+23.	What is a higher-order function? Provide an example.
+24.	How do you return a value from a function?
+25.	What is an immediately invoked function expression (IIFE)?
+26.	How do you create an object in JavaScript?
+27.	What is the difference between dot notation and bracket notation for accessing object properties?
+28.	Explain the concept of prototypes in JavaScript.
+29.	How do you add a method to an object?
+30.	What is a constructor function?
+31.	How do you create a class in JavaScript?
+32.	Explain inheritance in JavaScript using classes.
+33.	What is the this keyword, and how does it work?
+34.	How do you achieve private properties in a class?
+35.	What is the difference between Object.keys(), Object.values(), and Object.entries()?
+36.	How do you create an array in JavaScript?
+37.	What is the difference between push() and pop() methods?
+38.	Explain the map() method with an example.
+39.	How do you remove an element from an array using splice()?
+40.	What is the purpose of the filter() method?
+41.	How do you find the index of an element in an array?
+42.	Explain the reduce() method with an example.
+43.	What is the difference between slice() and splice()?
+44.	How do you check if a variable is an array?
+45.	What is destructuring in arrays?
+46.	What is the event loop in JavaScript?
+47.	Explain the difference between synchronous and asynchronous code.
+48.	What is a callback hell, and how can it be avoided?
+49.	How do you create a promise in JavaScript?
+50.	What are the states of a promise?
+51.	Explain the then() and catch() methods in promises.
+52.	How do you handle multiple promises using Promise.all()?
+53.	What is async/await, and how does it simplify asynchronous code?
+54.	How do you handle errors in async/await?
+55.	What is the purpose of setTimeout() and setInterval()?
+56.	What is the DOM, and how does JavaScript interact with it?
+57.	How do you select an element by its ID?
+58.	Explain the difference between getElementById and querySelector.
+59.	How do you change the content of an HTML element using JavaScript?
+60.	What is event delegation?
+61.	How do you add an event listener to an element?
+62.	Explain the event bubbling and capturing phases.
+63.	How do you prevent the default behavior of an event?
+64.	What is the difference between innerHTML and textContent?
+65.	How do you create a new HTML element and append it to the DOM?
+66.	What is the purpose of the try-catch block?
+67.	How do you throw a custom error in JavaScript?
+68.	Explain the finally block in error handling.
+69.	What is the difference between Error and SyntaxError?
+70.	How do you handle errors in promises?
+71.	What is a closure in JavaScript? Provide an example.
+72.	Explain the concept of currying in functions.
+73.	What is the difference between call(), apply(), and bind()?
+74.	How do you create a module in JavaScript?
+75.	What is the purpose of export and import statements?
+76.	Explain the concept of memoization.
+77.	What is the difference between shallow copy and deep copy?
+78.	How do you implement recursion in JavaScript?
+79.	What is the purpose of the Symbol data type?
+80.	Explain the concept of generators in JavaScript.
+81.	What is the difference between null and undefined?
+82.	How do you convert a string to a number in JavaScript?
+83.	What is the purpose of the JSON.parse() and JSON.stringify() methods?
+84.	Explain the concept of strict mode in JavaScript.
+85.	How do you check if a property exists in an object?
+86.	What is the difference between localStorage and sessionStorage?
+87.	How do you make an HTTP request using the Fetch API?
+88.	What is the purpose of the async attribute in a script tag?
+89.	Explain the concept of debouncing and throttling.
+90.	How do you handle cross-origin requests in JavaScript
+91.	Write a program to reverse a string without using built-in methods like reverse().
+92.	Create a function to determine if a given number is prime. 
+93.	Implement a function to flatten a nested array (e.g., [[1, 2], [3, 4]] → [1, 2, 3, 4]). 
+94.	Write a recursive function to calculate the factorial of a number. 
+95.	Create a debounce function that limits the rate of function execution. 
+96.	Write a program to check if a year is a leap year. 
+97.	Calculate the sum of the first 100 natural numbers using a loop. 
+98.	Write a function to count the number of digits in a given number. 
+99.	Print the multiplication table for a given number up to 10. 
+100.	Implement a solution for the FizzBuzz problem (1 to 100, with "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both).
+
+101.	Who created JavaScript, and in which year was it first developed?
+102.	What was the original name of JavaScript before it was renamed to its current name?
+103.	Why was JavaScript initially created, and what was its primary purpose?
+104.	What prompted JavaScript to be handed over to ECMA for standardization, and in which year did this occur?
+105.	What is the significance of the first ECMAScript specification (ES1) released in 1997?
+106.	How long did it take Brendan Eich to create the initial version of JavaScript?
+107.	What limitations of static web pages led to the development of JavaScript?
+108.	How did JavaScript’s ability to run in the browser without plugins contribute to its early popularity?
+109.	What was Microsoft’s response to JavaScript, and how did JScript relate to it?
+110.	How has JavaScript evolved from a simple scripting language to a full-fledged programming language?
+111.	What factors have influenced the development of JavaScript over time?
+112.	Why is JavaScript considered one of the most widely used programming languages today?
+113.	2. JavaScript Features
+114.	What characteristics define JavaScript as a scripting language?
+115.	Why is JavaScript classified as a high-level language, and can you provide an example?
+116.	What does it mean for JavaScript to be an interpreted language, and how does this affect its execution?
+117.	How does JavaScript’s synchronous and single-threaded nature impact its performance?
+118.	Why is JavaScript referred to as an object-based language rather than a purely object-oriented one?
+119.	What does it mean that JavaScript is loosely typed, and how does this differ from strongly typed languages?
+120.	Explain how JavaScript’s dynamically typed nature works with an example.
+121.	How does JavaScript achieve platform independence?
+122.	What aspects of JavaScript contribute to its readability and writability?
+123.	How does JavaScript’s single-threaded architecture simplify coding compared to multi-threaded languages?
+124.	Why was JavaScript primarily introduced to instruct the browser?
+125.	How does JavaScript enhance the functionality and behavior of web pages?
+126.	3. JavaScript Runtime Environment
+127.	What is a JavaScript Runtime Environment, and why is it necessary?
+128.	Name two popular JavaScript runtime environments and explain their differences.
+129.	What role does a JavaScript engine play in a browser?
+130.	What is the V8 engine, and in which environments is it utilized?
+131.	How does Node.js extend JavaScript’s capabilities beyond the browser?
+132.	Why is Node.js considered a significant advancement for JavaScript?
+133.	What is the purpose of a browser as a runtime environment for JavaScript?
+134.	How does the event-driven, non-blocking I/O model in Node.js improve performance?
+135.	Name four popular JavaScript engines and the browsers or platforms they support.
+136.	How does a JavaScript engine execute code, and what is its relationship with the runtime environment?
+137.	4. Tokens
+138.	What is a token in JavaScript, and why is it considered the smallest unit of the language?
+139.	List the five main types of tokens in JavaScript and provide an example of each.
+140.	What are the rules for naming identifiers in JavaScript?
+141.	Differentiate between keywords and identifiers with examples.
+142.	What are literals, and how do they differ from identifiers?
+143.	Explain the difference between primitive literals and non-primitive literals with examples.
+144.	What role do operators play in JavaScript, and provide three examples?
+145.	What are punctuators, and how are they used in JavaScript code structure?
+146.	How do comments function as tokens, and what are their practical uses?
+147.	Why can’t an identifier start with a number or use a keyword?
+148.	5. Scope
+149.	What is scope in JavaScript, and why is it important for variable accessibility?
+150.	Differentiate between global scope and local scope with examples.
+151.	What is lexical scope, and how does it determine variable lookup?
+152.	Explain the concept of the scope chain with a practical example.
+153.	How does function scope differ from block scope in JavaScript?
+154.	How do var, let, and const affect the scope of variables?
+155.	What happens when a variable is accessed outside its defined scope?
+156.	How does JavaScript resolve variable references in nested functions?
+157.	Why can variables declared with var inside a block still be accessed outside it?
+158.	Provide an example where lexical scope enables a function to access an outer variable.
+159.	6. Global Execution Context
+160.	What is the Global Execution Context in JavaScript, and when is it created?
+161.	What role does the window object play in a browser’s Global Execution Context?
+162.	Explain the two phases of JavaScript code execution: variable phase and execution phase.
+163.	How are variables declared with var handled during the variable phase?
+164.	Why can’t let and const variables be accessed before their declaration?
+165.	What is the significance of the window object being a global object?
+166.	How does the JavaScript engine allocate memory in the Global Execution Context?
+167.	What happens to variables declared in the global scope in terms of the window object?
+168.	Provide an example demonstrating the difference in behavior between var and let in the Global Execution Context.
+169.	How does the execution phase interact with the variable phase?
+170.	Compare var, let, and const in terms of scope, hoisting, and redeclaration with examples.
+171.	What is the Temporal Dead Zone (TDZ), and how does it apply to let and const?
+172.	Why can’t you redeclare a variable with let or const in the same scope?
+173.	How does hoisting behavior differ between var, let, and const?
+174.	Provide an example where var causes unexpected behavior due to its scope rules.
+175.	What happens if you attempt to update a const variable’s value?
+176.	How does let improve upon the limitations of var in block scope?
+177.	Why must const be initialized at declaration, unlike var and let?
+178.	Demonstrate a scenario where TDZ causes a ReferenceError.
+179.	How does the use of var in a function differ from its use in a block?
+180.	What are the different methods to declare a function in JavaScript?
+181.	What is the difference between a function declaration and a function expression?
+182.	Explain what an arrow function is and how it differs from a regular function.
+183.	What is a callback function, and how is it used? Provide an example.
+184.	Define a higher-order function and illustrate it with an example.
+185.	What is an Immediately Invoked Function Expression (IIFE), and when is it useful?
+186.	How does function hoisting work, and why doesn’t it apply to function expressions?
+187.	What is the arguments object, and how can it be used in a function?
+188.	Differentiate between parameters and arguments with an example.
+189.	How does a nested function access variables from its parent function?
+190.	What are the advantages of using functions for code reusability?
+191.	Explain how this behaves differently in arrow functions versus regular functions.
+192.	9. Strings
+193.	What are the different ways to declare a string in JavaScript?
+194.	What is string interpolation, and how is it implemented using template literals?
+195.	List five common string methods and explain their purposes with examples.
+196.	How do you convert a string to uppercase and lowercase in JavaScript?
+197.	What is the difference between charAt() and charCodeAt() methods?
+198.	Explain the functionality of padStart() and padEnd() with examples.
+199.	How can you check if a string starts or ends with a specific substring?
+200.	What does the includes() method do, and how is it used?
+201.	How does the replace() method differ from replaceAll()?
+202.	Provide an example of splitting a string into an array using split().
+203.	10. String Methods
+204.	How does toUpperCase() differ from toLowerCase() in terms of output?
+205.	What does charAt(2) return for the string "JavaScript"?
+206.	What is the purpose of charCodeAt(), and what does it return for "A"?
+207.	How can padStart(10, "0") be used to format numbers as strings?
+208.	What does startsWith("Ja") return for "JavaScript"?
+209.	How does endsWith("ipt") behave with "JavaScript"?
+210.	What is the result of "hello world".replace("world", "there")?
+211.	How does trim() affect " hello "?
+212.	What does "JavaScript".substring(4, 10) return?
+213.	How does slice() handle negative indices compared to substring()?
+214.	11. Arrays
+215.	What are the different ways to create an array in JavaScript?
+216.	What is the difference between push() and pop() methods?
+217.	How does the map() method transform array elements? Provide an example.
+218.	What is the purpose of the filter() method, and how does it work?
+219.	How can you remove elements from an array using splice()?
+220.	Explain the reduce() method and provide an example of summing an array.
+221.	Differentiate between slice() and splice() with examples.
+222.	How do you check if a variable is an array in JavaScript?
+223.	What is array destructuring, and how is it applied? Give an example.
+224.	How does unshift() differ from push() in array manipulation?
+225.	12. Array Methods
+226.	What does forEach() return, and how does it differ from map()?
+227.	How does find() locate an element in an array?
+228.	What is the purpose of findIndex(), and what does it return if no match is found?
+229.	How does some() differ from every() in testing array elements?
+230.	What does includes(5) return for [1, 2, 3, 4]?
+231.	How does indexOf() work, and what happens if the element isn’t found?
+232.	What is the effect of sort((a, b) => a - b) on [5, 2, 8, 1]?
+233.	How does reverse() modify an array?
+234.	What does join("-") do to [1, 2, 3]?
+235.	How can flat() be used to flatten [[1, 2], [3, 4]]?
+236.	What are the different methods to create an object in JavaScript?
+237.	How do dot notation and bracket notation differ when accessing object properties?
+238.	What are prototypes, and how do they relate to inheritance in JavaScript?
+239.	How do you add a method to an object after its creation?
+240.	What is the this keyword, and how does its value change in different contexts?
+241.	How can you simulate private properties in a JavaScript object?
+242.	What do Object.keys(), Object.values(), and Object.entries() return when applied to {a: 1, b: 2}?
+243.	How do you check if a property exists in an object?
+244.	What is the difference between shallow copy and deep copy of an object?
+245.	How can you update an existing property in an object?
+246.	What does this refer to in the global execution context in a browser?
+247.	How does this behave inside a regular function called without an object?
+248.	What is the value of this when a function is called as an object method?
+249.	How does this work in a constructor function when used with new?
+250.	Why doesn’t an arrow function have its own this binding?
+251.	What does this refer to in an event listener attached to a DOM element?
+252.	How does call() change the value of this in a function invocation?
+253.	What is the difference between apply() and call() in setting this?
+254.	How does bind() create a new function with a fixed this value?
+255.	Provide an example where this causes confusion in a nested function.
+256.	What is an Abstract Syntax Tree (AST), and how is it used in JavaScript execution?
+257.	What is the purpose of the <script> tag in an HTML document?
+258.	When and why would you use the <noscript> tag?
+259.	List and explain the different ways to add JavaScript to an HTML page.
+260.	How does the JavaScript engine utilize tokens during code parsing?
+261.	What role do variables play in JavaScript, and how are they declared?
+262.	How does JavaScript’s productivity benefit from its ecosystem of libraries and frameworks?
+263.	16. Advanced Topics
+264.	What is a closure, and how does it preserve state? Provide an example.
+265.	Explain currying in JavaScript and write a curried function.
+266.	What are the differences between call(), apply(), and bind() methods?
+267.	How do you create and use a module in JavaScript with export and import?
+268.	What is memoization, and how can it optimize function performance?
+269.	Differentiate between shallow copy and deep copy with examples.
+270.	How do you implement recursion in JavaScript, and what are its pitfalls?
+271.	What is the Symbol data type, and what is its primary use case?
+272.	Explain generators in JavaScript and provide an example of their use.
+273.	How does prototypal inheritance differ from classical inheritance?
+274.	What is the Document Object Model (DOM), and how does JavaScript interact with it?
+275.	How do you select an element by its ID using the DOM?
+276.	What is the difference between getElementById() and querySelector()?
+277.	How can you change the text content of an HTML element using JavaScript?
+278.	What is event delegation, and why is it useful?
+279.	How do you attach an event listener to a DOM element?
+280.	Explain the difference between event bubbling and event capturing.
+281.	How do you prevent an event’s default behavior in JavaScript?
+282.	What is the difference between innerHTML and textContent when modifying elements?
+283.	How do you create a new HTML element and append it to the DOM?
+284.	What is the purpose of a try-catch block in JavaScript?
+285.	How do you throw a custom error, and why might you do so?
+286.	What is the role of the finally block in exception handling?
+287.	Differentiate between a generic Error and a SyntaxError with examples.
+288.	How do you handle errors in a Promise-based operation?
+
+
+
+
+
+
+
+
+
+
+
