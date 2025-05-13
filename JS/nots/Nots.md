@@ -382,11 +382,11 @@ Block's Local Scope
 2. Execution phase
 
 
-# Variable Phase
+## Variable Phase
 1. In variable phase, JS Engine will check the complete JS Code and it will search for variable declaration statement.
 2. If variable is declared then JS Engine allocate (provide) memory for them.
 3. Variable declared with var will be initialized storing "undefined" at the time of memory block creation. Variable declared with let and const will remain uninitialized (empty) at the time of memory block creation.
-#Execution Phase
+## Execution Phase
 1. In Execution phase, JS Engine will execute the instruction line-by-line.
 
 
