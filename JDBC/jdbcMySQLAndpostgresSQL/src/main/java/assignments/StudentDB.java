@@ -30,70 +30,81 @@ public class StudentDB {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public static void fetchTable() {
 
 		try {
 			Statement stm = conn.createStatement();
 			rs = stm.executeQuery("SELECT * FROM student");
 
-			while (rs.next()) { // loop through the result set to get each row
-				int rollno = rs.getInt("rollno");
-				String name = rs.getString("name");
+			while (rs.next()) {  // loop through the result set to get each row
+	            int rollno = rs.getInt("rollno"); 
+	            String name = rs.getString("name");
 
-				System.out.println("Roll No: " + rollno);
-				System.out.println("Name: " + name);
+	            System.out.println("Roll No: " + rollno);
+	            System.out.println("Name: " + name);
 			}
-		} catch (SQLException e) {
+		}
+		 catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-
+	
+	
 	public static void insertStudentData() {
-		PreparedStatement stm = null;
+	    PreparedStatement stm = null;
 
-		try {
-			// Correct SQL query
-			stm = conn.prepareStatement("INSERT INTO student (rollno, name, class) VALUES (?, ?, ?)");
+	    try {
+	        // Correct SQL query
+	        stm = conn.prepareStatement("INSERT INTO student (rollno, name, class) VALUES (?, ?, ?)");
 
-			// Collect user input
-			System.out.println("Enter Roll No: ");
-			int rollNo = sc.nextInt(); // Read roll number
-			sc.nextLine(); // Consume the leftover newline character
+	        // Collect user input
+	        System.out.println("Enter Roll No: ");
+	        int rollNo = sc.nextInt(); // Read roll number
+	        sc.nextLine(); // Consume the leftover newline character
 
-			System.out.println("Enter Name: ");
-			String name = sc.nextLine(); // Read full name
+	        System.out.println("Enter Name: ");
+	        String name = sc.nextLine(); // Read full name
 
-			System.out.println("Enter Class: ");
-			String className = sc.nextLine(); // Read class name
+	        System.out.println("Enter Class: ");
+	        String className = sc.nextLine(); // Read class name
 
-			// Set parameters
-			stm.setInt(1, rollNo);
-			stm.setString(2, name);
-			stm.setString(3, className);
+	        // Set parameters
+	        stm.setInt(1, rollNo);
+	        stm.setString(2, name);
+	        stm.setString(3, className);
 
-			// Execute the query
-			int rowsInserted = stm.executeUpdate(); // Use executeUpdate for INSERT queries
+	        // Execute the query
+	        int rowsInserted = stm.executeUpdate(); // Use executeUpdate for INSERT queries
 
-			if (rowsInserted > 0) {
-				System.out.println("Student data inserted successfully.");
-			} else {
-				System.out.println("Failed to insert student data.");
-			}
+	        if (rowsInserted > 0) {
+	            System.out.println("Student data inserted successfully.");
+	        } else {
+	            System.out.println("Failed to insert student data.");
+	        }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-//		finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	    	try {
+	        conn.close();
+	    	}
+	        catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
+
+	
+	
 
 	public static void fetchDataFromDB() {
 
@@ -114,74 +125,76 @@ public class StudentDB {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-//		finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-
-	public static void updateStudentData() {
+	
+	
+	
+	public static void updateStudentData(){
 
 		try {
 			// Use PreparedStatement for parameterized queries
 			stm = conn.prepareStatement("update student set name=? WHERE rollno = ?");
 			System.out.println("Enter Roll No to update details:");
-			int rollno = sc.nextInt();
-
+			int rollno = sc.nextInt(); 
+		     
 			System.out.println("Enter name to update:");
-			String name = sc.nextLine();
-
+		    String name = sc.nextLine(); 
+		    
 			stm.setString(1, name);
-			stm.setInt(2, rollno);
+		    stm.setInt(2, rollno);
 
 			rs = stm.executeQuery();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-//		finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-
-	public static void deleteStudentData() {
+	
+	
+	
+	public static void deleteStudentData(){
 
 		try {
-			// Use PreparedStatement for parameterized queries
-			PreparedStatement stm = conn.prepareStatement("DELETE FROM student WHERE rollno = ?");
-			System.out.println("Enter Roll No to delete the student:");
-			int rollNo = sc.nextInt();
-			stm.setInt(1, rollNo);
+		    // Use PreparedStatement for parameterized queries
+		    PreparedStatement stm = conn.prepareStatement("DELETE FROM student WHERE rollno = ?");
+		    System.out.println("Enter Roll No to delete the student:");
+		    int rollNo = sc.nextInt();
+		    stm.setInt(1, rollNo);
 
-			int rowsAffected = stm.executeUpdate(); // Use executeUpdate for DELETE statements
+		    int rowsAffected = stm.executeUpdate(); // Use executeUpdate for DELETE statements
 
-			if (rowsAffected > 0) {
-				System.out.println("Student with Roll No " + rollNo + " is deleted successfully.");
-			} else {
-				System.out.println("No student found with Roll No " + rollNo);
-			}
+		    if (rowsAffected > 0) {
+		        System.out.println("Student with Roll No " + rollNo + " is deleted successfully.");
+		    } else {
+		        System.out.println("No student found with Roll No " + rollNo);
+		    }
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-//		finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
+
 
 	public static void choice() {
 //		while (true) {		
@@ -195,57 +208,48 @@ public class StudentDB {
 		System.out.println("Enter 6 for Exit");
 		int choice = sc.nextInt();
 		switch (choice) {
-
-		case 1: {
-			fetchTable();
-			break;
-		}
-
-		case 2: {
-			insertStudentData();
-			break;
-		}
-
-		case 3: {
-			fetchDataFromDB();
-			break;
-		}
-
-		case 4: {
-			updateStudentData();
-
-			break;
-		}
-
-		case 5: {
-			deleteStudentData();
-			break;
-		}
-
-		case 6: {
-			System.out.println("Exited.....");
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			case 1: {
+				fetchTable();
+				break;
 			}
-			break;
-		}
+			
+			case 2: {
+				insertStudentData();
+				break;
+			}
+			
+			case 3: {
+				fetchDataFromDB();
+				break;
+			}
 
-		default:
-			System.out.println("Invalid Input Try Again....");
-			return;
+			case 4: {
+				updateStudentData();
+
+				break;
+			}
+
+			case 5: {
+				deleteStudentData();
+				break;
+			}
+			
+			case 6: {
+				System.out.println("Exited.....");
+				break;
+			}
+			
+			default:
+				System.out.println("Invalid Input Try Again....");
+				break;
 		}
 	}
 //	}
 
 	public static void main(String[] args) {
 		System.out.println("----------- Welcome To Student Database -----------");
-        while(true) {
-        	System.out.println();
-        	System.out.println();
+
 		choice();
-}
 	}
 }
