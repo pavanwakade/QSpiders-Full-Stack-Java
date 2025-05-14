@@ -2465,39 +2465,45 @@ console.log(obj1);
 ## Object In-Built Methods
 
 1. Object.keys(obj_ref)
-1. Returns an array of given object's property names.
-2.
+- Returns an array of given object's property names.
+```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.keys(obj));
 // Output: ["a", "b", "c"]
+```
 2. Object.values(obj_ref)
-1. Returns an array of given object's values.
-2.
+- Returns an array of given object's values.
+```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.values(obj));
 // Output: [1,2,3]
+```
 3. Object.entries(obj_ref)
-1. Returns an array of key-value pairs in an array.
-2.
+ Returns an array of key-value pairs in an array.
+```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.entries(obj));
 // Output: [[a,1],[b,2],[c,3]]
+```
 4. Object.assign(target_obj,src1,...,srcn)
-1. Copies key-value pair from one or more source objects to a target object.
-2.
+- Copies key-value pair from one or more source objects to a target object.
+```
 const target = { a: 1, b: 2 };
 const source = { c: 4, d: 5 };
 const result = Object.assign(target, source);
 console.log(result);
 // Output: { a: 1, b: 2, c: 4, d: 5 }
-# What Is JSON?
+```
+## What Is JSON?
 1. JSON stands for javascript object notation.
 2. It is data only format to represent values and objects.
 3. It is used to transfer data between applications through apis.
 4. JSON keys must be strings enclosed in double quotes.
 5. It supports six data types: object, array, string, number, boolean, and null.
 6. It supports nested structures, allowing objects and arrays to be nested within each other.
-## JSON Methods
+7. It is language independent and can be used with any programming language.
+8. It is lightweight and easy to read and write.
+### JSON Methods
 1. JSON.stringify(value)
 - JSON.stringify() is a method that converts a JavaScript object or value into a JSON string.
 - Returns JSON.
