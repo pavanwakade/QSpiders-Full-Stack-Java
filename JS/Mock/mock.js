@@ -165,3 +165,43 @@
 // obj1["speak"]();//i can speak
 // obj1.speak();//i can speak
 
+
+
+
+
+
+let pavan={
+    name:"pavan",
+    age:25,
+    location:"latur",
+    EDU:{
+        10:"matephal",
+        12:"science",
+        Diploma:"computer",
+        BE:"E&TC"
+    }
+}
+
+// pavan.age=26;//?update
+// delete pavan.EDU["12"];//?delete
+// pavan.certificates={Qspider:"Java Full Stack",Symboises:"java full stack"};
+// pavan.certificate="postman";
+// console.log(pavan);
+
+
+// console.log("age" in pavan);//?true
+// console.log("certificate" in pavan);
+
+
+// copyobj=pavan;
+// console.log(copyobj);//?shallow copy the same object
+
+// let deepcopyy={};
+
+//  deepcopyy=pavan;//?deep copy
+//  pavan.certificate="postman";
+
+// console.log(deepcopyy);
+
+
+
