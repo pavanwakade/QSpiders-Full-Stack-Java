@@ -2369,7 +2369,8 @@ console.log(obj1["speak"]());
 // Here, we can access object property, by using object reference.
 Here , we can can access object property , by using object reference because arrow function is not
 having 'this' property.
-## Add Key Value In Object
+```
+### Add Key Value In Object
 1. To add key-value pair we can using dot operator and square brackets
 2.
 By using dot operator ( . ) and key name
@@ -2409,21 +2410,24 @@ country:"india",
 }
 ```
 We can check using "in" operator.
+```
 let obj = { name:"chombi",age:16}
 console.log("name" in obj )// true
 console.log("age" in obj )// true
 console.log("city" in obj )// false
+```
 ## Copy Of Object
-1. We can create copy of two types :
-1. Shallow copy
-2. Deep Copy
-2. Shallow copy
-1. The copy of object that is directly connected with original object is called as shallow object.
-2. Here, we store reference of original object in a new varaiable , now new variable starts pointing to
-same memory block.
-3. So if we make any changes in copy , it will be reflected to original object because both variables are
-pointing to same memory block.
+
+There are two types of object copies:
+
+### 1. Shallow Copy
+- The copy of object that is directly connected with original object is called a shallow copy
+- Here, we store reference of original object in a new variable, now new variable starts pointing to same memory block
+- So if we make any changes in copy, it will be reflected to original object because both variables are pointing to same memory block
+
+
 4.
+```
 let obj = { name:"chombi",age:16}
 let obj_cpy = obj;
 //reference of obj is copied in obj_cpy
@@ -2432,10 +2436,10 @@ console.log(obj_copy);
 //{ name:"chombi",age:20 }
 console.log(obj);
 //{ name:"chombi",age:20 }
+```
 3. Deep copy
 1. The copy in which original object is not connected with it's copy , is called as Deep copy.
-2. Here , we create separate empty object and after that we copy key-value pair of original object into
-new empty object.
+2. Here , we create separate empty object and after that we copy key-value pair of original object into new empty object.
 3. Now , if we make any changes in copy , it will not be reflected to original object because we have
 create separate memory blocks.
 4.
@@ -2454,6 +2458,7 @@ console.log(obj2);
 console.log(obj1);
 //{ name:"chombi",age:16 }
 ## Object In-Built Methods
+
 1. Object.keys(obj_ref)
 1. Returns an array of given object's property names.
 2.
