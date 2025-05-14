@@ -2494,6 +2494,8 @@ const result = Object.assign(target, source);
 console.log(result);
 // Output: { a: 1, b: 2, c: 4, d: 5 }
 ```
+
+# JSON
 ## What Is JSON?
 1. JSON stands for javascript object notation.
 2. It is data only format to represent values and objects.
@@ -2504,11 +2506,11 @@ console.log(result);
 7. It is language independent and can be used with any programming language.
 8. It is lightweight and easy to read and write.
 ### JSON Methods
-1. JSON.stringify(value)
+###### 1. JSON.stringify(value)
 - JSON.stringify() is a method that converts a JavaScript object or value into a JSON string.
 - Returns JSON.
 - It does not support : function properties,symbolic keys and values and Properties that store undefined.
-2. JSON.parse(value)
+###### 2. JSON.parse(value)
 - JSON.parse() is a method that converts JSON string into JavaScript object or value.
 - Returns plain javascript object.
 ## Introduction
@@ -2517,6 +2519,7 @@ console.log(result);
 object.
 3.
 For practice we will use these objects as reference.
+```
 let human1 = {
 name: "Chombi",
 age: 20,
@@ -2529,7 +2532,7 @@ let human3 = {
 name: "Nimbi",
 age: 18,
 };
-Below function we will use to access object's properties by using call, apply and bind methods.
+//Below function we will use to access object's properties by using call, apply and bind methods.
 function detailsAll(a, b, c) {
 console.log("Name : " + this.name);
 console.log("Age : " + this.age);
@@ -2537,6 +2540,7 @@ console.log("value of a : " + a);
 console.log("value of b : " + b);
 console.log("value of c : " + c);
 }
+```
 ## Call
 1. Call method accepts object reference as first argument And accepts 'n' number of arguments.
 2. Here, arguments are passed to the function's parameter list.
