@@ -8,7 +8,8 @@
       #mainsection {
         display: flex;
         flex-wrap: wrap;
-        /* height: 100vh;
+
+justify-content: center;        /* height: 100vh;
         width: 100%; */
         /* background-color: rgb(152, 137, 137); */
       }
@@ -16,9 +17,20 @@
       .card {
         margin: 20px;
         padding: 10px;
-        border: 2px solid red;
-        height: 400px;
-        width: 200px;
+        border: 2px solid #fe6002;
+        height: 360px;
+        width: 250px;
+        background-color: #fe6002;
+        color: aliceblue;
+      }
+
+      .card:hover{
+        /* background-color: #00ff80;*/
+        
+      }
+      .card button {
+        display: block;
+        margin: 0 auto;
       }
       img {
         height: 30vh;
@@ -26,7 +38,19 @@
         border-radius: 30px;
       }
       button {
-        padding: 10px 20px;
+        padding: 5px 20px;
+        font-size: 15px;
+        color: #ffffff;
+        background-color: #2196f3;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+      }
+      button:hover {
+        background-color: #00ff80;
+        color: #000000;
       }
     </style>
   </head>
@@ -34,7 +58,6 @@
     <section id="mainsection">
       <!-- <div id="card"></div> -->
     </section>
-    <button type=""></button>
     <script>
       let mainsection = document.getElementById("mainsection");
       let fetchdata = async () => {
@@ -47,11 +70,11 @@
           newCard.setAttribute("class", "card");
           newCard.innerHTML = `
             <img src="${val.image}" alt="${val.name}">
-            <p>${val.name}</p>
+            <p style="font-size: 20px">${val.name}</p>
             <p>rating : ⭐${val.rating}</p>
             <p>cuisine: ${val.cuisine}</p>
             <p>difficulty : ${val.difficulty}</p>
-            <button>buy</button>
+            <button>Order</button>
           `;
           mainsection.appendChild(newCard);
         });
