@@ -205,6 +205,7 @@
 
 
 let body=document.querySelector("body")
+body.style.backgroundColor="yellow";
 let circle=document.getElementById("circle")
 let squre=document.getElementById("squre")
 let divv=document.getElementById("sty")
@@ -242,9 +243,21 @@ divv.style.fontSize="50px"
 body.style.backgroundColor="green"
 circle.style.backgroundColor="red"
 squre.style.backgroundColor="red"
-
 })
 
-let objjj={
 
+let datadiv=document.querySelector("#datadiv");
+
+let fetchdata= async ()=>{
+    let productss=await fetch("https://dummyjson.com/products");
+
+    let datsssss = await productss.json();
+    console.log(datsssss.products);
+
+    datsssss.products.map((val)=>{
+       console.log(val.id);
+    })
+    
 }
+
+fetchdata();
