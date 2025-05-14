@@ -72,53 +72,22 @@
 
     <script>
       let product = document.getElementById("container");
-
       let allProducts = [];
-
       let fetchData = async () => {
         let productApi = await fetch("https://dummyjson.com/products");
-
-        // console.log(productApi);
-
         let data = await productApi.json();
-
-        // console.log(data.products);
-
         displayProduct(data.products);
-
-        // allProducts = data.products;
       };
-
       let displayProduct = (items) => {
-        // console.log(items);
-
-        // let productCard = document.createElement('div');
-
-        // productCard.id = "product-card"
-
         let productData = items.map((e) => `
         <div id = "product-card">
-
         <img src ="${e.images[0]}" id  = "prod-img" />
-
         <h1>${e.price}$</h1>
-
         <h1> ${e.title} </h1>
-                <h1> ⭐${e.rating} </h1>
-
-        
+        <h1> ⭐${e.rating} </h1>        
         <button id ="card-bn"> Add To Card </button>
-
         </div>
-
-       
-        `
-          )
-          .join("");
-
-        // productCard.innerHTML = productData
-        // product.append(productCard);
-
+        `).join("");
         product.innerHTML = productData;
       };
 
