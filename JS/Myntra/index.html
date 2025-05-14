@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-    
+        #mainsection{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #card{
+            margin: 20px;
+            padding: 10px;
+
+        }
+        img{
+            height: 30vh;
+            width: 100%;
+        }
     </style>
-</head>
-<body>
-    
-    <section id="mainsection"></section>
+  </head>
+  <body>
+    <section id="mainsection">
+      <div id="card"></div>
+      
+    </section>
     <script>
-        
+      let mainsection = document.getElementById("mainsection");
+      let fetchdata = async () => {
+        let apiresponse = await fetch("https://dummyjson.com/recipes");
+        let data = await apiresponse.json();
+        console.log(data.recipes);
+
+        data.recipes.map((val) => {
+          let card = document.getElementById("card");
+        card.innerHTML=`
+        <img src="${val.image}" alt="${val.name}">
+        <p>${val.name}</p>
+        <p>${val.name}</p>
+        <p>${val.name}</p>
+        `
+        });
+      };
+      fetchdata();
     </script>
-</body>
+  </body>
 </html>
