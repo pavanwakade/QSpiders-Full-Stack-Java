@@ -2506,13 +2506,62 @@ console.log(result);
 7. It is language independent and can be used with any programming language.
 8. It is lightweight and easy to read and write.
 ### JSON Methods
-###### 1. JSON.stringify(value)
+##### 1. JSON.stringify(value)
 - JSON.stringify() is a method that converts a JavaScript object or value into a JSON string.
 - Returns JSON.
-- It does not support : function properties,symbolic keys and values and Properties that store undefined.
-###### 2. JSON.parse(value)
+- It does not support : function properties, symbolic keys and values and Properties that store undefined.
+
+```javascript
+const user = {
+  name: "John",
+  age: 30,
+  city: "New York",
+  greet: function() { // Function will be ignored
+    return "Hello!";
+  },
+  [Symbol('id')]: 123, // Symbol will be ignored
+  undefinedProp: undefined // undefined will be ignored
+};
+
+const jsonString = JSON.stringify(user);
+console.log(jsonString);
+// Output: {"name":"John","age":30,"city":"New York"}
+
+// With formatting (pretty print)
+console.log(JSON.stringify(user, null, 2));
+/* Output:
+{
+  "name": "John",
+  "age": 30,
+  "city": "New York"
+}
+*/
+```
+
+##### 2. JSON.parse(value)
 - JSON.parse() is a method that converts JSON string into JavaScript object or value.
 - Returns plain javascript object.
+
+```javascript
+const jsonString = '{"name":"John","age":30,"city":"New York"}';
+
+const obj = JSON.parse(jsonString);
+console.log(obj.name); // "John"
+console.log(obj.age);  // 30
+console.log(obj.city); // "New York"
+
+// Handling invalid JSON
+try {
+  JSON.parse('{"bad json"}');
+} catch (error) {
+  console.log("Invalid JSON string"); 
+}
+
+// Parsing arrays
+const jsonArray = '[1,2,3,["a","b","c"]]';
+const parsed = JSON.parse(jsonArray);
+console.log(parsed); // [1, 2, 3, ["a", "b", "c"]]
+```
 ## Introduction
 1. Call , Apply and Bind methods are used to store the object reference in 'this' keyword of function.
 2. When function's 'this' have reference of object, then we can access states and behaviours of that
