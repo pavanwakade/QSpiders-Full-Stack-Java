@@ -2464,28 +2464,28 @@ console.log(obj1);
 ```
 ## Object In-Built Methods
 
-1. Object.keys(obj_ref)
+1. ### Object.keys(obj_ref)
 - Returns an array of given object's property names.
 ```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.keys(obj));
 // Output: ["a", "b", "c"]
 ```
-2. Object.values(obj_ref)
+2. ### Object.values(obj_ref)
 - Returns an array of given object's values.
 ```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.values(obj));
 // Output: [1,2,3]
 ```
-3. Object.entries(obj_ref)
+3. ### Object.entries(obj_ref)
  Returns an array of key-value pairs in an array.
 ```
 const obj = { a: 1, b: 2, c: 3 };
 console.log(Object.entries(obj));
 // Output: [[a,1],[b,2],[c,3]]
 ```
-4. Object.assign(target_obj,src1,...,srcn)
+4. ### Object.assign(target_obj,src1,...,srcn)
 - Copies key-value pair from one or more source objects to a target object.
 ```
 const target = { a: 1, b: 2 };
