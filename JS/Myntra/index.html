@@ -5,27 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        #mainsection{
-            display: flex;
-            flex-wrap: wrap;
-        }
+      #mainsection {
+        display: flex;
+        flex-wrap: wrap;
+        /* height: 100vh;
+        width: 100%; */
+        /* background-color: rgb(152, 137, 137); */
+      }
 
-        #card{
-            margin: 20px;
-            padding: 10px;
-
-        }
-        img{
-            height: 30vh;
-            width: 100%;
-        }
+      .card {
+        margin: 20px;
+        padding: 10px;
+        border: 2px solid red;
+        height: 400px;
+        width: 200px;
+      }
+      img {
+        height: 30vh;
+        width: 100%;
+        border-radius: 30px;
+      }
+      button {
+        padding: 10px 20px;
+      }
     </style>
   </head>
   <body>
     <section id="mainsection">
-      <div id="card"></div>
-      
+      <!-- <div id="card"></div> -->
     </section>
+    <button type=""></button>
     <script>
       let mainsection = document.getElementById("mainsection");
       let fetchdata = async () => {
@@ -33,14 +42,18 @@
         let data = await apiresponse.json();
         console.log(data.recipes);
 
-        data.recipes.map((val) => {
-          let card = document.getElementById("card");
-        card.innerHTML=`
-        <img src="${val.image}" alt="${val.name}">
-        <p>${val.name}</p>
-        <p>${val.name}</p>
-        <p>${val.name}</p>
-        `
+        data.recipes.forEach((val) => {
+          let newCard = document.createElement("div");
+          newCard.setAttribute("class", "card");
+          newCard.innerHTML = `
+            <img src="${val.image}" alt="${val.name}">
+            <p>${val.name}</p>
+            <p>rating : ⭐${val.rating}</p>
+            <p>cuisine: ${val.cuisine}</p>
+            <p>difficulty : ${val.difficulty}</p>
+            <button>buy</button>
+          `;
+          mainsection.appendChild(newCard);
         });
       };
       fetchdata();
