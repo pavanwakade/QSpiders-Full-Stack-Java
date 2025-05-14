@@ -2437,13 +2437,17 @@ console.log(obj_copy);
 console.log(obj);
 //{ name:"chombi",age:20 }
 ```
-3. Deep copy
-1. The copy in which original object is not connected with it's copy , is called as Deep copy.
-2. Here , we create separate empty object and after that we copy key-value pair of original object into new empty object.
-3. Now , if we make any changes in copy , it will not be reflected to original object because we have
+
+### 2. Deep Copy
+- The copy of object that is not connected with original object is called a deep copy
+- Here, we create separate empty object and after that we copy key-value pairs of original object into it
+- The copy in which original object is not connected with it's copy , is called as Deep copy.
+
+- Now , if we make any changes in copy , it will not be reflected to original object because we have
 create separate memory blocks.
 4.
 Create copy using for loop.
+```
 let obj1 = {name:"chombi",age:16}
 let obj2 = { }
 // new empty object
@@ -2457,6 +2461,7 @@ console.log(obj2);
 //{ name:"chombi",age:20 }
 console.log(obj1);
 //{ name:"chombi",age:16 }
+```
 ## Object In-Built Methods
 
 1. Object.keys(obj_ref)

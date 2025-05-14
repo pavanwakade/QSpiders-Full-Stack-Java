@@ -62,13 +62,16 @@ let person = {
 
 
 // ?CRUD
+// console.log(person.hobbies);
 
 // person.hobbies.push("BGMI");//!update
 
+// delete person.hobbies[person.hobbies.length-1];  //!delete last //?it will just delete the value not block of Array  //<1 empty item>
 // delete person.hobbies;  //!delete
 
 // console.log(person); //!read
 
+// console.log(person.hobbies);
 
 
 let arr = [{
@@ -239,7 +242,7 @@ copy.location="jalgaon";
 //     throw new Error("tonku ne boot dekha");
     
 // } catch (error) {
-    console.log(error);
+    // console.log(error);
 // }
 // finally{
 //     console.log("Zut bolta hai sala");
