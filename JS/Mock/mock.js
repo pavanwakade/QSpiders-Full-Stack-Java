@@ -204,60 +204,6 @@
 // console.log(deepcopyy);
 
 
-let body=document.querySelector("body")
-body.style.backgroundColor="yellow";
-let circle=document.getElementById("circle")
-let squre=document.getElementById("squre")
-let divv=document.getElementById("sty")
-
-circle.addEventListener("click",()=>{
-divv.style.width="300px";
-divv.style.height="300px";
-divv.style.backgroundColor="green";
-divv.style.borderRadius="50%"
-divv.style.margin="100px"
-divv.style.display="flex"
-divv.style.justifyContent="center"
-divv.style.alignItems="center"
-divv.style.color="white"
-divv.innerText="green"
-divv.style.fontSize="40px"
-body.style.backgroundColor="red"
-circle.style.backgroundColor="green"
-squre.style.backgroundColor="green"
-
-})
-
-squre.addEventListener("click",()=>{
-divv.style.width="300px";
-divv.style.height="300px";
-divv.style.backgroundColor="red";
-divv.style.borderRadius="0"
-divv.style.margin="100px"
-divv.style.display="flex"
-divv.style.justifyContent="center"
-divv.style.alignItems="center"
-divv.style.color="white"
-divv.innerText="RED"
-divv.style.fontSize="50px"
-body.style.backgroundColor="green"
-circle.style.backgroundColor="red"
-squre.style.backgroundColor="red"
-})
 
 
-let datadiv=document.querySelector("#datadiv");
 
-let fetchdata= async ()=>{
-    let productss=await fetch("https://dummyjson.com/products");
-
-    let datsssss = await productss.json();
-    console.log(datsssss.products);
-
-    datsssss.products.map((val)=>{
-       console.log(val.id);
-    })
-    
-}
-
-fetchdata();

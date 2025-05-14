@@ -82,21 +82,21 @@
 
         let data = await productApi.json();
 
-        console.log(data.products);
+        // console.log(data.products);
 
         displayProduct(data.products);
 
-        allProducts = data.products;
+        // allProducts = data.products;
       };
 
       let displayProduct = (items) => {
-        console.log(items);
+        // console.log(items);
 
         // let productCard = document.createElement('div');
 
         // productCard.id = "product-card"
 
-        let productData = items.map((e, inx) => `
+        let productData = items.map((e) => `
         <div id = "product-card">
 
         <img src ="${e.images[0]}" id  = "prod-img" />
@@ -121,6 +121,30 @@
 
         product.innerHTML = productData;
       };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
