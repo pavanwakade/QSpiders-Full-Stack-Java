@@ -1,12 +1,12 @@
-//!promise in js
-//promises are the objects that represent the eventual completion 
+// !promise in js
+// promises are the objects that represent the eventual completion 
 // (or failure) of an asynchronous operation and its resulting value.
-//promise is a placeholder for a value that we don't have yet but
-//promise is an object that may produce a single value some time in the future
-//promisees are introduce to avoid callback hell
-//! callback hell: its a complex situation when we use multiple callback function
+// promise is a placeholder for a value that we don't have yet but
+// promise is an object that may produce a single value some time in the future
+// promisees are introduce to avoid callback hell
+// ! callback hell: its a complex situation when we use multiple callback function
 
-//!js syntax
+// !js syntax
 //   let a = 10;
 //   let promise = new Promise((resolve, reject) => {
 //     if (a == 10) {
@@ -30,7 +30,7 @@
 //     return res.json()
 // });
 // p2.then((api) => {
-    // console.log(api);
+//     console.log(api);
 // });
 
 
@@ -63,9 +63,9 @@
 
 
 
-//!timer   
+// !timer   
 
-//setTimeout: it is used to execute a function after a specified interval of time
+// setTimeout: it is used to execute a function after a specified interval of time
 
 // console.log("start");
 // setTimeout(() => {
@@ -74,7 +74,7 @@
 
 
 
-//setInterval: it is used to execute a function repeatedly at a specified interval of time
+// setInterval: it is used to execute a function repeatedly at a specified interval of time
 // let count = 0;
 // setInterval(() => {
 //     console.log(count++);
@@ -87,4 +87,3 @@
 //     if (count2 > 0) count2 -= 1;
 //     else clearInterval(interval);
 // }, 1000);
-
