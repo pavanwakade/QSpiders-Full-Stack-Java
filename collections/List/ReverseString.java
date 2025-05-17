@@ -26,11 +26,10 @@ class ReverseString{
 		public static int [] numberReversed(int [] num){
 		int newarr[]=new int[num.length];
 		for (int i=0;i<num.length ;i++ ) {
-
 			newarr[i]=num[num.length-1-i];
 		}
-		System.out.println(Arrays.toString(newarr));
 
+		System.out.println(Arrays.toString(newarr));
 		return newarr;
 	}
 
