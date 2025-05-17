@@ -6,7 +6,11 @@ class ReverseString{
 
 	public static void main(String[] args) {
 		String str="hello world";
-		reverse(str);
+		int arr[]={1,2,3,4,5};
+
+				reverse(str);
+	System.out.println(Arrays.toString(numberReversed(arr)));
+
 
 		StringBuilder builde=new StringBuilder(str).reverse();
 		System.out.println(builde);
@@ -16,8 +20,8 @@ class ReverseString{
 		Collections.reverse(strss);
 		System.out.println(strss);
 
-		int arr[]={1,2,3,4,5};
-	System.out.println(Arrays.toString(numberReversed(arr)));
+		
+
 	}
 		public static int [] numberReversed(int [] num){
 		int newarr[]=new int[num.length];
@@ -25,10 +29,12 @@ class ReverseString{
 
 			newarr[i]=num[num.length-1-i];
 		}
-		// System.out.println(Arrays.toString(newarr));
+		System.out.println(Arrays.toString(newarr));
 
 		return newarr;
 	}
+
+	
 
 	static public void reverse(String str){
 
