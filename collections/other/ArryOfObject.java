@@ -6,28 +6,28 @@ public class ArryOfObject {
 
     public static void main(String[] args) {
 
-//        Object[] o = {1, "pavan", 10.0};
+       Object[] o = {1, "pavan", 10.0};
 
-//        System.out.println(Arrays.toString(o));
+       System.out.println(Arrays.toString(o));
 
-        Collection c = new ArrayList();
+        // Collection c = new ArrayList();
 
-        for (int i = 0; i <= 50; i++) {
+        // for (int i = 0; i <= 50; i++) {
 
-            c.add(i);
-        }
+        //     c.add(i);
+        // }
 
 
-        List<Integer> i = new Stack<>();
+//         List<Integer> i = new Stack<>();
 
-        i.addAll(c);
-//        i.removeAll(i);
-//        i.clear();
-//        i.remove(i.size()-1);
+//         i.addAll(c);
+// //        i.removeAll(i);
+// //        i.clear();
+// //        i.remove(i.size()-1);
 
-        System.out.println(i);
+//         System.out.println(i);
 
-        lis();
+//         lis();
     }
 
 
