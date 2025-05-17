@@ -2,6 +2,7 @@ import java.util.Arrays;
 class ReverseString{
 
 	public static void main(String[] args) {
+		String str=
 		reverse("hello world");
 	}
 
@@ -17,7 +18,7 @@ class ReverseString{
 		for (int i=0;i<end ;i++ , end-- ) {
 
 			newreversed[i]=c[end];
-			ss+=c.indexOf(end);
+			ss+=c.charAt(end);
 
 		}
 		System.out.println(ss);
