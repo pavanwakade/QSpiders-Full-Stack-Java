@@ -10,6 +10,7 @@ class ReverseAtringWithoutFirst{
 
 			ch[i]=newChar[newChar.length-1-i];
 
+			
 		}
 
 		String ss=new String(ch);
