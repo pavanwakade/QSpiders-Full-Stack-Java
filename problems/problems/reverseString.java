@@ -1,3 +1,5 @@
+package problems;
+
 import java.util.Arrays;
 class reverseString{
 	public static void main(String[] args) {

@@ -1,3 +1,5 @@
+package problems;
+
 class ReverseWithoutThirdVariable{
 public static void main(String[] args) {
 	System.out.println(reverse("pavan"));
