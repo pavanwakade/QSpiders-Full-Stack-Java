@@ -17,12 +17,12 @@ public class BauncyArrays {
 				c[j++] = a[i];
 				c[j++] = b[i];
 			}
-			if (i < a.length) {
+			else if (i < a.length) {
 				c[j++] = a[i];
 			}
 
-			if (i < b.length) {
-				c[j++] = a[i];
+			else if (i < b.length) {
+				c[j++] = b[i];
 			}
 		}
 		return c;
