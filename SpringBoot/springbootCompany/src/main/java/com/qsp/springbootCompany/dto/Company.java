@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import java.util.List;
 
 @Entity
 public class Company {
@@ -13,15 +11,8 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
     private String location;
-
-    @OneToMany(mappedBy = "company")
-    private List<Employee> employees;
-
-    @OneToMany(mappedBy = "company")
-    private List<Admin> admins;
 
     public Company() {
         super();
@@ -33,7 +24,6 @@ public class Company {
         this.location = location;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -58,19 +48,8 @@ public class Company {
         this.location = location;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public List<Admin> getAdmins() {
-        return admins;
-    }
-
-    public void setAdmins(List<Admin> admins) {
-        this.admins = admins;
+    @Override
+    public String toString() {
+        return "Company{id=" + id + ", name='" + name + "', location='" + location + "'}";
     }
 }

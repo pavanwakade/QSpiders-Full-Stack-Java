@@ -1,5 +1,6 @@
 package com.qsp.springbootCompany.dao;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class CompanyDao {
 	   return repository.findByName(name);
    }
 
+   
 	
 	
 }
