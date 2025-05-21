@@ -4,57 +4,73 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Company {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	private String name;
-	
-	private String location;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public Company(int id, String name, String location) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.location = location;
-	}
+    private String name;
+    private String location;
 
-	
-	public int getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "company")
+    private List<Employee> employees;
 
-	public Company() {
-	super();
-}
+    @OneToMany(mappedBy = "company")
+    private List<Admin> admins;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Company() {
+        super();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Company(int id, String name, String location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	
-	
-	
-	
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(List<Admin> admins) {
+        this.admins = admins;
+    }
 }
