@@ -47,10 +47,11 @@
                     localStorage.setItem('employeeId', employee.id);
                     window.location.href = 'employee-dashboard.html';
                 } else {
-                    document.getElementById('message').innerHTML = '<div class="alert alert-danger">Login failed!</div>';
+                    const errorData = await response.json();
+                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Login failed: ${errorData.message || response.statusText}</div>`;
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
         });
     </script>

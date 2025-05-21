@@ -55,7 +55,7 @@
             }
 
             try {
-                const response = await fetch('http://localhost:8080/employee/findAll');
+                const response = await fetch('http://localhost:5000/employee/findAll');
                 if (!response.ok) {
                     throw new Error(`Failed to fetch employees: ${response.statusText}`);
                 }
@@ -81,7 +81,7 @@
 
         async function deleteEmployee(id) {
             try {
-                const response = await fetch(`http://localhost:8080/employee/delete?id=${id}`, {
+                const response = await fetch(`http://localhost:5000/employee/delete?id=${id}`, {
                     method: 'DELETE'
                 });
                 if (response.ok) {
@@ -111,7 +111,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:8080/task/assign', {
+                const response = await fetch('http://localhost:5000/task/assign', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(task)
