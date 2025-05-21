@@ -2,12 +2,14 @@ package com.qsp.springbootCompany.service;
 
 import com.qsp.springbootCompany.dao.CompanyDao;
 import com.qsp.springbootCompany.dto.Company;
+import com.qsp.springbootCompany.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -26,15 +28,20 @@ public class CompanyService {
     }
 
     public ResponseEntity<Company> findById(int id) {
-        Company company = dao.findById(id);
-        if (company != null) {
-            return new ResponseEntity<>(company, HttpStatus.OK);
+        Optional<Company> optional = dao.findCompanyById(id);
+        if (optional.isPresent()) {
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        throw new IdNotFoundException("Company with ID " + id + " not found");
     }
 
-    public void deleteCompany(int id) {
-        dao.deleteCompany(id);
+    public ResponseEntity<String> deleteCompany(int id) {
+        Optional<Company> optional = dao.findCompanyById(id);
+        if (optional.isPresent()) {
+            dao.deleteCompany(id);
+            return new ResponseEntity<>("Company deleted", HttpStatus.OK);
+        }
+        throw new IdNotFoundException("Company with ID " + id + " not found");
     }
 
     public ResponseEntity<List<Company>> findAll() {
@@ -47,8 +54,8 @@ public class CompanyService {
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<Company>> FindByName(String name) {
-        List<Company> companies = dao.FindByName(name);
+    public ResponseEntity<List<Company>> findByName(String name) {
+        List<Company> companies = dao.findByName(name);
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
 }
