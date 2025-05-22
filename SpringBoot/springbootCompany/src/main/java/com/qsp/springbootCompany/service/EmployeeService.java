@@ -1,6 +1,7 @@
 package com.qsp.springbootCompany.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +18,16 @@ public class EmployeeService {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public Employee saveEmployee(Employee employee) {
         Company company = companyService.findById(employee.getCompany().getId());
         if (!company.isApproved()) {
             throw new IllegalStateException("Company is not approved");
         }
-        // Store password as plain text (NOT RECOMMENDED)
-        // employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 }

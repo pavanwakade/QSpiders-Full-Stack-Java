@@ -19,8 +19,7 @@ public class PortalAdminService {
 
     @Transactional
     public PortalAdmin savePortalAdmin(PortalAdmin portalAdmin) {
-        // Store password as plain text (NOT RECOMMENDED)
-        // portalAdmin.setPassword(passwordEncoder.encode(portalAdmin.getPassword()));
+        portalAdmin.setPassword(passwordEncoder.encode(portalAdmin.getPassword()));
         return portalAdminRepository.save(portalAdmin);
     }
 }

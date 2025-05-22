@@ -1,13 +1,14 @@
 package com.qsp.springbootCompany.service;
 
-import com.qsp.springbootCompany.dto.Company;
-import com.qsp.springbootCompany.dto.Task;
-import com.qsp.springbootCompany.repository.TaskRepository;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import com.qsp.springbootCompany.dto.Company;
+import com.qsp.springbootCompany.dto.Task;
+import com.qsp.springbootCompany.repository.TaskRepository;
 
 @Service
 public class TaskService {
