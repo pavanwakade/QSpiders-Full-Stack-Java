@@ -4,14 +4,11 @@ import com.qsp.springbootCompany.config.JwtUtil;
 import com.qsp.springbootCompany.dto.Admin;
 import com.qsp.springbootCompany.dto.Employee;
 import com.qsp.springbootCompany.dto.PortalAdmin;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AuthController {
 
-	@Autowired
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -31,12 +28,18 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/portal/login")
-    public String portalLogin(@RequestBody PortalAdmin portalAdmin) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(portalAdmin.getUsername(), portalAdmin.getPassword()));
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(portalAdmin.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-        return jwt;
+    public ResponseEntity<?> portalLogin(@RequestBody PortalAdmin portalAdmin) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(portalAdmin.getUsername(), portalAdmin.getPassword()));
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(portalAdmin.getUsername());
+            final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+            return ResponseEntity.ok(jwt);
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
+        }
     }
 
     @PostMapping("/admin/login")
@@ -47,28 +50,51 @@ public class AuthController {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(admin.getUsername());
             final String jwt = jwtUtil.generateToken(userDetails.getUsername());
             return ResponseEntity.ok(jwt);
-        } catch (Exception e) {
+        } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
         }
     }
 
     @PostMapping("/employee/login")
-    public ResponseEntity<String> employeeLogin(@RequestBody Employee employee) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(employee.getUsername(), employee.getPassword()));
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(employee.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-        return ResponseEntity.ok(jwt);
-    }
-    @GetMapping("/auth/user")
-    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    public ResponseEntity<?> employeeLogin(@RequestBody Employee employee) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(employee.getUsername(), employee.getPassword()));
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(employee.getUsername());
+            final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+            return ResponseEntity.ok(jwt);
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
         }
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Map<String, String> userInfo = new HashMap<>();
-        userInfo.put("username", userDetails.getUsername());
-        userInfo.put("role", userDetails.getAuthorities().iterator().next().getAuthority());
-        return ResponseEntity.ok(userInfo);
+    }
+
+    @GetMapping("/auth/user")
+    public ResponseEntity<?> getUserDetails(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return ResponseEntity.ok(new UserResponse(authentication.getName(), authentication.getAuthorities().iterator().next().getAuthority()));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+    }
+
+    private static class UserResponse {
+        private String username;
+        private String role;
+
+        public UserResponse(String username, String role) {
+            this.username = username;
+            this.role = role;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getRole() {
+            return role;
+        }
     }
 }

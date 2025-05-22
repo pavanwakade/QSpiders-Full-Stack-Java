@@ -32,6 +32,7 @@
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
 
             try {
                 const response = await fetch('http://localhost:5000/portal/login', {
@@ -39,17 +40,25 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
+
                 if (response.ok) {
                     const token = await response.text();
+                    if (!token) {
+                        throw new Error('Received empty token');
+                    }
                     localStorage.setItem('jwtToken', token);
-                    localStorage.setItem('portalAdminId', username); // Optional
                     window.location.href = 'portal-admin-dashboard.html';
                 } else {
-                    const errorData = await response.json();
-                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Login failed: ${errorData.message || 'Invalid credentials'}</div>`;
+                    let errorMessage = 'Invalid credentials';
+                    try {
+                        errorMessage = await response.text() || errorMessage;
+                    } catch (err) {
+                        // Ignore if response.text() fails
+                    }
+                    messageDiv.innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+                messageDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
         });
     </script>
