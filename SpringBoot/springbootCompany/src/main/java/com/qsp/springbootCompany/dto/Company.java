@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Company {
@@ -20,7 +21,8 @@ public class Company {
     private boolean approved;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Employee> employees; // Added to store employees associated with the company
+    @JsonManagedReference // Added to manage serialization of employees
+    private List<Employee> employees;
 
     public Company() {
         super();

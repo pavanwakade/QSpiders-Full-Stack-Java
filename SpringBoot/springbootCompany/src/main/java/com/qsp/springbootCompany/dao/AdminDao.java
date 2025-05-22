@@ -33,11 +33,15 @@ public class AdminDao {
         return repository.findByUsername(username);
     }
 
+    public Optional<Admin> findByUsernameAndPassword(String username, String password) { // Added to support login
+        return repository.findByUsernameAndPassword(username, password);
+    }
+
     public List<Admin> findAll() {
         return repository.findAll();
     }
 
-    public List<Admin> findAdminsByCompanyId(int companyId) { // Added to support company deletion
+    public List<Admin> findAdminsByCompanyId(int companyId) {
         return repository.findByCompany_Id(companyId);
     }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Employee {
@@ -18,6 +19,7 @@ public class Employee {
     private String email;
 
     @ManyToOne
+    @JsonBackReference // Added to prevent circular reference during serialization
     private Company company;
 
     public Employee() {

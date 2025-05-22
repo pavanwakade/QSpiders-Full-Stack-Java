@@ -1,7 +1,7 @@
-
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Employee;
+import com.qsp.springbootCompany.dto.EmployeeLoginDTO;
 import com.qsp.springbootCompany.service.CompanyService;
 import com.qsp.springbootCompany.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +39,16 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Employee> login(@RequestBody Employee employee) {
+    public ResponseEntity<EmployeeLoginDTO> login(@RequestBody Employee employee) {
         Employee emp = service.login(employee.getUsername(), employee.getPassword()).getBody();
         if (emp.getCompany() != null && companyService.findCompanyById(emp.getCompany().getId()).getBody().isApproved()) {
-            return ResponseEntity.ok(emp);
+            EmployeeLoginDTO dto = new EmployeeLoginDTO(
+                emp.getId(),
+                emp.getUsername(),
+                emp.getEmail(),
+                emp.getCompany().getId()
+            );
+            return ResponseEntity.ok(dto);
         }
         throw new IllegalStateException("Company is not approved");
     }
