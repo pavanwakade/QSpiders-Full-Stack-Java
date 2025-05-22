@@ -39,18 +39,21 @@
             const password = document.getElementById('password').value;
 
             try {
-                const response = await fetch(`http://localhost:5000/admin/login?username=${username}&password=${password}`, {
-                    method: 'POST'
+                const response = await fetch('http://localhost:5000/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
                 });
                 if (response.ok) {
                     const admin = await response.json();
                     localStorage.setItem('adminId', admin.id);
                     window.location.href = 'admin-dashboard.html';
                 } else {
-                    document.getElementById('message').innerHTML = '<div class="alert alert-danger">Login failed!</div>';
+                    const errorData = await response.json();
+                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Login failed: ${errorData.message || 'Unknown error'}</div>`;
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
         });
     </script>
