@@ -1,5 +1,8 @@
 package com.qsp.springbootCompany.config;
 
+import com.qsp.springbootCompany.dto.Admin;
+import com.qsp.springbootCompany.dto.Employee;
+import com.qsp.springbootCompany.dto.PortalAdmin;
 import com.qsp.springbootCompany.repository.AdminRepository;
 import com.qsp.springbootCompany.repository.EmployeeRepository;
 import com.qsp.springbootCompany.repository.PortalAdminRepository;
@@ -25,12 +28,23 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<?> userOpt = portalAdminRepository.findByUsername(username)
-            .map(Optional::of)
-            .orElseGet(() -> adminRepository.findByUsername(username)
-                .map(Optional::of)
-                .orElseGet(() -> employeeRepository.findByUsername(username)));
+        // Try to find PortalAdmin
+        Optional<UserDetails> user = portalAdminRepository.findByUsername(username)
+            .map(UserDetails.class::cast);
 
-        return (UserDetails) userOpt.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+        // If not found, try Admin
+        if (user.isEmpty()) {
+            user = adminRepository.findByUsername(username)
+                .map(UserDetails.class::cast);
+        }
+
+        // If not found, try Employee
+        if (user.isEmpty()) {
+            user = employeeRepository.findByUsername(username)
+                .map(UserDetails.class::cast);
+        }
+
+        // Throw exception if no user is found
+        return user.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 }

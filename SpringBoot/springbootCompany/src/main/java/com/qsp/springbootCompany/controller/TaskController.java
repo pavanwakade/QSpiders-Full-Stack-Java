@@ -38,7 +38,7 @@ public class TaskController {
     public ResponseEntity<Task> assignTask(@RequestBody Task task, @AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         Admin admin = adminService.findByUsername(username).getBody();
-        if (admin != null && task.getEmployee() != null && task.getEmployee().getId() != null) {
+        if (admin != null && task.getEmployee() != null) {
             Employee employee = employeeService.findEmployeeById(task.getEmployee().getId()).getBody();
             if (employee != null && employee.getCompany().getId() == admin.getCompany().getId() && admin.getCompany().isApproved()) {
                 task.setAssignedBy(admin);
@@ -71,8 +71,8 @@ public class TaskController {
     @PutMapping("/updateStatus")
     @PreAuthorize("hasAnyRole('COMPANY_ADMIN', 'EMPLOYEE')")
     public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status,
-                                                 @RequestParam(required = false) String message,
-                                                 @AuthenticationPrincipal UserDetails userDetails) {
+                                                @RequestParam(required = false) String message,
+                                                @AuthenticationPrincipal UserDetails userDetails) {
         Task task = service.findTaskById(id).getBody();
         if (task != null) {
             String username = userDetails.getUsername();

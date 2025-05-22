@@ -6,18 +6,14 @@
     <title>Employee Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 50px;
-        }
+        body { background-color: #f8f9fa; }
+        .container { margin-top: 50px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 class="mb-4">Employee Dashboard</h2>
-        <button class="btn btn-danger mb-3" onclick="logout()">Logout</button>
+        <a href="/logout" class="btn btn-danger mb-3">Logout</a>
         <h3>Your Tasks</h3>
         <table class="table table-striped">
             <thead>
@@ -36,15 +32,12 @@
     </div>
     <script>
         async function loadTasks() {
-            const employeeId = localStorage.getItem('employeeId');
-            if (!employeeId) {
-                window.location.href = 'employee-login.html';
-                return;
-            }
-
             try {
-                const response = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employeeId}`);
+                const response = await fetch('http://localhost:5000/task/employeeTasks?employeeId=' + new URLSearchParams(window.location.search).get('employeeId'), {
+                    credentials: 'include'
+                });
                 if (!response.ok) {
+                    if (response.status === 401) window.location.href = '/login.html';
                     throw new Error(`Failed to fetch tasks: ${response.statusText}`);
                 }
                 const tasks = await response.json();
@@ -79,23 +72,19 @@
             const status = document.getElementById(`status-${taskId}`).value;
             try {
                 const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}`, {
-                    method: 'PUT'
+                    method: 'PUT',
+                    credentials: 'include'
                 });
                 if (response.ok) {
                     document.getElementById('message').innerHTML = '<div class="alert alert-success">Task status updated successfully!</div>';
-                    loadTasks(); // Refresh the task list
+                    loadTasks();
                 } else {
-                    const errorData = await response.json();
-                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to update task status: ${errorData.message || response.statusText}</div>`;
+                    const errorData = await response.text();
+                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to update task status: ${errorData || response.statusText}</div>`;
                 }
             } catch (error) {
                 document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error updating task status: ${error.message}</div>`;
             }
-        }
-
-        function logout() {
-            localStorage.removeItem('employeeId');
-            window.location.href = 'index.html';
         }
 
         window.onload = loadTasks;

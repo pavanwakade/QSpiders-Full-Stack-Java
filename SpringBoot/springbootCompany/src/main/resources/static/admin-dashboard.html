@@ -6,37 +6,18 @@
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 20px;
-        }
-        .task-table {
-            margin-left: 20px;
-            font-size: 0.9em;
-        }
-        #alertContainer {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1050;
-            min-width: 300px;
-            max-width: 90%;
-        }
-        .main-content {
-            margin-top: 30px;
-        }
+        body { background-color: #f8f9fa; }
+        .container { margin-top: 20px; }
+        .task-table { margin-left: 20px; font-size: 0.9em; }
+        #alertContainer { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1050; min-width: 300px; max-width: 90%; }
+        .main-content { margin-top: 30px; }
     </style>
 </head>
 <body>
-    <!-- Alert Container at the top -->
     <div id="alertContainer"></div>
-    
     <div class="container main-content">
         <h2 class="mb-4">Admin Dashboard</h2>
-        <button class="btn btn-danger mb-3" onclick="logout()">Logout</button>
+        <a href="/logout" class="btn btn-danger mb-3">Logout</a>
         
         <h3>Employees</h3>
         <table class="table table-striped mb-5">
@@ -72,17 +53,13 @@
         function showAlert(message, type = 'success') {
             const alertContainer = document.getElementById('alertContainer');
             const alertId = 'alert-' + Date.now();
-            
             const alertHTML = `
                 <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert">
                     ${message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             `;
-            
             alertContainer.innerHTML = alertHTML;
-            
-            // Auto-dismiss after 5 seconds
             setTimeout(() => {
                 const alertElement = document.getElementById(alertId);
                 if (alertElement) {
@@ -93,15 +70,12 @@
         }
 
         async function loadEmployees() {
-            const adminId = localStorage.getItem('adminId');
-            if (!adminId) {
-                window.location.href = 'admin-login.html';
-                return;
-            }
-
             try {
-                const response = await fetch('http://localhost:5000/employee/findAll');
+                const response = await fetch('http://localhost:5000/employee/findAll', {
+                    credentials: 'include'
+                });
                 if (!response.ok) {
+                    if (response.status === 401) window.location.href = '/login.html';
                     throw new Error(`Failed to fetch employees: ${response.statusText}`);
                 }
                 const employees = await response.json();
@@ -110,10 +84,10 @@
                 for (const employee of employees) {
                     let tasks = [];
                     try {
-                        const taskResponse = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employee.id}`);
-                        if (taskResponse.ok) {
-                            tasks = await taskResponse.json();
-                        }
+                        const taskResponse = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employee.id}`, {
+                            credentials: 'include'
+                        });
+                        if (taskResponse.ok) tasks = await taskResponse.json();
                     } catch (error) {
                         console.error(`Error fetching tasks for employee ${employee.id}: ${error.message}`);
                     }
@@ -186,14 +160,15 @@
             const message = document.getElementById(`message-${taskId}`).value;
             try {
                 const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}${message ? '&message=' + encodeURIComponent(message) : ''}`, {
-                    method: 'PUT'
+                    method: 'PUT',
+                    credentials: 'include'
                 });
                 if (response.ok) {
                     showAlert('Task updated successfully!', 'success');
-                    loadEmployees(); // Refresh employees and tasks
+                    loadEmployees();
                 } else {
-                    const errorData = await response.json();
-                    showAlert(`Failed to update task: ${errorData.message || response.statusText}`, 'danger');
+                    const errorData = await response.text();
+                    showAlert(`Failed to update task: ${errorData || response.statusText}`, 'danger');
                 }
             } catch (error) {
                 showAlert(`Error updating task: ${error.message}`, 'danger');
@@ -203,14 +178,15 @@
         async function deleteEmployee(id) {
             try {
                 const response = await fetch(`http://localhost:5000/employee/delete?id=${id}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    credentials: 'include'
                 });
                 if (response.ok) {
                     showAlert('Employee and associated tasks deleted successfully!', 'success');
                     loadEmployees();
                 } else {
-                    const errorData = await response.json();
-                    showAlert(`Failed to delete employee: ${errorData.message || response.statusText}`, 'danger');
+                    const errorData = await response.text();
+                    showAlert(`Failed to delete employee: ${errorData || response.statusText}`, 'danger');
                 }
             } catch (error) {
                 showAlert(`Error deleting employee: ${error.message}`, 'danger');
@@ -222,40 +198,34 @@
             const employeeId = document.getElementById('employeeId').value;
             const description = document.getElementById('description').value;
             const message = document.getElementById('message').value;
-            const adminId = localStorage.getItem('adminId');
 
             const task = {
                 description,
                 assignedDate: new Date().toISOString().split('T')[0],
                 status: 'Pending',
                 message,
-                employee: { id: parseInt(employeeId) },
-                assignedBy: { id: parseInt(adminId) }
+                employee: { id: parseInt(employeeId) }
             };
 
             try {
                 const response = await fetch('http://localhost:5000/task/assign', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(task)
+                    body: JSON.stringify(task),
+                    credentials: 'include'
                 });
                 if (response.ok) {
                     showAlert('Task assigned successfully!', 'success');
                     document.getElementById('assignTaskForm').reset();
-                    loadEmployees(); // Refresh employees and tasks
+                    loadEmployees();
                 } else {
-                    const errorData = await response.json();
-                    showAlert(`Failed to assign task: ${errorData.message || response.statusText}`, 'danger');
+                    const errorData = await response.text();
+                    showAlert(`Failed to assign task: ${errorData || response.statusText}`, 'danger');
                 }
             } catch (error) {
                 showAlert(`Error assigning task: ${error.message}`, 'danger');
             }
         });
-
-        function logout() {
-            localStorage.removeItem('adminId');
-            window.location.href = 'index.html';
-        }
 
         window.onload = loadEmployees;
     </script>

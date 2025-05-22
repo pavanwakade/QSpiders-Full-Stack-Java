@@ -1,21 +1,18 @@
 package com.qsp.springbootCompany.dao;
 
 import com.qsp.springbootCompany.dto.Employee;
-import com.qsp.springbootCompany.dto.Task;
 import com.qsp.springbootCompany.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class EmployeeDao {
 
     @Autowired
     private EmployeeRepository repository;
-
-    @Autowired
-    private TaskDao taskDao;
 
     public Employee saveEmployee(Employee employee) {
         return repository.save(employee);
@@ -29,19 +26,15 @@ public class EmployeeDao {
         return repository.findAll();
     }
 
-    public Optional<Employee> findByUsernameAndPassword(String username, String password) {
-        return repository.findByUsernameAndPassword(username, password);
+    public Optional<Employee> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 
     public void deleteEmployee(int id) {
-        List<Task> tasks = taskDao.findTasksByEmployeeId(id);
-        for (Task task : tasks) {
-            taskDao.deleteTask(task.getId());
-        }
         repository.deleteById(id);
     }
 
-    public List<Employee> findEmployeesByCompanyId(int companyId) { // Added to support company deletion
-        return repository.findByCompany_Id(companyId);
+    public List<Employee> findEmployeesByCompanyId(int companyId) {
+        return repository.findByCompanyId(companyId);
     }
 }
