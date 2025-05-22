@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AuthController {
 
-    @Autowired
+	@Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -31,21 +31,25 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/portal/login")
-    public ResponseEntity<String> portalLogin(@RequestBody PortalAdmin portalAdmin) {
+    public String portalLogin(@RequestBody PortalAdmin portalAdmin) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(portalAdmin.getUsername(), portalAdmin.getPassword()));
         final UserDetails userDetails = userDetailsService.loadUserByUsername(portalAdmin.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-        return ResponseEntity.ok(jwt);
+        return jwt;
     }
 
     @PostMapping("/admin/login")
-    public ResponseEntity<String> adminLogin(@RequestBody Admin admin) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(admin.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-        return ResponseEntity.ok(jwt);
+    public ResponseEntity<?> adminLogin(@RequestBody Admin admin) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(admin.getUsername());
+            final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+            return ResponseEntity.ok(jwt);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
     }
 
     @PostMapping("/employee/login")

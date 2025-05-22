@@ -30,11 +30,21 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/portal/register", "/portal/login", "/company", "/admin/login", "/employee/login").permitAll()
+                // Permit public access to root, static resources, and HTML files
+                .requestMatchers("/", "/index.html", "/static/**", 
+                                "/admin-login.html", "/admin-register.html", "/admin-dashboard.html",
+                                "/employee-login.html", "/employee-register.html", "/employee-dashboard.html",
+                                "/portal-admin-login.html", "/portal-admin-register.html", "/portal-admin-dashboard.html",
+                                "/company-register.html",
+                                "/portal/register", "/portal/login", "/company", "/admin/login", "/employee/login").permitAll()
+                // Secure endpoints by role
                 .requestMatchers("/portal/**").hasRole("PORTAL_ADMIN")
                 .requestMatchers("/admin/**").hasRole("COMPANY_ADMIN")
                 .requestMatchers("/employee/**").hasAnyRole("COMPANY_ADMIN", "EMPLOYEE")
                 .requestMatchers("/task/**").hasAnyRole("COMPANY_ADMIN", "EMPLOYEE")
+                // Secure /auth/user for authenticated users
+                .requestMatchers("/auth/user").authenticated()
+                // All other requests require authentication
                 .anyRequest().authenticated()
             )
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
