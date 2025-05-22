@@ -3,10 +3,11 @@ package com.qsp.springbootCompany.dao;
 import com.qsp.springbootCompany.dto.PortalAdmin;
 import com.qsp.springbootCompany.repository.PortalAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
-@Component
+@Repository
 public class PortalAdminDao {
 
     @Autowired
@@ -16,7 +17,7 @@ public class PortalAdminDao {
         return repository.save(portalAdmin);
     }
 
-    public Optional<PortalAdmin> findByUsernameAndPassword(String username, String password) {
-        return repository.findByUsernameAndPassword(username, password);
+    public Optional<PortalAdmin> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 }

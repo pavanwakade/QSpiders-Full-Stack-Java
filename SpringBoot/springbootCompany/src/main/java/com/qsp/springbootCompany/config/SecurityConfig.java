@@ -19,19 +19,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/portal/register", "/company/**", "/login.html", "/index.html", "/portal-admin-register.html").permitAll()
                 .requestMatchers("/portal/**").hasRole("PORTAL_ADMIN")
                 .requestMatchers("/admin/**").hasRole("COMPANY_ADMIN")
                 .requestMatchers("/employee/**").hasRole("EMPLOYEE")
-                .requestMatchers("/company/**", "/login.html").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login.html")
+                .loginProcessingUrl("/login")
                 .successHandler(authenticationSuccessHandler())
                 .permitAll()
             )
-            .logout(logout -> logout.permitAll());
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/index.html")
+                .permitAll()
+            );
         return http.build();
     }
 
