@@ -67,7 +67,6 @@
                 const tbody = document.getElementById('employeeTableBody');
                 tbody.innerHTML = '';
                 for (const employee of employees) {
-                    // Fetch tasks for this employee
                     let tasks = [];
                     try {
                         const taskResponse = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employee.id}`);
@@ -78,7 +77,6 @@
                         console.error(`Error fetching tasks for employee ${employee.id}: ${error.message}`);
                     }
 
-                    // Create employee row
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${employee.id}</td>
@@ -90,7 +88,6 @@
                     `;
                     tbody.appendChild(row);
 
-                    // Add tasks sub-table if tasks exist
                     if (tasks.length > 0) {
                         const taskRow = document.createElement('tr');
                         taskRow.innerHTML = `
@@ -104,6 +101,7 @@
                                             <th>Status</th>
                                             <th>Employee ID</th>
                                             <th>Assigned By Admin ID</th>
+                                            <th>Update Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,6 +113,16 @@
                                                 <td>${task.status}</td>
                                                 <td>${task.employee?.id || 'N/A'}</td>
                                                 <td>${task.assignedBy?.id || 'N/A'}</td>
+                                                <td>
+                                                    <select id="status-${task.id}" class="form-select form-select-sm d-inline w-auto">
+                                                        <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                                        <option value="InProgress" ${task.status === 'InProgress' ? 'selected' : ''}>In Progress</option>
+                                                        <option value="Done" ${task.status === 'Done' ? 'selected' : ''}>Done</option>
+                                                        <option value="ToDo" ${task.status === 'ToDo' ? 'selected' : ''}>To Do</option>
+                                                        <option value="Reject" ${task.status === 'Reject' ? 'selected' : ''}>Reject</option>
+                                                    </select>
+                                                    <button class="btn btn-primary btn-sm" onclick="updateTaskStatus(${task.id})">Update</button>
+                                                </td>
                                             </tr>
                                         `).join('')}
                                     </tbody>
@@ -126,6 +134,24 @@
                 }
             } catch (error) {
                 document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error loading employees: ${error.message}</div>`;
+            }
+        }
+
+        async function updateTaskStatus(taskId) {
+            const status = document.getElementById(`status-${taskId}`).value;
+            try {
+                const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}`, {
+                    method: 'PUT'
+                });
+                if (response.ok) {
+                    document.getElementById('message').innerHTML = '<div class="alert alert-success">Task status updated successfully!</div>';
+                    loadEmployees(); // Refresh employees and tasks
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to update task status: ${errorData.message || response.statusText}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error updating task status: ${error.message}</div>`;
             }
         }
 
