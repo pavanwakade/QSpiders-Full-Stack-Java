@@ -1,4 +1,3 @@
-
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Company;
@@ -6,10 +5,9 @@ import com.qsp.springbootCompany.dto.PortalAdmin;
 import com.qsp.springbootCompany.service.CompanyService;
 import com.qsp.springbootCompany.service.PortalAdminService;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,28 +21,20 @@ public class PortalAdminController {
     private CompanyService companyService;
 
     @PostMapping("/register")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<PortalAdmin> register(@RequestBody PortalAdmin portalAdmin) {
         return portalAdminService.savePortalAdmin(portalAdmin);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<PortalAdmin> login(@RequestBody PortalAdmin portalAdmin) {
-        return portalAdminService.login(portalAdmin.getUsername(), portalAdmin.getPassword());
-    }
-
     @PutMapping("/company/approve")
+    @PreAuthorize("hasRole('PORTAL_ADMIN')")
     public ResponseEntity<Company> approveCompany(@RequestParam int id) {
         return companyService.approveCompany(id);
     }
 
     @DeleteMapping("/company/delete")
+    @PreAuthorize("hasRole('PORTAL_ADMIN')")
     public ResponseEntity<String> deleteCompany(@RequestParam int id) {
         return companyService.deleteCompany(id);
-    }
-
-    @GetMapping("/company/employees")
-    public ResponseEntity<List<CompanyEmployeesDTO>> getAllCompaniesWithEmployees() {
-        // Implemented in CompanyController for simplicity
-        return null; // Placeholder; actual logic in CompanyController
     }
 }

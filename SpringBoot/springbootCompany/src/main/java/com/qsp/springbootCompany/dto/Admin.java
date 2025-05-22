@@ -1,67 +1,107 @@
 package com.qsp.springbootCompany.dto;
 
-  import jakarta.persistence.Entity;
-  import jakarta.persistence.GeneratedValue;
-  import jakarta.persistence.GenerationType;
-  import jakarta.persistence.Id;
-  import jakarta.persistence.ManyToOne;
-  import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-  @Entity
-  public class Admin {
+import java.util.Collection;
+import java.util.List;
 
-      @Id
-      @GeneratedValue(strategy = GenerationType.IDENTITY)
-      private int id;
+@Entity
+public class Admin implements UserDetails {
 
-      private String username;
-      private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-      @ManyToOne
-      @JsonBackReference // Added to prevent circular reference
-      private Company company;
+    private String username;
+    private String password;
+    private String role = "COMPANY_ADMIN";
 
-      public Admin() {
-          super();
-      }
+    @ManyToOne
+    @JsonBackReference
+    private Company company;
 
-      public Admin(int id, String username, String password, Company company) {
-          this.id = id;
-          this.username = username;
-          this.password = password;
-          this.company = company;
-      }
+    public Admin() {
+    }
 
-      // Getters and Setters
-      public int getId() {
-          return id;
-      }
+    public Admin(int id, String username, String password, Company company) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.company = company;
+    }
 
-      public void setId(int id) {
-          this.id = id;
-      }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> role);
+    }
 
-      public String getUsername() {
-          return username;
-      }
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-      public void setUsername(String username) {
-          this.username = username;
-      }
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-      public String getPassword() {
-          return password;
-      }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-      public void setPassword(String password) {
-          this.password = password;
-      }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-      public Company getCompany() {
-          return company;
-      }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-      public void setCompany(Company company) {
-          this.company = company;
-      }
-  }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+}

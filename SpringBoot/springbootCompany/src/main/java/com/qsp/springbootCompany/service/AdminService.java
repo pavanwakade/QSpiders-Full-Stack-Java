@@ -6,6 +6,7 @@ import com.qsp.springbootCompany.exception.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,11 @@ public class AdminService {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public ResponseEntity<Admin> saveAdmin(Admin admin) {
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         Admin savedAdmin = adminDao.saveAdmin(admin);
         return new ResponseEntity<>(savedAdmin, HttpStatus.CREATED);
     }
@@ -38,16 +43,12 @@ public class AdminService {
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
-    public ResponseEntity<Admin> login(String username, String password) {
-        Optional<Admin> optional = adminDao.findByUsernameAndPassword(username, password);
+    public ResponseEntity<Admin> findByUsername(String username) {
+        Optional<Admin> optional = adminDao.findByUsername(username);
         if (optional.isPresent()) {
-            Admin admin = optional.get();
-            if (companyService.findCompanyById(admin.getCompany().getId()).getBody().isApproved()) {
-                return new ResponseEntity<>(admin, HttpStatus.OK);
-            }
-            throw new IllegalStateException("Company is not approved");
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
         }
-        throw new IdNotFoundException("Invalid username or password");
+        throw new IdNotFoundException("Admin with username " + username + " not found");
     }
 
     public ResponseEntity<String> deleteAdmin(int id) {
