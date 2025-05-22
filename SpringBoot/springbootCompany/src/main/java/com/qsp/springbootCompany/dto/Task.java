@@ -18,6 +18,7 @@ public class Task {
     private LocalDate assignedDate;
     // Status can be: "Pending", "InProgress", "Done", "ToDo"
     private String status;
+    private String message; // Message from admin
 
     @ManyToOne
     private Employee employee;
@@ -29,11 +30,12 @@ public class Task {
         super();
     }
 
-    public Task(int id, String description, LocalDate assignedDate, String status, Employee employee, Admin assignedBy) {
+    public Task(int id, String description, LocalDate assignedDate, String status, String message, Employee employee, Admin assignedBy) {
         this.id = id;
         this.description = description;
         this.assignedDate = assignedDate;
         this.status = status;
+        this.message = message;
         this.employee = employee;
         this.assignedBy = assignedBy;
     }
@@ -69,6 +71,14 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Employee getEmployee() {

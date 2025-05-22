@@ -10,16 +10,31 @@
             background-color: #f8f9fa;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 20px;
         }
         .task-table {
             margin-left: 20px;
             font-size: 0.9em;
         }
+        #alertContainer {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            min-width: 300px;
+            max-width: 90%;
+        }
+        .main-content {
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Alert Container at the top -->
+    <div id="alertContainer"></div>
+    
+    <div class="container main-content">
         <h2 class="mb-4">Admin Dashboard</h2>
         <button class="btn btn-danger mb-3" onclick="logout()">Logout</button>
         
@@ -46,11 +61,37 @@
                 <label for="description" class="form-label">Task Description</label>
                 <textarea class="form-control" id="description" required></textarea>
             </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message (Optional)</label>
+                <textarea class="form-control" id="message"></textarea>
+            </div>
             <button type="submit" class="btn btn-primary">Assign Task</button>
         </form>
-        <div id="message" class="mt-3"></div>
     </div>
     <script>
+        function showAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertId = 'alert-' + Date.now();
+            
+            const alertHTML = `
+                <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            
+            alertContainer.innerHTML = alertHTML;
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                const alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    const bsAlert = new bootstrap.Alert(alertElement);
+                    bsAlert.close();
+                }
+            }, 5000);
+        }
+
         async function loadEmployees() {
             const adminId = localStorage.getItem('adminId');
             if (!adminId) {
@@ -101,6 +142,7 @@
                                             <th>Status</th>
                                             <th>Employee ID</th>
                                             <th>Assigned By Admin ID</th>
+                                            <th>Message</th>
                                             <th>Update Status</th>
                                         </tr>
                                     </thead>
@@ -113,6 +155,7 @@
                                                 <td>${task.status}</td>
                                                 <td>${task.employee?.id || 'N/A'}</td>
                                                 <td>${task.assignedBy?.id || 'N/A'}</td>
+                                                <td>${task.message || ''}</td>
                                                 <td>
                                                     <select id="status-${task.id}" class="form-select form-select-sm d-inline w-auto">
                                                         <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
@@ -121,6 +164,7 @@
                                                         <option value="ToDo" ${task.status === 'ToDo' ? 'selected' : ''}>To Do</option>
                                                         <option value="Reject" ${task.status === 'Reject' ? 'selected' : ''}>Reject</option>
                                                     </select>
+                                                    <input type="text" id="message-${task.id}" class="form-control form-control-sm d-inline w-auto" placeholder="Add message" value="${task.message || ''}">
                                                     <button class="btn btn-primary btn-sm" onclick="updateTaskStatus(${task.id})">Update</button>
                                                 </td>
                                             </tr>
@@ -133,25 +177,26 @@
                     }
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error loading employees: ${error.message}</div>`;
+                showAlert(`Error loading employees: ${error.message}`, 'danger');
             }
         }
 
         async function updateTaskStatus(taskId) {
             const status = document.getElementById(`status-${taskId}`).value;
+            const message = document.getElementById(`message-${taskId}`).value;
             try {
-                const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}`, {
+                const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}${message ? '&message=' + encodeURIComponent(message) : ''}`, {
                     method: 'PUT'
                 });
                 if (response.ok) {
-                    document.getElementById('message').innerHTML = '<div class="alert alert-success">Task status updated successfully!</div>';
+                    showAlert('Task updated successfully!', 'success');
                     loadEmployees(); // Refresh employees and tasks
                 } else {
                     const errorData = await response.json();
-                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to update task status: ${errorData.message || response.statusText}</div>`;
+                    showAlert(`Failed to update task: ${errorData.message || response.statusText}`, 'danger');
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error updating task status: ${error.message}</div>`;
+                showAlert(`Error updating task: ${error.message}`, 'danger');
             }
         }
 
@@ -161,14 +206,14 @@
                     method: 'DELETE'
                 });
                 if (response.ok) {
-                    document.getElementById('message').innerHTML = '<div class="alert alert-success">Employee deleted successfully!</div>';
+                    showAlert('Employee and associated tasks deleted successfully!', 'success');
                     loadEmployees();
                 } else {
                     const errorData = await response.json();
-                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to delete employee: ${errorData.message || response.statusText}</div>`;
+                    showAlert(`Failed to delete employee: ${errorData.message || response.statusText}`, 'danger');
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error deleting employee: ${error.message}</div>`;
+                showAlert(`Error deleting employee: ${error.message}`, 'danger');
             }
         }
 
@@ -176,12 +221,14 @@
             e.preventDefault();
             const employeeId = document.getElementById('employeeId').value;
             const description = document.getElementById('description').value;
+            const message = document.getElementById('message').value;
             const adminId = localStorage.getItem('adminId');
 
             const task = {
                 description,
                 assignedDate: new Date().toISOString().split('T')[0],
                 status: 'Pending',
+                message,
                 employee: { id: parseInt(employeeId) },
                 assignedBy: { id: parseInt(adminId) }
             };
@@ -193,15 +240,15 @@
                     body: JSON.stringify(task)
                 });
                 if (response.ok) {
-                    document.getElementById('message').innerHTML = '<div class="alert alert-success">Task assigned successfully!</div>';
+                    showAlert('Task assigned successfully!', 'success');
                     document.getElementById('assignTaskForm').reset();
                     loadEmployees(); // Refresh employees and tasks
                 } else {
                     const errorData = await response.json();
-                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to assign task: ${errorData.message || response.statusText}</div>`;
+                    showAlert(`Failed to assign task: ${errorData.message || response.statusText}`, 'danger');
                 }
             } catch (error) {
-                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error assigning task: ${error.message}</div>`;
+                showAlert(`Error assigning task: ${error.message}`, 'danger');
             }
         });
 

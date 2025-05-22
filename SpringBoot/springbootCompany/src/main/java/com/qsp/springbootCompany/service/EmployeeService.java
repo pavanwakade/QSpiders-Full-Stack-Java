@@ -21,21 +21,7 @@ public class EmployeeService {
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Employee> updateEmployee(Employee employee) {
-        Employee updatedEmployee = dao.updateEmployee(employee);
-        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
-    }
-
-    public ResponseEntity<String> deleteEmployee(int id) {
-        Optional<Employee> optional = dao.findEmployeeById(id);
-        if (optional.isPresent()) {
-            dao.deleteEmployee(id);
-            return new ResponseEntity<>("Employee deleted", HttpStatus.OK);
-        }
-        throw new IdNotFoundException();
-    }
-
-    public ResponseEntity<Employee> findById(int id) {
+    public ResponseEntity<Employee> findEmployeeById(int id) {
         Optional<Employee> optional = dao.findEmployeeById(id);
         if (optional.isPresent()) {
             return new ResponseEntity<>(optional.get(), HttpStatus.OK);
@@ -49,13 +35,19 @@ public class EmployeeService {
     }
 
     public ResponseEntity<Employee> login(String username, String password) {
-        Optional<Employee> optional = dao.findByUsername(username);
+        Optional<Employee> optional = dao.findByUsernameAndPassword(username, password);
         if (optional.isPresent()) {
-            Employee employee = optional.get();
-            if (employee.getPassword().equals(password)) {
-                return new ResponseEntity<>(employee, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
         }
-        throw new IdNotFoundException("Invalid credentials");
+        throw new IdNotFoundException("Invalid username or password");
+    }
+
+    public ResponseEntity<String> deleteEmployee(int id) {
+        Optional<Employee> optional = dao.findEmployeeById(id);
+        if (optional.isPresent()) {
+            dao.deleteEmployee(id);
+            return new ResponseEntity<>("Employee and associated tasks deleted", HttpStatus.OK);
+        }
+        throw new IdNotFoundException("Employee with ID " + id + " not found");
     }
 }

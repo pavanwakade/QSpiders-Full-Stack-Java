@@ -29,13 +29,18 @@ public class TaskController {
         return service.findTasksByEmployeeId(employeeId);
     }
 
-    @PutMapping("/updateStatus")
-    public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status) {
-        return service.updateTaskStatus(id, status);
-    }
-
     @GetMapping("/findAll")
     public ResponseEntity<List<Task>> findAll() {
         return service.findAll();
+    }
+
+    @PutMapping("/updateStatus")
+    public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status, @RequestParam(required = false) String message) {
+        return service.updateTaskStatus(id, status, message);
+    }
+
+    @PutMapping("/updateMessage")
+    public ResponseEntity<Task> updateTaskMessage(@RequestParam int id, @RequestParam String message) {
+        return service.updateTaskMessage(id, message);
     }
 }

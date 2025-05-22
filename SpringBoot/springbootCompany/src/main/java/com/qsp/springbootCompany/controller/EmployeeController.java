@@ -19,28 +19,23 @@ public class EmployeeController {
         return service.saveEmployee(employee);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Employee> login(@RequestParam String username, @RequestParam String password) {
-        return service.login(username, password);
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
-        return service.updateEmployee(employee);
-    }
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteEmployee(@RequestParam int id) {
-        return service.deleteEmployee(id);
-    }
-
     @GetMapping("/findById")
-    public ResponseEntity<Employee> findById(@RequestParam int id) {
-        return service.findById(id);
+    public ResponseEntity<Employee> findEmployeeById(@RequestParam int id) {
+        return service.findEmployeeById(id);
     }
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Employee>> findAll() {
         return service.findAll();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Employee> login(@RequestBody Employee employee) {
+        return service.login(employee.getUsername(), employee.getPassword());
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteEmployee(@RequestParam int id) {
+        return service.deleteEmployee(id);
     }
 }

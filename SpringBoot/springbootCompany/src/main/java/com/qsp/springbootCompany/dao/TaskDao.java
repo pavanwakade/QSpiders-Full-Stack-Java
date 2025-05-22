@@ -29,17 +29,30 @@ public class TaskDao {
         return repository.findByEmployeeId(employeeId);
     }
 
-    public Task updateTaskStatus(int id, String status) {
+    public List<Task> findAll() {
+        return repository.findAll();
+    }
+
+    public Task updateTaskStatus(int id, String status, String message) {
         Optional<Task> optional = repository.findById(id);
         if (optional.isPresent()) {
             Task task = optional.get();
             task.setStatus(status);
+            if (message != null) {
+                task.setMessage(message);
+            }
             return repository.save(task);
         }
         return null;
     }
 
-    public List<Task> findAll() {
-        return repository.findAll();
+    public Task updateTaskMessage(int id, String message) {
+        Optional<Task> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Task task = optional.get();
+            task.setMessage(message);
+            return repository.save(task);
+        }
+        return null;
     }
 }

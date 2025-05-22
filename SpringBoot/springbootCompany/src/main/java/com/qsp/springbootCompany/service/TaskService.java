@@ -35,16 +35,24 @@ public class TaskService {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    public ResponseEntity<Task> updateTaskStatus(int id, String status) {
-        Task updatedTask = dao.updateTaskStatus(id, status);
+    public ResponseEntity<List<Task>> findAll() {
+        List<Task> tasks = dao.findAll();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Task> updateTaskStatus(int id, String status, String message) {
+        Task updatedTask = dao.updateTaskStatus(id, status, message);
         if (updatedTask != null) {
             return new ResponseEntity<>(updatedTask, HttpStatus.OK);
         }
         throw new IdNotFoundException("Task with ID " + id + " not found");
     }
 
-    public ResponseEntity<List<Task>> findAll() {
-        List<Task> tasks = dao.findAll();
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    public ResponseEntity<Task> updateTaskMessage(int id, String message) {
+        Task updatedTask = dao.updateTaskMessage(id, message);
+        if (updatedTask != null) {
+            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+        }
+        throw new IdNotFoundException("Task with ID " + id + " not found");
     }
 }

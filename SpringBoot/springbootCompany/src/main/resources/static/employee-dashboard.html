@@ -26,6 +26,7 @@
                     <th>Description</th>
                     <th>Assigned Date</th>
                     <th>Status</th>
+                    <th>Message</th>
                     <th>Update Status</th>
                 </tr>
             </thead>
@@ -56,6 +57,7 @@
                         <td>${task.description}</td>
                         <td>${task.assignedDate}</td>
                         <td>${task.status}</td>
+                        <td>${task.message || ''}</td>
                         <td>
                             <select id="status-${task.id}" class="form-select form-select-sm d-inline w-auto">
                                 <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
