@@ -28,4 +28,14 @@ public class TaskController {
     public ResponseEntity<List<Task>> findTasksByEmployeeId(@RequestParam int employeeId) {
         return service.findTasksByEmployeeId(employeeId);
     }
+
+    @PutMapping("/updateStatus")
+    public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status) {
+        return service.updateTaskStatus(id, status);
+    }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Task>> findAll() {
+        return service.findAll();
+    }
 }

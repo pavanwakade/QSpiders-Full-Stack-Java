@@ -16,6 +16,7 @@ public class Task {
 
     private String description;
     private LocalDate assignedDate;
+    // Status can be: "Pending", "InProgress", "Done", "ToDo"
     private String status;
 
     @ManyToOne

@@ -34,4 +34,17 @@ public class TaskService {
         List<Task> tasks = dao.findTasksByEmployeeId(employeeId);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
+
+    public ResponseEntity<Task> updateTaskStatus(int id, String status) {
+        Task updatedTask = dao.updateTaskStatus(id, status);
+        if (updatedTask != null) {
+            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+        }
+        throw new IdNotFoundException("Task with ID " + id + " not found");
+    }
+
+    public ResponseEntity<List<Task>> findAll() {
+        List<Task> tasks = dao.findAll();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
 }

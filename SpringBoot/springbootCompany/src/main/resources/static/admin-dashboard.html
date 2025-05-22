@@ -12,6 +12,10 @@
         .container {
             margin-top: 50px;
         }
+        .task-table {
+            margin-left: 20px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +66,19 @@
                 const employees = await response.json();
                 const tbody = document.getElementById('employeeTableBody');
                 tbody.innerHTML = '';
-                employees.forEach(employee => {
+                for (const employee of employees) {
+                    // Fetch tasks for this employee
+                    let tasks = [];
+                    try {
+                        const taskResponse = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employee.id}`);
+                        if (taskResponse.ok) {
+                            tasks = await taskResponse.json();
+                        }
+                    } catch (error) {
+                        console.error(`Error fetching tasks for employee ${employee.id}: ${error.message}`);
+                    }
+
+                    // Create employee row
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${employee.id}</td>
@@ -73,7 +89,41 @@
                         </td>
                     `;
                     tbody.appendChild(row);
-                });
+
+                    // Add tasks sub-table if tasks exist
+                    if (tasks.length > 0) {
+                        const taskRow = document.createElement('tr');
+                        taskRow.innerHTML = `
+                            <td colspan="4">
+                                <table class="table table-bordered task-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Task ID</th>
+                                            <th>Description</th>
+                                            <th>Assigned Date</th>
+                                            <th>Status</th>
+                                            <th>Employee ID</th>
+                                            <th>Assigned By Admin ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${tasks.map(task => `
+                                            <tr>
+                                                <td>${task.id}</td>
+                                                <td>${task.description}</td>
+                                                <td>${task.assignedDate}</td>
+                                                <td>${task.status}</td>
+                                                <td>${task.employee?.id || 'N/A'}</td>
+                                                <td>${task.assignedBy?.id || 'N/A'}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </td>
+                        `;
+                        tbody.appendChild(taskRow);
+                    }
+                }
             } catch (error) {
                 document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error loading employees: ${error.message}</div>`;
             }
@@ -119,6 +169,7 @@
                 if (response.ok) {
                     document.getElementById('message').innerHTML = '<div class="alert alert-success">Task assigned successfully!</div>';
                     document.getElementById('assignTaskForm').reset();
+                    loadEmployees(); // Refresh employees and tasks
                 } else {
                     const errorData = await response.json();
                     document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to assign task: ${errorData.message || response.statusText}</div>`;

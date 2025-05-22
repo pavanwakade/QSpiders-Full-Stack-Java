@@ -28,4 +28,18 @@ public class TaskDao {
     public List<Task> findTasksByEmployeeId(int employeeId) {
         return repository.findByEmployeeId(employeeId);
     }
+
+    public Task updateTaskStatus(int id, String status) {
+        Optional<Task> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Task task = optional.get();
+            task.setStatus(status);
+            return repository.save(task);
+        }
+        return null;
+    }
+
+    public List<Task> findAll() {
+        return repository.findAll();
+    }
 }

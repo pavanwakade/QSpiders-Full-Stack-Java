@@ -26,10 +26,12 @@
                     <th>Description</th>
                     <th>Assigned Date</th>
                     <th>Status</th>
+                    <th>Update Status</th>
                 </tr>
             </thead>
             <tbody id="taskTableBody"></tbody>
         </table>
+        <div id="message" class="mt-3"></div>
     </div>
     <script>
         async function loadTasks() {
@@ -41,6 +43,9 @@
 
             try {
                 const response = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employeeId}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+                }
                 const tasks = await response.json();
                 const tbody = document.getElementById('taskTableBody');
                 tbody.innerHTML = '';
@@ -51,11 +56,38 @@
                         <td>${task.description}</td>
                         <td>${task.assignedDate}</td>
                         <td>${task.status}</td>
+                        <td>
+                            <select id="status-${task.id}" class="form-select form-select-sm d-inline w-auto">
+                                <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="InProgress" ${task.status === 'InProgress' ? 'selected' : ''}>In Progress</option>
+                                <option value="Done" ${task.status === 'Done' ? 'selected' : ''}>Done</option>
+                                <option value="ToDo" ${task.status === 'ToDo' ? 'selected' : ''}>To Do</option>
+                            </select>
+                            <button class="btn btn-primary btn-sm" onclick="updateTaskStatus(${task.id})">Update</button>
+                        </td>
                     `;
                     tbody.appendChild(row);
                 });
             } catch (error) {
-                console.error('Error loading tasks:', error);
+                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error loading tasks: ${error.message}</div>`;
+            }
+        }
+
+        async function updateTaskStatus(taskId) {
+            const status = document.getElementById(`status-${taskId}`).value;
+            try {
+                const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}`, {
+                    method: 'PUT'
+                });
+                if (response.ok) {
+                    document.getElementById('message').innerHTML = '<div class="alert alert-success">Task status updated successfully!</div>';
+                    loadTasks(); // Refresh the task list
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById('message').innerHTML = `<div class="alert alert-danger">Failed to update task status: ${errorData.message || response.statusText}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error updating task status: ${error.message}</div>`;
             }
         }
 
