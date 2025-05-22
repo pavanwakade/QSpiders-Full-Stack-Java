@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="mb-4">Company Management System</h2>
+        <h2 class="mb-4">Welcome to the Company Management System</h2>
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="employee-login.html" class="btn btn-primary">Employee Login</a>
             <a href="employee-register.html" class="btn btn-secondary">Register Employee</a>
@@ -24,30 +24,22 @@
         </div>
     </div>
     <script>
-        // Check if user is authenticated and redirect to appropriate dashboard
+        // Redirect authenticated users to their dashboard
         const token = localStorage.getItem('jwtToken');
         if (token) {
             fetch('http://localhost:5000/auth/user', {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
+                if (response.ok) return response.json();
                 throw new Error('Not authenticated');
             })
             .then(user => {
-                if (user.role === 'ROLE_PORTAL_ADMIN') {
-                    window.location.href = 'portal-admin-dashboard.html';
-                } else if (user.role === 'ROLE_COMPANY_ADMIN') {
-                    window.location.href = 'admin-dashboard.html';
-                } else if (user.role === 'ROLE_EMPLOYEE') {
-                    window.location.href = 'employee-dashboard.html';
-                }
+                if (user.role === 'ROLE_PORTAL_ADMIN') window.location.href = 'portal-admin-dashboard.html';
+                else if (user.role === 'ROLE_COMPANY_ADMIN') window.location.href = 'admin-dashboard.html';
+                else if (user.role === 'ROLE_EMPLOYEE') window.location.href = 'employee-dashboard.html';
             })
-            .catch(() => {
-                localStorage.removeItem('jwtToken'); // Clear invalid token
-            });
+            .catch(() => localStorage.removeItem('jwtToken'));
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
