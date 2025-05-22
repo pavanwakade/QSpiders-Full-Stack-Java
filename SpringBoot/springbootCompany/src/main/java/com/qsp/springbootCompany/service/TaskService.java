@@ -1,66 +1,46 @@
 package com.qsp.springbootCompany.service;
 
-import com.qsp.springbootCompany.dao.TaskDao;
+import com.qsp.springbootCompany.dto.Company;
 import com.qsp.springbootCompany.dto.Task;
-import com.qsp.springbootCompany.exception.IdNotFoundException;
+import com.qsp.springbootCompany.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 public class TaskService {
 
     @Autowired
-    private TaskDao dao;
+    private TaskRepository taskRepository;
 
-    public ResponseEntity<Task> saveTask(Task task) {
-        Task savedTask = dao.saveTask(task);
-        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
-    }
+    @Autowired
+    private CompanyService companyService;
 
-    public ResponseEntity<String> deleteTask(int id) {
-        Optional<Task> optional = dao.findTaskById(id);
-        if (optional.isPresent()) {
-            dao.deleteTask(id);
-            return new ResponseEntity<>("Task deleted", HttpStatus.OK);
+    @Transactional
+    public Task assignTask(Task task, int adminId) {
+        if (task.getEmployee() == null || task.getEmployee().getCompany() == null) {
+            throw new IllegalArgumentException("Employee or company data missing");
         }
-        throw new IdNotFoundException();
-    }
-
-    public ResponseEntity<List<Task>> findTasksByEmployeeId(int employeeId) {
-        List<Task> tasks = dao.findTasksByEmployeeId(employeeId);
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
-    }
-
-    public ResponseEntity<List<Task>> findAll() {
-        List<Task> tasks = dao.findAll();
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
-    }
-
-    public ResponseEntity<Task> findTaskById(int id) { // Added to support task retrieval by ID
-        Optional<Task> optional = dao.findTaskById(id);
-        if (optional.isPresent()) {
-            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+        Company company = companyService.findById(task.getEmployee().getCompany().getId());
+        if (!company.isApproved()) {
+            throw new IllegalStateException("Company is not approved");
         }
-        throw new IdNotFoundException("Task with ID " + id + " not found");
+        task.setAssignedDate(LocalDate.now());
+        task.setStatus("Pending");
+        return taskRepository.save(task);
     }
 
-    public ResponseEntity<Task> updateTaskStatus(int id, String status, String message) {
-        Task updatedTask = dao.updateTaskStatus(id, status, message);
-        if (updatedTask != null) {
-            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    @Transactional
+    public Task updateTaskStatus(int id, String status, String message) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        if (!task.getEmployee().getCompany().isApproved()) {
+            throw new IllegalStateException("Company is not approved");
         }
-        throw new IdNotFoundException("Task with ID " + id + " not found");
-    }
-
-    public ResponseEntity<Task> updateTaskMessage(int id, String message) {
-        Task updatedTask = dao.updateTaskMessage(id, message);
-        if (updatedTask != null) {
-            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
-        }
-        throw new IdNotFoundException("Task with ID " + id + " not found");
+        task.setStatus(status);
+        if (message != null) task.setMessage(message);
+        return taskRepository.save(task);
     }
 }

@@ -2,233 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f8f9fa; }
-        .container { margin-top: 20px; }
-        .task-table { margin-left: 20px; font-size: 0.9em; }
-        #alertContainer { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1050; min-width: 300px; max-width: 90%; }
-        .main-content { margin-top: 30px; }
-    </style>
 </head>
 <body>
-    <div id="alertContainer"></div>
-    <div class="container main-content">
-        <h2 class="mb-4">Admin Dashboard</h2>
-        <a href="/logout" class="btn btn-danger mb-3">Logout</a>
-        
-        <h3>Employees</h3>
-        <table class="table table-striped mb-5">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="employeeTableBody"></tbody>
-        </table>
+    <h2>Company Admin Dashboard</h2>
+    <button id="loadEmployees">Load Employees</button>
+    <ul id="employeeList"></ul>
 
-        <h3>Assign Task</h3>
-        <form id="assignTaskForm" class="mb-5">
-            <div class="mb-3">
-                <label for="employeeId" class="form-label">Employee ID</label>
-                <input type="number" class="form-control" id="employeeId" required>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Task Description</label>
-                <textarea class="form-control" id="description" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Message (Optional)</label>
-                <textarea class="form-control" id="message"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Assign Task</button>
-        </form>
-    </div>
     <script>
-        function showAlert(message, type = 'success') {
-            const alertContainer = document.getElementById('alertContainer');
-            const alertId = 'alert-' + Date.now();
-            const alertHTML = `
-                <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `;
-            alertContainer.innerHTML = alertHTML;
-            setTimeout(() => {
-                const alertElement = document.getElementById(alertId);
-                if (alertElement) {
-                    const bsAlert = new bootstrap.Alert(alertElement);
-                    bsAlert.close();
-                }
-            }, 5000);
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            window.location.href = '/login.html'; // Redirect if not authenticated
         }
 
-        async function loadEmployees() {
+        document.getElementById('loadEmployees').addEventListener('click', async () => {
             try {
                 const response = await fetch('http://localhost:5000/employee/findAll', {
-                    credentials: 'include'
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
+
+                if (response.status === 401) {
+                    window.location.href = '/login.html'; // Token expired or invalid
+                    return;
+                }
+
                 if (!response.ok) {
-                    if (response.status === 401) window.location.href = '/login.html';
-                    throw new Error(`Failed to fetch employees: ${response.statusText}`);
+                    throw new Error('Failed to fetch employees');
                 }
+
                 const employees = await response.json();
-                const tbody = document.getElementById('employeeTableBody');
-                tbody.innerHTML = '';
-                for (const employee of employees) {
-                    let tasks = [];
-                    try {
-                        const taskResponse = await fetch(`http://localhost:5000/task/employeeTasks?employeeId=${employee.id}`, {
-                            credentials: 'include'
-                        });
-                        if (taskResponse.ok) tasks = await taskResponse.json();
-                    } catch (error) {
-                        console.error(`Error fetching tasks for employee ${employee.id}: ${error.message}`);
-                    }
-
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${employee.id}</td>
-                        <td>${employee.username}</td>
-                        <td>${employee.email}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${employee.id})">Delete</button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-
-                    if (tasks.length > 0) {
-                        const taskRow = document.createElement('tr');
-                        taskRow.innerHTML = `
-                            <td colspan="4">
-                                <table class="table table-bordered task-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Task ID</th>
-                                            <th>Description</th>
-                                            <th>Assigned Date</th>
-                                            <th>Status</th>
-                                            <th>Employee ID</th>
-                                            <th>Assigned By Admin ID</th>
-                                            <th>Message</th>
-                                            <th>Update Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${tasks.map(task => `
-                                            <tr>
-                                                <td>${task.id}</td>
-                                                <td>${task.description}</td>
-                                                <td>${task.assignedDate}</td>
-                                                <td>${task.status}</td>
-                                                <td>${task.employee?.id || 'N/A'}</td>
-                                                <td>${task.assignedBy?.id || 'N/A'}</td>
-                                                <td>${task.message || ''}</td>
-                                                <td>
-                                                    <select id="status-${task.id}" class="form-select form-select-sm d-inline w-auto">
-                                                        <option value="Pending" ${task.status === 'Pending' ? 'selected' : ''}>Pending</option>
-                                                        <option value="InProgress" ${task.status === 'InProgress' ? 'selected' : ''}>In Progress</option>
-                                                        <option value="Done" ${task.status === 'Done' ? 'selected' : ''}>Done</option>
-                                                        <option value="ToDo" ${task.status === 'ToDo' ? 'selected' : ''}>To Do</option>
-                                                        <option value="Reject" ${task.status === 'Reject' ? 'selected' : ''}>Reject</option>
-                                                    </select>
-                                                    <input type="text" id="message-${task.id}" class="form-control form-control-sm d-inline w-auto" placeholder="Add message" value="${task.message || ''}">
-                                                    <button class="btn btn-primary btn-sm" onclick="updateTaskStatus(${task.id})">Update</button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </td>
-                        `;
-                        tbody.appendChild(taskRow);
-                    }
-                }
-            } catch (error) {
-                showAlert(`Error loading employees: ${error.message}`, 'danger');
-            }
-        }
-
-        async function updateTaskStatus(taskId) {
-            const status = document.getElementById(`status-${taskId}`).value;
-            const message = document.getElementById(`message-${taskId}`).value;
-            try {
-                const response = await fetch(`http://localhost:5000/task/updateStatus?id=${taskId}&status=${status}${message ? '&message=' + encodeURIComponent(message) : ''}`, {
-                    method: 'PUT',
-                    credentials: 'include'
+                const list = document.getElementById('employeeList');
+                list.innerHTML = '';
+                employees.forEach(emp => {
+                    const li = document.createElement('li');
+                    li.textContent = `${emp.name} - ${emp.email}`;
+                    list.appendChild(li);
                 });
-                if (response.ok) {
-                    showAlert('Task updated successfully!', 'success');
-                    loadEmployees();
-                } else {
-                    const errorData = await response.text();
-                    showAlert(`Failed to update task: ${errorData || response.statusText}`, 'danger');
-                }
             } catch (error) {
-                showAlert(`Error updating task: ${error.message}`, 'danger');
-            }
-        }
-
-        async function deleteEmployee(id) {
-            try {
-                const response = await fetch(`http://localhost:5000/employee/delete?id=${id}`, {
-                    method: 'DELETE',
-                    credentials: 'include'
-                });
-                if (response.ok) {
-                    showAlert('Employee and associated tasks deleted successfully!', 'success');
-                    loadEmployees();
-                } else {
-                    const errorData = await response.text();
-                    showAlert(`Failed to delete employee: ${errorData || response.statusText}`, 'danger');
-                }
-            } catch (error) {
-                showAlert(`Error deleting employee: ${error.message}`, 'danger');
-            }
-        }
-
-        document.getElementById('assignTaskForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const employeeId = document.getElementById('employeeId').value;
-            const description = document.getElementById('description').value;
-            const message = document.getElementById('message').value;
-
-            const task = {
-                description,
-                assignedDate: new Date().toISOString().split('T')[0],
-                status: 'Pending',
-                message,
-                employee: { id: parseInt(employeeId) }
-            };
-
-            try {
-                const response = await fetch('http://localhost:5000/task/assign', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(task),
-                    credentials: 'include'
-                });
-                if (response.ok) {
-                    showAlert('Task assigned successfully!', 'success');
-                    document.getElementById('assignTaskForm').reset();
-                    loadEmployees();
-                } else {
-                    const errorData = await response.text();
-                    showAlert(`Failed to assign task: ${errorData || response.statusText}`, 'danger');
-                }
-            } catch (error) {
-                showAlert(`Error assigning task: ${error.message}`, 'danger');
+                console.error(error);
             }
         });
-
-        window.onload = loadEmployees;
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

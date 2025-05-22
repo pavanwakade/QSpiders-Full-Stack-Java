@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management System</title>
+    <title>Company Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
@@ -12,16 +12,44 @@
 </head>
 <body>
     <div class="container">
-        <h2>Task Management System</h2>
-        <p>Start by registering a Portal Admin to manage companies.</p>
-        <div class="mt-4">
-            <a href="portal-admin-register.html" class="btn btn-primary m-2">Register as Portal Admin</a>
-            <a href="company-register.html" class="btn btn-primary m-2">Register as Company</a>
-            <a href="admin-register.html" class="btn btn-primary m-2">Register as Company Admin</a>
-            <a href="employee-register.html" class="btn btn-primary m-2">Register as Employee</a>
-            <a href="login.html" class="btn btn-success m-2">Login</a>
+        <h2 class="mb-4">Company Management System</h2>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="employee-login.html" class="btn btn-primary">Employee Login</a>
+            <a href="employee-register.html" class="btn btn-secondary">Register Employee</a>
+            <a href="admin-login.html" class="btn btn-primary">Admin Login</a>
+            <a href="admin-register.html" class="btn btn-secondary">Register Admin</a>
+            <a href="portal-admin-login.html" class="btn btn-primary">Portal Admin Login</a>
+            <a href="portal-admin-register.html" class="btn btn-secondary">Register Portal Admin</a>
+            <a href="company-register.html" class="btn btn-secondary">Register Company</a>
         </div>
     </div>
+    <script>
+        // Check if user is authenticated and redirect to appropriate dashboard
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            fetch('http://localhost:5000/auth/user', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Not authenticated');
+            })
+            .then(user => {
+                if (user.role === 'ROLE_PORTAL_ADMIN') {
+                    window.location.href = 'portal-admin-dashboard.html';
+                } else if (user.role === 'ROLE_COMPANY_ADMIN') {
+                    window.location.href = 'admin-dashboard.html';
+                } else if (user.role === 'ROLE_EMPLOYEE') {
+                    window.location.href = 'employee-dashboard.html';
+                }
+            })
+            .catch(() => {
+                localStorage.removeItem('jwtToken'); // Clear invalid token
+            });
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
