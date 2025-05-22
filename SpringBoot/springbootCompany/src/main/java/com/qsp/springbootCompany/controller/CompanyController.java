@@ -1,4 +1,3 @@
-
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Company;
@@ -37,6 +36,9 @@ public class CompanyController {
     @GetMapping("/employees")
     public ResponseEntity<List<CompanyEmployeesDTO>> getAllCompaniesWithEmployees() {
         List<Company> companies = service.findAll().getBody();
+        if (companies == null) {
+            return new ResponseEntity<>(List.of(), HttpStatus.OK); // Return empty list if no companies
+        }
         List<CompanyEmployeesDTO> result = companies.stream().map(company -> {
             List<Employee> employees = company.getEmployees();
             int employeeCount = employees != null ? employees.size() : 0;

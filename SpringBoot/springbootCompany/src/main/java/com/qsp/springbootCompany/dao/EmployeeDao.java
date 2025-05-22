@@ -15,7 +15,7 @@ public class EmployeeDao {
     private EmployeeRepository repository;
 
     @Autowired
-    private TaskDao taskDao; // Inject TaskDao to manage tasks
+    private TaskDao taskDao;
 
     public Employee saveEmployee(Employee employee) {
         return repository.save(employee);
@@ -34,12 +34,14 @@ public class EmployeeDao {
     }
 
     public void deleteEmployee(int id) {
-        // Delete all tasks associated with the employee
         List<Task> tasks = taskDao.findTasksByEmployeeId(id);
         for (Task task : tasks) {
             taskDao.deleteTask(task.getId());
         }
-        // Now delete the employee
         repository.deleteById(id);
+    }
+
+    public List<Employee> findEmployeesByCompanyId(int companyId) { // Added to support company deletion
+        return repository.findByCompany_Id(companyId);
     }
 }

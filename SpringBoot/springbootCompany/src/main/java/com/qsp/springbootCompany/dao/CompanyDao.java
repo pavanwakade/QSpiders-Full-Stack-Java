@@ -1,16 +1,19 @@
 package com.qsp.springbootCompany.dao;
 
+import com.qsp.springbootCompany.dto.Admin;
 import com.qsp.springbootCompany.dto.Company;
+import com.qsp.springbootCompany.dto.Employee;
 import com.qsp.springbootCompany.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
 import java.util.Optional;
 
 @Component
 public class CompanyDao {
 
     @Autowired
-	public CompanyRepository repository;
+    public CompanyRepository repository;
 
     @Autowired
     private EmployeeDao employeeDao;
@@ -22,7 +25,7 @@ public class CompanyDao {
     private TaskDao taskDao;
 
     public Company saveCompany(Company company) {
-        company.setApproved(false); // Default to unapproved
+        company.setApproved(false);
         return repository.save(company);
     }
 
@@ -44,11 +47,11 @@ public class CompanyDao {
         Optional<Company> optional = repository.findById(id);
         if (optional.isPresent()) {
             // Delete associated admins
-            adminDao.findAdminsByCompanyId(id).forEach(admin -> adminDao.deleteAdmin(admin.getId()));
+            List<Admin> admins = adminDao.findAdminsByCompanyId(id);
+            admins.forEach(admin -> adminDao.deleteAdmin(admin.getId()));
             // Delete associated employees (which deletes their tasks)
-            employeeDao.findAll().stream()
-                    .filter(emp -> emp.getCompany() != null && emp.getCompany().getId() == id)
-                    .forEach(emp -> employeeDao.deleteEmployee(emp.getId()));
+            List<Employee> employees = employeeDao.findEmployeesByCompanyId(id);
+            employees.forEach(emp -> employeeDao.deleteEmployee(emp.getId()));
             // Delete company
             repository.deleteById(id);
         }

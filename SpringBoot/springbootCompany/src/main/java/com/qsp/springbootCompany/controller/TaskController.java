@@ -1,10 +1,10 @@
-
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Task;
 import com.qsp.springbootCompany.service.CompanyService;
 import com.qsp.springbootCompany.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,21 +46,29 @@ public class TaskController {
 
     @PutMapping("/updateStatus")
     public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status, @RequestParam(required = false) String message) {
-        Task task = service.findTasksByEmployeeId(service.findTaskById(id).getBody().getEmployee().getId()).getBody().get(0);
-        if (task.getEmployee().getCompany() != null &&
+        ResponseEntity<Task> taskResponse = service.findTaskById(id); // Assumes findTaskById is added to TaskService
+        if (taskResponse.getStatusCode() == HttpStatus.OK) {
+            Task task = taskResponse.getBody();
+            if (task != null && task.getEmployee() != null && task.getEmployee().getCompany() != null &&
                 companyService.findCompanyById(task.getEmployee().getCompany().getId()).getBody().isApproved()) {
-            return service.updateTaskStatus(id, status, message);
+                return service.updateTaskStatus(id, status, message);
+            }
+            throw new IllegalStateException("Company is not approved or task/employee data is missing");
         }
-        throw new IllegalStateException("Company is not approved");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/updateMessage")
     public ResponseEntity<Task> updateTaskMessage(@RequestParam int id, @RequestParam String message) {
-        Task task = service.findTasksByEmployeeId(service.findTaskById(id).getBody().getEmployee().getId()).getBody().get(0);
-        if (task.getEmployee().getCompany() != null &&
+        ResponseEntity<Task> taskResponse = service.findTaskById(id); // Assumes findTaskById is added to TaskService
+        if (taskResponse.getStatusCode() == HttpStatus.OK) {
+            Task task = taskResponse.getBody();
+            if (task != null && task.getEmployee() != null && task.getEmployee().getCompany() != null &&
                 companyService.findCompanyById(task.getEmployee().getCompany().getId()).getBody().isApproved()) {
-            return service.updateTaskMessage(id, message);
+                return service.updateTaskMessage(id, message);
+            }
+            throw new IllegalStateException("Company is not approved or task/employee data is missing");
         }
-        throw new IllegalStateException("Company is not approved");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

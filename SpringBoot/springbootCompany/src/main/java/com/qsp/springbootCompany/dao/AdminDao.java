@@ -36,4 +36,8 @@ public class AdminDao {
     public List<Admin> findAll() {
         return repository.findAll();
     }
+
+    public List<Admin> findAdminsByCompanyId(int companyId) { // Added to support company deletion
+        return repository.findByCompany_Id(companyId);
+    }
 }

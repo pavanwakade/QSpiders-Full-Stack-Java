@@ -1,9 +1,12 @@
 package com.qsp.springbootCompany.dto;
 
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Company {
@@ -14,7 +17,10 @@ public class Company {
 
     private String name;
     private String location;
-    private boolean approved; // New field for approval status
+    private boolean approved;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees; // Added to store employees associated with the company
 
     public Company() {
         super();
@@ -58,5 +64,13 @@ public class Company {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

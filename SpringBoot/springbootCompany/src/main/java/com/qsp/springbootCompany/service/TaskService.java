@@ -40,6 +40,14 @@ public class TaskService {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
+    public ResponseEntity<Task> findTaskById(int id) { // Added to support task retrieval by ID
+        Optional<Task> optional = dao.findTaskById(id);
+        if (optional.isPresent()) {
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+        }
+        throw new IdNotFoundException("Task with ID " + id + " not found");
+    }
+
     public ResponseEntity<Task> updateTaskStatus(int id, String status, String message) {
         Task updatedTask = dao.updateTaskStatus(id, status, message);
         if (updatedTask != null) {
