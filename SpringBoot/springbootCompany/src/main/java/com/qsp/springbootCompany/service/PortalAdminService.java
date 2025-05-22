@@ -1,11 +1,12 @@
 package com.qsp.springbootCompany.service;
 
-import com.qsp.springbootCompany.dto.PortalAdmin;
-import com.qsp.springbootCompany.repository.PortalAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.qsp.springbootCompany.dto.PortalAdmin;
+import com.qsp.springbootCompany.repository.PortalAdminRepository;
 
 @Service
 public class PortalAdminService {
@@ -18,7 +19,8 @@ public class PortalAdminService {
 
     @Transactional
     public PortalAdmin savePortalAdmin(PortalAdmin portalAdmin) {
-        portalAdmin.setPassword(passwordEncoder.encode(portalAdmin.getPassword()));
+        // Store password as plain text (NOT RECOMMENDED)
+        // portalAdmin.setPassword(passwordEncoder.encode(portalAdmin.getPassword()));
         return portalAdminRepository.save(portalAdmin);
     }
 }
