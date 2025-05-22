@@ -1,3 +1,4 @@
+
 package com.qsp.springbootCompany.service;
 
 import com.qsp.springbootCompany.dao.CompanyDao;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,15 +22,22 @@ public class CompanyService {
         return new ResponseEntity<>(savedCompany, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Company> updateCompany(Company company) {
-        Company updatedCompany = dao.updateCompany(company);
-        return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
-    }
-
-    public ResponseEntity<Company> findById(int id) {
+    public ResponseEntity<Company> findCompanyById(int id) {
         Optional<Company> optional = dao.findCompanyById(id);
         if (optional.isPresent()) {
             return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+        }
+        throw new IdNotFoundException();
+    }
+
+    public ResponseEntity<List<Company>> findAll() {
+        return new ResponseEntity<>(dao.repository.findAll(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Company> approveCompany(int id) {
+        Company updatedCompany = dao.approveCompany(id);
+        if (updatedCompany != null) {
+            return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
         }
         throw new IdNotFoundException("Company with ID " + id + " not found");
     }
@@ -39,23 +46,8 @@ public class CompanyService {
         Optional<Company> optional = dao.findCompanyById(id);
         if (optional.isPresent()) {
             dao.deleteCompany(id);
-            return new ResponseEntity<>("Company deleted", HttpStatus.OK);
+            return new ResponseEntity<>("Company and associated data deleted", HttpStatus.OK);
         }
         throw new IdNotFoundException("Company with ID " + id + " not found");
-    }
-
-    public ResponseEntity<List<Company>> findAll() {
-        List<Company> companies = dao.findAll();
-        return new ResponseEntity<>(companies, HttpStatus.OK);
-    }
-
-    public ResponseEntity<List<Company>> findByLocation(String location) {
-        List<Company> companies = dao.findByLocation(location);
-        return new ResponseEntity<>(companies, HttpStatus.OK);
-    }
-
-    public ResponseEntity<List<Company>> findByName(String name) {
-        List<Company> companies = dao.findByName(name);
-        return new ResponseEntity<>(companies, HttpStatus.OK);
     }
 }

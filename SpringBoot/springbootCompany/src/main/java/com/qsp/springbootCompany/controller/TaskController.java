@@ -1,10 +1,13 @@
+
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Task;
+import com.qsp.springbootCompany.service.CompanyService;
 import com.qsp.springbootCompany.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -14,9 +17,16 @@ public class TaskController {
     @Autowired
     private TaskService service;
 
+    @Autowired
+    private CompanyService companyService;
+
     @PostMapping("/assign")
     public ResponseEntity<Task> assignTask(@RequestBody Task task) {
-        return service.saveTask(task);
+        if (task.getEmployee() != null && task.getEmployee().getCompany() != null &&
+                companyService.findCompanyById(task.getEmployee().getCompany().getId()).getBody().isApproved()) {
+            return service.saveTask(task);
+        }
+        throw new IllegalStateException("Company is not approved");
     }
 
     @DeleteMapping("/delete")
@@ -36,11 +46,21 @@ public class TaskController {
 
     @PutMapping("/updateStatus")
     public ResponseEntity<Task> updateTaskStatus(@RequestParam int id, @RequestParam String status, @RequestParam(required = false) String message) {
-        return service.updateTaskStatus(id, status, message);
+        Task task = service.findTasksByEmployeeId(service.findTaskById(id).getBody().getEmployee().getId()).getBody().get(0);
+        if (task.getEmployee().getCompany() != null &&
+                companyService.findCompanyById(task.getEmployee().getCompany().getId()).getBody().isApproved()) {
+            return service.updateTaskStatus(id, status, message);
+        }
+        throw new IllegalStateException("Company is not approved");
     }
 
     @PutMapping("/updateMessage")
     public ResponseEntity<Task> updateTaskMessage(@RequestParam int id, @RequestParam String message) {
-        return service.updateTaskMessage(id, message);
+        Task task = service.findTasksByEmployeeId(service.findTaskById(id).getBody().getEmployee().getId()).getBody().get(0);
+        if (task.getEmployee().getCompany() != null &&
+                companyService.findCompanyById(task.getEmployee().getCompany().getId()).getBody().isApproved()) {
+            return service.updateTaskMessage(id, message);
+        }
+        throw new IllegalStateException("Company is not approved");
     }
 }

@@ -1,49 +1,56 @@
 package com.qsp.springbootCompany.dao;
 
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.qsp.springbootCompany.dto.Company;
 import com.qsp.springbootCompany.repository.CompanyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import java.util.Optional;
 
 @Component
 public class CompanyDao {
 
-	@Autowired
-	private CompanyRepository repository;
+    @Autowired
+	public CompanyRepository repository;
 
-	public Company saveCompany(Company company) {
-		return repository.save(company);
-	}
+    @Autowired
+    private EmployeeDao employeeDao;
 
-	public Company updateCompany(Company company) {
-		return repository.save(company);
-	}
+    @Autowired
+    private AdminDao adminDao;
 
-	public void deleteCompany(int id) {
-		repository.deleteById(id);
-	}
+    @Autowired
+    private TaskDao taskDao;
 
-	public Optional<Company> findCompanyById(int id) {
-		return repository.findById(id);
-	}
+    public Company saveCompany(Company company) {
+        company.setApproved(false); // Default to unapproved
+        return repository.save(company);
+    }
 
-	public List<Company> findAll() {
-		return repository.findAll();
-	}
+    public Optional<Company> findCompanyById(int id) {
+        return repository.findById(id);
+    }
 
-	public List<Company> findByLocation(String location) {
-		return repository.findByLocation(location);
-	}
+    public Company approveCompany(int id) {
+        Optional<Company> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Company company = optional.get();
+            company.setApproved(true);
+            return repository.save(company);
+        }
+        return null;
+    }
 
-   public List<Company>findByName(String name){
-	   return repository.findByName(name);
-   }
-
-   
-	
-	
+    public void deleteCompany(int id) {
+        Optional<Company> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            // Delete associated admins
+            adminDao.findAdminsByCompanyId(id).forEach(admin -> adminDao.deleteAdmin(admin.getId()));
+            // Delete associated employees (which deletes their tasks)
+            employeeDao.findAll().stream()
+                    .filter(emp -> emp.getCompany() != null && emp.getCompany().getId() == id)
+                    .forEach(emp -> employeeDao.deleteEmployee(emp.getId()));
+            // Delete company
+            repository.deleteById(id);
+        }
+    }
 }

@@ -1,10 +1,13 @@
+
 package com.qsp.springbootCompany.controller;
 
 import com.qsp.springbootCompany.dto.Employee;
+import com.qsp.springbootCompany.service.CompanyService;
 import com.qsp.springbootCompany.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -14,9 +17,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService service;
 
+    @Autowired
+    private CompanyService companyService;
+
     @PostMapping("/register")
     public ResponseEntity<Employee> register(@RequestBody Employee employee) {
-        return service.saveEmployee(employee);
+        if (employee.getCompany() != null && companyService.findCompanyById(employee.getCompany().getId()).getBody().isApproved()) {
+            return service.saveEmployee(employee);
+        }
+        throw new IllegalStateException("Company is not approved");
     }
 
     @GetMapping("/findById")
@@ -31,7 +40,11 @@ public class EmployeeController {
 
     @PostMapping("/login")
     public ResponseEntity<Employee> login(@RequestBody Employee employee) {
-        return service.login(employee.getUsername(), employee.getPassword());
+        Employee emp = service.login(employee.getUsername(), employee.getPassword()).getBody();
+        if (emp.getCompany() != null && companyService.findCompanyById(emp.getCompany().getId()).getBody().isApproved()) {
+            return ResponseEntity.ok(emp);
+        }
+        throw new IllegalStateException("Company is not approved");
     }
 
     @DeleteMapping("/delete")

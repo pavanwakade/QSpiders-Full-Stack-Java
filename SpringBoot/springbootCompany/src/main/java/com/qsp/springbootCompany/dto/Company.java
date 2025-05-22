@@ -11,19 +11,23 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private String location;
+    private boolean approved; // New field for approval status
 
     public Company() {
         super();
     }
 
-    public Company(int id, String name, String location) {
+    public Company(int id, String name, String location, boolean approved) {
         this.id = id;
         this.name = name;
         this.location = location;
+        this.approved = approved;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -48,8 +52,11 @@ public class Company {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "Company{id=" + id + ", name='" + name + "', location='" + location + "'}";
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 }
