@@ -26,15 +26,17 @@ public static  void bubblesort(int a[]){
 
 
 
-	    // Arrays.sort(a);
-	    // System.out.println(Arrays.toString(a));
+	    Arrays.sort(a);
+	    System.out.println(Arrays.toString(a));
 
 
-	    // List<Integer> list=new ArrayList<>();
-	    // for (int i :a ) {
-	    // 	list.add(i);
-	    // }
-	    // Collections.sort(list);
-	    // System.out.println(list);
+	    List<Integer> list=new ArrayList<>();
+	    for (int i :a ) {
+	    	list.add(i);
+	    }
+
+	    Collections.sort(list);
+	    	    Collections.reverse(list);
+	    System.out.println(list);
 	}
 }
