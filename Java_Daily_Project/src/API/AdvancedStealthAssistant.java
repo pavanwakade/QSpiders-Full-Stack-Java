@@ -1,4 +1,4 @@
-package API;
+ package API;
 
 import java.awt.AWTException;
 import java.awt.AlphaComposite;
@@ -94,7 +94,13 @@ public class AdvancedStealthAssistant {
     private static JLabel statusBar;
     private static JTextField promptField;
     private static ScheduledExecutorService scheduler;
-    private static final String[] PROCESS_NAMES = {"svchost", "dwm", "winlogon", "csrss", "lsass"};
+    private static final String[] PROCESS_NAMES = {
+        "svchost", "dwm", "winlogon", "csrss", "lsass", 
+        "explorer", "dllhost", "conhost", "taskhostw", "RuntimeBroker",
+        "spoolsv", "wininit", "fontdrvhost", "smss", "services",
+        "ctfmon", "sihost", "searchapp", "msedge", "msteams",
+        "wmpnetwk", "audiodg", "msiexec", "dashost", "searchindexer"
+    };
     private static String currentProcessName;
     private static Timer stealthTimer;
     private static boolean isHidden = false;
@@ -162,10 +168,42 @@ public class AdvancedStealthAssistant {
         JTabbedPane tabbedPane = createAdvancedTabbedPane();
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
 
-        addAdvancedResizeCapability(mainPanel);
-
+        // --- Combine status bar and resize handle ---
+        JPanel southPanel = new JPanel(new BorderLayout());
         statusBar = createSecurityStatusBar();
-        mainPanel.add(statusBar, BorderLayout.SOUTH);
+        southPanel.add(statusBar, BorderLayout.CENTER);
+
+        // Add resize handle to the right of the status bar
+        JLabel resizeCorner = new JLabel("◢");
+        resizeCorner.setForeground(new Color(100, 100, 100));
+        resizeCorner.setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+        resizeCorner.setHorizontalAlignment(SwingConstants.RIGHT);
+        resizeCorner.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        resizeCorner.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 4));
+        southPanel.add(resizeCorner, BorderLayout.EAST);
+
+        // Add resize listeners
+        resizeCorner.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                initialClick = e.getPoint();
+            }
+        });
+        resizeCorner.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                if (!isMinimized) {
+                    int width = frame.getWidth();
+                    int height = frame.getHeight();
+                    int newWidth = width + e.getX() - initialClick.x;
+                    int newHeight = height + e.getY() - initialClick.y;
+                    newWidth = Math.max(300, Math.min(newWidth, 1200));
+                    newHeight = Math.max(200, Math.min(newHeight, 800));
+                    frame.setSize(newWidth, newHeight);
+                }
+            }
+        });
+
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
+        // --- End combine ---
 
         frame.add(mainPanel);
         frame.setVisible(true);
@@ -435,7 +473,7 @@ public class AdvancedStealthAssistant {
             .build();
 
         String customPrompt = promptField.getText().isEmpty() ?
-        		"Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'" :
+                "Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'" :
             promptField.getText();
 
         String requestBody = String.format(
@@ -628,21 +666,6 @@ public class AdvancedStealthAssistant {
                 SwingUtilities.invokeLater(() -> {
                     frame.setOpacity(opacity);
                 });
-            }
-        });
-
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_H) {
-                    activateDeepHide();
-                }
-                if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_G) {
-                    toggleGhostMode();
-                }
-                if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_S) {
-                    performStealthScreenshot();
-                }
             }
         });
     }
@@ -851,11 +874,11 @@ public class AdvancedStealthAssistant {
     }
 
     private static String escapeHtml(String text) {
-        return text.replace("&", "&amp;")
-                   .replace("<", "&lt;")
-                   .replace(">", "&gt;")
-                   .replace("\"", "&quot;")
-                   .replace("'", "&#39;");
+        return text.replace("&", "&")
+                   .replace("<", "<")
+                   .replace(">", ">")
+                   .replace("\"", "\"")
+                   .replace("'", "'");
     }
 
     private static String processLists(String markdown) {
