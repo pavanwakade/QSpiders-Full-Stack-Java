@@ -7,7 +7,7 @@ class Collection1
 {
 	public static void main(String[] args) 
 	{
-
+//what will be output?
 //		ArrayList<Integer> nList=new ArrayList<Integer>();
 		ArrayList<Integer> nList=new ArrayList<Integer>();
 		nList.add(1);

@@ -83,7 +83,7 @@ public class AdvancedStealthAssistant {
     private static final int MINIMAL_SIZE = 40;
     private static boolean isMinimized = false;
     private static boolean isStealthMode = true;
-    private static final Dimension NORMAL_SIZE = new Dimension(550, 650);
+    private static final Dimension NORMAL_SIZE = new Dimension(500, 400);
     private static final Dimension MINIMIZED_SIZE = new Dimension(15, 15);
     private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
@@ -225,7 +225,7 @@ public class AdvancedStealthAssistant {
         promptLabel.setForeground(new Color(140, 140, 140));
         promptLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
 
-        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'");
+        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'");
         promptField.setFont(new Font("Consolas", Font.PLAIN, 11));
         promptField.setBackground(new Color(40, 40, 40));
         promptField.setForeground(new Color(200, 200, 200));
@@ -435,7 +435,7 @@ public class AdvancedStealthAssistant {
             .build();
 
         String customPrompt = promptField.getText().isEmpty() ?
-            "Analyze this image comprehensively. Extract all text, identify questions, analyze code if present, and provide detailed responses with proper formatting." :
+        		"Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'" :
             promptField.getText();
 
         String requestBody = String.format(
