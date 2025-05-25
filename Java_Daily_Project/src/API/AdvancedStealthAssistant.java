@@ -263,7 +263,7 @@ public class AdvancedStealthAssistant {
         promptLabel.setForeground(new Color(140, 140, 140));
         promptLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
 
-        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'");
+        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What ...?', 'Who ...?', 'Where ...?', 'When ...?', 'Why ...?', 'How ...?', 'Which ...?', 'Whose ...?', 'Whom ...?', 'Can ...?', 'Could ...?', 'Would ...?', 'Should ...?', 'Is ...?', 'Are ...?', 'Will ...?', 'Do ...?', 'Does ...?', 'Did ...?'). If a question is found, provide only the answer in Markdown format without repeating the question or adding extra context, using headers, lists, and code blocks as needed. If no question is found, respond with: 'No question detected in the image. If code is present, identify any issues or bugs, explain how to fix them, show the expected output when applicable, and format code solutions in appropriate code blocks.'");
         promptField.setFont(new Font("Consolas", Font.PLAIN, 11));
         promptField.setBackground(new Color(40, 40, 40));
         promptField.setForeground(new Color(200, 200, 200));
@@ -427,7 +427,7 @@ public class AdvancedStealthAssistant {
 
                 String base64Image = encodeImageToBase64(screenshot);
 
-                statusBar.setText(" Processing with AI...");
+                statusBar.setText(" Processing...");
                 String response = sendSecureImageToGemini(base64Image);
                 String responseText = extractResponseText(response);
 
@@ -473,8 +473,8 @@ public class AdvancedStealthAssistant {
             .build();
 
         String customPrompt = promptField.getText().isEmpty() ?
-                "Analyze the image to detect any questions (e.g., 'What is...?', 'How does...?', or code-related queries). If a question is found, provide only the answer in Markdown format no need any explatation, using headers, lists, and code blocks as appropriate. Do not include the question or additional context. If no question is found, respond with: 'No question detected in the image. If code is detected, identify any issues or bugs in the code, explain how to fix the problems, show the expected output of the code when applicable, and format code solutions in appropriate code blocks.'" :
-            promptField.getText();
+                        "Analyze the image to detect any questions (e.g., 'What ...?', 'Who ...?', 'Where ...?', 'When ...?', 'Why ...?', 'How ...?', 'Which ...?', 'Whose ...?', 'Whom ...?', 'Can ...?', 'Could ...?', 'Would ...?', 'Should ...?', 'Is ...?', 'Are ...?', 'Will ...?', 'Do ...?', 'Does ...?', 'Did ...?'). If a question is found, provide only the answer in Markdown format without repeating the question or adding extra context, using headers, lists, and code blocks as needed. If no question is found, respond with: 'No question detected in the image. If code is present, identify any issues or bugs, explain how to fix them, show the expected output when applicable, and format code solutions in appropriate code blocks.'" :
+                    promptField.getText();
 
         String requestBody = String.format(
             "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
