@@ -31,6 +31,7 @@ public class StudentDB {
 		}
 	}
 	
+	static boolean choice=true;
 	
 	public static void fetchTable() {
 
@@ -117,9 +118,9 @@ public class StudentDB {
 			rs = stm.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("Roll No: " + rs.getInt("rollno"));
-				System.out.println("Name: " + rs.getString("name"));
-				System.out.println("Class: " + rs.getString("class"));
+				System.out.print("Roll No: " + rs.getInt("rollno")+" - ");
+				System.out.print("Name: " + rs.getString("name")  +" - ");
+				System.out.print("Class: " + rs.getString("class"));
 			} else {
 				System.out.println("No record found for the provided rollno.");
 			}
@@ -198,14 +199,17 @@ public class StudentDB {
 
 	public static void choice() {
 //		while (true) {		
-//			System.out.println();	
-
+		System.out.println();	
+		System.out.println();	
+		
+		
 		System.out.println("Enter 1 display full Table");
 		System.out.println("Enter 2 for Insert Data Of Student");
 		System.out.println("Enter 3 for Display Data Of Student");
 		System.out.println("Enter 4 for Update Data Of Student");
 		System.out.println("Enter 5 for Delete Data Of Student");
 		System.out.println("Enter 6 for Exit");
+		
 		int choice = sc.nextInt();
 		switch (choice) {
 			
@@ -237,6 +241,7 @@ public class StudentDB {
 			
 			case 6: {
 				System.out.println("Exited.....");
+				StudentDB.choice=false;
 				break;
 			}
 			
@@ -249,7 +254,9 @@ public class StudentDB {
 
 	public static void main(String[] args) {
 		System.out.println("----------- Welcome To Student Database -----------");
-
+		
+		while (choice) {
 		choice();
+		}
 	}
 }
