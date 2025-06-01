@@ -3,9 +3,9 @@
 
 
 //! 1.	Reverse a String
-//! Write a function that takes a string as input and returns the string in reverse order.
-//! Input: “hello”
-//! Expected Output: “olleh”
+// Write a function that takes a string as input and returns the string in reverse order.
+// Input: “hello”
+//? Expected Output: “olleh”
 
 let q1String = "hello";
 let reversestring = (str) => str.split("").reverse().join("");
@@ -13,9 +13,9 @@ let reversestring = (str) => str.split("").reverse().join("");
 
 
 //! 2.	Check for Palindrome
-//! Check if a given string is a palindrome (reads the same forward and backward).
-//! Input: “madam”
-//! Expected Output: true
+// Check if a given string is a palindrome (reads the same forward and backward).
+// Input: “madam”
+//? Expected Output: true
 let q2palindrom = "madam";
 let q2Array = q2palindrom.split("");
 
@@ -28,22 +28,34 @@ let checkpalindrom = (arr) => {
     }
     return true;
 }
-console.log(checkpalindrom(q2Array)); //true
+// console.log(checkpalindrom(q2Array)); //true
 
 //! 3.	Count Vowels in a String
+//Write a function to count the number of vowels in a string.
+let Input= "javascript";
+//? Expected Output: 3
 
-//! Write a function to count the number of vowels in a string.
-let Input: “javascript”
-//! Expected Output: 3
+let checkovels=(Inp)=>{
+    let e=Inp.split("");
+    let count=0;
+    e.forEach(element => {
+    if (element=='a' || element=='e' ||element=='i' ||element=='o' ||element=='u' ||element=='A' ||element=='E' ||element=='I' ||element=='O' ||element=='U') {
+        count+=1;
+    }
+})
+return count;
+}
+// console.log(checkovels(Input));
 
 
 
-
-// 4.	Find Factorial of a Number
-
+//! 4.	Find Factorial of a Number
 // Find the factorial of a given number using recursion.
 // Input: 5
 // Expected Output: 120
+
+
+let q4=5;
 
 
 
