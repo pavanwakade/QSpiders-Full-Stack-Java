@@ -228,44 +228,62 @@ let output = capitalizeWords(input);
 // Input: “JavaScript is fun”
 // Expected Output: 3
 
-let countsentecnce="JavaScript is fun ";
-let sentencetoarraycount= countsentecnce.trim().split(' ').length;
+let countsentecnce = "JavaScript is fun ";
+let sentencetoarraycount = countsentecnce.trim().split(' ').length;
 // console.log(sentencetoarraycount);
 
 
 //! 16.	Reverse Each Word in a Sentence
-
 // Reverse each word in a sentence but maintain their positions.
 // Input: “hello world”
 // Expected Output: “olleh dlrow”
 
-let striing="hello world";
+let striing = "hello world";
+let rev = striing.split(" ").map((el) => el.split("").reverse().join("")).join(" ");
+// console.log(rev);
 
 
 
-
-// 17.	Check If Number is Even or Odd
+//! 17.	Check If Number is Even or Odd
 
 // Check if a number is even or odd.
 // Input: 9
 // Expected Output: “Odd”
+let checkenodd = 9;
+// let checkEvenorOdd = checkenodd % 2 === 0 ? console.log("Even") : console.log("odd");
 
 
 
-// 18.	Check If Array is Sorted
+
+// !18.	Check If Array is Sorted
 
 // Determine if a given array is sorted in ascending order.
 // Input: [1, 2, 3, 4, 5]
 // Expected Output: true
 
+let SortOrNot = [1, 2, 6,3, 4, 5];
+
+let checkAccendingorNot = (sss) => {
+    for (let i = 0; i < sss.length - 1; i++) {
+        if (sss[i] > sss[i + 1]) {
+            // console.log(sss[i] + "   " + sss[i + 1]);
+            return false;
+        }
+    }
+    return true;
+}
+
+// console.log(checkAccendingorNot(SortOrNot));
 
 
-// 19.	Find GCD of Two Numbers
+
+//! 19.	Find GCD of Two Numbers
 
 // Calculate the Greatest Common Divisor (GCD) of two integers.
 // Input: 12, 18
 // Expected Output: 6
 
+let num1=12;
 
 
 // 20.	Find LCM of Two Numbers
