@@ -1,4 +1,4 @@
- package API;
+package API;
 
 import java.awt.AWTException;
 import java.awt.AlphaComposite;
@@ -32,6 +32,9 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
@@ -47,6 +50,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -75,6 +79,7 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import javax.swing.JOptionPane;
 
 public class AdvancedStealthAssistant1 {
     private static JWindow frame;
@@ -85,7 +90,7 @@ public class AdvancedStealthAssistant1 {
     private static boolean isStealthMode = true;
     private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
     private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
-    private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
+    private static String API_KEY;
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
     private static JEditorPane htmlPreview;
@@ -123,8 +128,9 @@ public class AdvancedStealthAssistant1 {
     }
 
     public static void main(String[] args) {
+        API_KEY = getApiKey();
         if (API_KEY == null || API_KEY.isEmpty()) {
-            System.err.println("Configuration error.");
+            System.err.println("Configuration error: API key not provided.");
             System.exit(1);
         }
 
@@ -140,6 +146,43 @@ public class AdvancedStealthAssistant1 {
         }
 
         SwingUtilities.invokeLater(() -> createStealthGUI());
+    }
+
+    private static String getApiKey() {
+        String homeDir = System.getProperty("user.home");
+        File configDir = new File(homeDir, ".advancedstealthassistant");
+        if (!configDir.exists()) {
+            configDir.mkdirs();
+        }
+        File configFile = new File(configDir, "config.properties");
+        Properties props = new Properties();
+
+        // Check if config file exists and load the API key
+        if (configFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(configFile)) {
+                props.load(fis);
+                String apiKey = props.getProperty("api_key");
+                if (apiKey != null && !apiKey.isEmpty()) {
+                    return apiKey;
+                }
+            } catch (IOException e) {
+                System.err.println("Error loading config: " + e.getMessage());
+            }
+        }
+
+        // API key not found or empty, prompt user
+        String apiKey = JOptionPane.showInputDialog(null, "Please enter your Gemini API key:", 
+            "API Key Required", JOptionPane.PLAIN_MESSAGE);
+        if (apiKey != null && !apiKey.isEmpty()) {
+            props.setProperty("api_key", apiKey);
+            try (FileOutputStream fos = new FileOutputStream(configFile)) {
+                props.store(fos, "API Key");
+            } catch (IOException e) {
+                System.err.println("Error saving config: " + e.getMessage());
+            }
+            return apiKey;
+        }
+        return null; // User canceled or entered an empty key
     }
 
     private static void createStealthGUI() {
@@ -228,8 +271,6 @@ public class AdvancedStealthAssistant1 {
         JButton screenshotButton = createStealthButton("📷", "Capture");
         screenshotButton.addActionListener(e -> performStealthScreenshot());
 
-       
-
         JButton copyButton = createStealthButton("📋", "Copy");
         copyButton.addActionListener(e -> secureClipboardCopy());
 
@@ -240,7 +281,6 @@ public class AdvancedStealthAssistant1 {
         closeButton.addActionListener(e -> secureExit());
 
         controlPanel.add(screenshotButton);
-      
         controlPanel.add(copyButton);
         controlPanel.add(ghostButton);
         controlPanel.add(closeButton);
@@ -869,11 +909,11 @@ public class AdvancedStealthAssistant1 {
     }
 
     private static String escapeHtml(String text) {
-        return text.replace("&", "&")
-                   .replace("<", "<")
-                   .replace(">", ">")
-                   .replace("\"", "\"")
-                   .replace("'", "'");
+        return text.replace("&", "&amp;")
+                   .replace("<", "&lt;")
+                   .replace(">", "&gt;")
+                   .replace("\"", "&quot;")
+                   .replace("'", "&#39;");
     }
 
     private static String processLists(String markdown) {
