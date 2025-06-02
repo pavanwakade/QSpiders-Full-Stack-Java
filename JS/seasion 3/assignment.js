@@ -213,22 +213,25 @@ a = a - b;
 // Input: “hello world”
 // Expected Output: “Hello World”
 
-let capstring="hello world";
-let StrArray=capstring.split(" ").map((k)=>{
-    k.charAt(0).toUpperCase().slice(1)
-})
+function capitalizeWords(sentence) {
+    return sentence.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
 
-console.log(StrArray);
+let input = "hello world";
+let output = capitalizeWords(input);
+// console.log(output);  // Output: "Hello World"
 
 
 
-
-// 15.	Count Number of Words in a String
-
+//! 15.	Count Number of Words in a String
 // Count the number of words in a given sentence.
 // Input: “JavaScript is fun”
 // Expected Output: 3
 
+let countsentecnce="JavaScript is fun ";
+
+let sentencetoarray= countsentecnce.trim().split(' ');
+console.log(sentencetoarray.length);
 
 
 // 16.	Reverse Each Word in a Sentence
