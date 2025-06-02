@@ -159,40 +159,67 @@ for (let i = 0; i < q10num; i++) {
 // Input: “listen”, “silent”
 // Expected Output: true
 
-let string1="listen";
-let string2="silent";
-let sorted1=string1.split("").sort().join("");
-let sorted2=string2.split("").sort().join("");
-
+let string1 = "listen";
+let string2 = "silent";
+let sorted1 = string1.split("").sort().join("");
+let sorted2 = string2.split("").sort().join("");
 // console.log(sorted1);
 // console.log(sorted2);
-
-sorted1===sorted2?console.log("anagram"):console.log("NOt Anagram");
-
+// sorted1===sorted2?console.log("anagram"):console.log("NOt Anagram");
 
 
 
-// 12.	Find Second Largest Number
+
+//! 12.	Find Second Largest Number
 
 // Return the second largest number in an array.
 // Input: [10, 5, 8, 20, 15]
 // Expected Output: 15
 
+let q12 = [10, 5, 8, 20, 15];
+q12.sort((a, b) => a - b)
+let secondLargest = q12[q12.length - 2];
+// console.log(secondLargest);
 
 
-// 13.	Swap Two Variables Without Temp
+
+//! 13.	Swap Two Variables Without Temp
 
 // Swap the values of two variables without using a temporary variable.
 // Input: a = 10, b = 20
 // Expected Output: a = 20, b = 10
 
+let a = 10;
+let b = 20;
+// console.log("a : " + a);
+// console.log("b : " + b);
+
+a = a + b;
+b = a - b;
+a = a - b;
+
+// console.log("after swap");
+
+// console.log("a : " + a);
+// console.log("b : " + b);
 
 
-// 14.	Capitalize First Letter of Each Word
+
+
+
+//! 14.	Capitalize First Letter of Each Word
 
 // Capitalize the first letter of each word in a sentence.
 // Input: “hello world”
 // Expected Output: “Hello World”
+
+let capstring="hello world";
+let StrArray=capstring.split(" ").map((k)=>{
+    k.charAt(0).toUpperCase().slice(1)
+})
+
+console.log(StrArray);
+
 
 
 
