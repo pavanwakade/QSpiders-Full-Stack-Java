@@ -59,38 +59,57 @@ return count;
 
 
 let q4=5;
+if (q4>0) {
 let element=1;
 for (let i = 1; i <= q4; i++) {
      element = element* i;
-     console.log(element);    
+    //  console.log(element);    
 }
-console.log(element);
+// console.log(element);
+}
 
 
-
-// 5.	Find Largest Number in an Array
+//! 5.	Find Largest Number in an Array
 
 // Write a function to return the largest number in an array.
 // Input: [4, 7, 1, 9, 3]
-// Expected Output: 9
+//? Expected Output: 9
 
+let arr=[4, 7, 1, 9, 3];
+arr.sort((a,b)=>a-b);
+let largestnum=arr[arr.length-1];
+// console.log(largestnum);
 
-
-// 6.	Find Smallest Number in an Array
-
+//! 6.	Find Smallest Number in an Array
 // Return the smallest number from a given array.
 // Input: [4, 7, 1, 9, 3]
-// Expected Output: 1
+//? Expected Output: 1
+
+let arr1=[4, 7, 1, 9, 3];
+arr1.sort((a,b)=>b-a);
+let smallestinArray=arr[0];
+// console.log(smallestinArray);
 
 
-
-// 7.	Check If Number is Prime
-
+//! 7.	Check If Number is Prime
 // Check if a given number is a prime number.
 // Input: 11
 // Expected Output: true
 
 
+let num=9;
+let cnt=0;
+for (let i = 2; i <=num ; i++) {
+    if (num/i==0) {
+        cnt+1;
+    } 
+    console.log(i);
+    
+}
+if (cnt>1) {
+    console.log("not prime");
+    
+}
 
 // 8.	Sum of All Elements in Array
 
