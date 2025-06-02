@@ -1,11 +1,40 @@
 package API;
-import java.util.List;
-import java.awt.*;
+
+import java.awt.AWTException;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -14,7 +43,13 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,25 +57,37 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JWindow;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.event.HyperlinkEvent;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
-public class AdvancedStealthAssistant1 {
+public class AdvancedStealthAssistant2 {
     private static JWindow frame;
-    private static float opacity = Float.parseFloat(System.getProperty("stealth.opacity", "0.2"));
-    private static final float STEALTH_OPACITY = Float.parseFloat(System.getProperty("stealth.opacity", "0.2"));
-    private static final float NORMAL_OPACITY = Float.parseFloat(System.getProperty("normal.opacity", "0.3"));
+    private static float opacity = 0.1f;
     private static Point initialClick;
     private static final int MINIMAL_SIZE = 30;
     private static boolean isMinimized = false;
     private static boolean isStealthMode = true;
     private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
     private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
-    private static String API_KEY = null;
-    private static final String CONFIG_FILE = "stealth_configs.dat";
+    private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
     private static JEditorPane htmlPreview;
@@ -48,38 +95,17 @@ public class AdvancedStealthAssistant1 {
     private static String currentResponse = "";
     private static JLabel statusBar;
     private static JTextField promptField;
-    private static boolean isHidden = false;
-    static String prompt = 
-    	    "Analyze the image carefully. Your task is to:\n\n" +
-    	    "1. Detect and recognize any **questions** present in the image. This includes:\n" +
-    	    "   - WH-questions: Who, What, Where, When, Why, Which, Whose, Whom, How\n" +
-    	    "   - Yes/No questions: Is, Are, Was, Were, Will, Do, Does, Did, Can, Could, Would, Should\n\n" +
-    	    "2. If **any question** is found:\n" +
-    	    "   - Provide ** the correct and optimized answer**.\n" +
-    	    "   - Format the answer in **Markdown**.\n" +
-    	    "   - You may use headers, lists, or code blocks if the answer is structured.\n" +
-    	    "3. If the image contains **multiple-choice questions (MCQs)**:\n" +
-    	    "   - Return only the correct option (e.g., A, B, C, or D).\n" +
-    	    "   - No explanation or reasoning should be included.\n\n" +
-    	    "4. If **no question** is found:\n" +
-    	    "   - Reply with exactly: No question detected in the image.\n\n" +
-    	    "5. If the image contains **code but no question**:\n" +
-    	    "   - Detect and describe any bugs or issues.\n" +
-    	    "   - Explain how to fix them.\n" +
-    	    "   - Show the expected output, if applicable.\n" +
-    	    "   - Format code using Markdown code blocks.\n\n" +
-    	    "Be precise and respond only according to the above rules.";
-
-
     private static ScheduledExecutorService scheduler;
     private static final String[] PROCESS_NAMES = {
         "svchost", "dwm", "winlogon", "csrss", "lsass", 
         "explorer", "dllhost", "conhost", "taskhostw", "RuntimeBroker",
         "spoolsv", "wininit", "fontdrvhost", "smss", "services",
         "ctfmon", "sihost", "searchapp", "msedge", "msteams",
-        "wmpnetwk", "audiodg", "msiexec", "dashost", "searchindexer" 
+        "wmpnetwk", "audiodg", "msiexec", "dashost", "searchindexer"
     };
     private static String currentProcessName;
+    private static Timer stealthTimer;
+    private static boolean isHidden = false;
     private static Robot robot;
     private static final Set<String> SECURITY_PROCESSES = new HashSet<>(Arrays.asList(
         "procmon", "procexp", "taskmgr", "wireshark", "fiddler", "cheatengine", "ollydbg",
@@ -93,27 +119,15 @@ public class AdvancedStealthAssistant1 {
             scheduler = Executors.newScheduledThreadPool(3);
             currentProcessName = getRandomProcessName();
             initializeStealthFeatures();
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                if (scheduler != null && !scheduler.isShutdown()) {
-                    scheduler.shutdownNow();
-                }
-            }));
         } catch (Exception e) {
             System.err.println("Initialization failed: " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        API_KEY = getStoredApiKey();
         if (API_KEY == null || API_KEY.isEmpty()) {
-            API_KEY = promptForApiKey();
-            if (API_KEY == null || API_KEY.isEmpty()) {
-                JOptionPane.showMessageDialog(null, 
-                    "API Key is required to run the application. Exiting.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                System.exit(1);
-            }
-            storeApiKey(API_KEY);
+            System.err.println("Configuration error.");
+            System.exit(1);
         }
 
         try {
@@ -211,6 +225,9 @@ public class AdvancedStealthAssistant1 {
         JButton screenshotButton = createStealthButton("📷", "Capture");
         screenshotButton.addActionListener(e -> performStealthScreenshot());
 
+        JButton multiImageButton = createStealthButton("🖼️", "Multiple Images");
+        multiImageButton.addActionListener(e -> performMultipleImageAnalysis());
+
         JButton copyButton = createStealthButton("📋", "Copy");
         copyButton.addActionListener(e -> secureClipboardCopy());
 
@@ -221,12 +238,59 @@ public class AdvancedStealthAssistant1 {
         closeButton.addActionListener(e -> secureExit());
 
         controlPanel.add(screenshotButton);
+        controlPanel.add(multiImageButton);
         controlPanel.add(copyButton);
         controlPanel.add(ghostButton);
         controlPanel.add(closeButton);
 
         titleBar.add(controlPanel, BorderLayout.EAST);
         return titleBar;
+    }
+
+    private static void performMultipleImageAnalysis() {
+        CompletableFuture.runAsync(() -> {
+            try {
+//                status 0
+                statusBar.setText(" Selecting images...");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setMultiSelectionEnabled(true);
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg"));
+                int result = fileChooser.showOpenDialog(frame);
+                if (result != JFileChooser.APPROVE_OPTION) {
+                    SwingUtilities.invokeLater(() -> statusBar.setText(" Image selection cancelled"));
+                    return;
+                }
+
+                File[] files = fileChooser.getSelectedFiles();
+                if (files == null || files.length == 0) {
+                    SwingUtilities.invokeLater(() -> statusBar.setText(" No images selected"));
+                    return;
+                }
+
+                statusBar.setText(" Processing " + files.length + " images...");
+                StringBuilder combinedResponse = new StringBuilder();
+                for (int i = 0; i < files.length; i++) {
+                    File file = files[i];
+                    BufferedImage image = ImageIO.read(file);
+                    String base64Image = encodeImageToBase64(image);
+                    String response = sendSecureImageToGemini(base64Image);
+                    String responseText = extractResponseText(response);
+                    combinedResponse.append("### Image ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
+                }
+
+                String finalResponse = combinedResponse.toString();
+                SwingUtilities.invokeLater(() -> {
+                    currentResponse = finalResponse;
+                    markdownArea.setText(currentResponse);
+                    updateSecureHtmlPreview(currentResponse);
+                    updateSecureCodeBlocks(currentResponse);
+                    statusBar.setText(" Analysis of " + files.length + " images complete");
+                });
+
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Error: " + e.getMessage()));
+            }
+        });
     }
 
     private static JPanel createPromptPanel() {
@@ -238,7 +302,7 @@ public class AdvancedStealthAssistant1 {
         promptLabel.setForeground(new Color(140, 140, 140));
         promptLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
 
-        promptField = new JTextField(prompt);
+        promptField = new JTextField("Analyze the image to detect any questions (e.g., 'What ...?', 'Who ...?', 'Where ...?', 'When ...?', 'Why ...?', 'How ...?', 'Which ...?', 'Whose ...?', 'Whom ...?', 'Can ...?', 'Could ...?', 'Would ...?', 'Should ...?', 'Is ...?', 'Are ...?', 'Will ...?', 'Do ...?', 'Does ...?', 'Did ...?'). If a question is found, provide only the answer in Markdown format without repeating the question or adding extra context, using headers, lists, and code blocks as needed. If no question is found, respond with: 'No question detected in the image. If code is present, identify any issues or bugs, explain how to fix them, show the expected output when applicable, and format code solutions in appropriate code blocks.'");
         promptField.setFont(new Font("Consolas", Font.PLAIN, 11));
         promptField.setBackground(new Color(40, 40, 40));
         promptField.setForeground(new Color(200, 200, 200));
@@ -291,16 +355,6 @@ public class AdvancedStealthAssistant1 {
         styleSheet.addRule("pre, code { background-color: #2d2d2d; padding: 6px; font-family: 'JetBrains Mono', Consolas, monospace; border-radius: 4px; border: 1px solid #404040; }");
         styleSheet.addRule("h1, h2, h3 { color: #4a9eff; border-bottom: 1px solid #404040; }");
         styleSheet.addRule("ul, ol { margin-left: 24px; }");
-
-        htmlPreview.addHyperlinkListener(e -> {
-            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED && Desktop.isDesktopSupported()) {
-                try {
-                    Desktop.getDesktop().browse(e.getURL().toURI());
-                } catch (Exception ex) {
-                    statusBar.setText("Failed to open link: " + ex.getMessage());
-                }
-            }
-        });
 
         JScrollPane htmlScrollPane = new JScrollPane(htmlPreview);
         htmlScrollPane.getViewport().setBackground(new Color(30, 30, 30));
@@ -371,7 +425,6 @@ public class AdvancedStealthAssistant1 {
         }
         return false;
     }
-    
 
     private static void initiateEmergencyProtocol() {
         SwingUtilities.invokeLater(() -> {
@@ -403,14 +456,20 @@ public class AdvancedStealthAssistant1 {
         CompletableFuture.runAsync(() -> {
             try {
                 statusBar.setText(" Initiating capture...");
-                SwingUtilities.invokeAndWait(() -> frame.setVisible(false));
+
+                frame.setVisible(false);
                 Thread.sleep(300);
+
                 BufferedImage screenshot = captureWithStealth();
-                SwingUtilities.invokeAndWait(() -> frame.setVisible(true));
+
+                frame.setVisible(true);
+
                 String base64Image = encodeImageToBase64(screenshot);
+
                 statusBar.setText(" Processing...");
                 String response = sendSecureImageToGemini(base64Image);
                 String responseText = extractResponseText(response);
+
                 SwingUtilities.invokeLater(() -> {
                     currentResponse = responseText;
                     markdownArea.setText(currentResponse);
@@ -418,6 +477,7 @@ public class AdvancedStealthAssistant1 {
                     updateSecureCodeBlocks(currentResponse);
                     statusBar.setText(" Analysis complete");
                 });
+
             } catch (Exception e) {
                 SwingUtilities.invokeLater(() -> {
                     statusBar.setText(" Error: " + e.getMessage());
@@ -447,14 +507,13 @@ public class AdvancedStealthAssistant1 {
     }
 
     private static String sendSecureImageToGemini(String base64Image) throws Exception {
-        long timeoutSeconds = Long.parseLong(System.getProperty("gemini.api.timeout", "30"));
         HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(java.time.Duration.ofSeconds(timeoutSeconds))
+            .connectTimeout(java.time.Duration.ofSeconds(30))
             .build();
 
         String customPrompt = promptField.getText().isEmpty() ?
-        		prompt  :
-            promptField.getText();
+                        "Analyze the image to detect any questions (e.g., 'What ...?', 'Who ...?', 'Where ...?', 'When ...?', 'Why ...?', 'How ...?', 'Which ...?', 'Whose ...?', 'Whom ...?', 'Can ...?', 'Could ...?', 'Would ...?', 'Should ...?', 'Is ...?', 'Are ...?', 'Will ...?', 'Do ...?', 'Does ...?', 'Did ...?'). If a question is found, provide only the answer in Markdown format without repeating the question or adding extra context, using headers, lists, and code blocks as needed. If no question is found, respond with: 'No question detected in the image. If code is present, identify any issues or bugs, explain how to fix them, show the expected output when applicable, and format code solutions in appropriate code blocks.'" :
+                    promptField.getText();
 
         String requestBody = String.format(
             "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
@@ -481,9 +540,45 @@ public class AdvancedStealthAssistant1 {
 
     private static void toggleStealthMode() {
         isStealthMode = !isStealthMode;
-        opacity = isStealthMode ? STEALTH_OPACITY : NORMAL_OPACITY;
+        if (isStealthMode) {
+            opacity = 0.2f;
+            statusBar.setText(" Deep stealth activated");
+        } else {
+            opacity = 0.3f;
+            statusBar.setText(" Normal mode active");
+        }
         makeTranslucent(opacity);
-        statusBar.setText(isStealthMode ? " Deep stealth activated" : " Normal mode active");
+    }
+
+    private static void activateDeepHide() {
+        frame.setVisible(false);
+        isHidden = true;
+
+        Timer hideTimer = new Timer(100, new ActionListener() {
+            private boolean ctrlPressed = false;
+            private boolean shiftPressed = false;
+            private boolean altPressed = false;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (robot != null) {
+                        Point mouse = MouseInfo.getPointerInfo().getLocation();
+                        if (mouse.x == 0 && mouse.y == 0) {
+                            frame.setVisible(true);
+                            isHidden = false;
+                            statusBar.setText(" Unhidden from deep stealth");
+                            ((Timer)e.getSource()).stop();
+                        }
+                    }
+                } catch (Exception ex) {
+                    // Continue silently
+                }
+            }
+        });
+        hideTimer.start();
+
+        statusBar.setText(" Deep hide active - Move mouse to top-left to restore");
     }
 
     private static void toggleGhostMode() {
@@ -492,7 +587,7 @@ public class AdvancedStealthAssistant1 {
             frame.setFocusableWindowState(false);
             statusBar.setText(" Ghost mode - Nearly invisible");
         } else {
-            frame.setOpacity(opacity);
+            frame.setOpacity(0.2f);
             frame.setFocusableWindowState(true);
             statusBar.setText(" Ghost mode disabled");
         }
@@ -769,7 +864,7 @@ public class AdvancedStealthAssistant1 {
     }
 
     private static String convertMarkdownToSecureHtml(String markdown) {
-        if (markdown == null) {
+        if (markdown == null || markdown.isEmpty()) {
             return "<html><body style='background-color:#1e1e1e;color:#e0e0e0;'><p>No content available</p></body></html>";
         }
 
@@ -818,11 +913,11 @@ public class AdvancedStealthAssistant1 {
     }
 
     private static String escapeHtml(String text) {
-        return text.replace("&", "&amp;")
-                   .replace("<", "&lt;")
-                   .replace(">", "&gt;")
-                   .replace("\"", "&quot;")
-                   .replace("'", "&#39;");
+        return text.replace("&", "&")
+                   .replace("<", "<")
+                   .replace(">", ">")
+                   .replace("\"", "\"")
+                   .replace("'", "'");
     }
 
     private static String processLists(String markdown) {
@@ -976,162 +1071,42 @@ public class AdvancedStealthAssistant1 {
         });
     }
 
+    private static void addAdvancedResizeCapability(JPanel panel) {
+        JLabel resizeCorner = new JLabel("◢");
+        resizeCorner.setForeground(new Color(100, 100, 100));
+        resizeCorner.setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+        resizeCorner.setHorizontalAlignment(SwingConstants.RIGHT);
+        resizeCorner.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        JPanel cornerPanel = new JPanel(new BorderLayout());
+        cornerPanel.setOpaque(false);
+        cornerPanel.add(resizeCorner, BorderLayout.EAST);
+        panel.add(cornerPanel, BorderLayout.SOUTH);
+
+        resizeCorner.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                initialClick = e.getPoint();
+            }
+        });
+
+        resizeCorner.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                if (!isMinimized) {
+                    int width = frame.getWidth();
+                    int height = frame.getHeight();
+                    int newWidth = width + e.getX() - initialClick.x;
+                    int newHeight = height + e.getY() - initialClick.y;
+
+                    newWidth = Math.max(300, Math.min(newWidth, 1200));
+                    newHeight = Math.max(200, Math.min(newHeight, 800));
+
+                    frame.setSize(newWidth, newHeight);
+                }
+            }
+        });
+    }
+
     private static void makeTranslucent(float opacity) {
         frame.setOpacity(Math.max(0.05f, Math.min(1.0f, opacity)));
-    }
-
-    private static String getStoredApiKey() {
-        try {
-            Path configPath = Paths.get(System.getProperty("user.home"), ".stealth_assistant", CONFIG_FILE);
-            if (Files.exists(configPath)) {
-                List<String> lines = Files.readAllLines(configPath);
-                if (!lines.isEmpty()) {
-                    return new String(Base64.getDecoder().decode(lines.get(0)));
-                }
-            }
-        } catch (Exception e) {
-            // Silently continue
-        }
-        return null;
-    }
-
-    private static void storeApiKey(String apiKey) {
-        try {
-            Path configDir = Paths.get(System.getProperty("user.home"), ".stealth_assistant");
-            Files.createDirectories(configDir);
-            Path configPath = configDir.resolve(CONFIG_FILE);
-
-            String encodedKey = Base64.getEncoder().encodeToString(apiKey.getBytes());
-            Files.write(configPath, Arrays.asList(encodedKey));
-
-            try {
-                configPath.toFile().setReadable(false, false);
-                configPath.toFile().setReadable(true, true);
-                configPath.toFile().setWritable(false, false);
-                configPath.toFile().setWritable(true, true);
-            } catch (Exception e) {
-                // Continue silently
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to store API key configuration.");
-        }
-    }
-
-    private static String promptForApiKey() {
-        JDialog dialog = new JDialog((Frame) null, "Stealth Assistant - First Time Setup", true);
-        dialog.setSize(450, 220);
-        dialog.setLocationRelativeTo(null);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(new Color(40, 40, 40));
-
-        JLabel titleLabel = new JLabel("Stealth Assistant - First Time Setup");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        titleLabel.setForeground(new Color(200, 200, 200));
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JEditorPane instructionLabel = new JEditorPane("text/html", 
-            "<html><div style='text-align: center; color: #c0c0c0; font-size: 12px;'>" +
-            "Enter your Google Gemini API Key<br>" +
-            "Get one at: <a href='https://makersuite.google.com/app/apikey'>makersuite.google.com</a><br><br>" +
-            "Your key will be stored securely on this device.</div></html>");
-        instructionLabel.setEditable(false);
-        instructionLabel.setOpaque(false);
-        instructionLabel.setBackground(new Color(40, 40, 40));
-        instructionLabel.addHyperlinkListener(e -> {
-            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED && Desktop.isDesktopSupported()) {
-                try {
-                    Desktop.getDesktop().browse(e.getURL().toURI());
-                } catch (Exception ex) {
-                    // Silently fail
-                }
-            }
-        });
-//        instructionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JTextField apiKeyField = new JTextField(20);
-        apiKeyField.setFont(new Font("Consolas", Font.PLAIN, 12));
-        apiKeyField.setBackground(new Color(60, 60, 60));
-        apiKeyField.setForeground(new Color(220, 220, 220));
-        apiKeyField.setCaretColor(new Color(100, 150, 255));
-        apiKeyField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(80, 80, 80), 1),
-            BorderFactory.createEmptyBorder(8, 8, 8, 8)
-        ));
-
-        JPanel inputPanel = new JPanel(new BorderLayout(5, 5));
-        inputPanel.setOpaque(false);
-        JLabel keyLabel = new JLabel("API Key:");
-        keyLabel.setForeground(new Color(180, 180, 180));
-        keyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        inputPanel.add(keyLabel, BorderLayout.WEST);
-        inputPanel.add(apiKeyField, BorderLayout.CENTER);
-
-        panel.add(titleLabel, BorderLayout.NORTH);
-        panel.add(instructionLabel, BorderLayout.CENTER);
-        panel.add(inputPanel, BorderLayout.SOUTH);
-
-        JPanel dialogPanel = new JPanel(new BorderLayout());
-        dialogPanel.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 2));
-        dialogPanel.setBackground(new Color(40, 40, 40));
-        dialogPanel.add(panel, BorderLayout.CENTER);
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        buttonPanel.setBackground(new Color(40, 40, 40));
-
-        JButton cancelButton = new JButton("Exit");
-        cancelButton.setBackground(new Color(80, 50, 50));
-        cancelButton.setForeground(new Color(220, 220, 220));
-        cancelButton.setFocusPainted(false);
-        cancelButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-
-        JButton okButton = new JButton("Save & Continue");
-        okButton.setBackground(new Color(50, 80, 50));
-        okButton.setForeground(new Color(220, 220, 220));
-        okButton.setFocusPainted(false);
-        okButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-
-        final String[] result = {null};
-
-        cancelButton.addActionListener(e -> {
-            dialog.dispose();
-        });
-
-        okButton.addActionListener(e -> {
-            String key = apiKeyField.getText().trim();
-            if (key.isEmpty()) {
-                apiKeyField.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(200, 50, 50), 2),
-                    BorderFactory.createEmptyBorder(8, 8, 8, 8)
-                ));
-                return;
-            }
-            result[0] = key;
-            dialog.dispose();
-        });
-
-        apiKeyField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    okButton.doClick();
-                }
-            }
-        });
-
-        buttonPanel.add(cancelButton);
-        buttonPanel.add(okButton);
-        dialogPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        dialog.add(dialogPanel);
-        SwingUtilities.invokeLater(() -> {
-            dialog.setVisible(true);
-            apiKeyField.requestFocusInWindow();
-        });
-
-        dialog.setVisible(true);
-        return result[0];
     }
 }
