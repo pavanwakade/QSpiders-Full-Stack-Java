@@ -127,7 +127,7 @@ for (let i = 0; i < num1.length; i++) {
 // Input: [1, 2, 2, 3, 4, 4]
 // Expected Output: [1, 2, 3, 4]
 
-let newArray=[1, 2, 2, 3, 4, 4];
+let newArray = [1, 2, 2, 3, 4, 4];
 let newUniqueArray = [];
 
 newArray.forEach(element => {
@@ -142,25 +142,23 @@ newArray.forEach(element => {
 //! 10.	Generate Fibonacci Sequence
 
 // Generate the Fibonacci sequence up to n terms.
-// Input: 6
+// let numr: 6
 // Expected Output: [0, 1, 1, 2, 3, 5]
 
-let q10num=6;
-let febnum;
+let q10num = 6;
+let febnum = [];
 for (let i = 0; i < q10num; i++) {
-    
-febnum=(i-1)+(i+1)
-console.log(febnum);
-
-    
+    i === 0 ? febnum.push(0) : i === 1 ? febnum.push(1) : febnum.push(febnum[i - 1] + febnum[i - 2])
 }
+// console.log(febnum);
 
-// 11.	Check If Two Strings Are Anagrams
+
+//! 11.	Check If Two Strings Are Anagrams
 
 // Check whether two given strings are anagrams of each other.
 // Input: “listen”, “silent”
 // Expected Output: true
-
+\
 
 
 // 12.	Find Second Largest Number
