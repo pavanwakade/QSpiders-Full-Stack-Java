@@ -158,7 +158,18 @@ for (let i = 0; i < q10num; i++) {
 // Check whether two given strings are anagrams of each other.
 // Input: “listen”, “silent”
 // Expected Output: true
-\
+
+let string1="listen";
+let string2="silent";
+let sorted1=string1.split("").sort().join("");
+let sorted2=string2.split("").sort().join("");
+
+// console.log(sorted1);
+// console.log(sorted2);
+
+sorted1===sorted2?console.log("anagram"):console.log("NOt Anagram");
+
+
 
 
 // 12.	Find Second Largest Number
