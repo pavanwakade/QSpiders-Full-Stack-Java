@@ -11,8 +11,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -66,7 +64,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -89,9 +86,7 @@ public class AdvancedStealthAssistant1 {
     private static boolean isStealthMode = true;
     private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
     private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
-//    private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
-    private static String API_KEY = null;
-    private static final String CONFIG_FILE = "stealth_config.dat";
+    private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
     private static JEditorPane htmlPreview;
@@ -129,9 +124,21 @@ public class AdvancedStealthAssistant1 {
     }
 
     public static void main(String[] args) {
+        API_KEY = getStoredApiKey();
+        
         if (API_KEY == null || API_KEY.isEmpty()) {
-            System.err.println("Configuration error.");
-            System.exit(1);
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                // Continue with default look and feel
+            }
+            
+            API_KEY = promptForApiKey();
+            if (API_KEY == null || API_KEY.isEmpty()) {
+                System.exit(1);
+            }
+            
+            storeApiKey(API_KEY);
         }
 
         try {
@@ -147,6 +154,7 @@ public class AdvancedStealthAssistant1 {
 
         SwingUtilities.invokeLater(() -> createStealthGUI());
     }
+
 
     private static void createStealthGUI() {
         frame = new JWindow();
@@ -1075,29 +1083,28 @@ public class AdvancedStealthAssistant1 {
     
     
     private static String promptForApiKey() {
-        // Use JDialog instead of JWindow for better focus management
         JDialog dialog = new JDialog();
-        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setTitle("Stealth Assistant - First Time Setup");
+        dialog.setModal(true);
         dialog.setSize(450, 220);
         dialog.setLocationRelativeTo(null);
-        dialog.setAlwaysOnTop(true);
-        dialog.setResizable(false);
-        
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(new Color(40, 40, 40));
-        
+
         JLabel titleLabel = new JLabel("Stealth Assistant - First Time Setup");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         titleLabel.setForeground(new Color(200, 200, 200));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         JLabel instructionLabel = new JLabel("<html><div style='text-align: center; color: #c0c0c0; font-size: 12px;'>" +
             "Enter your Google Gemini API Key<br>" +
             "Get one at: https://makersuite.google.com/app/apikey<br><br>" +
             "Your key will be stored securely on this device.</div></html>");
         instructionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         JTextField apiKeyField = new JTextField(20);
         apiKeyField.setFont(new Font("Consolas", Font.PLAIN, 12));
         apiKeyField.setBackground(new Color(60, 60, 60));
@@ -1107,11 +1114,7 @@ public class AdvancedStealthAssistant1 {
             BorderFactory.createLineBorder(new Color(80, 80, 80), 1),
             BorderFactory.createEmptyBorder(8, 8, 8, 8)
         ));
-        
-        // Ensure the text field can receive focus
-        apiKeyField.setFocusable(true);
-        apiKeyField.setRequestFocusEnabled(true);
-        
+
         JPanel inputPanel = new JPanel(new BorderLayout(5, 5));
         inputPanel.setOpaque(false);
         JLabel keyLabel = new JLabel("API Key:");
@@ -1119,38 +1122,38 @@ public class AdvancedStealthAssistant1 {
         keyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         inputPanel.add(keyLabel, BorderLayout.WEST);
         inputPanel.add(apiKeyField, BorderLayout.CENTER);
-        
+
         panel.add(titleLabel, BorderLayout.NORTH);
         panel.add(instructionLabel, BorderLayout.CENTER);
         panel.add(inputPanel, BorderLayout.SOUTH);
-        
+
         JPanel dialogPanel = new JPanel(new BorderLayout());
         dialogPanel.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 2));
         dialogPanel.setBackground(new Color(40, 40, 40));
         dialogPanel.add(panel, BorderLayout.CENTER);
-        
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
         buttonPanel.setBackground(new Color(40, 40, 40));
-        
+
         JButton cancelButton = new JButton("Exit");
         cancelButton.setBackground(new Color(80, 50, 50));
         cancelButton.setForeground(new Color(220, 220, 220));
         cancelButton.setFocusPainted(false);
         cancelButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-        
+
         JButton okButton = new JButton("Save & Continue");
         okButton.setBackground(new Color(50, 80, 50));
         okButton.setForeground(new Color(220, 220, 220));
         okButton.setFocusPainted(false);
         okButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-        
+
         final String[] result = {null};
-        
+
         cancelButton.addActionListener(e -> {
             dialog.dispose();
             System.exit(0);
         });
-        
+
         okButton.addActionListener(e -> {
             String key = apiKeyField.getText().trim();
             if (key.isEmpty()) {
@@ -1158,89 +1161,39 @@ public class AdvancedStealthAssistant1 {
                     BorderFactory.createLineBorder(new Color(200, 50, 50), 2),
                     BorderFactory.createEmptyBorder(8, 8, 8, 8)
                 ));
-                // Flash the field to indicate error
-                apiKeyField.requestFocusInWindow();
                 return;
             }
             result[0] = key;
             dialog.dispose();
         });
-        
-        // Enter key submits
+
         apiKeyField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     okButton.doClick();
-                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    cancelButton.doClick();
                 }
             }
         });
-        
-        // Handle window closing
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
-        
+
         buttonPanel.add(cancelButton);
         buttonPanel.add(okButton);
         dialogPanel.add(buttonPanel, BorderLayout.SOUTH);
-        
+
         dialog.add(dialogPanel);
-        
-        // Set focus to the text field after the dialog is shown
-        SwingUtilities.invokeLater(() -> {
-            apiKeyField.requestFocusInWindow();
+
+        // Ensure the text field gains focus when the dialog opens
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                apiKeyField.requestFocusInWindow();
+            }
         });
-        
-        dialog.setVisible(true); // This blocks until dialog is closed
-        
+
+        dialog.setVisible(true);
+
         return result[0];
     }
-
-    // Alternative simpler version using JOptionPane if the custom dialog still has issues
-    private static String promptForApiKeySimple() {
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(new Color(40, 40, 40));
-        GridBagConstraints gbc = new GridBagConstraints();
-        
-        JLabel titleLabel = new JLabel("Enter your Google Gemini API Key:");
-        titleLabel.setForeground(new Color(200, 200, 200));
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        
-        JLabel instructionLabel = new JLabel("<html><div style='color: #c0c0c0; font-size: 11px;'>" +
-            "Get one at: https://makersuite.google.com/app/apikey</div></html>");
-        
-        JTextField apiKeyField = new JTextField(30);
-        apiKeyField.setFont(new Font("Consolas", Font.PLAIN, 12));
-        apiKeyField.setBackground(new Color(60, 60, 60));
-        apiKeyField.setForeground(new Color(220, 220, 220));
-        apiKeyField.setCaretColor(new Color(100, 150, 255));
-        
-        gbc.gridx = 0; gbc.gridy = 0; gbc.insets = new Insets(5, 5, 5, 5);
-        panel.add(titleLabel, gbc);
-        gbc.gridy = 1;
-        panel.add(instructionLabel, gbc);
-        gbc.gridy = 2;
-        panel.add(apiKeyField, gbc);
-        
-        int result = JOptionPane.showConfirmDialog(
-            null, 
-            panel, 
-            "Stealth Assistant - Setup", 
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE
-        );
-        
-        if (result == JOptionPane.OK_OPTION) {
-            String key = apiKeyField.getText().trim();
-            return key.isEmpty() ? null : key;
-        }
-        
-        return null;
-    }
+    
+    
 }
