@@ -104,7 +104,7 @@ for (let i = 2; i <= num; i++) {
         cnt += 1;
     }
 }
-cnt > 1 ? console.log("not prime") : console.log("prime");
+// cnt > 1 ? console.log("not prime") : console.log("prime");
 
 
 //! 8.	Sum of All Elements in Array
@@ -113,23 +113,47 @@ cnt > 1 ? console.log("not prime") : console.log("prime");
 // Input: [5, 10, 15]
 // Expected Output: 30
 
+let num1 = [50, 100, 150];
+let sum = 0;
+for (let i = 0; i < num1.length; i++) {
+    sum += num1[i];
+}
+// console.log(sum);
 
 
 // 9.	Remove Duplicates from Array
 
-// Remove all duplicate values from a given array and return a new array.
+// !Remove all duplicate values from a given array and return a new array.
 // Input: [1, 2, 2, 3, 4, 4]
 // Expected Output: [1, 2, 3, 4]
 
+let newArray=[1, 2, 2, 3, 4, 4];
+let newUniqueArray = [];
+
+newArray.forEach(element => {
+    if (!newUniqueArray.includes(element)) {
+        newUniqueArray.push(element)
+    }
+});
+// console.log(newUniqueArray);
 
 
-// 10.	Generate Fibonacci Sequence
+
+//! 10.	Generate Fibonacci Sequence
 
 // Generate the Fibonacci sequence up to n terms.
 // Input: 6
 // Expected Output: [0, 1, 1, 2, 3, 5]
 
+let q10num=6;
+let febnum;
+for (let i = 0; i < q10num; i++) {
+    
+febnum=(i-1)+(i+1)
+console.log(febnum);
 
+    
+}
 
 // 11.	Check If Two Strings Are Anagrams
 
