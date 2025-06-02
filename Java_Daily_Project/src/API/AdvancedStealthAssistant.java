@@ -80,11 +80,11 @@ public class AdvancedStealthAssistant {
     private static JWindow frame;
     private static float opacity = 0.3f;
     private static Point initialClick;
-    private static final int MINIMAL_SIZE = 40;
+    private static final int MINIMAL_SIZE = 30;
     private static boolean isMinimized = false;
     private static boolean isStealthMode = true;
-    private static final Dimension NORMAL_SIZE = new Dimension(500, 400);
-    private static final Dimension MINIMIZED_SIZE = new Dimension(15, 15);
+    private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
+    private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
     private static final String API_KEY = "AIzaSyDaa5ZGb7kRHknvtAXrW8ppbSF86t-CTOs";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
@@ -228,11 +228,7 @@ public class AdvancedStealthAssistant {
         JButton screenshotButton = createStealthButton("📷", "Capture");
         screenshotButton.addActionListener(e -> performStealthScreenshot());
 
-        JButton stealthButton = createStealthButton("👻", "Stealth Mode");
-        stealthButton.addActionListener(e -> toggleStealthMode());
-
-        JButton hideButton = createStealthButton("🫥", "Deep Hide");
-        hideButton.addActionListener(e -> activateDeepHide());
+       
 
         JButton copyButton = createStealthButton("📋", "Copy");
         copyButton.addActionListener(e -> secureClipboardCopy());
@@ -244,8 +240,7 @@ public class AdvancedStealthAssistant {
         closeButton.addActionListener(e -> secureExit());
 
         controlPanel.add(screenshotButton);
-        controlPanel.add(stealthButton);
-        controlPanel.add(hideButton);
+      
         controlPanel.add(copyButton);
         controlPanel.add(ghostButton);
         controlPanel.add(closeButton);
