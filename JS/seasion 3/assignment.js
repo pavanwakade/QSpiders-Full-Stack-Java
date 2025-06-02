@@ -8,7 +8,7 @@
 //? Expected Output: “olleh”
 
 let q1String = "hello";
-let reversestring = (str) => str.split("").reverse().join("");
+let reversestring = str => str.split("").reverse().join("");
 // console.log(reversestring(q1String));
 
 
@@ -19,16 +19,19 @@ let reversestring = (str) => str.split("").reverse().join("");
 let q2palindrom = "madam";
 let q2Array = q2palindrom.split("");
 
-let checkpalindrom = (arr) => {
+// let checkpalindrom = (arr) => {
 
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== (arr[arr.length - 1 - i])) {
-            return false;
-        }
-    }
-    return true;
-}
-// console.log(checkpalindrom(q2Array)); //true
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i] !== (arr[arr.length - 1 - i])) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+
+let checkPlaindrome=q2palindrom.split().reverse().join("")===q2palindrom;
+
+// console.log(checkPlaindrome); //true
 
 //! 3.	Count Vowels in a String
 //Write a function to count the number of vowels in a string.
@@ -36,9 +39,9 @@ let Input= "javascript";
 //? Expected Output: 3
 
 let checkovels=(Inp)=>{
-    let e=Inp.split("");
+    // let e=Inp.split("");
     let count=0;
-    e.forEach(element => {
+    Inp.split("").forEach(element => {
     if (element=='a' || element=='e' ||element=='i' ||element=='o' ||element=='u' ||element=='A' ||element=='E' ||element=='I' ||element=='O' ||element=='U') {
         count+=1;
     }
@@ -56,6 +59,12 @@ return count;
 
 
 let q4=5;
+let element=1;
+for (let i = 1; i <= q4; i++) {
+     element = element* i;
+     console.log(element);    
+}
+console.log(element);
 
 
 
