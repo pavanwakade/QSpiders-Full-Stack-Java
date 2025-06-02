@@ -302,17 +302,17 @@ let checkgcd = (a, b) => {
 // Expected Output: 12
 
 let checklcm = (a, b) => {
-    let lcm;
-    for (let i = 0; i <= Math.max(a, b); i++) {
+    let gcd = 0;
+    for (let i = 0; i <= Math.min(a, b); i++) {
         if (a % i === 0 && b % i === 0) {
-           return lcm = i;
+            gcd = i;
         }
     }
-    console.log(lcm);
+    console.log((a * b) / gcd);
 }
-checklcm(12, 18)
+// checklcm(12, 18)
 
-// 21.	Count Occurrence of a Character
+//! 21.	Count Occurrence of a Character
 
 // Count how many times a specific character appears in a string.
 // Input: “banana”, ‘a’
