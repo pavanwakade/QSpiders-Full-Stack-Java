@@ -32,7 +32,6 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
@@ -56,13 +55,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -74,7 +73,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
@@ -112,6 +110,10 @@ public class AdvancedStealthAssistant2 {
         "x64dbg", "ida", "vmware", "virtualbox", "sandboxie", "avp", "mcshield", "windefend",
         "malwarebytes", "avgui", "avguard", "ekrn", "eset", "fsav", "sophosui", "trendmicro"
     ));
+    private static boolean isMultipleCaptureMode = false;
+    private static List<BufferedImage> capturedScreenshots = new ArrayList<>();
+    private static JPanel controlPanel;
+    private static JButton sendButton;
 
     static {
         try {
@@ -219,14 +221,20 @@ public class AdvancedStealthAssistant2 {
         titleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         titleBar.add(titleLabel, BorderLayout.WEST);
 
-        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 0));
+        controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 0));
         controlPanel.setOpaque(false);
 
         JButton screenshotButton = createStealthButton("📷", "Capture");
-        screenshotButton.addActionListener(e -> performStealthScreenshot());
+        screenshotButton.addActionListener(e -> {
+            if (isMultipleCaptureMode) {
+                captureSingleScreenshotForMultiple();
+            } else {
+                performStealthScreenshot();
+            }
+        });
 
-        JButton multiImageButton = createStealthButton("🖼️", "Multiple Images");
-        multiImageButton.addActionListener(e -> performMultipleImageAnalysis());
+        JButton multiCaptureButton = createStealthButton("📸", "Multiple Capture");
+        multiCaptureButton.addActionListener(e -> toggleMultipleCaptureMode());
 
         JButton copyButton = createStealthButton("📋", "Copy");
         copyButton.addActionListener(e -> secureClipboardCopy());
@@ -238,7 +246,7 @@ public class AdvancedStealthAssistant2 {
         closeButton.addActionListener(e -> secureExit());
 
         controlPanel.add(screenshotButton);
-        controlPanel.add(multiImageButton);
+        controlPanel.add(multiCaptureButton);
         controlPanel.add(copyButton);
         controlPanel.add(ghostButton);
         controlPanel.add(closeButton);
@@ -247,35 +255,59 @@ public class AdvancedStealthAssistant2 {
         return titleBar;
     }
 
-    private static void performMultipleImageAnalysis() {
+    private static void toggleMultipleCaptureMode() {
+        isMultipleCaptureMode = !isMultipleCaptureMode;
+        capturedScreenshots.clear();
+        if (isMultipleCaptureMode) {
+            statusBar.setText(" Multiple capture mode: Use 📷 to capture, Send to process");
+            sendButton = createStealthButton("➤", "Send Captures");
+            sendButton.addActionListener(e -> sendMultipleScreenshots());
+            controlPanel.add(sendButton, 2); // Add after multiCaptureButton
+            controlPanel.revalidate();
+            controlPanel.repaint();
+        } else {
+            statusBar.setText(" Multiple capture mode disabled");
+            if (sendButton != null) {
+                controlPanel.remove(sendButton);
+                controlPanel.revalidate();
+                controlPanel.repaint();
+                sendButton = null;
+            }
+        }
+    }
+
+    private static void captureSingleScreenshotForMultiple() {
         CompletableFuture.runAsync(() -> {
             try {
-//                status 0
-                statusBar.setText(" Selecting images...");
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setMultiSelectionEnabled(true);
-                fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg"));
-                int result = fileChooser.showOpenDialog(frame);
-                if (result != JFileChooser.APPROVE_OPTION) {
-                    SwingUtilities.invokeLater(() -> statusBar.setText(" Image selection cancelled"));
-                    return;
-                }
+                statusBar.setText(" Capturing screenshot...");
+                frame.setVisible(false);
+                Thread.sleep(300);
+                BufferedImage screenshot = captureWithStealth();
+                frame.setVisible(true);
+                capturedScreenshots.add(screenshot);
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Captured " + capturedScreenshots.size() + " screenshot(s)"));
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Capture error: " + e.getMessage()));
+            }
+        });
+    }
 
-                File[] files = fileChooser.getSelectedFiles();
-                if (files == null || files.length == 0) {
-                    SwingUtilities.invokeLater(() -> statusBar.setText(" No images selected"));
-                    return;
-                }
+    private static void sendMultipleScreenshots() {
+        if (capturedScreenshots.isEmpty()) {
+            statusBar.setText(" No screenshots captured");
+            return;
+        }
 
-                statusBar.setText(" Processing " + files.length + " images...");
+        CompletableFuture.runAsync(() -> {
+            try {
+                statusBar.setText(" Processing " + capturedScreenshots.size() + " screenshots...");
                 StringBuilder combinedResponse = new StringBuilder();
-                for (int i = 0; i < files.length; i++) {
-                    File file = files[i];
-                    BufferedImage image = ImageIO.read(file);
-                    String base64Image = encodeImageToBase64(image);
+                for (int i = 0; i < capturedScreenshots.size(); i++) {
+                    BufferedImage screenshot = capturedScreenshots.get(i);
+                    String base64Image = encodeImageToBase64(screenshot);
                     String response = sendSecureImageToGemini(base64Image);
                     String responseText = extractResponseText(response);
-                    combinedResponse.append("### Image ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
+                    combinedResponse.append("### Screenshot ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
                 }
 
                 String finalResponse = combinedResponse.toString();
@@ -284,7 +316,8 @@ public class AdvancedStealthAssistant2 {
                     markdownArea.setText(currentResponse);
                     updateSecureHtmlPreview(currentResponse);
                     updateSecureCodeBlocks(currentResponse);
-                    statusBar.setText(" Analysis of " + files.length + " images complete");
+                    statusBar.setText(" Analysis of " + capturedScreenshots.size() + " screenshots complete");
+                    toggleMultipleCaptureMode(); // Exit multiple capture mode
                 });
 
             } catch (Exception e) {
