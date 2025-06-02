@@ -261,7 +261,7 @@ let checkenodd = 9;
 // Input: [1, 2, 3, 4, 5]
 // Expected Output: true
 
-let SortOrNot = [1, 2, 6,3, 4, 5];
+let SortOrNot = [1, 2, 6, 3, 4, 5];
 
 let checkAccendingorNot = (sss) => {
     for (let i = 0; i < sss.length - 1; i++) {
@@ -283,16 +283,34 @@ let checkAccendingorNot = (sss) => {
 // Input: 12, 18
 // Expected Output: 6
 
-let num1=12;
+let checkgcd = (a, b) => {
+    let gcd;
+    for (let i = 0; i <= Math.min(a, b); i++) {
+        if (a % i === 0 && b % i === 0) {
+            gcd = i;
+        }
+    }
+    console.log(gcd);
+}
+// checkgcd(12, 18)
 
 
-// 20.	Find LCM of Two Numbers
+//! 20.	Find LCM of Two Numbers
 
 // Calculate the Least Common Multiple (LCM) of two numbers.
 // Input: 4, 6
 // Expected Output: 12
 
-
+let checklcm = (a, b) => {
+    let lcm;
+    for (let i = 0; i <= Math.max(a, b); i++) {
+        if (a % i === 0 && b % i === 0) {
+           return lcm = i;
+        }
+    }
+    console.log(lcm);
+}
+checklcm(12, 18)
 
 // 21.	Count Occurrence of a Character
 
