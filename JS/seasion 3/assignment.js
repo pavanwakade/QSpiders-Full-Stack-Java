@@ -229,16 +229,18 @@ let output = capitalizeWords(input);
 // Expected Output: 3
 
 let countsentecnce="JavaScript is fun ";
+let sentencetoarraycount= countsentecnce.trim().split(' ').length;
+// console.log(sentencetoarraycount);
 
-let sentencetoarray= countsentecnce.trim().split(' ');
-console.log(sentencetoarray.length);
 
-
-// 16.	Reverse Each Word in a Sentence
+//! 16.	Reverse Each Word in a Sentence
 
 // Reverse each word in a sentence but maintain their positions.
 // Input: “hello world”
 // Expected Output: “olleh dlrow”
+
+let striing="hello world";
+
 
 
 
