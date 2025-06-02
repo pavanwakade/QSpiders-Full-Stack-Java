@@ -78,7 +78,7 @@ import javax.swing.text.html.StyleSheet;
 
 public class AdvancedStealthAssistant {
     private static JWindow frame;
-    private static float opacity = 0.3f;
+    private static float opacity = 0.1f;
     private static Point initialClick;
     private static final int MINIMAL_SIZE = 30;
     private static boolean isMinimized = false;
@@ -195,8 +195,8 @@ public class AdvancedStealthAssistant {
                     int height = frame.getHeight();
                     int newWidth = width + e.getX() - initialClick.x;
                     int newHeight = height + e.getY() - initialClick.y;
-                    newWidth = Math.max(300, Math.min(newWidth, 1200));
-                    newHeight = Math.max(200, Math.min(newHeight, 800));
+                    newWidth = Math.max(200, Math.min(newWidth, 1200));
+                    newHeight = Math.max(100, Math.min(newHeight, 800));
                     frame.setSize(newWidth, newHeight);
                 }
             }
@@ -500,7 +500,7 @@ public class AdvancedStealthAssistant {
             opacity = 0.2f;
             statusBar.setText(" Deep stealth activated");
         } else {
-            opacity = 0.8f;
+            opacity = 0.3f;
             statusBar.setText(" Normal mode active");
         }
         makeTranslucent(opacity);
@@ -543,7 +543,7 @@ public class AdvancedStealthAssistant {
             frame.setFocusableWindowState(false);
             statusBar.setText(" Ghost mode - Nearly invisible");
         } else {
-            frame.setOpacity(0.7f);
+            frame.setOpacity(0.2f);
             frame.setFocusableWindowState(true);
             statusBar.setText(" Ghost mode disabled");
         }
