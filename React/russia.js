@@ -11,9 +11,14 @@
 // console.log(indianoil);
 
 
-import indianoil from "./india.js"; //!we can import with diffrant name  with default export
 // console.log(indianoil);
-let {resourses,resourses2}=indianoil;   //!import and destucture for easy access
+// let resourses=indianoil;   //!import array for easy access
+// console.log(resourses);
+// console.log(resourses[0]);
+// console.log(resourses[1]);
 
-console.log(resourses);
-console.log(resourses2);
+
+// let {resourses,resourses2}=indianoil;   //!import object and destucture for easy access
+
+// console.log(resourses);
+// console.log(resourses2);

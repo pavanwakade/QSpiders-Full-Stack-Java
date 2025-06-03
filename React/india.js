@@ -10,6 +10,8 @@ let resourses = "crud oil";
 
 let resourses2 = "wepons";
 
+// export default [resourses,resourses2]
+
 // export default { 
 //     resourses,
 //      resourses2 }
