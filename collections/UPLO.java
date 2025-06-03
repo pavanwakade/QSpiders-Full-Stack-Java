@@ -2,6 +2,9 @@ class UPLO{
 	public static void main(String[] args) {
 		String str="hello From pavan";  
 		String ss="";
+
+
+		//more memory
 		String s[]=str.split("");
 
 		for (int i=0;i<s.length ;i++ ) {
@@ -15,8 +18,10 @@ class UPLO{
 		}
 		System.out.println(ss);
 
-ss="";
+       ss="";
 
+
+//low memory
 for (int i =0;i<str.length();i++ ) {
 	String ch=str.substring(i,i+1);
 	if (i%2==0) {
