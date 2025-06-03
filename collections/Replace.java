@@ -5,10 +5,13 @@ class Replace{
 		String ss=s.replace('a','z');
 		System.out.println(ss);
 
-        char c=s.toCharArray();
+        char c []=s.toCharArray();
 		for (int i=0;i<s.length() ;i++ ) {
 			
-
+			if (c.toCharAt(i)=='a') {
+				
+				c[i]='z';
+			}
 		}
 	}
 }
