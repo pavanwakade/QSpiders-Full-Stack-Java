@@ -1,9 +1,10 @@
+//!default expoart
 
 // import phone from "./india.js";
 // console.log(phone);
 // console.log(price);
 
-// import resourses from "./india.js";  //!we can import with same name  with default export
+// import resourses from "./india.js"; //!we can import with same name  with default export
 
 // console.log(resourses);
 
@@ -25,3 +26,14 @@
 // console.log(resourses2);
 
 
+     //! Named expoart
+
+import { age, loc, name } from "./india.js";
+
+console.log(name);
+console.log(age);
+console.log(loc);
+
+console.log(
+    `my name is ${name} my age is ${age} i am from ${loc}`
+);
