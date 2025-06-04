@@ -1,3 +1,5 @@
+//!onw js file can have only one default expoart
+
 // let phone = "Iphone";
 
 // export default phone;

@@ -1,3 +1,4 @@
+
 // import phone from "./india.js";
 // console.log(phone);
 // console.log(price);
@@ -22,3 +23,5 @@
 
 // console.log(resourses);
 // console.log(resourses2);
+
+
