@@ -9,8 +9,9 @@ function App() {
     
      
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => setCount((count) => count + 1)}    
+          style={{backgroundColor: count === 0 ? 'green' :count >5 ? 'yellow' : 'red'}}>
+          count is {count}   
         </button>
        
       </div>
