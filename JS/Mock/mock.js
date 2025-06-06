@@ -2,12 +2,12 @@
 
 // //! var
 // //? Stored in global scope/window object (if declared outside functions)
-// /* We can:
-// - declare only: var a;
-// - declare and initialize: var a = 10;
-// - update: a = 20;
-// - redeclare: var a = 50;
-// */
+//  We can:
+// declare only: var a;
+//  declare and initialize: var a = 10;
+//  update: a = 20;
+// redeclare: var a = 50;
+
 
 // //! let
 // //? Stored in block scope/Temporal Dead Zone (TDZ) before initialization
