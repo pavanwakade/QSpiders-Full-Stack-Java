@@ -518,7 +518,7 @@ while (num3 > 0) {
 // Expected Output: 4321
 let nummm = 1234;
 let Strrr = nummm.toString().split("").reverse().join("");
-console.log(Strrr);
+// console.log(Strrr);
 
 
 
@@ -526,10 +526,27 @@ console.log(Strrr);
 // Count the number of even and odd digits in a number.
 // Input: 123456
 // Expected Output: Even: 3, Odd: 3
+let num7 = 123456;
+let evenCount = 0;
+let oddCount = 0;
+
+while (num7 > 0) {
+    let digit = num7 % 10;
+    
+    if (digit % 2 === 0) {
+        evenCount++;
+    } else {
+        oddCount++;
+    }
+
+    num7 = Math.floor(num7 / 10);
+}
+
+// console.log(`Even: ${evenCount}, Odd: ${oddCount}`);
 
 
 
-// 35.	Celsius to Fahrenheit Conversion
+//? 35.	Celsius to Fahrenheit Conversion
 
 // Convert a temperature from Celsius to Fahrenheit.
 // Input: 0
@@ -537,12 +554,18 @@ console.log(Strrr);
 
 
 
-// 36.	Check If String Is Numeric
+//! 36.	Check If String Is Numeric
 
 // Check if a given string can be converted to a number.
-// Input: “123”
+let t="fgh";
 // Expected Output: true
 
+// try { parseFloat(t)
+//     console.log("jj");
+    
+// } catch (error) {
+    
+// }
 
 
 // 37.	First Non-Repeating Character
@@ -550,6 +573,13 @@ console.log(Strrr);
 // Find the first non-repeating character in a string.
 // Input: “aabbcdde”
 // Expected Output: “c”
+
+let zz="aabbcdde";
+let ff=zz.split("")
+
+
+console.log(ff);
+
 
 
 
