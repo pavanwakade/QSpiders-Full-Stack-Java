@@ -428,55 +428,85 @@ let bbb = aaa.toString();
 //! 28.	Get Unique Values from Array
 
 // Return only the unique values from an array.
-// const inputArray = [1, 2, 2, 3, 4, 4];
-// let uniqueValues = [...new Set(inputArray)];
+const inputArray = [1, 2, 2, 3, 4, 4];
+let uniqueValues = [...new Set(inputArray)];
 
 // console.log(uniqueValues);
 
 
 
-// 29.	Frequency of Elements in Array
+// !29.	Frequency of Elements in Array
 
 // Return an object showing how many times each element occurs.
 // Input: [1, 2, 2, 3]
 // Expected Output: {1: 1, 2: 2, 3: 1}
+const ttt = [1, 2, 2, 3];
+let frequency = {};
 
-const ttt= [1, 2, 2, 3];
-
-
-let uniqueValues = [...new Set(ttt)];
-let frequency={};
-
-for (let i = 0; i < uniqueValues.length; i++) {
-   
-    
+for (let i = 0; i < ttt.length; i++) {
+    let item = ttt[i];
+    if (frequency[item]) {
+        frequency[item] += 1;
+    } else {
+        frequency[item] = 1;
+    }
 }
 
-console.log(frequency);
+// console.log(frequency); // Output: {1: 1, 2: 2, 3: 1}
 
 
 
-// 30.	Intersection of Two Arrays
+//! 30.	Intersection of Two Arrays
 
 // Return the common elements of two arrays.
 // Input: [1, 2, 3], [2, 3, 4]
 // Expected Output: [2, 3]
 
+let q30=[1, 2, 3];  let q301=[2, 3, 4];
+
+let nnnn=[];
+for (let i = 0; i < q30.length; i++) {
+    const element = q30[i];
+
+    if (q301.includes(element)) {
+
+        nnnn.push(element);
+    }
+}
+// console.log(nnnn);
 
 
-// 31.	Union of Two Arrays
+//! 31.	Union of Two Arrays
 
 // Return a new array that combines elements from both arrays without duplicates.
 // Input: [1, 2], [2, 3]
 // Expected Output: [1, 2, 3]
 
+const inputArray1 = [1, 2];
+const inputArray2 = [2,3];
+
+const ot=inputArray1.concat(inputArray2);
+let uniqueValues2 = [...new Set(ot)];
+
+// console.log(uniqueValues2);
 
 
-// 32.	Sum of Digits in a Number
+
+
+// !32.	Sum of Digits in a Number
 
 // Calculate the sum of digits in a number.
 // Input: 1234
 // Expected Output: 10
+
+let num3=1234;let ct=0;
+while (num==0) {
+    num3%10;
+    ct++;
+   num3=num3/10 
+}
+console.log(ct);
+
 
 
 
