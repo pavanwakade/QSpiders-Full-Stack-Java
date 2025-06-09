@@ -337,10 +337,18 @@ let checklcm = (a, b) => {
 
 
 // 24.	Find Missing Number
-
 // Find the missing number in an array containing numbers from 1 to n.
 // Input: [1, 2, 4, 5]
 // Expected Output: 3
+
+let z = [1, 2, 4, 5];
+
+for (let i = 0; i < z.length; i++) {
+    
+    
+    
+}
+
 
 
 
