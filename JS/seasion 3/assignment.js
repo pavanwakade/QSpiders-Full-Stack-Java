@@ -308,9 +308,9 @@ let checklcm = (a, b) => {
             gcd = i;
         }
     }
-    // console.log((a * b) / gcd);
+    console.log((a * b) / gcd);
 }
-// checklcm(12, 18)
+checklcm(12, 18)
 
 //! 21.	Count Occurrence of a Character
 // Count how many times a specific character appears in a string.
@@ -327,10 +327,10 @@ let inn = (arr, ch) => {
     return cn;
 }
 let m = "banana".split("");
-console.log(inn(m, 'a'));
+// console.log(inn(m, 'a'));
 
 
-// 22.	Merge Two Arrays
+// !22.	Merge Two Arrays
 
 // Write a function that merges two arrays into one.
 // Input: [1, 2], [3, 4]
@@ -340,7 +340,7 @@ let mergeArrays = (arr1, arr2) => {
     return arr1.concat(arr2);
 };
 
-console.log(mergeArrays([1, 2], [3, 4])); // Output: [1, 2, 3, 4]
+// console.log(mergeArrays([1, 2], [3, 4])); // Output: [1, 2, 3, 4]
 
 
 
