@@ -308,16 +308,26 @@ let checklcm = (a, b) => {
             gcd = i;
         }
     }
-    console.log((a * b) / gcd);
+    // console.log((a * b) / gcd);
 }
 // checklcm(12, 18)
 
 //! 21.	Count Occurrence of a Character
-
 // Count how many times a specific character appears in a string.
 // Input: “banana”, ‘a’
 // Expected Output: 3
-
+let inn = (arr, ch) => {
+    let cn = 0;
+    arr.forEach(element => {
+        if (element === ch) {
+            cn++;
+            // console.log(element);
+        }
+    });
+    return cn;
+}
+let m = "banana".split("");
+console.log(inn(m, 'a'));
 
 
 // 22.	Merge Two Arrays
@@ -325,6 +335,13 @@ let checklcm = (a, b) => {
 // Write a function that merges two arrays into one.
 // Input: [1, 2], [3, 4]
 // Expected Output: [1, 2, 3, 4]
+
+let mergeArrays = (arr1, arr2) => {
+    return arr1.concat(arr2);
+};
+
+console.log(mergeArrays([1, 2], [3, 4])); // Output: [1, 2, 3, 4]
+
 
 
 
@@ -344,9 +361,11 @@ let checklcm = (a, b) => {
 let z = [1, 2, 4, 5];
 
 for (let i = 0; i < z.length; i++) {
-    
-    
-    
+
+    if (z[i + 1] !== z[i] + 1) {
+        // console.log("first occurance: "+z[i] + 1);
+        break;
+    }
 }
 
 
