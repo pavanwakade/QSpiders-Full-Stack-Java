@@ -606,31 +606,83 @@ const input4 = "aabbcdde";
 // Input: [1, 2, 2, 3, 3, 4]
 // Expected Output: [2, 3]
 
+function findDuplicates(arr) {
+  const countMap = {};
+  const duplicates = new Set();
+
+  for (let num of arr) {
+    if (countMap[num]) {
+      duplicates.add(num);
+    } else {
+      countMap[num] = 1;
+    }
+  }
+
+  return Array.from(duplicates);
+}
+
+// Test
+const input9 = [1, 2, 2, 3, 3, 4];
+// console.log(findDuplicates(input9)); // Output: [2, 3]
+
  
 
 
 
-// 39.	Generate Random Number Between Range
+//! 39.	Generate Random Number Between Range
 
 // Generate a random number between two values (inclusive).
 // Input: 1, 10
 // Expected Output: Random number between 1 and 10
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Test
+const random = getRandomNumber(1, 10);
+// console.log(random);
 
 
 
-// 40.	Check If Year Is Leap Year
+//! 40.	Check If Year Is Leap Year
 
 // Determine if a year is a leap year.
 // Input: 2024
 // Expected Output: true
+function isLeapYear(year) {
+  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
+
+// Test
+const input99 = 2024;
+// console.log(isLeapYear(input99));  // Output: true
 
 
 
-// 41.	Count Uppercase and Lowercase Letters
-
+//! 41.	Count Uppercase and Lowercase Letters
 // Count the number of uppercase and lowercase characters in a string.
 // Input: “HelloWorld”
 // Expected Output: Uppercase: 2, Lowercase: 8
+function countCase(str) {
+  let upper = 0;
+  let lower = 0;
+
+  for (let char of str) {
+    if (char >= 'A' && char <= 'Z') {
+      upper++;
+    } else if (char >= 'a' && char <= 'z') {
+      lower++;
+    }
+  }
+
+  return { uppercase: upper, lowercase: lower };
+}
+
+// Test
+const result = countCase("HelloWorld");
+console.log(`Uppercase: ${result.uppercase}, Lowercase: ${result.lowercase}`);
+// Output: Uppercase: 2, Lowercase: 8
+
 
 
 
