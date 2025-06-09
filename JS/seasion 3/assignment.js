@@ -778,17 +778,28 @@ function sumOfEvenNumbers(arr) {
 }
 
 // Test
-const tt = [1, 2, 3, 4];
-console.log("Sum of even numbers:", sumOfEvenNumbers(tt)); // Output: 6
+// const tt = [1, 2, 3, 4];
+// console.log("Sum of even numbers:", sumOfEvenNumbers([1, 2, 3, 4])); // Output: 6
 
 
 
-// 48.	Sum of Odd Numbers in Array
-
+//! 48.	Sum of Odd Numbers in Array
 // Calculate the sum of all odd numbers in an array.
 // Input: [1, 2, 3, 4]
 // Expected Output: 4
 
+function sumOfOddNumbers(arr) {
+  let ct = 0;
+  for (let num of arr) {
+    if (num % 2 !== 0) {
+      ct ++;
+    }
+  }
+  return ct;
+}
+
+// Test
+// console.log("Sum of odd numbers:", sumOfOddNumbers([1, 2, 3, 4])); // Output: 4
 
 
 // 49.	Convert Time to 24-Hour Format
@@ -800,3 +811,11 @@ console.log("Sum of even numbers:", sumOfEvenNumbers(tt)); // Output: 6
 
 
 // 50.	Check if Array Contains Specific Value
+
+function containsValue(arr, value) {
+  return arr.includes(value);
+}
+
+// Test
+console.log(containsValue([1, 2, 3, 4], 3)); 
+
