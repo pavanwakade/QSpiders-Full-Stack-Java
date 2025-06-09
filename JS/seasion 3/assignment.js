@@ -680,34 +680,69 @@ function countCase(str) {
 
 // Test
 const result = countCase("HelloWorld");
-console.log(`Uppercase: ${result.uppercase}, Lowercase: ${result.lowercase}`);
+// console.log(`Uppercase: ${result.uppercase}, Lowercase: ${result.lowercase}`);
 // Output: Uppercase: 2, Lowercase: 8
 
 
 
 
-// 42.	Find Average of Array Elements
-
+//! 42.	Find Average of Array Elements
 // Calculate the average of all numbers in an array.
 // Input: [10, 20, 30, 40]
 // Expected Output: 25
+function findAverage(arr) {
+
+  const sum = arr.reduce((total, num) => total + num, 0);
+  return sum / arr.length;
+}
+
+// Test
+const input88 = [10, 20, 30, 40];
+// console.log("Average:", findAverage(input88)); // Output: 25
 
 
 
-// 43.	Check If All Array Elements Are Unique
+
+// ! 43.	Check If All Array Elements Are Unique
 
 // Verify if all elements in an array are unique.
 // Input: [1, 2, 3, 4]
 // Expected Output: true
 
+function areElementsUnique(arr) {
+  const uniqueSet = new Set(arr);
+  return uniqueSet.size === arr.length;
+}
+
+// Test
+const input44 = [1, 2, 3, 4];
+// console.log(areElementsUnique(input44));  // Output: true
 
 
-// 44.	Print Star Pattern
+
+
+
+//! 44.	Print Star Pattern
 
 // Print the following pattern for n = 3:
 
 // *
 // **
+
+
+function printStarPattern(n) {
+  for (let i = 1; i <= n; i++) {
+    let line = '';
+    for (let j = 1; j <= i; j++) {
+      line += '*';
+    }
+    console.log(line);
+  }
+}
+
+// Test
+// printStarPattern(3);
+
 
 
 
@@ -727,11 +762,24 @@ console.log(`Uppercase: ${result.uppercase}, Lowercase: ${result.lowercase}`);
 
 
 
-// 47.	Sum of Even Numbers in Array
+//! 47.	Sum of Even Numbers in Array
 
 // Calculate the sum of all even numbers in an array.
 // Input: [1, 2, 3, 4]
 // Expected Output: 6
+function sumOfEvenNumbers(arr) {
+  let sum = 0;
+  for (let num of arr) {
+    if (num % 2 === 0) {
+      sum++;
+    }
+  }
+  return sum;
+}
+
+// Test
+const tt = [1, 2, 3, 4];
+console.log("Sum of even numbers:", sumOfEvenNumbers(tt)); // Output: 6
 
 
 
