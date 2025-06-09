@@ -568,26 +568,45 @@ let t="fgh";
 // }
 
 
-// 37.	First Non-Repeating Character
+//! 37.	First Non-Repeating Character
 
 // Find the first non-repeating character in a string.
 // Input: “aabbcdde”
 // Expected Output: “c”
 
-let zz="aabbcdde";
-let ff=zz.split("")
+function firstNonRepeatingChar(str) {
+  const charCount = {};
+
+  // Step 1: Count frequency of each character
+  for (let char of str) {
+    charCount[char] = (charCount[char] || 0) + 1;
+  }
+
+  // Step 2: Find the first character with count = 1
+  for (let char of str) {
+    if (charCount[char] === 1) {
+      return char;
+    }
+  }
+
+  return null; // if no non-repeating character found
+}
+
+// Test
+const input4 = "aabbcdde";
+// console.log(firstNonRepeatingChar(input4)); // Output: "c"
 
 
-console.log(ff);
 
 
 
-
-// 38.	Find Duplicates in Array
+//! 38.	Find Duplicates in Array
 
 // Identify all elements that appear more than once.
 // Input: [1, 2, 2, 3, 3, 4]
 // Expected Output: [2, 3]
+
+ 
 
 
 
