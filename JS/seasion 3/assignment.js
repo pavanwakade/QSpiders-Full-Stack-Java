@@ -350,6 +350,25 @@ let checklcm = (a, b) => {
 // Input: [0, 1, false, 2, ‘’, 3]
 // Expected Output: [1, 2, 3]
 
+let q25 = [0, 1, false, 2, '', 3];
+
+let removeFalsyValues = (arr) => {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        let value = arr[i];
+        if (value !== false && value !== 0 && value !== '' && value !== null && value !== undefined && !Number.isNaN(value)) {
+            result.push(value);
+        }
+    }
+    return result;
+};
+
+// console.log(removeFalsyValues(q25)); // Output: [1, 2, 3]
+
+
+
+
+
 
 
 // 26.	Convert String to Number

@@ -24,15 +24,20 @@ hero1.style.height = "100%";
 hero1.style.color = "white";
 hero1.style.backgroundColor = "rgb(179, 230, 214)"; // 🔥 fixed
 hero1.style.display = "flex";
-// hero1.style.flexDirection = "column";
+hero1.style.flexDirection = "column";
 hero1.style.justifyContent = "center";
 hero1.style.alignItems = "center";
 
-hero1.style.fontSize = "5vw"; // responsive to screen width
+hero1.style.fontSize = "6vw"; // responsive to screen width
 hero1.style.fontWeight = "bold";
 hero1.style.textAlign = "center";
 hero1.innerText = "SIMPLICITY";
 hero1.style.padding = "1%";
+ 
+let span = document.createElement("span");
+span.style.fontSize = "3vw";
+span.innerText = "is the ultimate sophistication";
+hero1.appendChild(span);
 
 
 
