@@ -499,27 +499,30 @@ let uniqueValues2 = [...new Set(ot)];
 // Input: 1234
 // Expected Output: 10
 
-let num3=1234;let ct=0;
-while (num==0) {
-    num3%10;
-    ct++;
-   num3=num3/10 
+let num3 = 1234;
+let sum1 = 0;
+
+while (num3 > 0) {
+    sum1 += num3 % 10;            
+    num3 = Math.floor(num3 / 10); 
 }
-console.log(ct);
+// console.log(sum1); 
 
 
 
 
-// 33.	Reverse a Number
 
+// !33.	Reverse a Number
 // Reverse the digits of a number.
 // Input: 1234
 // Expected Output: 4321
+let nummm = 1234;
+let Strrr = nummm.toString().split("").reverse().join("");
+console.log(Strrr);
 
 
 
-// 34.	Count Even and Odd Digits
-
+//! 34.	Count Even and Odd Digits
 // Count the number of even and odd digits in a number.
 // Input: 123456
 // Expected Output: Even: 3, Odd: 3
