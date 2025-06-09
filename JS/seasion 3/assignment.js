@@ -428,15 +428,10 @@ let bbb = aaa.toString();
 //! 28.	Get Unique Values from Array
 
 // Return only the unique values from an array.
-let q28 = [1, 2, 2, 3, 4, 4]
-// Expected Output: [1, 2, 3, 4]
-let newarrra = [];
-q28.forEach(element => {
-    if (!newArray.includes(element)) {
-        newArray.push(element);
-    }
-})
-console.log(newArray);
+// const inputArray = [1, 2, 2, 3, 4, 4];
+// let uniqueValues = [...new Set(inputArray)];
+
+// console.log(uniqueValues);
 
 
 
@@ -445,6 +440,19 @@ console.log(newArray);
 // Return an object showing how many times each element occurs.
 // Input: [1, 2, 2, 3]
 // Expected Output: {1: 1, 2: 2, 3: 1}
+
+const ttt= [1, 2, 2, 3];
+
+
+let uniqueValues = [...new Set(ttt)];
+let frequency={};
+
+for (let i = 0; i < uniqueValues.length; i++) {
+   
+    
+}
+
+console.log(frequency);
 
 
 
