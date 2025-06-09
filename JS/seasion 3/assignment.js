@@ -308,7 +308,7 @@ let checklcm = (a, b) => {
             gcd = i;
         }
     }
-    console.log((a * b) / gcd);
+    // console.log((a * b) / gcd);
 }
 checklcm(12, 18)
 
@@ -345,15 +345,14 @@ let mergeArrays = (arr1, arr2) => {
 
 
 
-// 23.	Flatten a Nested Array
-
+//! 23.	Flatten a Nested Array
 // Flatten a deeply nested array into a single-level array.
 // Input: [1, [2, [3, [4]]]]
 // Expected Output: [1, 2, 3, 4]
 
 
 
-// 24.	Find Missing Number
+//! 24.	Find Missing Number
 // Find the missing number in an array containing numbers from 1 to n.
 // Input: [1, 2, 4, 5]
 // Expected Output: 3
@@ -398,27 +397,46 @@ let removeFalsyValues = (arr) => {
 
 
 
-// 26.	Convert String to Number
-
+//! 26.	Convert String to Number
 // Convert a string value into a number.
 // Input: “123”
 // Expected Output: 123
 
+let ii = parseInt("123");
+// console.log(typeof ii);
+// console.log(ii);
 
 
-// 27.	Convert Number to String
+
+
+
+//! 27.	Convert Number to String
 
 // Convert a number into a string.
 // Input: 456
 // Expected Output: “456”
 
+let aaa = 123;
+let bbb = aaa.toString();
+// console.log(bbb);
+// console.log(typeof bbb);
 
 
-// 28.	Get Unique Values from Array
+
+
+
+//! 28.	Get Unique Values from Array
 
 // Return only the unique values from an array.
-// Input: [1, 2, 2, 3, 4, 4]
+let q28 = [1, 2, 2, 3, 4, 4]
 // Expected Output: [1, 2, 3, 4]
+let newarrra = [];
+q28.forEach(element => {
+    if (!newArray.includes(element)) {
+        newArray.push(element);
+    }
+})
+console.log(newArray);
 
 
 
