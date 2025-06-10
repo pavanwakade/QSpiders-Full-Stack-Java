@@ -1,42 +1,22 @@
 import { Component } from "react";
 import './App.css';
-import Aside from './Aside';
-import Footer from './Componant/Footer';
-import MainBody from './Componant/MainBody';
-import NavBar from './Componant/NavBar';
+import Aside from './Componants/Aside';
+import Footer from "./Componants/Footer";
+import MainBody from './Componants/MainBody';
+import NavBar from "./Componants/NavBar";
 
-
-
-class App  extends Component {
+class App extends Component {
     render() {
         return (
-          <div>
-          <NavBar></NavBar>
-          <div className='mainbody'>
-          <Aside></Aside>
-          <MainBody></MainBody>
-          </div>
-          <Footer></Footer>
+          <div className="app-container">
+            <NavBar />
+            <div className='mainbody'>
+              <Aside />
+              <MainBody />
+            </div>
+            <Footer />
           </div>
         );
     }
 }
- export default App;
-
-
- // function App() {
-//   return (
-  
-    
-     
-//       <div className="card" 
-//       style={{color: 'black'}}> 
-//         <button onClick={() => setCount((count) => count + 1)}    
-//           style={{backgroundColor: count === 0 ? 'green' : count < 5 ? 'yellow' :count > 10 ? 'red': 'white'}}>
-//           count is {count}   
-//         </button>
-       
-//       </div>
-  
-//   )
-// }
+export default App;

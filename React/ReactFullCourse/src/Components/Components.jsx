@@ -1,4 +1,14 @@
-import { ComponentsIntro } from './ComponentsIntro/ComponentsIntro';
+import { Component } from 'react';
+import ComponentsIntro from './ComponentsIntro/ComponentsIntro';
 
-// You can export directly
-export { ComponentsIntro };
+class Components extends Component {
+  render() {
+    return (
+      <div>
+        <ComponentsIntro />
+      </div>
+    );
+  }
+}
+
+export default Components;

@@ -1,11 +1,14 @@
+import { Component } from 'react';
 import Landing from './landing';
 
-const ComponentsDay1 = () => {
-  return (
-    <div>
-      <Landing />
-    </div>
-  );
-};
+class ComponentsDay1 extends Component {
+  render() {
+    return (
+      <div>
+        <Landing />
+      </div>
+    );
+  }
+}
 
 export default ComponentsDay1;
