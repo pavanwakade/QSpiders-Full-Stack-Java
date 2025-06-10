@@ -1,25 +1,10 @@
+import { Component } from "react";
 import './App.css';
-import {  Componant}  from "react";
-import Aside from './Componant/Aside';
+import Aside from './Aside';
 import Footer from './Componant/Footer';
 import MainBody from './Componant/MainBody';
 import NavBar from './Componant/NavBar';
-// function App() {
-//   return (
-  
-    
-     
-//       <div className="card" 
-//       style={{color: 'black'}}> 
-//         <button onClick={() => setCount((count) => count + 1)}    
-//           style={{backgroundColor: count === 0 ? 'green' : count < 5 ? 'yellow' :count > 10 ? 'red': 'white'}}>
-//           count is {count}   
-//         </button>
-       
-//       </div>
-  
-//   )
-// }
+
 
 
 class App  extends Component {
@@ -37,3 +22,21 @@ class App  extends Component {
     }
 }
  export default App;
+
+
+ // function App() {
+//   return (
+  
+    
+     
+//       <div className="card" 
+//       style={{color: 'black'}}> 
+//         <button onClick={() => setCount((count) => count + 1)}    
+//           style={{backgroundColor: count === 0 ? 'green' : count < 5 ? 'yellow' :count > 10 ? 'red': 'white'}}>
+//           count is {count}   
+//         </button>
+       
+//       </div>
+  
+//   )
+// }
