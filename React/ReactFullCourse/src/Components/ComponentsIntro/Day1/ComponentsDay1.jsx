@@ -1,22 +1,12 @@
-class Car {
-   constructor() {
-    super();
+// ./Components/ComponentsIntro/Day1/ComponentsDay1.jsx
+import Landing from './landing';
 
-    this.state={
-      cartitem: 0,
-    };
-  }
+const ComponentsDay1 = () => {
+  return (
+    <div>
+      <Landing />
+    </div>
+  );
+};
 
-  render(){
-    return(
-      <div>
-        <h1>{this.state.cartitem}</h1>
-        <button onClick={(()=>{
-          this.setState({cartitem:this.state.cartitem +=1})
-        })}>add</button>
-      </div>
-    )
-  }
-}
-
-export default Car
+export default ComponentsDay1;

@@ -1,8 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import ComponentsDay1 from './Components/ComponentsIntro/Day1/ComponentsDay1';
 
-import ComponentsDay1 from './Components/ComponentsIntro/Day1/ComponentsDay1'
+
+function App() {
+  return (
+    <div className="App">
+      <ComponentsDay1 />
+    </div>
+  );
+}
+
+export default App;
 
 
