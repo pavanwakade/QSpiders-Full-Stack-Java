@@ -8,8 +8,19 @@ container.style.width = "100vw";
 
 let header = document.createElement("section");
 header.style.display = "flex";
+header.style.justifyContent="center"
+header.style.alignItems="center"
 header.style.height = "70px";
 header.style.backgroundColor = "white";
+
+
+let texts = ["HOME", "ABOUT", "SERVICE", "PORTFOLIO","CONTACT"];
+texts.forEach(text => {
+  let span = document.createElement("span");
+  span.innerText = text;
+  span.style.margin = "0 15px"; 
+  header.appendChild(span);
+});
 
 
 let hero = document.createElement("section");
