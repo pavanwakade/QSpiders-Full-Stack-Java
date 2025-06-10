@@ -1,9 +1,9 @@
 import './App.css';
+import {  Componant}  from "react";
 import Aside from './Componant/Aside';
 import Footer from './Componant/Footer';
 import MainBody from './Componant/MainBody';
 import NavBar from './Componant/NavBar';
-
 // function App() {
 //   return (
   
@@ -25,9 +25,9 @@ import NavBar from './Componant/NavBar';
 class App  extends Component {
     render() {
         return (
-<div>
+          <div>
           <NavBar></NavBar>
-          <div className='maainbody'>
+          <div className='mainbody'>
           <Aside></Aside>
           <MainBody></MainBody>
           </div>
