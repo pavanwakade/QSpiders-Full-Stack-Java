@@ -3,23 +3,18 @@ import Aside from "./Aside";
 import Footer from "./Footer";
 import MainBody from "./MainBody";
 import NavBar from "./NavBar";
+import './main.css';
 
 class Components extends Component {
     render() {
         return (
             <div className="container">
-                <nav className="navbar">
-                    <NavBar />
-                </nav>
+                <NavBar className="navbar" />
                 <div className="mainbody">
-                    <MainBody />
-                    <aside className="aside">
-                        <Aside />
-                    </aside>
+                    <MainBody className="mbody" />
+                    <Aside className="aside" />
                 </div>
-                <footer className="footer">
-                    <Footer />
-                </footer>
+                <Footer className="footer" />
             </div>
         );
     }

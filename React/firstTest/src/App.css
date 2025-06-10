@@ -1,57 +1,13 @@
-/* Reset default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Main container styles */
-/* .container {
-    width: 100%;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-} */
-
-/* Navbar styles */
-.navbar {
-    background-color: #333;
-    padding: 1rem;
-    color: white;
-    width: 100%;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-/* Main body styles */
-.mainbody {
-    display: flex;
-    padding: 2rem;
-    min-height: 70vh;
-}
-
-/* Aside styles */
-.aside {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 1rem;
-}
-
-/* Footer styles */
-.footer {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .mainbody {
-        flex-direction: column;
-    }
-    
-    .aside {
-        width: 30%;
-        margin-top: 1rem;
-    }
