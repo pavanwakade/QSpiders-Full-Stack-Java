@@ -10,8 +10,8 @@ let ComponantsDay1 = () => {
 
             <NavBar />
 
+            {/* <Main /> */}
             <Aside />
-            <Main />
 
         </div>
     )
