@@ -1,12 +1,15 @@
 import { Component } from 'react';
 import './App.css';
-import Components from './Components/Components';
 
 class App extends Component {
+
+  // let div=createElement('div',null,"hello")
   render() {
     return (
       <div className="App">
-        <Components />
+        
+        {/* {div} */}
+        {/* <Components /> */}
       </div>
     );
   }

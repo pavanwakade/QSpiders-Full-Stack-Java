@@ -6,6 +6,7 @@ class ComponentsDay1 extends Component {
     return (
       <div>
         <Landing />
+        {/* <h1>hello pavan</h1> */}
       </div>
     );
   }
