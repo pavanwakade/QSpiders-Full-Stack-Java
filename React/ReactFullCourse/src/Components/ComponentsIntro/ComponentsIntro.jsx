@@ -1,11 +1,11 @@
 import { Component } from 'react';
-// import ComponentsDay1 from './Day1/ComponentsDay1';
+import ComponentsDay1 from './Day1/ComponentsDay1';
 
 class ComponentsIntro extends Component {
   render() {
     return (
       <div>
-        {/* <ComponentsDay1 /> */}
+        <ComponentsDay1 />
       </div>
     );
   }

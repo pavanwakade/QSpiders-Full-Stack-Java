@@ -7,6 +7,7 @@ console.log('Attempting to render the App component.'); // Added console log
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    {/* <h1> h1 from main</h1> */}
     <App />
   </StrictMode>,
 )

@@ -1,13 +1,12 @@
 import { Component } from 'react';
-import ComponentsIntro from './ComponentsIntro/ComponentsIntro';
-import Jxsintro from './JsxIntro/JsxIntro';
-
+import Jxsintro from './'
 class Components extends Component {
   render() {
     return (
       <div>
-        <ComponentsIntro />
-        <Jxsintro></Jxsintro>
+        {/* <h1>hello from Components</h1> */}
+        {/* <ComponentsIntro /> */}
+        <Jxsintro />
       </div>
     );
   }
