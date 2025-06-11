@@ -9,12 +9,12 @@
 //         </div>
 //     );
 
-import { Component } from "react";
 
 // }
 
 // export default Jxsintro;
 
+import { Component } from "react";
 
 class Jxsintro extends Component{
 
@@ -22,8 +22,8 @@ class Jxsintro extends Component{
         return(
 
           <div>
-             {/* <JsxTask1 /> */}
            <h1>hello</h1>
+             <JsxTask1></JsxTask1>
           </div>
 
         );
