@@ -1,5 +1,5 @@
+import './App.css';
 import Components from "./Componants/Componants";
-
 let App=()=>{
 
   return(

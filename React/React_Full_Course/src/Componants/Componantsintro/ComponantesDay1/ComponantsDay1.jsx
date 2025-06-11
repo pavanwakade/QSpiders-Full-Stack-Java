@@ -1,3 +1,4 @@
+import Aside from "./Aside.jsx";
 import NavBar from "./NavBar.jsx";
 
 let ComponantsDay1=()=>{
@@ -6,7 +7,10 @@ let ComponantsDay1=()=>{
             {/* <h1>hello  from Day1</h1> */}
 
 
-            <NavBar />
+            {/* <NavBar /> */}
+
+            <Aside />
+
             
         </div>
     )
