@@ -208,11 +208,11 @@
 
 
 
-let body = document.querySelector("body")
+// let body = document.querySelector("body")
 // body.style.backgroundColor = "yellow";
-let circle = document.getElementById("circle")
-let squre = document.getElementById("squre")
-let divv = document.getElementById("sty")
+// let circle = document.getElementById("circle")
+// let squre = document.getElementById("squre")
+// let divv = document.getElementById("sty")
 
 // circle.addEventListener("click", () => {
 //     divv.style.width = "300px";
@@ -248,35 +248,36 @@ let divv = document.getElementById("sty")
 //     circle.style.backgroundColor = "red"
 //     squre.style.backgroundColor = "red"
 // })
-let alldata = [];
-let datadiv = document.querySelector("#datadiv");
+// let alldata = [];
+// let datadiv = document.querySelector("#datadiv");
 
-const displayItems = (items) => {
-    // datadiv.innerHTML = ''; // Clear previous content
-    items.forEach(item => {
-        datadiv.innerHTML += `
-            <div id ="dd" style="border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px;">
-                <img src="${item.thumbnail}" alt="${item.title}" width="200px" height="200px">
-                <h3>${item.title}</h3>
-                <p>Brand: ${item.brand}</p>
-                <p>Price: $${item.price}</p>
-                <p>Category: ${item.category}</p>
-                <p>Rating: ${item.rating}/5</p>
-                <p>Stock: ${item.stock}</p>
-            </div>`;
-    });
-}
+// const displayItems = (items) => {
+//     // datadiv.innerHTML = ''; // Clear previous content
+//     items.forEach(item => {
+//         datadiv.innerHTML += `
+//             <div id ="dd" style="border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px;">
+//                 <img src="${item.thumbnail}" alt="${item.title}" width="200px" height="200px">
+//                 <h3>${item.title}</h3>
+//                 <p>Brand: ${item.brand}</p>
+//                 <p>Price: $${item.price}</p>
+//                 <p>Category: ${item.category}</p>
+//                 <p>Rating: ${item.rating}/5</p>
+//                 <p>Stock: ${item.stock}</p>
+//             </div>`;
+//     });
+// }
 
-const fetchdata = async () => {
-    try {
-        let response = await fetch("https://dummyjson.com/products");
-        let data = await response.json();
-        alldata = data.products;
-        displayItems(alldata);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        datadiv.innerHTML = '<p>Error loading products</p>';
-    }
-}
+// const fetchdata = async () => {
+//     try {
+//         let response = await fetch("https://dummyjson.com/products");
+//         let data = await response.json();
+//         alldata = data.products;
+//         displayItems(alldata);
+//     } catch (error) {
+//         console.error("Error fetching data:", error);
+//         datadiv.innerHTML = '<p>Error loading products</p>';
+//     }
+// }
 
-fetchdata();
+// fetchdata();
+
