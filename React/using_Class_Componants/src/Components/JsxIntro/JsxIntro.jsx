@@ -15,6 +15,7 @@
 // export default Jxsintro;
 
 import { Component } from "react";
+import JsxTask1 from './tasks/JsxTask1.jsx';
 
 class Jxsintro extends Component{
 
@@ -22,8 +23,8 @@ class Jxsintro extends Component{
         return(
 
           <div>
-           <h1>hello</h1>
-             <JsxTask1></JsxTask1>
+           {/* <h1>hello</h1> */}
+          <JsxTask1 />
           </div>
 
         );
