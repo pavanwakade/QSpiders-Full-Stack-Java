@@ -1,9 +1,21 @@
-let UseStateTask1=()=>{
+import { useState } from "react";
 
-    
-    return(
+let UseStateTask1 = () => {
+
+    // let x= useState(0);
+    // console.log(x);
+
+    let [count, setcount] = useState(0)
+
+
+    return (
         <div>
             <h1>UseStateHookstask1</h1>
+
+            <h2>{count}</h2>
+            <button onClick={() => {
+                setcount(count += 1)
+            }}>add</button>
         </div>
     )
 }
