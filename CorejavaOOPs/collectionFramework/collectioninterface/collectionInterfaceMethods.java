@@ -14,21 +14,22 @@ public class CollectionInterfaceMethods {
 
 	public static void main(String[] args) {
 		addINtoCollection();
-//		System.out.println(RemoveFromCollection(coll, "java"));
-		UpdateCollection(coll, "java" , "Rava");
+		UpdateCollection(coll, "sql", "Rava");
+		RemoveFromCollection(coll, "pavan");
+//		System.out.println(coll);
 	}
 
-	public static Object addINtoCollection() {
-		for (int i = 0; i <= 5; i++) {
+	public static Collection<String> addINtoCollection() {
+		for (int i = 0; i <= 3; i++) {
 			System.out.println("entr String");
 			String obj = sc.nextLine();
 			coll.add(obj);
 		}
-//		System.out.println(coll);
+		System.out.println("insert   :"+coll);
 		return coll;
 	}
 
-	public static Object RemoveFromCollection(Collection<String> str, String ss) {
+	public static Collection<String> RemoveFromCollection(Collection<String> str, String ss) {
 
 		Iterator<String> it = str.iterator();
 
@@ -38,24 +39,25 @@ public class CollectionInterfaceMethods {
 				it.remove();
 			}
 		}
-//		System.out.println(coll);
+		System.out.println("Remove   :"+coll);
 		return str;
 	}
-	
-	public static Object UpdateCollection(Collection<String>str,String ss,String nn) {
-		
-		ListIterator<String>it=(ListIterator<String>) str.iterator();
-		
-		while(it.hasNext()) {
+
+	public static Collection<String> UpdateCollection(Collection<String> str, String ss, String nn) {
+
+		List<String> list = (List<String>) str;
+		ListIterator<String> it = list.listIterator();
+
+		while (it.hasNext()) {
 			if (it.next().equalsIgnoreCase(ss)) {
+				
 				it.set(nn);
 			}
 		}
-		System.out.println(coll);
-		
+		System.out.println("updated  :"+coll);
+
 		return str;
-		
+
 	}
-	
-	
+
 }
