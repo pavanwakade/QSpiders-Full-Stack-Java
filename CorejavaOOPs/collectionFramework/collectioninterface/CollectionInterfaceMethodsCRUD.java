@@ -4,8 +4,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CollectionInterfaceMethodsCRUD {
@@ -14,49 +18,11 @@ public class CollectionInterfaceMethodsCRUD {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-//		addINtoCollection();
-//		UpdateCollection(coll, "sql", "MySQL");
-//		RemoveFromCollection(coll, "pavan");
-//		System.out.println(coll);
-
-		Collection<String> ss = new ArrayList<>();
-		ss.add("pavan");
-		ss.add("ravan");
-
-//			coll.removeAll(ss);
-//			System.out.println(coll);
-//			System.out.println(coll.isEmpty());
-//			System.out.println(coll.size());
-//			System.out.println(coll.contains("pavan"));
-		
-//		toArray (specific type)
-//		List<Integer> names = new ArrayList<>();
-//		for (int ch = 1; ch <= 9; ch++) {
-//			names.add(ch);
-//		}
-//		System.out.println(names);
-//		Integer[] nameObjects = names.toArray(new Integer[0]);
-//		System.out.println("arrays  :" + Arrays.toString(nameObjects));
-		
-		
-		
-		
-//		toArray (object)
-		
-		List<Object> str = new ArrayList<>();
-		
-		str.add("pavan");
-		str.add("ravan");
-		str.add(true);
-		str.add(1);
-		str.add(null);
-		
-		Object [] obj=str.toArray();
-		System.out.println(  Arrays.toString(obj)  );
-		
-		
-		
-		
+		bufferReadFile();
+		addINtoCollection();
+		UpdateCollection(coll, "sql", "MySQL");
+		RemoveFromCollection(coll, "pavan");
+		System.out.println("orignal :" + coll);
 
 	}
 
@@ -65,6 +31,7 @@ public class CollectionInterfaceMethodsCRUD {
 			System.out.println("entr String");
 			String obj = sc.nextLine();
 			coll.add(obj);
+			bufferWriteFile(obj);
 		}
 		System.out.println("insert   :" + coll);
 		return coll;
@@ -101,4 +68,47 @@ public class CollectionInterfaceMethodsCRUD {
 
 	}
 
+	// Writing to file
+    public static void bufferWriteFile(String str) {
+        BufferedWriter bf = null;
+        try {
+        	bf = new BufferedWriter(new FileWriter("CollectionInterfaceMethodsCRUD.txt", true));
+
+            bf.write(str);
+            bf.newLine();
+            System.out.println("Write successful");
+        } catch (IOException e) {
+            e.printStackTrace(); // fixed line
+        } finally {
+            try {
+                if (bf != null) {
+                    bf.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Reading from file
+    public static void bufferReadFile() {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("CollectionInterfaceMethodsCRUD.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line); // Process each line
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close(); // Always close
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
