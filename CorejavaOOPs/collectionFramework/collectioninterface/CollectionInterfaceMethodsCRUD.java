@@ -7,14 +7,14 @@ import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CollectionInterfaceMethods {
+public class CollectionInterfaceMethodsCRUD {
 
 	static Collection<String> coll = new ArrayList<String>();
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		addINtoCollection();
-		UpdateCollection(coll, "sql", "Rava");
+		UpdateCollection(coll, "sql", "MySQL");
 		RemoveFromCollection(coll, "pavan");
 //		System.out.println(coll);
 	}
