@@ -14,9 +14,20 @@ public class CollectionInterfaceMethodsCRUD {
 
 	public static void main(String[] args) {
 		addINtoCollection();
-		UpdateCollection(coll, "sql", "MySQL");
-		RemoveFromCollection(coll, "pavan");
+//		UpdateCollection(coll, "sql", "MySQL");
+//		RemoveFromCollection(coll, "pavan");
 //		System.out.println(coll);
+		
+		 Collection<String>ss=new ArrayList<>();
+			ss.add("pavan");
+			ss.add("ravan");
+			
+//			coll.removeAll(ss);
+			System.out.println(coll);
+//			System.out.println(coll.isEmpty());
+//			System.out.println(coll.size());
+			System.out.println(coll.contains("pavan"));
+			
 	}
 
 	public static Collection<String> addINtoCollection() {
@@ -59,5 +70,8 @@ public class CollectionInterfaceMethodsCRUD {
 		return str;
 
 	}
+	
+
+	
 
 }

@@ -32,12 +32,14 @@ public class Collection1 {
         kkList.add(1);
         kkList.add("ravan");
         System.out.println(kkList);
+//        
+//        kkList.remove("ravan");
+//        System.out.println(kkList);
+//
+//        kkList.remove(1);
+//        System.out.println(kkList);
         
-        kkList.remove("ravan");
-        System.out.println(kkList);
-
-        kkList.remove(1);
-        System.out.println(kkList);
+        
         
         
         Object[] ssObjects=kkList.toArray();
