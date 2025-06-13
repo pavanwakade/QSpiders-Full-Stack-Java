@@ -10,12 +10,22 @@ let UseStateTask1 = () => {
 
     return (
         <div>
-            <h1>UseStateHookstask1</h1>
+            {/* <h1>UseStateHookstask1</h1> */}
 
             <h2>{count}</h2>
             <button onClick={() => {
                 setcount(count += 1)
             }}>add</button>
+
+
+             <button onClick={() => {
+                setcount(count -= 1)
+            }}>sub</button>
+
+
+             <button onClick={() => {
+                setcount(0)
+            }}>reset</button>
         </div>
     )
 }
