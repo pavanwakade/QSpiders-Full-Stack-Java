@@ -32,7 +32,7 @@ public class StringToArray {
 		
 
 		System.out.println();
-		System.out.println("using collection");
+		System.out.println("using collectionFramework");
 		// Step 1: Split the string into characters
 		String[] c = str.split("");
 

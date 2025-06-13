@@ -174,7 +174,7 @@ List<Integer> evenSquares = numbers.stream()
 Common stream operations:
 - `filter()` - select elements based on a condition
 - `map()` - transform elements
-- `collect()` - convert stream back to collection
+- `collect()` - convert stream back to collectionFramework
 - `reduce()` - combine elements
 - `sorted()` - sort elements
 - `limit()` - limit stream size

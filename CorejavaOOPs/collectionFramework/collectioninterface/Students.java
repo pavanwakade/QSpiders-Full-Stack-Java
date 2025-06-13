@@ -1,4 +1,4 @@
-package collection.collectioninterface;
+package collectionFramework.collectioninterface;
 
 public class Students {
 	
