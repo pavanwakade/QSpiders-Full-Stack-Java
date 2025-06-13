@@ -1,39 +1,77 @@
 package collectionFramework.collectioninterface;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CollectionInterfaceMethodsCRUD {
 
 	static Collection<String> coll = new ArrayList<String>();
 	static Scanner sc = new Scanner(System.in);
-
+	static boolean opt=true;
 	public static void main(String[] args) {
-		bufferReadFile();
-		addINtoCollection();
-		UpdateCollection(coll, "sql", "MySQL");
-		RemoveFromCollection(coll, "pavan");
-		System.out.println("orignal :" + coll);
+//		addINtoCollection();
+		
+		while (opt) {
+			choice();
+		}
+	}
+
+	public static void choice() {
+
+		System.out.println("Enter currect option");
+		System.out.println("1 read \n 2 insert \n 3 update /n 4 delete \n 5 stop \n currect option");
+		int inp = sc.nextInt();
+
+		switch (inp) {
+		case 1: {
+			System.out.println(coll);
+			break;
+		}
+		case 2: {
+			addINtoCollection();
+			break;
+		}
+
+		case 3: {
+			System.out.println("Enter old value which you need to change");
+			String oldvalue = sc.nextLine();
+
+			System.out.println("Enter new value");
+			String newValue = sc.nextLine();
+			UpdateCollection(coll, oldvalue, newValue);
+			break;
+		}
+		case 4: {
+			System.out.println("Enter  value which you need to delete");
+			String oldvalue = sc.nextLine();
+			RemoveFromCollection(coll, oldvalue);
+			break;
+		}
+		case 5: {
+			System.out.println("stoping operations .......");
+			opt=false;
+			break;
+		}
+		default: {
+
+			System.err.println("Unexpected value: " + inp);
+		}
+		}
 
 	}
 
 	public static Collection<String> addINtoCollection() {
 		for (int i = 0; i <= 3; i++) {
+			sc.next();
 			System.out.println("entr String");
 			String obj = sc.nextLine();
 			coll.add(obj);
-			bufferWriteFile(obj);
 		}
-		System.out.println("insert   :" + coll);
+//		System.out.println("insert   :" + coll);
 		return coll;
 	}
 
@@ -48,7 +86,7 @@ public class CollectionInterfaceMethodsCRUD {
 			}
 		}
 		System.out.println("Remove   :" + coll);
-		return str;
+		return coll;
 	}
 
 	public static Collection<String> UpdateCollection(Collection<String> str, String ss, String nn) {
@@ -64,51 +102,7 @@ public class CollectionInterfaceMethodsCRUD {
 		}
 		System.out.println("updated  :" + coll);
 
-		return str;
+		return coll;
 
 	}
-
-	// Writing to file
-    public static void bufferWriteFile(String str) {
-        BufferedWriter bf = null;
-        try {
-        	bf = new BufferedWriter(new FileWriter("CollectionInterfaceMethodsCRUD.txt", true));
-
-            bf.write(str);
-            bf.newLine();
-            System.out.println("Write successful");
-        } catch (IOException e) {
-            e.printStackTrace(); // fixed line
-        } finally {
-            try {
-                if (bf != null) {
-                    bf.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // Reading from file
-    public static void bufferReadFile() {
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("CollectionInterfaceMethodsCRUD.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line); // Process each line
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close(); // Always close
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
