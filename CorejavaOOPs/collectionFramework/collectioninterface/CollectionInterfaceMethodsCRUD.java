@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CollectionInterfaceMethodsCRUD {
@@ -13,21 +14,50 @@ public class CollectionInterfaceMethodsCRUD {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		addINtoCollection();
+//		addINtoCollection();
 //		UpdateCollection(coll, "sql", "MySQL");
 //		RemoveFromCollection(coll, "pavan");
 //		System.out.println(coll);
-		
-		 Collection<String>ss=new ArrayList<>();
-			ss.add("pavan");
-			ss.add("ravan");
-			
+
+		Collection<String> ss = new ArrayList<>();
+		ss.add("pavan");
+		ss.add("ravan");
+
 //			coll.removeAll(ss);
-			System.out.println(coll);
+//			System.out.println(coll);
 //			System.out.println(coll.isEmpty());
 //			System.out.println(coll.size());
-			System.out.println(coll.contains("pavan"));
-			
+//			System.out.println(coll.contains("pavan"));
+		
+//		toArray (specific type)
+//		List<Integer> names = new ArrayList<>();
+//		for (int ch = 1; ch <= 9; ch++) {
+//			names.add(ch);
+//		}
+//		System.out.println(names);
+//		Integer[] nameObjects = names.toArray(new Integer[0]);
+//		System.out.println("arrays  :" + Arrays.toString(nameObjects));
+		
+		
+		
+		
+//		toArray (object)
+		
+		List<Object> str = new ArrayList<>();
+		
+		str.add("pavan");
+		str.add("ravan");
+		str.add(true);
+		str.add(1);
+		str.add(null);
+		
+		Object [] obj=str.toArray();
+		System.out.println(  Arrays.toString(obj)  );
+		
+		
+		
+		
+
 	}
 
 	public static Collection<String> addINtoCollection() {
@@ -36,7 +66,7 @@ public class CollectionInterfaceMethodsCRUD {
 			String obj = sc.nextLine();
 			coll.add(obj);
 		}
-		System.out.println("insert   :"+coll);
+		System.out.println("insert   :" + coll);
 		return coll;
 	}
 
@@ -50,7 +80,7 @@ public class CollectionInterfaceMethodsCRUD {
 				it.remove();
 			}
 		}
-		System.out.println("Remove   :"+coll);
+		System.out.println("Remove   :" + coll);
 		return str;
 	}
 
@@ -61,17 +91,14 @@ public class CollectionInterfaceMethodsCRUD {
 
 		while (it.hasNext()) {
 			if (it.next().equalsIgnoreCase(ss)) {
-				
+
 				it.set(nn);
 			}
 		}
-		System.out.println("updated  :"+coll);
+		System.out.println("updated  :" + coll);
 
 		return str;
 
 	}
-	
-
-	
 
 }
