@@ -1,4 +1,4 @@
-import UseStateTask4 from "./tasks/UseStateTask4";
+import UseStateTask6 from "./tasks/UseStateTask6";
 
 let UseStateIntro = () => {
     return (
@@ -8,7 +8,8 @@ let UseStateIntro = () => {
             <UseStateTask2 /> */}
             {/* < UseStateTask3 /> */}
             {/* <Card /> */}
-            <UseStateTask4 />
+            {/* <UseStateTask4 /> */}
+            <UseStateTask6 />
 
         </div>
 

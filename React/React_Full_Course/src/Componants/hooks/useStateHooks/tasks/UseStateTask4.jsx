@@ -1,16 +1,18 @@
 import { useState } from "react";
 import "./UseState4Css.css";
 
-let UseStateTask4=()=>{
-    let {state,setState}=useState(0);
+let UseisDarkTask4=()=>{
+    let [isDark,setDark]=useState(false);
     return(
-        <div className={state?"dark":"light"}>
-            <button onClick={()=>{}}>{state?"dark":"light"}</button>
+        <div id="pp" className={isDark?"dark":"light"}>
             <h1>dark and light Mode</h1>
+            <button onClick={()=>{setDark(!isDark)}}>
+                {isDark?"light":"dark"}
+                </button>
 
 
         </div>
     )
 }
 
-export default UseStateTask4;
+export default UseisDarkTask4;
