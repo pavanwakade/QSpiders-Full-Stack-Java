@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Customizer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 800px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .output-section {
+            background: white;
+            padding: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .api-key-input {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e9ecef;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .resume-preview {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .resume-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .resume-contact {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .resume-section {
+            margin-bottom: 25px;
+        }
+
+        .resume-section h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 15px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .item-date {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .item-company {
+            color: #667eea;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .item-description ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .item-description li {
+            margin-bottom: 3px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #495057;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .floating-help {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-help:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-section {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Resume Customizer</h1>
+            <p>AI-powered resume tailoring for your dream job</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">
+                    📝 Job Requirements
+                </h2>
+
+                <div class="form-group">
+                    <label for="apiKey">Gemini API Key</label>
+                    <input 
+                        type="password" 
+                        id="apiKey" 
+                        class="form-control api-key-input" 
+                        placeholder="Enter your Gemini API key"
+                        required
+                    >
+                    <small style="color: #856404; margin-top: 5px; display: block;">
+                        Get your free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobRequirements">Job Requirements</label>
+                    <textarea 
+                        id="jobRequirements" 
+                        class="form-control" 
+                        placeholder="Paste the job description or requirements here..."
+                        rows="8"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="resumeContent">Current Resume Content</label>
+                    <textarea 
+                        id="resumeContent" 
+                        class="form-control" 
+                        rows="12"
+                    ></textarea>
+                </div>
+
+                <button onclick="customizeResume()" class="btn" id="customizeBtn">
+                    🚀 Customize Resume
+                </button>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">
+                    📄 Customized Resume
+                </h2>
+
+                <div id="alertContainer"></div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>AI is tailoring your resume...</p>
+                </div>
+
+                <div id="resumePreview" class="resume-preview">
+                    <div class="resume-header">
+                        <div class="resume-name">PAVAN WAKADE</div>
+                        <div class="resume-contact">
+                            Pune, Maharashtra | 8317277608 | pavanwakade199@gmail.com<br>
+                            GitHub: github.com/pavanwakade | LinkedIn: linkedin.com/in/pavan-wakade
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>OBJECTIVE</h3>
+                        <p>Seeking a Software Engineer role to apply my expertise in Java, SQL, Spring, Spring Boot, JDBC, Servlets, and Manual Testing to develop high-quality software solutions while growing in a dynamic environment.</p>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>TECHNICAL SKILLS</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Spring Boot</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>PROFESSIONAL EXPERIENCE</h3>
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-title">Java Desktop Application Developer</div>
+                                <div class="item-date">Dec 2024 - Present</div>
+                            </div>
+                            <div class="item-company">Robowaves - Internship</div>
+                            <div class="item-description">
+                                <ul>
+                                    <li>Developed full-stack web application integrating NASA's APIs</li>
+                                    <li>Implemented RESTful web services using Spring Boot</li>
+                                    <li>Enhanced application security with Spring Security and JWT</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>PROJECTS</h3>
+                        <div class="project-item">
+                            <div class="item-header">
+                                <div class="item-title">NASA API Implementation</div>
+                                <div class="item-date">2024</div>
+                            </div>
+                            <div class="item-description">
+                                <ul>
+                                    <li>Full-stack web application with NASA API integration</li>
+                                    <li>MySQL database management with CRUD operations</li>
+                                    <li>Deployed using Docker and AWS Elastic Beanstalk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>EDUCATION</h3>
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-title">Bachelor of Engineering</div>
+                                <div class="item-date">2024</div>
+                            </div>
+                            <div class="item-company">Savitribai Phule Pune University - 6.66 CGPA</div>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>CERTIFICATIONS</h3>
+                        <ul>
+                            <li>Full Stack Java Developer - Symbiosis (2023)</li>
+                            <li>Full Stack Java Developer - QSpiders (Present)</li>
+                            <li>Postman API Fundamentals Student Expert (2024)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="downloadPDF()" class="btn btn-secondary" id="downloadBtn">
+                        📥 Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-help" onclick="showHelp()">
+        ?
+    </div>
+
+    <script>
+        // Initialize with default resume content
+        document.getElementById('resumeContent').value = `PAVAN WAKADE
+Pune, Maharashtra | 8317277608 | pavanwakade199@gmail.com
+GitHub: github.com/pavanwakade | LinkedIn: linkedin.com/in/pavan-wakade
+
+OBJECTIVE:
+Seeking a Software Engineer role to apply my expertise in Java, SQL, Spring, Spring Boot, JDBC, Servlets, and Manual Testing to develop high-quality software solutions while growing in a dynamic environment. Certified as a Full Stack Java Developer from Symbiosis and QSpiders, with strong backend and frontend development skills. Currently located in Pune, Maharashtra, and open for relocation anywhere.
+
+TECHNICAL SKILLS:
+Programming Languages: Java (Core Java, OOPs concepts, Exception Handling)
+Frameworks: Spring, Spring Boot, Hibernate (JPA), Basic Spring Security
+Web Technologies: HTML, CSS, JavaScript, Servlet, JDBC
+Databases: SQL, MySQL, PostgreSQL, Oracle
+
+PROFESSIONAL EXPERIENCE:
+Robowaves – Internship (Dec 2024 - Present)
+Java Desktop Application Development
+• Developed a full-stack web application integrating NASA's APIs to provide APOD and Mars Rover Photos
+• Implemented RESTful web services using Spring Boot for seamless API integration
+• Designed responsive front-end using HTML, CSS, Bootstrap, and MVC architecture
+• Enhanced application security with Spring Security, JWT authentication, and role-based access control
+• Deployed the application using Docker and AWS Elastic Beanstalk
+
+PROJECTS:
+NASA API Implementation
+• Full-stack web application integrating NASA's APIs
+• RESTful web services using Spring Boot
+• MySQL database management with CRUD operations
+• Deployed using Docker and AWS Elastic Beanstalk
+
+SMART IV System
+• Developed automated intravenous infusion dosing system for hospitals
+• Real-time monitoring system tracking flow rate and volume parameters
+• Integrated hospital database system for patient records
+• Technologies: Arduino, IoT, Automation
+
+Wedding Celebration Database
+• Comprehensive database solution for wedding planning
+• Normalized database schema for vendor management
+• Stored procedures for efficient data retrieval
+• Technologies: SQL
+
+EDUCATION:
+Bachelor of Engineering - Savitribai Phule Pune University (2024) - 6.66 CGPA
+Diploma in Computer Technology - MSBTE Mumbai (2021) - 76.57%
+
+CERTIFICATIONS:
+• Full Stack Java Developer Certification – Symbiosis (2023)
+• Full Stack Java Developer Certification – QSpiders (present)
+• Postman API Fundamentals Student Expert – Postman (2024)
+
+ACHIEVEMENTS:
+• Won First Place in college project presentation
+• Participated in national-level project presentation
+• Published international research paper on project`;
+
+        let customizedContent = '';
+
+        async function customizeResume() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const jobRequirements = document.getElementById('jobRequirements').value.trim();
+            const resumeContent = document.getElementById('resumeContent').value.trim();
+
+            if (!apiKey) {
+                showAlert('Please enter your Gemini API key', 'error');
+                return;
+            }
+
+            if (!jobRequirements) {
+                showAlert('Please enter job requirements', 'error');
+                return;
+            }
+
+            if (!resumeContent) {
+                showAlert('Please enter resume content', 'error');
+                return;
+            }
+
+            showLoading(true);
+            document.getElementById('customizeBtn').disabled = true;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `You are an expert resume writer. Please customize the following resume to match the job requirements. Keep the same person's information but tailor the content to highlight relevant skills, experience, and achievements that align with the job requirements.
+
+Job Requirements:
+${jobRequirements}
+
+Current Resume:
+${resumeContent}
+
+Please provide a customized resume that:
+1. Emphasizes relevant skills and technologies mentioned in the job requirements
+2. Rewords experience descriptions to highlight applicable achievements
+3. Adjusts the objective/summary to match the role
+4. Maintains the same format and structure
+5. Keeps all factual information accurate
+6. Returns only the customized resume content without any additional commentary
+
+Customized Resume:`
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                    customizedContent = data.candidates[0].content.parts[0].text;
+                    updateResumePreview(customizedContent);
+                    showAlert('Resume customized successfully!', 'success');
+                } else {
+                    throw new Error('Invalid response format from API');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert(`Error customizing resume: ${error.message}`, 'error');
+            } finally {
+                showLoading(false);
+                document.getElementById('customizeBtn').disabled = false;
+            }
+        }
+
+        function updateResumePreview(content) {
+            const preview = document.getElementById('resumePreview');
+            
+            // Parse the content and format it
+            const lines = content.split('\n');
+            let formattedHTML = '';
+            let currentSection = '';
+            
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) continue;
+                
+                // Check if it's a name (first substantial line)
+                if (!currentSection && line.length > 5 && !line.includes(':') && !line.includes('•')) {
+                    formattedHTML += `<div class="resume-header"><div class="resume-name">${line}</div>`;
+                    continue;
+                }
+                
+                // Check if it's contact info
+                if (line.includes('@') || line.includes('github.com') || line.includes('linkedin.com') || line.includes('|')) {
+                    formattedHTML += `<div class="resume-contact">${line}</div></div>`;
+                    continue;
+                }
+                
+                // Check if it's a section header
+                if (line.includes(':') && !line.includes('•') && (line.toUpperCase() === line || line.includes('OBJECTIVE') || line.includes('SKILLS') || line.includes('EXPERIENCE') || line.includes('EDUCATION') || line.includes('PROJECTS') || line.includes('CERTIFICATIONS') || line.includes('ACHIEVEMENTS'))) {
+                    if (currentSection) formattedHTML += '</div>';
+                    currentSection = line.replace(':', '');
+                    formattedHTML += `<div class="resume-section"><h3>${currentSection}</h3>`;
+                    continue;
+                }
+                
+                // Handle bullet points
+                if (line.startsWith('•') || line.startsWith('-')) {
+                    formattedHTML += `<li>${line.substring(1).trim()}</li>`;
+                    continue;
+                }
+                
+                // Regular content
+                if (line.includes('–') || line.includes('-') && (line.includes('Present') || line.includes('2024') || line.includes('2023'))) {
+                    // This looks like a job/education entry
+                    formattedHTML += `<div class="experience-item"><div class="item-header"><div class="item-title">${line}</div></div></div>`;
+                } else {
+                    formattedHTML += `<p>${line}</p>`;
+                }
+            }
+            
+            if (currentSection) formattedHTML += '</div>';
+            
+            preview.innerHTML = formattedHTML;
+        }
+
+        function downloadPDF() {
+            if (!customizedContent) {
+                showAlert('Please customize your resume first', 'error');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set font
+            doc.setFont('helvetica');
+            
+            // Split content into lines and add to PDF
+            const lines = customizedContent.split('\n');
+            let yPosition = 20;
+            const pageHeight = doc.internal.pageSize.height;
+            const margin = 20;
+            
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) {
+                    yPosition += 5;
+                    continue;
+                }
+                
+                // Check if we need a new page
+                if (yPosition > pageHeight - margin) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                // Handle different types of content
+                if (line.includes(':') && !line.includes('•') && (line.toUpperCase() === line || line.includes('OBJECTIVE') || line.includes('SKILLS'))) {
+                    // Section headers
+                    doc.setFontSize(12);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(line, margin, yPosition);
+                    yPosition += 8;
+                } else if (line.startsWith('•') || line.startsWith('-')) {
+                    // Bullet points
+                    doc.setFontSize(10);
+                    doc.setFont('helvetica', 'normal');
+                    const bulletText = line.substring(1).trim();
+                    const wrappedText = doc.splitTextToSize(bulletText, 170);
+                    doc.text('• ' + wrappedText[0], margin + 5, yPosition);
+                    for (let i = 1; i < wrappedText.length; i++) {
+                        yPosition += 5;
+                        doc.text('  ' + wrappedText[i], margin + 5, yPosition);
+                    }
+                    yPosition += 5;
+                } else {
+                    // Regular text
+                    doc.setFontSize(10);
+                    doc.setFont('helvetica', 'normal');
+                    const wrappedText = doc.splitTextToSize(line, 170);
+                    for (let i = 0; i < wrappedText.length; i++) {
+                        doc.text(wrappedText[i], margin, yPosition);
+                        yPosition += 5;
+                    }
+                    yPosition += 3;
+                }
+            }
+            
+            // Download the PDF
+            doc.save('Customized_Resume_Pavan_Wakade.pdf');
+            showAlert('PDF downloaded successfully!', 'success');
+        }
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertClass = type === 'error' ? 'alert-error' : 'alert-success';
+            
+            alertContainer.innerHTML = `
+                <div class="alert ${alertClass}">
+                    ${message}
+                </div>
+            `;
+            
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            if (show) {
+                loading.classList.add('show');
+            } else {
+                loading.classList.remove('show');
+            }
+        }
+
+        function showHelp() {
+            alert(`How to use Resume Customizer:
+
+1. Get your free Gemini API key from Google AI Studio
+2. Paste the job requirements in the text area
+3. Modify your resume content if needed
+4. Click "Customize Resume" to generate tailored content
+5. Review the customized resume
+6. Download as PDF
+
+Tips:
+• Be specific with job requirements for better results
+• Include key technologies and skills mentioned in the job posting
+• The AI will emphasize relevant experience and skills`);
+        }
+
+        // Auto-save API key to session storage (not localStorage as per restrictions)
+        let sessionData = {};
+
+        document.getElementById('apiKey').addEventListener('input', function(e) {
+            sessionData.apiKey = e.target.value;
+        });
+
+        // Load saved API key if available
+        if (sessionData.apiKey) {
+            document.getElementById('apiKey').value = sessionData.apiKey;
+        }
+    </script>
+</body>
+</html>
