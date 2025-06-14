@@ -1,4 +1,4 @@
-import Card from "./tasks/Card";
+import UseStateTask4 from "./tasks/UseStateTask4";
 
 let UseStateIntro = () => {
     return (
@@ -7,7 +7,8 @@ let UseStateIntro = () => {
             {/* <UseStateTask1 />
             <UseStateTask2 /> */}
             {/* < UseStateTask3 /> */}
-            <Card />
+            {/* <Card /> */}
+            <UseStateTask4 />
 
         </div>
 
