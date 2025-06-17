@@ -78,9 +78,5 @@ public class CollectionInterfaceMethods {
 		System.out.println("Befour clear :"+coll);
 		coll.clear();
 		System.out.println("After clear  :"+coll);
-		
-		
-
 	}
-
 }

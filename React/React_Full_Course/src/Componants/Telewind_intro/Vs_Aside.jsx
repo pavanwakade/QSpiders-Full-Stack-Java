@@ -1,17 +1,19 @@
+import { useState } from 'react';
+import debug from './../../assets/debug-64.png';
+import extention from './../../assets/extension-64.png';
 import filepng from './../../assets/files.png';
 import searchs from './../../assets/search-64.png';
-import extention from './../../assets/extension-64.png';
 import sourse from './../../assets/share-64.png';
-import debug from './../../assets/debug-64.png';
 
 let Vs_Aside = () => {
+  let [open, setOpen] = useState(false);
   return (
     <div className="flex flex-col items-center gap-y-4 bg-[#292929] w-[4%] h-[100%]">
-      <button><img src={filepng} alt="File" className="h-[25px] m-[10px]" title='files' /></button>
-      <button><img src={searchs} alt="search" className="h-[25px] m-[10px]" title='search' /></button>
-      <button><img src={sourse} alt="sourse" className="h-[25px] m-[10px]" title='sourse' /></button>
-      <button><img src={debug} alt="debug" className="h-[25px] m-[10px]" title='debug' /></button>
-      <button><img src={extention} alt="extensions" className="h-[25px] m-[10px]" title='extensions' /></button>
+      <button onClick={() => {}}><img src={filepng} alt="File" className="h-[25px] m-[10px]" title='files' /></button>
+      <button onClick={() => {}}><img src={searchs} alt="search" className="h-[25px] m-[10px]" title='search' /></button>
+      <button onClick={() => {}}><img src={sourse} alt="sourse" className="h-[25px] m-[10px]" title='sourse' /></button>
+      <button onClick={() => {}}><img src={debug} alt="debug" className="h-[25px] m-[10px]" title='debug' /></button>
+      <button onClick={() => {}}><img src={extention} alt="extensions" className="h-[25px] m-[10px]" title='extensions' /></button>
     </div>
   );
 };
