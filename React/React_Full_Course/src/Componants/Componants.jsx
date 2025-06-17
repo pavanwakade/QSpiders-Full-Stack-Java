@@ -8,7 +8,9 @@ let Components=()=>{
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            <Hooksintro />
+            {/* <Hooksintro /> */}
+
+            Tele
         </div>
     )
 }

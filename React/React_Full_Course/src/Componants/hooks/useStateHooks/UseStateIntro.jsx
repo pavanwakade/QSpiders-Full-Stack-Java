@@ -9,7 +9,7 @@ let UseStateIntro = () => {
             {/* < UseStateTask3 /> */}
             {/* <Card /> */}
             {/* <UseStateTask4 /> */}
-            <UseStateTask6 />
+            {/* <UseStateTask6 /> */}
 
         </div>
 
