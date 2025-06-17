@@ -1,6 +1,6 @@
 // import Telewindintro from "./Telewindintro";
 
-import Vs_Aside from "./Vs_Aside";
+// import Vs_Aside from "./Vs_Aside";
 import VscodeFormat from "./VscodeFormat";
 
 let Tailwind_css = () => {
@@ -11,12 +11,10 @@ let Tailwind_css = () => {
 
             {/* <Telewindintro /> */}
 
-            <div className="h-screen flex gap-x-4">
+            <div className="h-[100vh] flex">
                 <VscodeFormat />
-                <Vs_Aside className="mt-10" />
+               
             </div>
-
-
         </div>
     )
 }
