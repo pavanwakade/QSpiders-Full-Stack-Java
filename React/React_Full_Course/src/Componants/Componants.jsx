@@ -1,6 +1,6 @@
 // import Componantsintro from "./Componantsintro/Componantsintro.jsx";
 
-import Hooksintro from "./hooks/Hooksintro";
+import Telewindintro from "./Telewind_intro/Telewindintro";
 
 let Components=()=>{
     return(
@@ -10,7 +10,7 @@ let Components=()=>{
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            Tele
+            <Telewindintro />
         </div>
     )
 }
