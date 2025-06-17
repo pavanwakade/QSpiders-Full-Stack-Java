@@ -1,18 +1,17 @@
 // import Componantsintro from "./Componantsintro/Componantsintro.jsx";
 
-import VscodeFormat from "./Telewind_intro/VscodeFormat";
+import Tailwind_css from "./Telewind_intro/Tailwind_css";
 
-let Components=()=>{
-    return(
+
+let Components = () => {
+    return (
         <div>
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            {/* <Telewindintro /> */}
-
-            <VscodeFormat />
+            < Tailwind_css />
         </div>
     )
 }
