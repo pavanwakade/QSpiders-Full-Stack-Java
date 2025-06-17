@@ -6,12 +6,19 @@ let Telewindintro = () => {
         // </div>
 
         <div>
-            <div class="flex items-center">
-                <a href="h " className="p-10"> logo</a>
-                <a href="h" className="p-10">Home </a>
-                <a href="h" className="p-10"> categry</a>
-                <a href="h" className="p-10"q
-                >about</a>
+            <div className="flex items-center bg-[#353434] text-justify color h-[50px] text-white">
+
+                <div className="flex items-start">
+                <a href=" " className="p-10"> logo</a>
+                </div>
+                <div>
+
+                <a href="" className="p-10">Home </a>
+                <a href=" " className="p-10"> about</a>
+                <a href="" className="p-10">carrier </a>
+                </div>
+
+                
             </div> 
         </div>
     )
