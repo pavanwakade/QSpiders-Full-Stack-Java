@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import debug from './../../assets/debug-64.png';
 import extention from './../../assets/extension-64.png';
 import filepng from './../../assets/files.png';
@@ -6,7 +6,7 @@ import searchs from './../../assets/search-64.png';
 import sourse from './../../assets/share-64.png';
 
 let Vs_Aside = () => {
-  let [open, setOpen] = useState(false);
+  // let [open, setOpen] = useState(false);
   return (
     <div className="flex flex-col items-center gap-y-4 bg-[#292929] w-[4%] h-[100%]">
       <button onClick={() => {}}><img src={filepng} alt="File" className="h-[25px] m-[10px]" title='files' /></button>
