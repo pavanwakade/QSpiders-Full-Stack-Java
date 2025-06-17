@@ -6,7 +6,7 @@ let Telewindintro = () => {
         // </div>
 
         <div>
-            <div className="flex items-center bg-[#353434] text-justify color h-[50px] text-white">
+            <div className=" bg-[#353434] text-justify color h-[50px] text-white">
 
                 <div className="flex items-start">
                 <a href=" " className="p-10"> logo</a>
