@@ -1,11 +1,10 @@
-import arrowImg from './../../assets/arrow.png';
-import vscodepng from './../../assets/vscode.png';
-import Vs_Aside from './Vs_Aside';
+import arrowImg from './../../../assets/arrow.png';
+import vscodepng from './../../../assets/vscode.png';
 
 let VscodeFormat = () => {
     return (
         <div className="h-[100%] w-[100%] bg-[#0f0f0fd5] ">
-            <div className="navbar h-[40px]  text-[white]  bg-[#5a5a5a] flex ">
+            <div className="navbar h-[40px]  text-[white]  bg-[#5a5a5a] flex z-10">
                 <div className="span1 flex h-full w-[30%] text-start justify-around items-center">
                     <a href=""><img src={vscodepng} alt="" className='h-[38px]' /></a>
                     <button>File</button>
@@ -23,7 +22,7 @@ let VscodeFormat = () => {
                 <div className="span3"> </div>
             </div>
 
-            < Vs_Aside />
+            {/* < Vs_Aside /> */}
         </div>
     )
 }

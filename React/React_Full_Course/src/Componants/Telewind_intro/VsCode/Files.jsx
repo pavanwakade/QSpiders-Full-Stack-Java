@@ -1,7 +1,7 @@
 let Files=()=>{
     return(
         <div>
-            
+            hello from files
         </div>
     )
 }

@@ -1,9 +1,8 @@
-// import Telewindintro from "./Telewindintro";
-
-// import Vs_Aside from "./Vs_Aside";
+import Vs_Aside from "./Vs_Aside";
 import VscodeFormat from "./VscodeFormat";
 
-let Tailwind_css = () => {
+
+let Vscode = () => {
 
     return (
 
@@ -12,10 +11,10 @@ let Tailwind_css = () => {
             {/* <Telewindintro /> */}
 
             <div className="h-[100vh] flex">
-                <VscodeFormat />
-               
+                <Vs_Aside />
+                <VscodeFormat></VscodeFormat>
             </div>
         </div>
     )
 }
-export default Tailwind_css;
+export default Vscode;

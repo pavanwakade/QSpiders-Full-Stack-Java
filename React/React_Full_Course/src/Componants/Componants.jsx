@@ -1,6 +1,6 @@
 // import Componantsintro from "./Componantsintro/Componantsintro.jsx";
 
-import Tailwind_css from "./Telewind_intro/Tailwind_css";
+import Telewindintro from "./Telewind_intro/Telewindintro";
 
 
 let Components = () => {
@@ -11,7 +11,7 @@ let Components = () => {
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            < Tailwind_css />
+            < Telewindintro />
         </div>
     )
 }
