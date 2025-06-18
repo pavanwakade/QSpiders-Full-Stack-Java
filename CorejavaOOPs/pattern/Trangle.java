@@ -7,10 +7,12 @@ class Trangle{
 
 		int in=sc.nextInt();
 
-		for (int i=0;i<in ;i++ ) {
-
-			System.out.print("*");
-			
+		for (int i=0;i<=in ;i++ ) 
+		{
+			for (int j=i;j<=in ;j++ ) 
+			{
+              System.out.print("* ");
+			}
 		}
 	}
 }
