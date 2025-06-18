@@ -12,9 +12,9 @@ let Vscode = () => {
             {/* <Telewindintro /> */}
 
             <div className="h-[100vh] flex">
-                {/* <Vs_Aside /> */}
-                {/* <VscodeFormat></VscodeFormat> */}
-                <Files />
+                <Vs_Aside />
+                <VscodeFormat></VscodeFormat>
+                {/* <Files /> */}
             </div>
         </div>
     )
