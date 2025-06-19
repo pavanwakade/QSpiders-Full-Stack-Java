@@ -2,13 +2,13 @@
 class removeDuplicates {
     public int[] removeDuplicate(int[] nums) 
     {
-        int[] r=new int[nums.length]
+        int[] r=new int[nums.length];
        for(int i =0 ;i<nums.length;i++)
        {
         
         for(int j= i ;j<nums.length;j++){
 
-        if(nums[i]==nums[j]){
+               if(nums[i]==nums[j]){
         r[i]=-1;
        }
        else{
@@ -16,7 +16,7 @@ class removeDuplicates {
        }
    }
 
-        return result; 
+        return r; 
     }
 
     public static void main(String[] args) {
