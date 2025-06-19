@@ -18,7 +18,7 @@ public class DiamondPattern {
             }
                 System.out.println();
         }
-
+ 
 
        for (int i=in;i>=0 ;i-- ) {
             for (int sp=1;sp<=(in-i) ;sp++ ) {

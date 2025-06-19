@@ -1,78 +1,63 @@
-package pattern;
-import java.util.Scanner;
-
-class Main {
+public class p {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = 8;
+        int n = 7; // height of each letter
 
         for (int i = 0; i < n; i++) {
-            // P
+
+            // Letter P
             for (int j = 0; j < n; j++) {
-                if (j == 0
-                    || (i == 0 && j < n / 2)
-                    || (i == n / 2 && j < n / 2)
-                    || (j == n / 2 && i != n / 2)
-                ) {
+                if (j == 0 || (i == 0 && j < n - 1) || (i == n / 2 && j < n - 1) || (j == n - 1 && i > 0 && i < n / 2)) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
                 }
             }
 
-            // A
+            System.out.print("   "); // Space between letters
+
+            // Letter A
             for (int j = 0; j < n; j++) {
-                if (j == 0
-                    || j == n / 2
-                    || i == n / 2
-                    || i == 0 && j < n / 2
-                ) {
+                if ((j == 0 || j == n - 1) && i != 0 || i == 0 && j > 0 && j < n - 1 || i == n / 2) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
                 }
             }
 
-            // V
-           
-            for (int j = 0; j < n; j++) {
-                // Print the left and right edges of the "V"
-if (j == i || j == n - i - 1)                 
-				{
-                    System.out.print("* ");
-                } else {
-                    System.out.print("  ");
-                }
-            }
-            
+            System.out.print("   ");
 
-
-            // A
+            // Letter V
             for (int j = 0; j < n; j++) {
-                if (j == 0
-                    || j == n / 2
-                    || i == n / 2
-                    || i == 0 && j < n / 2
-                ) {
+                if ((j == i && i <= n / 2) || (j == n - 1 - i && i <= n / 2) || (i > n / 2 && (j == n / 2 - 1 || j == n / 2))) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
                 }
             }
 
-            // N
+            System.out.print("   ");
+
+            // Letter A (again)
             for (int j = 0; j < n; j++) {
-                if (j == 0
-                    || j == n - 1
-                    || i == j
-                ) {
+                if ((j == 0 || j == n - 1) && i != 0 || i == 0 && j > 0 && j < n - 1 || i == n / 2) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
                 }
             }
 
-            System.out.println();
+            System.out.print("   ");
+
+            // Letter N
+            for (int j = 0; j < n; j++) {
+                if (j == 0 || j == n - 1 || i == j) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print("  ");
+                }
+            }
+
+            System.out.println(); // Move to next row
         }
     }
 }
