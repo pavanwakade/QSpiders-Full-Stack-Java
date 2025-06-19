@@ -8,7 +8,7 @@ class reverseWithoutConvertArray {
   public static String reverse(String str) {
     String s = "";
     for (int i = 0; i < str.length(); i++) {
-               s += str.charAt(str.length() - i - 1);
+      s += str.charAt(str.length() - i - 1);
     }
     return s;
   }
