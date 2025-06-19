@@ -8,7 +8,7 @@ class reverseString {
   }
 
   public static String reverse(String str) {
-    char[] a = str.toCharArray();
+                                     char[] a = str.toCharArray();
 
     System.out.println(Arrays.toString(a));
 
