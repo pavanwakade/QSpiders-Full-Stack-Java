@@ -1,4 +1,5 @@
 import Files from "./Files";
+import Search from "./Search";
 import Vs_Aside from "./Vs_Aside";
 import VscodeFormat from "./VscodeFormat";
 
@@ -15,6 +16,7 @@ let Vscode = () => {
                 <Vs_Aside />
                 <VscodeFormat></VscodeFormat>
                 {/* <Files /> */}
+                {/* <Search /> */}
             </div>
         </div>
     )
