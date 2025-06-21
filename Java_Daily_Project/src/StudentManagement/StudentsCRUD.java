@@ -51,8 +51,10 @@ public class StudentsCRUD implements StudentsInterface {
 			if (students2.getRollNo() == rollNo) {
 				System.out.println(students2);
 				return students2;
+			} else {
+
+				System.out.println("student not found");
 			}
-			System.out.println("student not found");
 		}
 		return null;
 
@@ -75,8 +77,8 @@ public class StudentsCRUD implements StudentsInterface {
 
 	@Override
 	public void deleteStudent() {
-		Students ssStudents= searchStudent();
-		if (ssStudents!=null) {
+		Students ssStudents = searchStudent();
+		if (ssStudents != null) {
 			students.remove(ssStudents);
 			System.out.println("Student deleted");
 		}
@@ -95,31 +97,46 @@ public class StudentsCRUD implements StudentsInterface {
 //		stud.updateStudent();
 //		stud.deleteStudent();
 //		stud.viewStudents();
-		
-		  int choice;
-	        do {
-	            System.out.println("\n====== Student Record Management ======");
-	            System.out.println("1. Add Student");
-	            System.out.println("2. View All Students");
-	            System.out.println("3. Search Student by Roll No");
-	            System.out.println("4. Update Student");
-	            System.out.println("5. Delete Student");
-	            System.out.println("6. Display Unique Courses");
-	            System.out.println("7. Exit");
-	            System.out.print("Enter choice: ");
-	            choice = sc.nextInt();
 
-	            switch (choice) {
-	                case 1:stud.addStudent(); break;
-	                case 2:stud. viewStudents(); break;
-	                case 3:stud. searchStudent(); break;
-	                case 4:stud. updateStudent(); break;
-	                case 5: stud.deleteStudent(); break;
-	                case 6: stud.displayCourses(); break;
-	                case 7: System.out.println("Exiting..."); break;
-	                default: System.out.println("Invalid choice.");
-	            }
-	        } while (choice != 7);
+		int choice;
+		do {
+			System.out.println("\n====== Student Record Management ======");
+			System.out.println("1. Add Student");
+			System.out.println("2. View All Students");
+			System.out.println("3. Search Student by Roll No");
+			System.out.println("4. Update Student");
+			System.out.println("5. Delete Student");
+			System.out.println("6. Display Unique Courses");
+			System.out.println("7. Exit");
+			System.out.print("Enter choice: ");
+			choice = sc.nextInt();
+
+			switch (choice) {
+			case 1:
+				stud.addStudent();
+				break;
+			case 2:
+				stud.viewStudents();
+				break;
+			case 3:
+				stud.searchStudent();
+				break;
+			case 4:
+				stud.updateStudent();
+				break;
+			case 5:
+				stud.deleteStudent();
+				break;
+			case 6:
+				stud.displayCourses();
+				break;
+			case 7:
+				System.out.println("Exiting...");
+				break;
+			default:
+				System.out.println("Invalid choice.");
+			}
+		} while (choice != 7);
 	}
 
 }

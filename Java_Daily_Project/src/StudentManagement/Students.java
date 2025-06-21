@@ -14,8 +14,8 @@ public class Students {
 
 	private Double marks;
 
-//	public Students() {
-//	};
+	public Students() {
+	};
 
 	public Students(int rollNo, String name, Double marks) {
 
@@ -71,6 +71,4 @@ public class Students {
 		this.marks = marks;
 	}
 
-	
-	
 }
