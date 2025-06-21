@@ -3,7 +3,6 @@ import ToHeadbg from './../../../assets/ToDoBg.jpg';
 export const TodoApp = () => {
     return (
         <>
-            {/* Header with blurred background */}
             <div className="relative h-[25vh] w-full overflow-hidden">
                 <div
                     className="absolute inset-0 bg-cover bg-center filter blur-sm scale-110"
@@ -14,7 +13,6 @@ export const TodoApp = () => {
                 </h1>
             </div>
 
-            {/* Main Content */}
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full min-h-[75vh] text-white flex justify-center">
                 <table className="w-[60%] mt-10 text-center border border-white">
 
@@ -23,7 +21,7 @@ export const TodoApp = () => {
                             <td className="p-4">
                                 <input
                                     type="text"
-                                    className="p-2 w-full text-black rounded"
+                                    className="p-2 w-full text-black rounded text-center "
                                     placeholder="Enter your task"
                                 />
                             </td>
