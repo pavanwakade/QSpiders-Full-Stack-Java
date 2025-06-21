@@ -5,34 +5,35 @@ package StudentManagement;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * 
  */
-public class StudentsCRUD {
+public class StudentsCRUD implements StudentsInterface {
 	static List<Students> students = new LinkedList<>();
 
 	public static void main(String[] args) {
-
-		students.add(new Students(1, "pavan", 100.0));
-		students.add(new Students(2, "Ravan", 35.0));
-		students.add(new Students(3, "Jivan", 10.0));
-		students.add(new Students(4, "Savan", 50.0));
-		students.add(new Students(5, "Ram", 100.0));
-		getAllStudents();
-		System.out.println(getStudentByRollNo(33));
+		StudentsCRUD ssCrud = new StudentsCRUD();
 		
-		System.out.println(updateStudent(4, "pavan", 100.0));
-		getAllStudents();
+		ssCrud.addStudent(new Students(0, null, null));
+
+		ssCrud.getAllStudents();
+		System.out.println(ssCrud.getStudentByRollNo(33));
+
+		System.out.println(ssCrud.updateStudent(4, "pavan", 100.0));
+		System.out.println(ssCrud.deleteStudent(4));
+		ssCrud.getAllStudents();
 	}
 
-	public static void getAllStudents() {
+	public List getAllStudents() {
 		for (Students students2 : students) {
 			System.out.println(students2);
 		}
+		return null;
 	}
 
-	public static Students getStudentByRollNo(int rollNo) {
+	public Students getStudentByRollNo(int rollNo) {
 
 		for (Students students2 : students) {
 
@@ -43,11 +44,10 @@ public class StudentsCRUD {
 		return null;
 	}
 
-	static boolean updateStudent(int rollNo, String newName, double newMarks) {
+	public boolean updateStudent(int rollNo, String newName, double newMarks) {
 
 		for (Students students2 : students) {
 			if (students2.getRollNo() == rollNo) {
-
 				students2.setName(newName);
 				students2.setMarks(newMarks);
 				return true;
@@ -55,13 +55,39 @@ public class StudentsCRUD {
 		}
 		return false;
 	}
-	
-	
-	 boolean deleteStudent(int rollNo) {
-		 
 
-		 
+	public boolean deleteStudent(int rollNo) {
+
+		ListIterator<Students> stuIterator = students.listIterator();
+		while (stuIterator.hasNext()) {
+			Students stu = stuIterator.next();
+			if (stu.getRollNo() == rollNo) {
+				stuIterator.remove();
+				System.out.println("Student removed with roll no " + rollNo);
+				return true;
+			}
+		}
 		return false;
-		 
-	 }
+	}
+
+	public List<Students> sortByMarks() {
+		return null;
+
+	}
+
+	@Override
+	public void addStudent(Students student) {
+		students.add(new Students(1, "pavan", 100.0));
+		students.add(new Students(2, "Ravan", 35.0));
+		students.add(new Students(3, "Jivan", 10.0));
+		students.add(new Students(4, "Savan", 50.0));
+		students.add(new Students(5, "Ram", 100.0));
+
+	}
+
+	@Override
+	public List<Students> sortByName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
