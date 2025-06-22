@@ -15,7 +15,7 @@ public class CollectionInterfaceMethodsCRUD {
 	}
 
 	public static void choice() {
-		System.out.println("\nChoose an option:");
+		System.out.println("Choose an option:");
 		System.out.println("1. Insert");
 		System.out.println("2. Read");
 		System.out.println("3. Update");
