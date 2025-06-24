@@ -17,7 +17,7 @@ const EventsTask2 = () => {
             <div>
                 {state
                     ? ""
-                    : <div className="flex flex-col w-[20%] h-[100vh] bg-[#e9c5c5]">
+                    : <div className="flex flex-col gap-[20px] pt-[30px] items-center w-[20%] h-[100vh] bg-[#e9c5c5]">
                         <a href="#">Home</a>
                         <a href="#">About</a>
                         <a href="#">Services</a>
