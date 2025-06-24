@@ -12,9 +12,12 @@
 }
 
 body {
-    /* display: flex; */
-    /* justify-content: center; */
+    @apply bg-gray-100 text-gray-900 font-sans;
+
+    display: flex;
+    justify-content: center;
     align-items: center;
-    
+    min-height: 100vh;
+  
  
 }
