@@ -1,6 +1,6 @@
 // import Componantsintro from "./Componantsintro/Componantsintro.jsx";
 
-import Telewindintro from "./Telewind_intro/Telewindintro";
+import Events from "./Events/Events";
 
 
 let Components = () => {
@@ -11,7 +11,10 @@ let Components = () => {
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            < Telewindintro />
+            {/* < Telewindintro /> */}
+
+            {/* <PropsIntro /> */}
+            <Events />
         </div>
     )
 }
