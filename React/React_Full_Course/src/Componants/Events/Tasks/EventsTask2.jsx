@@ -29,5 +29,4 @@ const EventsTask2 = () => {
         </>
     );
 };
-
 export default EventsTask2;
