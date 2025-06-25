@@ -1,6 +1,7 @@
 // import Componantsintro from "./Componantsintro/Componantsintro.jsx";
 
-import BoostrapIntro from "./Boostrap/BoostrapIntro";
+import PropsIntro from "./Props/PropsIntro";
+
 
 
 let Components = () => {
@@ -13,9 +14,9 @@ let Components = () => {
 
             {/* < Telewindintro /> */}
 
-            {/* <PropsIntro /> */}
+            <PropsIntro />
             {/* <Events /> */}
-            <BoostrapIntro />
+            {/* <BoostrapIntro /> */}
         </div>
     )
 }

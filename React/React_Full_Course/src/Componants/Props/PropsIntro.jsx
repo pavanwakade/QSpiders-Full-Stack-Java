@@ -1,5 +1,4 @@
-import PropsTask3 from "./Tasks/PropsTask3/PropsTask3"
-import PropsTas2Intro from "./Tasks/PropsTasks2/PropsTas2Intro"
+import Task4 from "./Tasks/Tasks4/Task4"
 
 const PropsIntro = () => {
   return (
@@ -7,7 +6,8 @@ const PropsIntro = () => {
     {/* <div>PropsIntro</div> */}
     {/* <PropsTasks1 /> */}
     {/* <PropsTas2Intro /> */}
-    <PropsTask3 />
+    {/* <PropsTask3 /> */}
+    <Task4 />
     </>
   )
 }
