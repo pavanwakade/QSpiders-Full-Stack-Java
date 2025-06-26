@@ -11,7 +11,13 @@ public class OccuranceOfCharInString {
 
 		String s = "hello pavan";
 
-		char[] sChar = s.toCharArray();
+//		char[] sChar =new char[s.length()];
+//		
+//		for (int i = 0; i < s.length(); i++) {
+//			sChar[i]=s.charAt(i);
+//			
+//		}
+		char[] sChar=s.toCharArray();
 
 		for (int i = 0; i < sChar.length; i++) {
 
@@ -20,12 +26,10 @@ public class OccuranceOfCharInString {
 			}
 
 			boolean isDuplicate = false;
-
 			for (int j = 0; j < i; j++) {
 				if (sChar[i] == sChar[j]) {
 					isDuplicate = true;
 					break;
-
 				}
 			}
 			if (!isDuplicate) {
@@ -41,22 +45,9 @@ public class OccuranceOfCharInString {
 
 		}
 
-		System.out.println(Arrays.toString(sChar));
+//		System.out.println(Arrays.toString(sChar));
+
 		
-		
-		for (int i = 0; i < sChar.length; i++) {
-			if (sChar[i]==' ') {
-				continue;
-			}
-			int ct=0;
-			for (int j = 0; j < sChar.length; j++) {
-				if (sChar[i]==sChar[j]) {
-					
-				ct++;	
-				}
-			}
-			System.out.println(sChar[i]+" = "+ct);
-		}
 	}
 
 }
