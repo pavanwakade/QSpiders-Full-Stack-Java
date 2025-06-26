@@ -33,7 +33,18 @@ const CRUD = () => {
 
                 </form>
             </div>
-            
+            <div>
+                {
+                    list.map((val, i) => (
+                        <div key={i}>{val.userName}  {val.password}
+                            <br />
+                            <button>edit</button>
+                            <button>delete</button>
+
+                        </div>
+                    ))
+                }
+            </div>
 
         </>
     )
