@@ -1,7 +1,5 @@
-// import Componantsintro from "./Componantsintro/Componantsintro.jsx";
+import Telewindintro from "./Componantsintro/Telewindintro";
 
-import CRUD from "./CRUD/CRUD";
-import CRUD1 from "./CRUD/CRUD1";
 
 
 
@@ -13,12 +11,13 @@ let Components = () => {
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            {/* < Telewindintro /> */}
+            < Telewindintro />
 
             {/* <PropsIntro /> */}
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
-            <CRUD1 />
+            {/* <CRUD1 /> */}
+            
         </div>
     )
 }
