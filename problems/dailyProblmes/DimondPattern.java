@@ -20,7 +20,7 @@ public class DimondPattern {
 				System.out.print(" ");
 			}
 			
-			for (int k = 0; k <=input ; k++) {
+			for (int k = 0; k <=i  ; k++) {
 				System.out.print("* ");
 			}
 			System.out.println();
