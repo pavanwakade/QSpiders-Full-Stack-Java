@@ -1,7 +1,10 @@
+package pattern;
+
 import java.util.Scanner;
 
 public class DiamondPattern {
     public static void main(String[] args) {
+    	System.out.println("enter number");
        Scanner sc= new Scanner(System.in);
 
         int in=sc.nextInt();
