@@ -7,7 +7,7 @@ const CRUD = () => {
 <>
 {/* <CRUD0 /> */}
 {/* <CRUD3 /> */}
-{/* <CRUD4 /> */}
+<CRUD4 />
 <CRUD5 />
 </>
   )

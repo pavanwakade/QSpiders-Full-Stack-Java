@@ -2,16 +2,27 @@ import React, { useState } from 'react'
 
 const CRUD5 = () => {
 
-    let [state,setState]=useState({});
+    let [state,setState]=useState({
+        id:Date.now(),
+        UserName:"",
+        Email:"",
+        PassWord:"",
+        list:[]
+    });
+
+    let handleOnChange=(e)=>{
+        
+    }
   return (
     <>
-    <input type="text"
-    className='bg-[#d6d3d3] text-[] justify-cen'
-    placeholder='Enter your name'
-    name='' value={""}
-    onChange={()=>{}}
-
-    />
+    <input
+  type="text"
+  className="bg-[#d6d3d3] text-white px-4 py-2 rounded"
+  placeholder="Enter your name"
+  name="UserName"
+  value={state.UserName}
+  onChange={() => {}}
+/>
     </>
   )
 }

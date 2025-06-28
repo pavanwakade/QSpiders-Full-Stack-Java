@@ -1,4 +1,5 @@
 import CRUD from "./CRUD/CRUD";
+import UseRefHook from "./hooks/useRefHook/UseRefHook";
 
 
 
@@ -11,12 +12,14 @@ let Components = () => {
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
+            <UseRefHook />
+
             {/* < Telewindintro /> */}
 
             {/* <PropsIntro /> */}
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
-           <CRUD />
+           {/* <CRUD /> */}
             
         </div>
     )
