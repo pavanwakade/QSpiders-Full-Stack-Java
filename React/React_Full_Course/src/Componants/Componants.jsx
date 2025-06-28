@@ -1,5 +1,4 @@
-import CRUD from "./CRUD/CRUD";
-import UseRefHook from "./hooks/useRefHook/UseRefHook";
+import ContextAPI from "./ContextAPI/ContextAPI";
 
 
 
@@ -12,7 +11,7 @@ let Components = () => {
             {/* <Componantsintro /> */}
             {/* <Hooksintro /> */}
 
-            <UseRefHook />
+            {/* <UseRefHook /> */}
 
             {/* < Telewindintro /> */}
 
@@ -20,6 +19,7 @@ let Components = () => {
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
            {/* <CRUD /> */}
+           <ContextAPI />
             
         </div>
     )
