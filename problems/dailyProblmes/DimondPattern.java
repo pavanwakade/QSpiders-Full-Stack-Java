@@ -27,9 +27,6 @@ public class DimondPattern {
 
 		System.out.println();
 
-		
-		
-		
 		for (int i = input; i >= 0; i--) {
 
 			for (int j = 0; j <= i; j++) {
@@ -44,16 +41,59 @@ public class DimondPattern {
 		
 		
 		
-		
-		for (int i = 0; i < input; i++) {
-			
-			for (int j = 0; j <= ; j++) {
-				
+
+		for (int i = 0; i <= input; i++) {
+
+			for (int j = 0; j <= input - i; j++) {
+				System.out.print(" ");
 			}
-			
+
+			for (int j = 0; j <= i; j++) {
+				System.out.print("* ");
+			}
 			System.out.println();
-			
+
 		}
+		for (int i = input; i <=0 ; i--) {
+
+			
+
+			for (int j = 0; j <= i; j++) {
+				System.out.print("* ");
+			}
+			for (int j = 0; j <= input - i; j++) {
+				System.out.print(" ");
+			}
+			System.out.println();
+
+		}
+		
+		
+		
+		
+		System.out.println();
+
+		
+		
+		
+		
+		for (int i = 0; i <= input; i++) {
+
+			for (int j = 0; j <= input - i; j++) {
+				System.out.print(" ");
+			}
+
+			for (int k = 0; k <= i; k++) {
+				System.out.print("* ");
+			}
+			System.out.println();
+
+		}
+
+		System.out.println();
+		
+		
+		
 		
 		
 		
@@ -72,7 +112,6 @@ public class DimondPattern {
 
 			}
 			System.out.println();
-
 		}
 
 	}
