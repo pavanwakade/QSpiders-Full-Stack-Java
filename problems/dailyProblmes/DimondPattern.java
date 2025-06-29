@@ -3,7 +3,6 @@
  */
 package dailyProblmes;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -12,11 +11,25 @@ import java.util.Scanner;
 public class DimondPattern {
 
 	public static void main(String[] args) {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("enter no");
-//		int input = scanner.nextInt();
-		int input = 11;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("enter no");
+		int input = scanner.nextInt();
 
+//		
+//		* 
+//		* * 
+//		* * * 
+//		* * * * 
+//		* * * * * 
+//		* * * * * * 
+//		* * * * * * * 
+//		* * * * * * * * 
+//		* * * * * * * * * 
+//		* * * * * * * * * * 
+//		* * * * * * * * * * *
+//		
+//		
+//
 		for (int i = 0; i < input; i++) {
 
 			for (int j = 0; j <= i; j++) {
@@ -26,6 +39,24 @@ public class DimondPattern {
 		}
 
 		System.out.println();
+		
+		
+		
+		
+
+//		
+//		* * * * * * * * * * * * 
+//		* * * * * * * * * * * 
+//		* * * * * * * * * * 
+//		* * * * * * * * * 
+//		* * * * * * * * 
+//		* * * * * * * 
+//		* * * * * * 
+//		* * * * * 
+//		* * * * 
+//		* * * 
+//		* * 
+//		* 
 
 		for (int i = input; i >= 0; i--) {
 
@@ -41,6 +72,22 @@ public class DimondPattern {
 		
 		
 		
+		
+		
+		
+		
+
+//          * 
+//         * * 
+//        * * * 
+//       * * * * 
+//      * * * * * 
+//     * * * * * * 
+//    * * * * * * * 
+//   * * * * * * * * 
+//  * * * * * * * * * 
+// * * * * * * * * * * 
+//* * * * * * * * * * * 
 
 		for (int i = 0; i <= input; i++) {
 
@@ -52,42 +99,6 @@ public class DimondPattern {
 				System.out.print("* ");
 			}
 			System.out.println();
-
-		}
-		for (int i = input; i <=0 ; i--) {
-
-			
-
-			for (int j = 0; j <= i; j++) {
-				System.out.print("* ");
-			}
-			for (int j = 0; j <= input - i; j++) {
-				System.out.print(" ");
-			}
-			System.out.println();
-
-		}
-		
-		
-		
-		
-		System.out.println();
-
-		
-		
-		
-		
-		for (int i = 0; i <= input; i++) {
-
-			for (int j = 0; j <= input - i; j++) {
-				System.out.print(" ");
-			}
-
-			for (int k = 0; k <= i; k++) {
-				System.out.print("* ");
-			}
-			System.out.println();
-
 		}
 
 		System.out.println();
@@ -97,6 +108,84 @@ public class DimondPattern {
 		
 		
 		
+//          * 
+//         * * 
+//        * * * 
+//       * * * * 
+//      * * * * * 
+//     * * * * * * 
+//    * * * * * * * 
+//   * * * * * * * * 
+//  * * * * * * * * * 
+// * * * * * * * * * * 
+//* * * * * * * * * * * 
+// * * * * * * * * * * 
+//  * * * * * * * * * 
+//   * * * * * * * * 
+//    * * * * * * * 
+//     * * * * * * 
+//      * * * * * 
+//       * * * * 
+//        * * * 
+//         * * 
+//          * 
+		
+		
+		
+		
+
+		// Upper half (including middle)
+        for (int i = 0; i <= input; i++) {
+            for (int j = 0; j <= input - i; j++) {
+                System.out.print(" ");
+            }
+
+            for (int k = 0; k < i; k++) {
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+
+        // Lower half (exclude middle)
+        for (int i = input - 1; i >= 1; i--) {
+            for (int sp = 0; sp <= input - i; sp++) {
+                System.out.print(" ");
+            }
+
+            for (int j = 0; j < i; j++) {
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+
+		System.out.println();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+//		
+//		* * * * * * * * * * * 
+//		* *       *       * * 
+//		*   *     *     *   * 
+//		*     *   *   *     * 
+//		*       * * *       * 
+//		* * * * * * * * * * * 
+//		*       * * *       * 
+//		*     *   *   *     * 
+//		*   *     *     *   * 
+//		* *       *       * * 
+//		* * * * * * * * * * * 
 
 		for (int i = 0; i < input; i++) {
 
