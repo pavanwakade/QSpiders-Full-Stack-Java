@@ -15,14 +15,15 @@ public class DimondPattern {
 //		System.out.println("enter no");
 //		int input = scanner.nextInt();
 		int input = 10;
+		int num=0;
 
 		for (int i = 0; i < input; i++) {
 			
 			for (int j = 0; j < input; j++) {
 				
-				if (i==0 || j==0 || i==input-1 || j==input-1 || i==j || i==input/2 || ) {
+				if (i==0 || j==0 || i==input-1 || j==input-1 || i==j || i==input/2 ||j==input-i-1) {
 					
-					System.out.print("* ");
+					System.out.print(++num+" ");
 				}
 				else { 
 					System.out.print("  ");
