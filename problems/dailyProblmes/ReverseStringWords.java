@@ -13,7 +13,7 @@ public class ReverseStringWords {
 
 	public static void main(String[] args) {
 
-		String str = "i Love Java i like java";
+		String str = "i Love coading";
 
 		ReverseWords(str);
 
