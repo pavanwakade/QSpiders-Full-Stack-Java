@@ -3,6 +3,7 @@
  */
 package dailyProblmes;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -43,6 +44,12 @@ public class DimondPattern {
 		
 		
 		
+		
+		
+		
+		
+		
+		
 
 //		
 //		* * * * * * * * * * * * 
@@ -68,6 +75,9 @@ public class DimondPattern {
 		}
 
 		System.out.println();
+		
+		
+		
 		
 		
 		
@@ -108,6 +118,46 @@ public class DimondPattern {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+
+//		* * * * * * 
+//		 * * * * * 
+//		  * * * * 
+//		   * * * 
+//		    * * 
+//		     * 
+
+		for (int i = input; i > 0; i--) {
+			for (int j = 0; j < input - i; j++) {
+
+				System.out.print(" ");
+			}
+
+			for (int j = 0; j < i; j++) {
+
+				System.out.print("* ");
+
+			}
+			System.out.println();
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 //          * 
 //         * * 
 //        * * * 
@@ -129,51 +179,41 @@ public class DimondPattern {
 //        * * * 
 //         * * 
 //          * 
-		
-		
-		
-		
 
-		// Upper half (including middle)
-        for (int i = 0; i <= input; i++) {
-            for (int j = 0; j <= input - i; j++) {
-                System.out.print(" ");
-            }
+		for (int i = 0; i < input; i++) {
 
-            for (int k = 0; k < i; k++) {
-                System.out.print("* ");
-            }
+			for (int j = 0; j < input - i; j++) {
+				System.out.print(" ");
+			}
 
-            System.out.println();
-        }
+			for (int j = 0; j < i; j++) {
+				System.out.print("* ");
+			}
+			System.out.println();
+		}
 
-        // Lower half (exclude middle)
-        for (int i = input - 1; i >= 1; i--) {
-            for (int sp = 0; sp <= input - i; sp++) {
-                System.out.print(" ");
-            }
+		for (int i = input; i > 0; i--) {
+			for (int j = 0; j < input - i; j++) {
 
-            for (int j = 0; j < i; j++) {
-                System.out.print("* ");
-            }
+				System.out.print(" ");
+			}
 
-            System.out.println();
-        }
+			for (int j = 0; j < i; j++) {
 
+				System.out.print("* ");
+
+			}
+			System.out.println();
+
+		}
 		System.out.println();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
+		
+		
+		
+		
+		
+		
 //		
 //		* * * * * * * * * * * 
 //		* *       *       * * 
