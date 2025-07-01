@@ -21,7 +21,7 @@ export const TodoApp = () => {
                 <input type="text"
                     className=''
                     placeholder='Enter your task'
-                    name=''
+                    name='state'
                     value={''}
                     onChange={() => { }}
                 />
