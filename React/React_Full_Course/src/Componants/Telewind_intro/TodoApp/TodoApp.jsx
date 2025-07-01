@@ -22,7 +22,7 @@ export const TodoApp = () => {
                     className=''
                     placeholder='Enter your task'
                     name='state'
-                    value={''}
+                    value={{}}
                     onChange={() => { }}
                 />
             </form>
