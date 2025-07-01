@@ -8,7 +8,7 @@ const UseEffectTask2 = () => {
         console.log("task 2");
     }, [])
 
-    useEffect(() => { }, [state1])
+    useEffect(() => { console.log("task 3"); }, [state1]);
     return (
         <>
 
