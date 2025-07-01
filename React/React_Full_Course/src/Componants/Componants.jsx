@@ -1,4 +1,4 @@
-import Hooksintro from "./hooks/Hooksintro";
+import CRUD from "./CRUD/CRUD";
 
 
 
@@ -9,7 +9,7 @@ let Components = () => {
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            <Hooksintro />
+            {/* <Hooksintro /> */}
 
             {/* <UseRefHook /> */}
 
@@ -18,7 +18,7 @@ let Components = () => {
             {/* <PropsIntro /> */}
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
-           {/* <CRUD /> */}
+           <CRUD />
            {/* <ContextAPI /> */}
             
         </div>

@@ -11,7 +11,7 @@ const UseEffectTask2 = () => {
     useEffect(() => { console.log("task 3"); }, [state1]);
     return (
         <>
-
+        
         </>
     )
 }

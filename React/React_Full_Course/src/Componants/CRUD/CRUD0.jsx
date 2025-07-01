@@ -13,7 +13,9 @@ const CRUD0 = () => {
 
 
     return (
-        <>CRUD
+        <>
+        <hr className="bg-[red]"/>
+        <h2>CRUD0</h2>
             <div>
                 <form>
                     <input type='text'
