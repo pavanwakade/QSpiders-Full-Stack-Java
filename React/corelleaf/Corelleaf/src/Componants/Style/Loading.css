@@ -1,0 +1,31 @@
+/* Loading.css */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.counter-display {
+  font-size: 200px;
+  color: white;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.loading-text-inline {
+  font-size: 40px;
+  color: #60a5fa; /* blue-400 */
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.loading-text {
+  font-size: 40px;
+  color: #60a5fa; /* blue-400 */
+  font-weight: 600;
+  margin-top: 1rem;
+}
