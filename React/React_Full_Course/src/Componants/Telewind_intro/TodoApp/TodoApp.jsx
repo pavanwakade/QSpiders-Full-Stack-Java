@@ -1,9 +1,34 @@
-import React from 'react'
+import { useState } from 'react';
+import ToHeadbg from './../../../assets/ToDoBg.jpg';
 
-const TodoApp = () => {
-  return (
-    <div>TodoApp</div>
-  )
-}
+export const TodoApp = () => {
 
-export default TodoApp
+    let [state, setState] = useState({
+        id: Date.now(),
+        task: '',
+        list: []
+    })
+
+    let handleOnchange=(e)=>{
+        let{name,value}=e.target;
+        setState({...state,[name]:value})
+    }
+    return (
+        <>
+            {/* <img src={ToHeadbg} alt="bg" /> */}
+
+            <form action="">
+                <input type="text"
+                    className=''
+                    placeholder='Enter your task'
+                    name=''
+                    value={''}
+                    onChange={() => { }}
+                />
+            </form>
+
+        </>
+    );
+};
+
+export default TodoApp;
