@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ToHeadbg from './../../../assets/ToDoBg.jpg';
 
 export const TodoApp = () => {
 
@@ -15,10 +14,25 @@ export const TodoApp = () => {
         setState({ ...state, [name]: value })
     }
 
-    let handleOnSubmit=()=>{
+    let handleOnSubmit = (e) => {
+        e.preventDefault();
+        let newTask = { tasks: state.tasks }
+
         setState({
-            
-        })
+            ...state,
+            list: [...state.list, newTask],
+            tasks: '',
+        });
+
+    }
+
+    let handlDelete = (id) => {
+     const filterdList=list.filter((val) => val !== id)
+        setState({ ...state,list:filterdList})
+    }
+
+    let handlUpdate = (id) => {
+
     }
     return (
         <>
@@ -26,7 +40,7 @@ export const TodoApp = () => {
 
             <div className='flex items-center justify-center  '>
 
-                <form action="" className=' '>
+                <form action="" className=' ' >
                     <input type="text"
                         className=''
                         placeholder='Enter your task'
@@ -34,11 +48,17 @@ export const TodoApp = () => {
                         value={tasks}
                         onChange={handleOnchange}
                     />
-                    <button className='bg-[#71dd71] px-[10px] mx-[20px]'>add</button>
-                    {/* <button className='bg-[#eb5247] px-[10px] mx-[10px]'>delete</button> */}
+                    <button className='bg-[#71dd71] px-[10px] mx-[20px]' onClick={handleOnSubmit}>add</button>
+                    <button className='bg-[#eb5247] px-[10px] mx-[10px]' onClick={handlDelete}>delete</button>
                 </form>
             </div>
-
+            <div className="mt-4 text-center">
+                {list.map((val, index) => (
+                    <div key={index} className="my-1">
+                        {val.tasks}
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
