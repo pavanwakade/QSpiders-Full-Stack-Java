@@ -1,4 +1,3 @@
-import React from 'react'
 import Loading from './Loading'
 
 const Componants = () => {
@@ -10,3 +9,5 @@ const Componants = () => {
 }
 
 export default Componants
+
+// This file is no longer needed with the new structure.

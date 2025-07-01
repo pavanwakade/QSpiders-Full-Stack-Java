@@ -1,31 +1,37 @@
-/* Loading.css */
+/* Import a monospaced font for the scramble effect */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 
 .loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: black;
+  z-index: 9999;
+  background-color: #020617; /* A very dark, rich blue */
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
 }
 
-.counter-display {
-  font-size: 200px;
-  color: white;
-  font-weight: 800;
-  line-height: 1;
+.loading-container.is-hiding {
+  opacity: 0;
 }
 
-.loading-text-inline {
-  font-size: 40px;
-  color: #60a5fa; /* blue-400 */
-  font-weight: 600;
-  margin-top: 1rem;
+.scramble-text-display {
+  font-family: 'Source Code Pro', monospace; /* Monospaced font is key! */
+  font-weight: 700;
+  font-size: 2rem; /* 32px */
+  letter-spacing: 0.1em;
+  color: #e2e8f0; /* A light, cool gray */
+  text-align: center;
+  /* A subtle glow effect to make it feel digital */
+  text-shadow: 0 0 5px rgba(14, 165, 233, 0.4), 0 0 10px rgba(14, 165, 233, 0.3);
 }
 
-.loading-text {
-  font-size: 40px;
-  color: #60a5fa; /* blue-400 */
-  font-weight: 600;
-  margin-top: 1rem;
+/* Style the characters that are currently scrambling */
+.scramble-char {
+  color: #0ea5e9; /* A vibrant sky blue */
 }

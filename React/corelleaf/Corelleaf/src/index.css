@@ -11,18 +11,40 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+} */
+
+:root {
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color-scheme: light dark;
 }
 
-a {
+/* *, *::before, *::after {
+  box-sizing: inherit;
+} */
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+} */
+a {
+  color: #0ea5e9;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 a:hover {
-  color: #535bf2;
+  color: #38bdf8;
 }
 
-body {
+/* body {
   margin: 0;
   display: flex;
   place-items: center;
