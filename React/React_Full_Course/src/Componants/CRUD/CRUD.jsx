@@ -5,12 +5,15 @@ import CRUD5 from "./CRUD5"
 
 const CRUD = () => {
   return (
-<>
-<CRUD0 />
-<CRUD3 />
-<CRUD4 />
-<CRUD5 />
-</>
+    <>
+      <CRUD0 />
+      {/* <CRUD3 />
+      {h}
+      <CRUD4 />
+      {h}
+      
+      <CRUD5 /> */}
+    </>
   )
 }
 

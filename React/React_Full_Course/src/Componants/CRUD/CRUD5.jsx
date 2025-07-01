@@ -9,8 +9,9 @@ const CRUD5 = () => {
         PassWord:"",
         list:[]
     });
-
     let handleOnChange=(e)=>{
+      let {value,name}=e.target;
+      
         
     }
   return (

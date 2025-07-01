@@ -11,12 +11,12 @@ const CRUD0 = () => {
     }
     console.log(list);
 
+                  let h = <hr className="my-5 border border-amber-500 w-[100%]" />;
 
     return (
         <>
-        <hr className="bg-[red]"/>
         <h2>CRUD0</h2>
-            <div>
+            <div className="flex align-content-center justify-center w-[30%] border border-red-500">
                 <form>
                     <input type='text'
                         placeholder='enter name'
@@ -35,13 +35,14 @@ const CRUD0 = () => {
 
                 </form>
             </div>
-            <div>
+{h}
+            <div className="flex border p-[10px] flex-wrap m-[10px]">
                 {
                     list.map((val, i) => (
-                        <div key={i}>{val.userName}  {val.password}
+                        <div key={i}    className="flex border p-[10px] ">{val.userName}  {val.password}
                             <br />
-                            <button>edit</button>
-                            <button>delete</button>
+                            <button className="flex border px-[10px]">edit</button>
+                            <button className="flex border px-[10px]">delete</button>
 
                         </div>
                     ))
