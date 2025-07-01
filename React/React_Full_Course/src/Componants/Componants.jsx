@@ -19,8 +19,8 @@ let Components = () => {
             {/* <PropsIntro /> */}
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
-           {/* <CRUD /> */}
-           {/* <ContextAPI /> */}
+           <CRUD />
+           <ContextAPI />
             
         </div>
     )

@@ -33,12 +33,9 @@ export const TodoApp = () => {
 
     let handlUpdate = (id) => {
 
-
-
     }
     return (
         <>
-            {/* <img src={ToHeadbg} alt="bg" /> */}
 
             <div className='flex items-center justify-center  '>
 
