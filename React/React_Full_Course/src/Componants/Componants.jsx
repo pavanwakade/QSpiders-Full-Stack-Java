@@ -1,4 +1,4 @@
-import ContextAPI from "./ContextAPI/ContextAPI";
+import Hooksintro from "./hooks/Hooksintro";
 
 
 
@@ -9,7 +9,7 @@ let Components = () => {
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            {/* <Hooksintro /> */}
+            <Hooksintro />
 
             {/* <UseRefHook /> */}
 
@@ -19,7 +19,7 @@ let Components = () => {
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
            {/* <CRUD /> */}
-           <ContextAPI />
+           {/* <ContextAPI /> */}
             
         </div>
     )
