@@ -6,9 +6,9 @@ const UseEffectTask2 = () => {
     useEffect(() => {
 
         console.log("task 2");
-    }, [state1])
+    }, [])
 
-    useEffect(() => { }, [])
+    useEffect(() => { }, [state1])
     return (
         <>
 
