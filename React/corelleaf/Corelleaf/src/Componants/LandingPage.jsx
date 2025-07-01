@@ -2,14 +2,18 @@
 function LandingPage() {
   return (
     <div className="page landing">
-      <h1>corelleaf Design Studio</h1>
-      <h2>Branding. UI/UX. Digital.</h2>
-      <p>
-        We are a creative design studio helping brands and startups grow with impactful branding, UI/UX, and digital solutions.
-      </p>
-      <p>
-        <a href="/contact" className="cta-button">Let's Work Together</a>
-      </p>
+      <h1>The Design Agency</h1>
+      <h2>We build ambitious digital products</h2>
+      <div className="projects">
+        <div className="project">
+          <h3>Trust</h3>
+          <a href="#">Veiw Project</a>
+        </div>
+        <div className="project">
+          <h3>Pink-Lotus</h3>
+          <a href="#">Veiw Project</a>
+        </div>
+      </div>
     </div>
   );
 }

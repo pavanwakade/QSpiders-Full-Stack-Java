@@ -2,21 +2,13 @@
 function Contact() {
   return (
     <div className="page contact">
-      <h1>Contact Us</h1>
+      <h1>Contact</h1>
       <p>
-        Ready to start your project or have questions? Reach out to us!
+        Mail us: <a href="mailto:career@corelleaf.com">career@corelleaf.com</a>
       </p>
       <p>
-        <strong>Email:</strong> hello@corelleaf.com<br />
-        <strong>Phone:</strong> +91 98765 43210<br />
-        <strong>Location:</strong> Bengaluru, India
+        Address: Venus Garden Building, Office No- 10, behind Bank of Baroda, Thite Vasti, Kharadi, Maharashtra 411014.
       </p>
-      <form>
-        <input type="text" placeholder="Your Name" required /><br />
-        <input type="email" placeholder="Your Email" required /><br />
-        <textarea placeholder="Your Message" required></textarea><br />
-        <button type="submit">Send Message</button>
-      </form>
     </div>
   );
 }

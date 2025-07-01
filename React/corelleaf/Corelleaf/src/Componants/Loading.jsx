@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Style/Loading.css';
 
-const TARGET_TEXT = "CORELLEAF";
+const TARGET_TEXT = "Corelleaf";
 const CHARS = "!<>-_\\/[]{}—=+*^?#________";
 
 const Loading = ({ onFinished }) => {
@@ -61,7 +61,7 @@ const Loading = ({ onFinished }) => {
   return (
     <div className={`loading-container ${isHiding ? 'is-hiding' : ''}`}>
       <div id="scramble-text" className="scramble-text-display" aria-label="Loading">
-        CORELLEAF
+        corelleaf
       </div>
     </div>
   );

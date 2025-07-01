@@ -1,0 +1,28 @@
+.footer-section {
+  background: #2e7d32;
+  color: #fff;
+  padding: 2rem 0;
+  text-align: center;
+}
+.footer-section a {
+  color: #a5d6a7;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.footer-section a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.footer-section .footer-logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: block;
+}
+.footer-section .footer-links {
+  margin-bottom: 1rem;
+}
+.footer-section .footer-copy {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
