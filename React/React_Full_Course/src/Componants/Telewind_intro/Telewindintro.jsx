@@ -4,11 +4,11 @@ let Telewindintro = () => {
 
     return (
         <>
-         <div>
+            {/* <div>
              <Vscode />
-         </div>
+         </div> */}
 
-         {/* <div className="bg-[#353434] h-[50px] text-[#f8f6f6] flex items-center justify-between px-10">
+            {/* <div className="bg-[#353434] h-[50px] text-[#f8f6f6] flex items-center justify-between px-10">
              <div className="text-[25px] font-semibold">
                  <a href="#">Logo</a>
              </div>
@@ -21,10 +21,10 @@ let Telewindintro = () => {
          </div>
  */}
 
-            {/* <div>
+            <div>
 
                 <TodoApp />
-            </div> */}
+            </div>
 
         </>
 
