@@ -215,3 +215,45 @@ body {
 .page form button:hover {
   background: #388e3c;
 }
+.service-items {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  justify-content: center;
+}
+.service-item {
+  background: #e8f5e9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 220px;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(46,125,50,0.08);
+  color: #234;
+  margin-bottom: 1rem;
+}
+.projects {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  justify-content: center;
+}
+.project {
+  background: #e3f2fd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 220px;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(14,165,233,0.08);
+  color: #234;
+  margin-bottom: 1rem;
+}
+.project a {
+  color: #0ea5e9;
+  font-weight: 600;
+  text-decoration: none;
+}
+.project a:hover {
+  text-decoration: underline;
+}
