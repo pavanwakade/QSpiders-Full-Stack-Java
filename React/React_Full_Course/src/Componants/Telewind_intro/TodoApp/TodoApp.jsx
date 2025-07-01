@@ -27,8 +27,8 @@ export const TodoApp = () => {
     }
 
     let handlDelete = (id) => {
-     const filterdList=list.filter((val) => val !== id)
-        setState({ ...state,list:filterdList})
+        const filterdList = list.filter((val) => val !== id)
+        setState({ ...state, list: filterdList })
     }
 
     let handlUpdate = (id) => {
@@ -49,13 +49,15 @@ export const TodoApp = () => {
                         onChange={handleOnchange}
                     />
                     <button className='bg-[#71dd71] px-[10px] mx-[20px]' onClick={handleOnSubmit}>add</button>
-                    <button className='bg-[#eb5247] px-[10px] mx-[10px]' onClick={handlDelete}>delete</button>
                 </form>
             </div>
-            <div className="mt-4 text-center">
+            <div className="mt-4 text-center" >
                 {list.map((val, index) => (
-                    <div key={index} className="my-1">
-                        {val.tasks}
+                    <div key={val.id}>
+                        <div key={index} className="my-1">
+                            {val.tasks}
+                            <button className='bg-[#eb5247] px-[10px] mx-[10px]' onClick={() => handlDelete(val.id)}>delete</button>
+                        </div>
                     </div>
                 ))}
             </div>
