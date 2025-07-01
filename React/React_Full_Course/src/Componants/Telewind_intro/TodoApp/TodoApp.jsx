@@ -16,22 +16,24 @@ export const TodoApp = () => {
 
     let handleOnSubmit = (e) => {
         e.preventDefault();
-        let newTask = { tasks: state.tasks }
+        let newTask = { id: Date.now(), tasks: state.tasks };
 
         setState({
-            ...state,
-            list: [...state.list, newTask],
-            tasks: '',
+            ...state, list: [...state.list, newTask], tasks: '',
         });
 
     }
 
     let handlDelete = (id) => {
-        const filterdList = list.filter((val) => val !== id)
+        
+        console.log(id);
+        const filterdList = list.filter((val) => val.id !== id);
         setState({ ...state, list: filterdList })
     }
 
     let handlUpdate = (id) => {
+
+
 
     }
     return (
