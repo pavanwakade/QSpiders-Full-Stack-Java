@@ -1,5 +1,4 @@
-import CRUD from "./CRUD/CRUD";
-import Telewindintro from "./Telewind_intro/Telewindintro";
+import Hooksintro from "./hooks/Hooksintro";
 
 
 
@@ -10,17 +9,17 @@ let Components = () => {
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            {/* <Hooksintro /> */}
+            <Hooksintro />
 
             {/* <UseRefHook /> */}
 
-            <Telewindintro />
+            {/* <Telewindintro /> */}
 
             {/* <PropsIntro /> */}
             {/* <Events /> */}
             {/* <BoostrapIntro /> */}
-           <CRUD />
-           <ContextAPI />
+           {/* <CRUD /> */}
+           {/* <ContextAPI /> */}
             
         </div>
     )

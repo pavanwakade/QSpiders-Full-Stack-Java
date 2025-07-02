@@ -4,10 +4,10 @@ import UseEffectTask2 from './Tasks/UseEffectTask2'
 const UseEffect = () => {
   return (
     <>
-    {/* <div>UseEffect</div> */}
+      {/* <div>UseEffect</div> */}
 
-    <UseEffectTask1 />
-    <UseEffectTask2 />
+      <UseEffectTask1 />
+      <UseEffectTask2 />
     </>
   )
 }
