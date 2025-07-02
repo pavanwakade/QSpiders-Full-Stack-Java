@@ -8,19 +8,17 @@ const FetchApi = () => {
   // let data;
   let fetchDate = async () => {
     let response = await fetch(`https://api.github.com/users`);  //it call only once 
-    console.log(response);
     let data = await response.json();
     setApi(data);
     console.log("api called");
-
-
+    
+    
   }
   console.log(api);
-
+  
   useEffect(() => {
     fetchDate();
   }, [])
-
   
 
 
@@ -34,7 +32,7 @@ const FetchApi = () => {
             return (
               <div key={item.id}>
                 <h1>{item.login}</h1>
-                <img src={item.avatar_url} alt={item.login} className='w-[80%]' />
+                <img src={item.avatar_url} alt={item.login} className='w-[80%],justify.center' />
               </div>
             );
           })
