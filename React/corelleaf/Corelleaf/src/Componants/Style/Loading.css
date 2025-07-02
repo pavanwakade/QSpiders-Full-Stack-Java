@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  background-color: #020617; /* A very dark, rich blue */
+  background-color: #1a202c; /* Use primary color from Tailwind */
   transition: opacity 0.5s ease-out;
   opacity: 1;
 }
@@ -25,13 +25,13 @@
   font-weight: 700;
   font-size: 2rem; /* 32px */
   letter-spacing: 0.1em;
-  color: #e2e8f0; /* A light, cool gray */
+  color: #e2e8f0; /* Use textLight color from Tailwind */
   text-align: center;
   /* A subtle glow effect to make it feel digital */
-  text-shadow: 0 0 5px rgba(14, 165, 233, 0.4), 0 0 10px rgba(14, 165, 233, 0.3);
+  text-shadow: 0 0 5px rgba(66, 153, 225, 0.4), 0 0 10px rgba(66, 153, 225, 0.3); /* Use accent color */
 }
 
 /* Style the characters that are currently scrambling */
 .scramble-char {
-  color: #0ea5e9; /* A vibrant sky blue */
+  color: #4299e1; /* Use accent color from Tailwind */
 }

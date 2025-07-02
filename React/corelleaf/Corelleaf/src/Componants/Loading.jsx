@@ -59,8 +59,8 @@ const Loading = ({ onFinished }) => {
   }, [onFinished]);
 
   return (
-    <div className={`loading-container ${isHiding ? 'is-hiding' : ''}`}>
-      <div id="scramble-text" className="scramble-text-display" aria-label="Loading">
+    <div className={`loading-container fixed inset-0 flex items-center justify-center bg-primary z-50 transition-opacity duration-700 ${isHiding ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div id="scramble-text" className="scramble-text-display text-5xl md:text-7xl font-extrabold text-textLight animate-pulse" aria-label="Loading">
         corelleaf
       </div>
     </div>

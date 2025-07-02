@@ -9,14 +9,76 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #555;
+  color: theme('colors.textLight'); /* Use new text color */
+  background-color: theme('colors.primary'); /* Use new primary background color */
+  min-height: 100vh;
+  transition: background-color 0.5s ease-in-out;
 }
 
 :root {
-  --primary-color: #75B83C;
-  --secondary-color: #2c3e50;
+  --primary-color: theme('colors.primary');
+  --secondary-color: theme('colors.secondary');
+  --accent-color: theme('colors.accent');
+  --text-light-color: theme('colors.textLight');
+  --text-dark-color: theme('colors.textDark');
 }
 
 a {
   text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* Removed .page animation, will apply directly in components */
+
+h1, h2, h3 {
+  @apply font-bold;
+  letter-spacing: 0.01em;
+  color: theme('colors.textLight'); /* Default heading color */
+}
+
+h1 {
+  @apply text-3xl md:text-5xl mb-4;
+}
+
+h2 {
+  @apply text-xl md:text-2xl mb-2;
+}
+
+h3 {
+  @apply text-lg md:text-xl mb-2;
+}
+
+button, .btn {
+  @apply bg-accent text-white px-6 py-2 rounded-full shadow hover:bg-blue-600 transition-colors duration-300;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: theme('colors.secondary');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.accent');
+  border-radius: 8px;
+}
+
+/* Custom animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

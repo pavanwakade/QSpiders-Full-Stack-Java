@@ -29,10 +29,10 @@ const AdvancedStylishLoading = () => {
     minHeight: '100vh',
     width: '100%',
     background: `
-      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
-      linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)
+      radial-gradient(circle at 20% 80%, rgba(66, 153, 225, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(66, 153, 225, 0.2) 0%, transparent 50%),
+      linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #1a202c 100%)
     `,
     position: 'relative',
     overflow: 'hidden',
@@ -54,7 +54,7 @@ const AdvancedStylishLoading = () => {
     left: '50%',
     width: `${size}px`,
     height: `${size}px`,
-    border: `1px solid rgba(148, 163, 184, ${opacity})`,
+    border: `1px solid rgba(113, 128, 150, ${opacity})`,
     borderRadius: '50%',
     transform: `translate(-50%, -50%) rotate(${rotationAngle * speed}deg)`,
     transition: 'all 0.1s linear',
@@ -80,7 +80,7 @@ const AdvancedStylishLoading = () => {
     borderRadius: '50%',
     position: 'relative',
     transition: 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-    backgroundColor: '#475569',
+    backgroundColor: '#4a5568',
   };
 
   const getActiveDotStyle = (index) => {
@@ -90,19 +90,19 @@ const AdvancedStylishLoading = () => {
 
     if (isActive) {
       return {
-        background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
+        background: 'linear-gradient(135deg, #4299e1, #8b5cf6, #ec4899)',
         transform: 'scale(1.8) translateY(-8px)',
         boxShadow: `
-          0 0 20px rgba(59, 130, 246, 0.6),
+          0 0 20px rgba(66, 153, 225, 0.6),
           0 0 40px rgba(139, 92, 246, 0.4),
           0 0 60px rgba(236, 72, 153, 0.2)
         `,
       };
     } else if (isPrevious || isNext) {
       return {
-        background: 'linear-gradient(135deg, #64748b, #475569)',
+        background: 'linear-gradient(135deg, #718096, #4a5568)',
         transform: 'scale(1.2)',
-        boxShadow: '0 0 10px rgba(100, 116, 139, 0.3)',
+        boxShadow: '0 0 10px rgba(113, 128, 150, 0.3)',
       };
     }
     return {};
@@ -112,7 +112,7 @@ const AdvancedStylishLoading = () => {
     position: 'absolute',
     width: '4px',
     height: '4px',
-    background: 'linear-gradient(45deg, #06b6d4, #3b82f6)',
+    background: 'linear-gradient(45deg, #4299e1, #8b5cf6)',
     borderRadius: '50%',
     animation: `float 3s infinite ease-in-out ${delay}s`,
     opacity: 0.7,
@@ -125,7 +125,7 @@ const AdvancedStylishLoading = () => {
   };
 
   const mainTextStyle = {
-    background: 'linear-gradient(90deg, #64748b, #e2e8f0, #64748b)',
+    background: 'linear-gradient(90deg, #718096, #e2e8f0, #718096)',
     backgroundSize: '200% 100%',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -139,7 +139,7 @@ const AdvancedStylishLoading = () => {
   };
 
   const subTextStyle = {
-    color: '#64748b',
+    color: '#718096',
     fontSize: '0.875rem',
     fontFamily: 'system-ui, sans-serif',
     fontWeight: '400',
@@ -150,7 +150,7 @@ const AdvancedStylishLoading = () => {
   const progressBarStyle = {
     width: '200px',
     height: '2px',
-    background: 'rgba(71, 85, 105, 0.3)',
+    background: 'rgba(74, 85, 104, 0.3)',
     borderRadius: '1px',
     overflow: 'hidden',
     marginTop: '20px',
@@ -158,7 +158,7 @@ const AdvancedStylishLoading = () => {
 
   const progressFillStyle = {
     height: '100%',
-    background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899)',
+    background: 'linear-gradient(90deg, #4299e1, #8b5cf6, #ec4899)',
     borderRadius: '1px',
     transform: `translateX(-${100 - ((activeIndex + 1) * 20)}%)`,
     transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
