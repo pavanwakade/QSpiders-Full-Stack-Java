@@ -1,4 +1,4 @@
-import Hooksintro from "./hooks/Hooksintro";
+import Axios1 from "./axios/Axios1";
 
 
 
@@ -9,7 +9,7 @@ let Components = () => {
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            <Hooksintro />
+            {/* <Hooksintro /> */}
 
             {/* <UseRefHook /> */}
 
@@ -20,6 +20,7 @@ let Components = () => {
             {/* <BoostrapIntro /> */}
            {/* <CRUD /> */}
            {/* <ContextAPI /> */}
+           <Axios1 />
             
         </div>
     )
