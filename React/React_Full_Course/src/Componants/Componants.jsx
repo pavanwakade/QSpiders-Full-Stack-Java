@@ -1,4 +1,4 @@
-import Axios1 from "./axios/Axios1";
+import Hoc from "./hoc/Hoc";
 
 
 
@@ -20,8 +20,8 @@ let Components = () => {
             {/* <BoostrapIntro /> */}
            {/* <CRUD /> */}
            {/* <ContextAPI /> */}
-           <Axios1 />
-            
+           {/* <Axios1 /> */}
+            <Hoc />
         </div>
     )
 }
