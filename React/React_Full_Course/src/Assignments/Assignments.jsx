@@ -24,6 +24,7 @@ import React from 'react'
 import Crud from './CRUD/Crud';
 import CardsRandomColor from './Class/CardsRandomColor';
 import CardsColor from './Class/CardsColor';
+import ClassTasks from './CRUD/ClassTasks/ClassTasks';
 
 const Assignments = () => {
   return (
@@ -50,8 +51,9 @@ const Assignments = () => {
       {/* <FormWithFieldHighlightOnValidation /> */}
       {/* <StartStopTimer /> */}
       {/* <MultiStepFormWithSharedState /> */}
-      <Crud />
+      {/* <Crud /> */}
       {/* <CardsColor /> */}
+      <ClassTasks />
     </div>
   );
 }
