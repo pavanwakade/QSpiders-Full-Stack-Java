@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
+/* 
 *{
     margin: 0;
     padding: 0;
@@ -12,7 +10,7 @@
 }
 
 body {
-    @apply bg-gray-100 text-gray-900 font-sans;
+    @apply font-sans text-gray-900 bg-gray-100;
 
     display: flex;
     justify-content: center;
@@ -20,4 +18,4 @@ body {
     min-height: 100vh;
   
  
-}
+}  */

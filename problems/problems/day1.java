@@ -29,11 +29,6 @@ Black
 Explanation
 We can clearly see a1 is black in the diagram.*/
 
-
-
-
-
-
 package problems;
 
 import java.util.*;
@@ -44,13 +39,14 @@ class day1 {
 
 		Scanner scanner = new Scanner(System.in);
 
-		String input = scanner.next().toLowerCase();
+		String input = scanner.next().toLowerCase(); // a1,a3,b1,b8
 		char col = input.charAt(0);
 		char row = input.charAt(1);
 
 		if (input.length() != 2 || col < 'a' || col > 'h' || row < '1' || row > '8') {
 
 			System.out.println("invalid input");
+			return;
 		}
 
 		String BW = "";

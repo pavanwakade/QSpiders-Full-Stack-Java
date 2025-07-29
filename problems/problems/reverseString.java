@@ -10,7 +10,7 @@ class reverseString {
   public static String reverse(String str) {
     char[] a = str.toCharArray();
 
-    System.out.println(Arrays.toString(a));
+//    System.out.println(Arrays.toString(a));
 
     String s = "";
 
@@ -19,7 +19,11 @@ class reverseString {
     for (int j = 0; j < a.length; j++, i--) {
       s += a[i];
     }
-    // System.out.println(s);
-    return s;
+//     System.out.println(s);
+//    return s;
+	  
+	  return new StringBuffer(str
   }
 }
+
+

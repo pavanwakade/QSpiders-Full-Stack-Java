@@ -1,4 +1,7 @@
-import Hoc from "./hoc/Hoc";
+// import Hoc from "./hoc/Hoc";
+import Hooksintro from "./hooks/Hooksintro";
+// import Memo from "./Memo/Memo";
+import Routing from "./Routing/Routing";
 
 
 
@@ -9,7 +12,7 @@ let Components = () => {
             {/* <h1>hello from Componants</h1> */}
 
             {/* <Componantsintro /> */}
-            {/* <Hooksintro /> */}
+            <Hooksintro />
 
             {/* <UseRefHook /> */}
 
@@ -21,7 +24,9 @@ let Components = () => {
            {/* <CRUD /> */}
            {/* <ContextAPI /> */}
            {/* <Axios1 /> */}
-            <Hoc />
+            {/* <Hoc /> */}
+            {/* <Memo/> */}
+            {/* <Routing /> */}
         </div>
     )
 }

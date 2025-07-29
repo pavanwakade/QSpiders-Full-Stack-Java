@@ -1,7 +1,5 @@
 package dailyProblmes;
 
-import java.util.Arrays;
-
 /**
  * 
  */
@@ -9,44 +7,32 @@ public class OccuranceOfCharInString {
 
 	public static void main(String[] args) {
 
-		String s = "hello pavan";
+		checkOccurancde("hello");
+	}
 
-//		char[] sChar =new char[s.length()];
-//		
-//		for (int i = 0; i < s.length(); i++) {
-//			sChar[i]=s.charAt(i);
-//			
-//		}
-		char[] sChar = s.toCharArray();
+	public static void checkOccurancde(String str) {
 
-		for (int i = 0; i < sChar.length; i++) {
+		char[] ch = str.toCharArray();
 
-			if (sChar[i] == ' ') {
-				continue;
-			}
-			
+		for (int i = 0; i < ch.length; i++) {
+
 			boolean isDuplicate = false;
-			for (int j = 0; j < i; j++) {
-				if (sChar[i] == sChar[j]) {
+			for (int j = 0; j < ch.length; j++) {
+
+				if (ch[i] == ch[j]) {
 					isDuplicate = true;
 					break;
 				}
 			}
-			if (!isDuplicate) {
-				int c = 0;
-				for (int k = 0; k < sChar.length; k++) {
-
-					if (sChar[i] == sChar[k]) {
-						c++;
+			if (isDuplicate) {
+				int Count = 0;
+				for (int k = 0; k < ch.length; k++) {
+					if (ch[i] == ch[k]) {
+						Count++;
 					}
 				}
-				System.out.println(sChar[i] + "=" + c);
+				System.out.println(ch[i] + "-->" + Count);
 			}
-
 		}
-
-//		System.out.println(Arrays.toString(sChar));
-
 	}
-
 }

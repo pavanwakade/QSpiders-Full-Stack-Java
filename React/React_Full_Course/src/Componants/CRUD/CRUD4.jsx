@@ -48,7 +48,7 @@ const CRUD4 = () => {
         <div>
             <form className="flex p-5 flex-col space-y-2 items-center w-full justify-between bg-gray-500">
                 <input
-                    type="text"
+                    
                     placeholder="Enter name"
                     name="userName"
                     value={userName}

@@ -4,6 +4,6 @@ class findDuplicateFromStringWithoutLoop {
   public static void main(String[] args) {}
 
   public static void duplicate(String str) {
-    char[] c = str.toCharArray();
+return str.;
   }
 }

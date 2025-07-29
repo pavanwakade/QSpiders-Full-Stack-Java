@@ -1,4 +1,5 @@
 import UseEffect from "./UseEffect/UseEffect";
+import UseReducer from "./UseReducer/UseReducer";
 import UseStateIntro from "./useStateHooks/UseStateIntro";
 
 let Hooksintro = () => {
@@ -7,7 +8,8 @@ let Hooksintro = () => {
             {/* <h1>hooksintro</h1> */}
 
             {/* <UseStateIntro /> */}
-            <UseEffect />
+            {/* <UseEffect /> */}
+            <UseReducer />
         </div>
     )
 }

@@ -7,7 +7,7 @@ public class LambdaStreamExample {
         List<String> names = Arrays.asList("Pavan", "Ankit", "Prakash", "Neha");
 
         names.stream()
-            .filter(name -> name.startsWith("Pavan"))  // Predicate<String>
+            .filter(name -> name.startsWith("P"))  // Predicate<String>
             .forEach(name -> System.out.println("Name: " + name));  // Consumer<String>
     }
 }
