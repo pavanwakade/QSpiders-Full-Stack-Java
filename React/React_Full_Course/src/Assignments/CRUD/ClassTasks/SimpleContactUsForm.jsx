@@ -19,7 +19,6 @@ const SimpleContactUsForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Simulate form submission
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Message:', message);

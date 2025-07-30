@@ -28,26 +28,33 @@ import FeedbackSubmissionForm from './FeedbackSubmissionForm';
 import EmailFormatValidator from './EmailFormatValidator';
 import ShoppingListEntryForm from './ShoppingListEntryForm';
 import SimpleContactUsForm from './SimpleContactUsForm';
-import Task1 from './Task1/Task1';
+import Task1 from './Task1/Task1.jsx';
 
 const ClassTasks = () => {
-  const hobbies = ['Reading', 'Hiking', 'Coding'];
+  const hobbies = ['Gaming', 'Travling', 'Coding'];
   const tasks = ['Task 1', 'Task 2', 'Task 3'];
 
   return (
-    <div>
-      <h1>Class Tasks</h1>
-      <Task1 />
+    <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
 
-      {/* <h2>1. User Profile Display</h2>
-      <ProfileCard name="John Doe" age={30} location="New York" />
 
-      <h2>2. Hobbies List Renderer</h2>
-      <HobbiesList hobbies={hobbies} />
+      {/* <p> 1. Welcome Message Component
+ Design a reusable Welcome component that accepts a user’s name through props and displays a personalized greeting in the UI.
+</p>
+<br />
+      <Task1 />  */}
 
-      <h2>3. Favorite Color Component with Default Prop</h2>
-      <FavoriteColor color="blue" />
+      {/* <p>2.	User Profile Display
+        Create a ProfileCard component that receives a user’s name, age, and location through props and displays them in a card-like layout.</p>
+      <ProfileCard name="pavan" age={25} location="pune" /> */}
 
+      {/* <h2>3. Hobbies List Renderer</h2>
+      <HobbiesList hobbies={hobbies} /> */}
+
+
+      {/* <h2>4. Favorite Color Component with Default Prop</h2>
+      <FavoriteColor color="blue" /> */}
+      {/* 
       <h2>4. Movie List with Parent-Child Communication</h2>
       <MovieListParent />
 

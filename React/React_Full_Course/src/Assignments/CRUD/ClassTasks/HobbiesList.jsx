@@ -4,7 +4,7 @@ const HobbiesList = ({ hobbies }) => {
   return (
     <ul>
       {hobbies.map((hobby, index) => (
-        <li key={index}>{hobby}</li>
+        <p key={index}>{index} . {hobby}</p>
       ))}
     </ul>
   );

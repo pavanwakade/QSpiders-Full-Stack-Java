@@ -19,8 +19,9 @@ const Task1 = () => {
           onChange={(e) =>
             setState({ name: e.target.value, isTrue: false })
           }
-        />
-        <button type="button" onClick={handleSubmit}>Submit</button>
+        /> <br />
+        <br />
+        <button type="button" onClick={handleSubmit} className='rounded-md border-x-2 bg-[#27F56F]'>Submit</button>
       </form>
 
       <p>{state.isTrue && <Welcome name={state.name} />}</p>
