@@ -17,9 +17,14 @@ const ToDoList = () => {
   }
 
   let handleUpdate = (id) => {
-    let updatetask = task.find((i) => i == id);
-    setTasks(...updatetask,task);
+    let oldid = id;
+    setNewTask()
+    setTasks(...task, newTask);
   }
+
+
+
+
   return (
     <div >
 
