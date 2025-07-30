@@ -13,9 +13,10 @@ const ToDoList = () => {
 
 
   let handleChange = (e) => {
-    e.preventDefault();
+
   }
-  let handleSubmit = () => {
+  let handleSubmit = (e) => {
+    e.preventDefault();
     setTasks({ ...task, newTask })
 
   }
