@@ -54,18 +54,20 @@ const ToDoList = () => {
 
 
   return (
-    <div className='flex flex-col w-[100%] h-[90vh] items-center justify-center'>
+    <div className='flex flex-col w-[100%] h-[90vh] items-center gap-11'>
 
+      <h1 className="mb-4 text-3xl font-bold text-center">ToDo-List</h1>
       <form onSubmit={handleSubmit} className='flex gap-4'>
 
         <input type="text" name='task' value={form.task} placeholder='Enter New Task'
+          className='text-center border rounded-md'
           onChange={handleChange}
         />
         <select
           name="priority"
           value={form.priority}
           onChange={handleChange}
-          className="px-2 border"
+          className="px-2 text-center border rounded-md"
         >
           <option value="">Select Priority</option>
           <option value="High">High</option>
@@ -73,9 +75,11 @@ const ToDoList = () => {
           <option value="Low">Low</option>
         </select>
 
-        <button type="submit" >{form.id ? "Update" : "Add"}</button>
+        <button type="submit" className={`px-6 py-1 rounded-md text-white font-semibold border-2 transition duration-200 ${form.id ? 'bg-yellow-500 hover:border-yellow-700' : 'bg-green-500 hover:border-[#ff5d78]'}`}>
+          {form.id ? 'Update' : 'Add'}
+        </button>
       </form>
-      <table className='w-[50%] items-center  justify-center border-x-2'>
+      <table className='w-[80%] items-center  justify-center border-x-2 mt-8'>
         <thead className='text-white bg-slate-400'>
           <tr className='border-x-2'>
             <th>task</th>
@@ -90,12 +94,11 @@ const ToDoList = () => {
             tasks.map((val) => (
               <tr key={val.id} className=' w-[60%]  border-y-2'>
                 {/* <tr> */}
-                <td className='px-4 py-2 w-[30%] whitespace-normal break-words'>
+                <td className='px-4 py-2 w-[30%] text-wrap'>
                   <p>{val.task}</p>
                 </td>
 
-
-                <td className='px-4 py-2 w-[5%] '>
+                <td className="px-4 py-2 w-[5%]" style={{ color: val.priority === 'High' ? 'red' : val.priority === 'Medium' ? 'crimson' : 'green', }}>
                   <p>{val.priority}</p>
                 </td>
                 <td className='px-4 py-2 space-x-2 text-center w-[20%] '>
