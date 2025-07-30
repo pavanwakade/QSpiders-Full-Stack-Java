@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
 
 const ToDoList = () => {
+
   let [task, setTasks] = useState([]);
   let [newTask, setNewTask] = useState('');
+
+
   let handleSubmit = () => {
     setTasks([...task, newTask])
     setNewTask('')
+  }
+
+  let handleDelete = (id) => {
+    let deletetask = task.filter((_, i) => i !== id);
+    setTasks(deletetask);
+  }
+
+  let handleUpdate = (id) => {
+    let updatetask = task.find((i) => i == id);
+    setTasks(...updatetask,task);
   }
   return (
     <div >
@@ -17,13 +30,13 @@ const ToDoList = () => {
         />
         <button type="button" onClick={() => handleSubmit()}>add Task</button>
       </form>
-      <div className='felx'>
+      <div >
         {
           task.map((val, i) => (
-            <div key={i}>
-              <div>{val}</div>
-              <button type="button">update</button>
-              <button type="button">delete</button>
+            <div key={i} className='flex m-2 bg-gray-400'>
+              <p>{val}</p>
+              <button type="button" onClick={() => handleUpdate(i)}>update</button>
+              <button type="button" onClick={() => handleDelete(i)}>delete</button>
 
             </div>
           ))

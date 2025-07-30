@@ -69,7 +69,7 @@ const ClassTasks = () => {
        <MovieListChild movies={movies} /> */}
 
 
-      <p>🔷 useState Hook  </p>  <br />
+      {/* <p>🔷 useState Hook  </p>  <br /> */}
 
 
       {/* <p>6.	Counter with Controls
@@ -91,8 +91,8 @@ const ClassTasks = () => {
 
 
 
-      <p>9.	To-Do List with Add Functionality
-        Develop a to-do list component where the user can add a new task via input. The list of tasks should update and display every newly added task.</p>
+      {/* <p>9.	To-Do List with Add Functionality
+        Develop a to-do list component where the user can add a new task via input. The list of tasks should update and display every newly added task.</p> */}
       <ToDoList />
 
 
