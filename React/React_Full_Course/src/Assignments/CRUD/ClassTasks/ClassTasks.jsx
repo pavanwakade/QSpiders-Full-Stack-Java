@@ -69,7 +69,7 @@ const ClassTasks = () => {
        <MovieListChild movies={movies} /> */}
 
 
-      <p>🔷 useState Hook  </p>
+      <p>🔷 useState Hook  </p>  <br />
 
 
       {/* <p>6.	Counter with Controls
@@ -77,19 +77,27 @@ const ClassTasks = () => {
       <Counter /> */}
 
 
-
+      {/* 
       <p>7.	Theme Toggle Switch
         Build a toggle switch that changes the current mode of the application between “Light Mode” and “Dark Mode” when clicked.</p>
-      <ThemeToggle />
+      <ThemeToggle /> */}
+
+
+
+      {/* <p>8.	Real-Time Form State Tracker
+        Design a form with multiple input fields (e.g., name, email). As the user types, reflect the updated values in real time somewhere on the screen.</p>
+      <FormStateTracker /> */}
+
+
+
+
+      <p>9.	To-Do List with Add Functionality
+        Develop a to-do list component where the user can add a new task via input. The list of tasks should update and display every newly added task.</p>
+      <ToDoList />
+
 
 
       {/* 
-      <h2>7. Real-Time Form State Tracker</h2>
-      <FormStateTracker />
-
-      <h2>8. To-Do List with Add Functionality</h2>
-      <ToDoList />
-
       <h2>9. Basic Shopping Cart Counter</h2>
       <ShoppingCart />
 
