@@ -75,9 +75,9 @@ const ToDoList = () => {
 
         <button type="submit" >{form.id ? "Update" : "Add"}</button>
       </form>
-      <table className='w-[50%] h-[90vh] items-center  justify-center'>
-        <thead>
-          <tr>
+      <table className='w-[50%] items-center  justify-center border-x-2'>
+        <thead className='text-white bg-slate-400'>
+          <tr className='border-x-2'>
             <th>task</th>
             <th>priority</th>
             <th>Actions</th>
@@ -85,30 +85,32 @@ const ToDoList = () => {
         </thead>
 
 
-        <tbody>
+        <tbody className=' w-[50%] items-center  justify-center'>
           {
             tasks.map((val) => (
-              <tr key={val.id} className='flex m-2 bg-gray-400 w-[100%] justify-center items-center'>
+              <tr key={val.id} className=' w-[60%]  border-y-2'>
                 {/* <tr> */}
-                  <td>
-                    <p>{val.task}</p>
-                  </td>
+                <td className='px-4 py-2 w-[30%] whitespace-normal break-words'>
+                  <p>{val.task}</p>
+                </td>
 
-                  <td>
-                    <p>{val.priority}</p>
-                  </td>
-                  <td>
-                    <button type="button" onClick={() => handleUpdate(val.id)} className='px-6 bg-green-500 rounded-md'>update</button>
-                    <button type="button" onClick={() => handleDelete(val.id)} className='px-6 bg-red-500 rounded-md'>delete</button>
-                  </td>
-                  {/* </tr> */}
-                  </tr>
-                  ))
-        }
-                </tbody>
-              </table>
-            </div>
-        )
+
+                <td className='px-4 py-2 w-[5%] '>
+                  <p>{val.priority}</p>
+                </td>
+                <td className='px-4 py-2 space-x-2 text-center w-[20%] '>
+                  <button type="button" onClick={() => handleUpdate(val.id)} className='px-6 bg-green-500 rounded-md'>update</button>
+
+                  <button type="button" onClick={() => handleDelete(val.id)} className='px-6 bg-red-500 rounded-md'>delete</button>
+                </td>
+                {/* </tr> */}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
-        export default ToDoList
+export default ToDoList
