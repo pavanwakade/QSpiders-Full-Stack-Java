@@ -28,6 +28,7 @@ import FeedbackSubmissionForm from './FeedbackSubmissionForm';
 import EmailFormatValidator from './EmailFormatValidator';
 import ShoppingListEntryForm from './ShoppingListEntryForm';
 import SimpleContactUsForm from './SimpleContactUsForm';
+import Task1 from './Task1/Task1';
 
 const ClassTasks = () => {
   const hobbies = ['Reading', 'Hiking', 'Coding'];
@@ -36,8 +37,9 @@ const ClassTasks = () => {
   return (
     <div>
       <h1>Class Tasks</h1>
+      <Task1 />
 
-      <h2>1. User Profile Display</h2>
+      {/* <h2>1. User Profile Display</h2>
       <ProfileCard name="John Doe" age={30} location="New York" />
 
       <h2>2. Hobbies List Renderer</h2>
@@ -122,7 +124,7 @@ const ClassTasks = () => {
       <ShoppingListEntryForm />
 
       <h2>34. Simple Contact Us Form</h2>
-      <SimpleContactUsForm />
+      <SimpleContactUsForm /> */}
     </div>
   );
 };
