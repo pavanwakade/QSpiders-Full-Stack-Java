@@ -54,7 +54,7 @@ const ToDoList = () => {
 
 
   return (
-    <div className='w-[100%] h-[90vh] items-center justify-center'>
+    <div className='flex flex-col w-[100%] h-[90vh] items-center justify-center'>
 
       <form onSubmit={handleSubmit} className='flex gap-4'>
 
@@ -75,21 +75,40 @@ const ToDoList = () => {
 
         <button type="submit" >{form.id ? "Update" : "Add"}</button>
       </form>
-      <div className='w-[100%] h-[90vh] items-center justify-center'>
-        {
-          tasks.map((val) => (
-            <div key={val.id} className='flex m-2 bg-gray-400 w-[100%] justify-center items-center'>
-              <p>{val.task}</p>
-              <p>{val.priority}</p>
-              <button type="button" onClick={() => handleUpdate(val.id)} className='px-6 bg-green-500 rounded-md'>update</button>
-              <button type="button" onClick={() => handleDelete(val.id)}  className='px-6 bg-red-500 rounded-md'>delete</button>
+      <table className='w-[50%] h-[90vh] items-center  justify-center'>
+        <thead>
+          <tr>
+            <th>task</th>
+            <th>priority</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-            </div>
-          ))
+
+        <tbody>
+          {
+            tasks.map((val) => (
+              <tr key={val.id} className='flex m-2 bg-gray-400 w-[100%] justify-center items-center'>
+                {/* <tr> */}
+                  <td>
+                    <p>{val.task}</p>
+                  </td>
+
+                  <td>
+                    <p>{val.priority}</p>
+                  </td>
+                  <td>
+                    <button type="button" onClick={() => handleUpdate(val.id)} className='px-6 bg-green-500 rounded-md'>update</button>
+                    <button type="button" onClick={() => handleDelete(val.id)} className='px-6 bg-red-500 rounded-md'>delete</button>
+                  </td>
+                  {/* </tr> */}
+                  </tr>
+                  ))
         }
-      </div>
-    </div>
-  )
+                </tbody>
+              </table>
+            </div>
+        )
 }
 
-export default ToDoList
+        export default ToDoList
