@@ -2,13 +2,22 @@ import React, { useState } from 'react'
 
 const ToDoList = () => {
 
-  let [task, setTasks] = useState([]);
-  let [newTask, setNewTask] = useState('');
+  let starting = {
+    id: Date.now(),
+    priority: '',
+    tasks: '',
+    Alltasks: []
+  }
+  let [task, setTasks] = useState(starting);
+  let { id, priority, tasks, Alltasks } = task
 
 
+  let handleChange = (e) => {
+    e.preventDefault();
+  }
   let handleSubmit = () => {
-    setTasks([...task, newTask])
-    setNewTask('')
+    setTasks({ ...task, newTask })
+
   }
 
   let handleDelete = (id) => {
@@ -30,8 +39,11 @@ const ToDoList = () => {
 
       <form className='flex gap-4'>
 
-        <input type="text" value={newTask} placeholder='Enter New Task'
-          onChange={(e) => setNewTask(e.target.value)}
+        <input type="text" name='tasks' value={tasks} placeholder='Enter New Task'
+          onChange={handleChange}
+        />
+        <input type="text" name='priority' value={priority} placeholder='Priority'
+          onChange={handleChange}
         />
         <button type="button" onClick={() => handleSubmit()}>add Task</button>
       </form>

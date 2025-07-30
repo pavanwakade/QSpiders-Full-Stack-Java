@@ -46,26 +46,27 @@ const CRUD4 = () => {
 
     return (
         <div>
-            <form className="flex p-5 flex-col space-y-2 items-center w-full justify-between bg-gray-500">
+            <form className="flex flex-col items-center justify-between w-full p-5 space-y-2 bg-gray-500">
                 <input
-                    
+                    className="h-8 px-4 py-2 border border-white rounded bg-slate-100"
+
                     placeholder="Enter name"
                     name="userName"
                     value={userName}
                     onChange={handleChange}
-                    className="bg-slate-100 border border-white px-4 py-2 rounded h-8"
                 />
                 <input
+                    className="h-8 px-4 py-2 border border-white rounded bg-slate-100"
+
                     type="text"
                     placeholder="Enter Password"
                     name="passWord"
                     value={passWord}
                     onChange={handleChange}
-                    className="bg-slate-100 border border-white px-4 py-2 rounded h-8"
                 />
                 <button
                     onClick={handleSubmit}
-                    className="bg-gray-600 text-white border-white px-4 py-2 rounded"
+                    className="px-4 py-2 text-white bg-gray-600 border-white rounded"
                 >
                     Create
                 </button>
@@ -73,7 +74,7 @@ const CRUD4 = () => {
             <hr />
 
             {list.length === 0 && (
-                <p className="text-center p-4 text-white">No users found.</p>
+                <p className="p-4 text-center text-white">No users found.</p>
             )}
 
             <div className="flex bg-slate-400 space-x-2 justify-evenly flex-wrap p-4 w-[100%]">
@@ -86,13 +87,13 @@ const CRUD4 = () => {
                         <p><strong>Password:</strong> {val.passWord}</p>
                         <div className="flex justify-evenly">
                             <button
-                                className="bg-gray-600 text-white border-white rounded px-4 py-2"
+                                className="px-4 py-2 text-white bg-gray-600 border-white rounded"
                                 onClick={() => handleUpdate(val.id)}
                             >
                                 Update
                             </button>
                             <button
-                                className="bg-gray-600 text-white border-white rounded px-4 py-2"
+                                className="px-4 py-2 text-white bg-gray-600 border-white rounded"
                                 onClick={() => handleDelete(val.id)}
                             >
                                 Delete
