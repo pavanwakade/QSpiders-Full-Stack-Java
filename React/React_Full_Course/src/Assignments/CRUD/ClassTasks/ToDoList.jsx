@@ -2,25 +2,23 @@ import React, { useState } from 'react'
 
 const ToDoList = () => {
 
-  let starting = {
-    id: Date.now(),
+  const [form, setForm] = useState({
+    id: '',
     priority: '',
-    tasks: '',
-    Alltasks: []
-  }
-  let [task, setTasks] = useState([]);
-  const [form, setForm] = useState(starting);
+    task: ''
+  });
+  const [tasks, setTasks] = useState([]);
 
-  let { id, priority, tasks, Alltasks } = task
-
+  // let { id, priority, task, Alltasks } = tasks
 
   let handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
       [name]: value
     }));
-  }
+  };
+
 
 
   const handleSubmit = (e) => {
@@ -29,58 +27,69 @@ const ToDoList = () => {
       ...prev,
       {
         id: Date.now(),
-        task: form.tasks,
+        task: form.task,
         priority: form.priority
       }
     ]);
-    setForm(starting);
+    setForm({ id: '', priority: '', task: '' });
   };
 
-let handleDelete = (id) => {
-  let deletetask = Alltasks.filter((_, i) => i !== id);
-  setTasks(deletetask);
-}
+  let handleDelete = (id) => {
+    const updatedTasks = tasks.filter((item) => item.id !== id);
+    setTasks(updatedTasks);
+  }
 
-let handleUpdate = (id) => {
-  const obj = Alltasks.find((val) => val.id === id);
-  const filteredList = Alltasks.filter((val) => val.id !== id)
-  setTasks({
-    priority: obj.priority,
-    tasks: obj.tasks,
-    Alltasks: obj.filteredList
-  })
-}
+  let handleUpdate = (id) => {
+    const obj = tasks.find((val) => val.id === id);
+    const filteredList = tasks.filter((val) => val.id !== id)
+    setForm({
+      id: obj.id,
+      task: obj.task,
+      priority: obj.priority
+    });
+    setTasks(filteredList);
+  }
 
 
 
 
-return (
-  <div >
+  return (
+    <div className='w-[100%] h-[90vh] items-center justify-center'>
 
-    <form className='flex gap-4'>
+      <form onSubmit={handleSubmit} className='flex gap-4'>
 
-      <input type="text" name='tasks' value={form.tasks} placeholder='Enter New Task'
-        onChange={handleChange}
-      />
-      <input type="text" name='priority' value={form.priority} placeholder='Priority'
-        onChange={handleChange}
-      />
-      <button type="button" onClick={() => handleSubmit()}>add Task</button>
-    </form>
-    <div >
-      {
-        task.map((val) => (
-          <div key={val.id} className='flex m-2 bg-gray-400'>
-            <p>{val}</p>
-            <button type="button" onClick={() => handleUpdate(val.id)}>update</button>
-            <button type="button" onClick={() => handleDelete(val.id)}>delete</button>
+        <input type="text" name='task' value={form.task} placeholder='Enter New Task'
+          onChange={handleChange}
+        />
+        <select
+          name="priority"
+          value={form.priority}
+          onChange={handleChange}
+          className="px-2 border"
+        >
+          <option value="">Select Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
 
-          </div>
-        ))
-      }
+        <button type="submit" >{form.id ? "Update" : "Add"}</button>
+      </form>
+      <div className='w-[100%] h-[90vh] items-center justify-center'>
+        {
+          tasks.map((val) => (
+            <div key={val.id} className='flex m-2 bg-gray-400 w-[100%] justify-center items-center'>
+              <p>{val.task}</p>
+              <p>{val.priority}</p>
+              <button type="button" onClick={() => handleUpdate(val.id)} className='px-6 bg-green-500 rounded-md'>update</button>
+              <button type="button" onClick={() => handleDelete(val.id)}  className='px-6 bg-red-500 rounded-md'>delete</button>
+
+            </div>
+          ))
+        }
+      </div>
     </div>
-  </div>
-)
+  )
 }
 
 export default ToDoList
