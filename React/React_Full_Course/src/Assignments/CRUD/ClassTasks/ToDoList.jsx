@@ -17,7 +17,13 @@ const ToDoList = () => {
   }
   let handleSubmit = (e) => {
     e.preventDefault();
-    setTasks({ ...task, newTask })
+    const obj = {
+      id: task.id,
+      priority: task.priority,
+      tasks: task.tasks,
+      // Alltasks: [...Alltasks, obj]
+    }
+    setTasks({ ...Alltasks, obj, starting })
 
   }
 
@@ -27,9 +33,12 @@ const ToDoList = () => {
   }
 
   let handleUpdate = (id) => {
-    let oldid = id;
-    setNewTask()
-    setTasks(...task, newTask);
+    const obj = Alltasks.find((val) => val.id === id);
+    const filteredList = Alltasks.filter((val) => val.id !== id)
+    setTasks({
+      priority: obj.priority,
+      tasks: obj.tasks,
+    })
   }
 
 
