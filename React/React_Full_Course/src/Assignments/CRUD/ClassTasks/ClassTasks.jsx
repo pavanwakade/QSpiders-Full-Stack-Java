@@ -2,7 +2,6 @@ import React from 'react';
 import ProfileCard from './ProfileCard';
 import HobbiesList from './HobbiesList';
 import FavoriteColor from './FavoriteColor';
-import MovieListParent from './Task4/MovieListParent';
 import Counter from './Counter';
 import ThemeToggle from './ThemeToggle';
 import FormStateTracker from './FormStateTracker';
@@ -29,11 +28,16 @@ import EmailFormatValidator from './EmailFormatValidator';
 import ShoppingListEntryForm from './ShoppingListEntryForm';
 import SimpleContactUsForm from './SimpleContactUsForm';
 import Task1 from './Task1/Task1.jsx';
+import MovieListChild from './MovieListChild.jsx';
 
 const ClassTasks = () => {
   const hobbies = ['Gaming', 'Travling', 'Coding'];
   const tasks = ['Task 1', 'Task 2', 'Task 3'];
-
+  const movies = [
+    { id: 1, title: 'Iron Man', year: 2008 },
+    { id: 2, title: 'The Fantastic Four', year: 2025 },
+    { id: 3, title: 'Ravan', year: 2004 },
+  ];
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
 
@@ -48,22 +52,38 @@ const ClassTasks = () => {
         Create a ProfileCard component that receives a user’s name, age, and location through props and displays them in a card-like layout.</p>
       <ProfileCard name="pavan" age={25} location="pune" /> */}
 
-      {/* <h2>3. Hobbies List Renderer</h2>
+      {/* <p>3.	Hobbies List Renderer
+        Build a component that takes an array of hobbies as props and renders them in an unordered list, with each hobby listed on a separate line.</p>
       <HobbiesList hobbies={hobbies} /> */}
 
 
-      {/* <h2>4. Favorite Color Component with Default Prop</h2>
+      {/* <p>4. Favorite Color Component with Default Prop
+        Implement a component that displays a user’s favorite color. If no color is passed via props, it should default to a predefined color.</p>
       <FavoriteColor color="blue" /> */}
+
+
+
       {/* 
-      <h2>4. Movie List with Parent-Child Communication</h2>
-      <MovieListParent />
+      <p>5.	Movie List with Parent-Child Communication
+        Develop a parent component that contains an array of movie objects and passes it to a child component to display each movie’s title and release year.</p>
+       <MovieListChild movies={movies} /> */}
 
-      <h2>5. Counter with Controls</h2>
-      <Counter />
 
-      <h2>6. Theme Toggle Switch</h2>
+      <p>🔷 useState Hook  </p>
+
+
+      {/* <p>6.	Counter with Controls
+        Create a counter that displays a numeric value and has buttons to increase, decrease, and reset the count.</p>
+      <Counter /> */}
+
+
+
+      <p>7.	Theme Toggle Switch
+        Build a toggle switch that changes the current mode of the application between “Light Mode” and “Dark Mode” when clicked.</p>
       <ThemeToggle />
 
+
+      {/* 
       <h2>7. Real-Time Form State Tracker</h2>
       <FormStateTracker />
 
