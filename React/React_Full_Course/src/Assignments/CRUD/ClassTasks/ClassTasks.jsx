@@ -103,11 +103,12 @@ const ClassTasks = () => {
       </p>
       <ConsoleLogFormData /> */}
 
-
-
-      <h2>12. Live Text Preview</h2>
+      <p>
+        13. Live Text Preview Build an input field that updates a text element
+        in real time as the user types.
+      </p>
       <LiveTextPreview />
-      
+
       {/* 
 
       <h2>13. Paragraph Toggle Visibility</h2>
