@@ -109,14 +109,20 @@ const ClassTasks = () => {
       </p>
       <LiveTextPreview /> */}
 
+      {/* <p>
+        14. Paragraph Toggle Visibility Implement a button that toggles the
+        visibility of a paragraph on the screen—hide it if visible, and show it
+        if hidden.
+      </p>
+      <ParagraphToggle /> */}
 
-      <h2>13. Paragraph Toggle Visibility</h2>
-      <ParagraphToggle />
-
-      {/* 
-      <h2>14. Dropdown Menu Selection Display</h2>
+      <p>
+        15. Dropdown Menu Selection Display Create a dropdown menu with multiple
+        options. Display the currently selected value just below the dropdown.
+      </p>
       <DropdownDisplay />
 
+      {/* 
       <h2>15. Fetch and Display Joke on Load</h2>
       <FetchAndDisplayJoke />
 
