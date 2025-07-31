@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const LiveTextPreview = () => {
-  const [text, setText] = useState('');
-
-  const handleTextChange = (event) => {
-    setText(event.target.value);
-  };
-
   return (
     <div>
-      <input type="text" value={text} onChange={handleTextChange} />
-      <p>Preview: {text}</p>
+      <input type="text" onChange={(e) => e.target.value} />
+<div>
+{
+  e.target.value
+}
+</div>
+
     </div>
   );
 };
