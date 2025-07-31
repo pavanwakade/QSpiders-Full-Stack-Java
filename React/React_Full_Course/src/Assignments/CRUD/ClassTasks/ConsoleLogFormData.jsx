@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ConsoleLogFormData = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  console.log("hii");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  let [state, setState] = useState("");
+
+  let handlwSubmit = () => {
+    console.log( "name : " + state);
   };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Name:', name);
-    console.log('Email:', email);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Name:</label>
-      <input type="text" value={name} onChange={handleNameChange} /><br />
-      <label>Email:</label>
-      <input type="email" value={email} onChange={handleEmailChange} /><br />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <form action={handlwSubmit}>
+        <input
+          type="text"
+          onChange={(e) => setState(e.target.value)}
+          placeholder="Enter name"
+        />
+        <button type="submit">submit</button>
+      </form>
+    </div>
   );
 };
 
