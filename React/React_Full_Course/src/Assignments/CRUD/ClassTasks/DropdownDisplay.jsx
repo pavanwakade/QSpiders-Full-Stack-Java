@@ -4,7 +4,9 @@ const DropdownDisplay = () => {
   return (
     <div>
 
-      <select name="" id=""></select>
+      <select name="" id="">
+        <option value="option1">option1</option>
+      </select>
     </div>
   )
 }
