@@ -122,16 +122,17 @@ const ClassTasks = () => {
       </p>
       <DropdownDisplay /> */}
 
-      <h2>
-        🔷 useEffect Hook 16. Fetch and Display Joke on Load Use an API to fetch
+      {/* <h2>
+       16. Fetch and Display Joke on Load Use an API to fetch
         a random joke and display it when the component is initially rendered.
       </h2>
-      <FetchAndDisplayJoke />
+      <FetchAndDisplayJoke /> */}
 
-      {/* 
-      <h2>16. Live Digital Clock</h2>
+      <h2>17.	Live Digital Clock
+Build a live clock that updates every second using the useEffect hook.</h2>
       <LiveDigitalClock />
 
+      {/* 
       <h2>20. Post-Login Greeting</h2>
       <PostLoginGreeting />
 
