@@ -116,16 +116,16 @@ const ClassTasks = () => {
       </p>
       <ParagraphToggle /> */}
 
-      <p>
+      {/* <p>
         15. Dropdown Menu Selection Display Create a dropdown menu with multiple
         options. Display the currently selected value just below the dropdown.
       </p>
-      <DropdownDisplay />
+      <DropdownDisplay /> */}
 
-      {/* 
       <h2>15. Fetch and Display Joke on Load</h2>
       <FetchAndDisplayJoke />
 
+      {/* 
       <h2>16. Live Digital Clock</h2>
       <LiveDigitalClock />
 
