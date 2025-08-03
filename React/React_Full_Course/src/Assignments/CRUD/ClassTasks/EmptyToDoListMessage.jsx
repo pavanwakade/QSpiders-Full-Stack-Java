@@ -7,8 +7,8 @@ const EmptyToDoListMessage = ({ tasks }) => {
         <p>No tasks to show.</p>
       ) : (
         <ul>
-          {tasks.map((task, index) => (
-            <li key={index}>{task}</li>
+          {tasks.map((task, i) => (
+            <li key={i}>{i+1}{task}</li>
           ))}
         </ul>
       )}

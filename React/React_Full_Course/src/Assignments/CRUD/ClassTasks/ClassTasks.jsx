@@ -32,7 +32,7 @@ import MovieListChild from "./MovieListChild.jsx";
 
 const ClassTasks = () => {
   const hobbies = ["Gaming", "Travling", "Coding"];
-  const tasks = ["Task 1", "Task 2", "Task 3"];
+  const tasks = ["Task", "Task", "Task"];
   const movies = [
     { id: 1, title: "Iron Man", year: 2008 },
     { id: 2, title: "The Fantastic Four", year: 2025 },
@@ -135,22 +135,22 @@ const ClassTasks = () => {
       </h2>
       <LiveDigitalClock /> */}
 
-      <h2>
+      {/* <h2>
         19. One-Time Welcome Message Display a one-time welcome message to the
         user the first time they visit or load the component.
       </h2>
-      <PostLoginGreeting />
+      <PostLoginGreeting /> */}
 
-      {/* 
-      <h2>21. Weather Status Message</h2>
-      <WeatherStatusMessage />
+      {/* <h2>21. Weather Status Message</h2>
+      <WeatherStatusMessage /> */}
 
-      <h2>22. Loading Indicator</h2>
-      <LoadingIndicator />
+      {/* <h2>22. Loading Indicator</h2>
+      <LoadingIndicator /> */}
 
       <h2>23. Empty To-Do List Message</h2>
       <EmptyToDoListMessage tasks={tasks} />
 
+      {/* 
       <h2>24. Dynamic Theme Renderer</h2>
       <DynamicThemeRenderer />
 
