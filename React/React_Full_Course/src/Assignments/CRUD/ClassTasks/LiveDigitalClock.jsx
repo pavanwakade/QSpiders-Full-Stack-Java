@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 const LiveDigitalClock = () => {
-  let [time,settime]=useState(new Date());
+  let [time, settime] = useState(new Date());
 
-  useEffect(()=>{
-      settime(new Date());
-  },[time])
+  useEffect(() => {
+    settime(new Date());
+  }, [time]);
   // console.log(new Date());
-  
+
   return (
     <div>
-      {
-        time.toLocaleDateString();
-        time.toLocaleTimeString()
-        }
+      {time.toLocaleDateString()} <br />
+      {time.toLocaleTimeString()}
     </div>
-  )
-}
+  );
+};
 
-export default LiveDigitalClock
+export default LiveDigitalClock;

@@ -88,7 +88,7 @@ const ClassTasks = () => {
       </p>
       <ShoppingCart /> */}
 
-      <h1>🔷 Event Handling</h1>
+      {/* <h1>🔷 Event Handling</h1> */}
       {/* 
       <p>
         11. Alert Button Add a button that, when clicked, shows a browser alert
@@ -123,19 +123,25 @@ const ClassTasks = () => {
       <DropdownDisplay /> */}
 
       {/* <h2>
+      
        16. Fetch and Display Joke on Load Use an API to fetch
         a random joke and display it when the component is initially rendered.
       </h2>
       <FetchAndDisplayJoke /> */}
 
-      <h2>17.	Live Digital Clock
-Build a live clock that updates every second using the useEffect hook.</h2>
-      <LiveDigitalClock />
+      {/* <h2>
+        17. Live Digital Clock Build a live clock that updates every second
+        using the useEffect hook.
+      </h2>
+      <LiveDigitalClock /> */}
 
-      {/* 
-      <h2>20. Post-Login Greeting</h2>
+      <h2>
+        19. One-Time Welcome Message Display a one-time welcome message to the
+        user the first time they visit or load the component.
+      </h2>
       <PostLoginGreeting />
 
+      {/* 
       <h2>21. Weather Status Message</h2>
       <WeatherStatusMessage />
 
