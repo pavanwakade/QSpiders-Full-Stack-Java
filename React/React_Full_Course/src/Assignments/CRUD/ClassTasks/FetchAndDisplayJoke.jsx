@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 const FetchAndDisplayJoke = () => {
+  let [jok, setJok] = useState("");
+  useEffect(() => {
+    let fetchdata = async () => {
+      let response = await fetch("https://api.chucknorris.io/jokes/random");
 
-  let[jok,setJok]=useState('')
-  useEffect
+      let data = await response.json();
+      setJok(data.value);
+    };
+    fetchdata();
+  }, []);
 
+  return <div className="bg-[pink] py-5 px-5 rounded-md fles flex-wrap">Joke   :   {jok}</div>;
+};
 
-  return (
-    <div>
-
-    </div>
-  )
-}
-
-export default FetchAndDisplayJoke
+export default FetchAndDisplayJoke;
