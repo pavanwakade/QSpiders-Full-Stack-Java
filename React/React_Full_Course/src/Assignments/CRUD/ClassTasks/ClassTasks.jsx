@@ -122,7 +122,10 @@ const ClassTasks = () => {
       </p>
       <DropdownDisplay /> */}
 
-      <h2>15. Fetch and Display Joke on Load</h2>
+      <h2>
+        🔷 useEffect Hook 16. Fetch and Display Joke on Load Use an API to fetch
+        a random joke and display it when the component is initially rendered.
+      </h2>
       <FetchAndDisplayJoke />
 
       {/* 
