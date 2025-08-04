@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const FeedbackSubmissionForm = () => {
-  const [feedback, setFeedback] = useState('');
-  const [submittedFeedback, setSubmittedFeedback] = useState('');
+  const [feedback, setFeedback] = useState("");
+  const [submittedFeedback, setSubmittedFeedback] = useState("");
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
@@ -17,7 +17,8 @@ const FeedbackSubmissionForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>Feedback:</label>
-        <textarea value={feedback} onChange={handleFeedbackChange} /><br />
+        <textarea value={feedback} onChange={handleFeedbackChange} />
+        <br />
         <button type="submit">Submit</button>
       </form>
       {submittedFeedback && <p>Submitted Feedback: {submittedFeedback}</p>}
