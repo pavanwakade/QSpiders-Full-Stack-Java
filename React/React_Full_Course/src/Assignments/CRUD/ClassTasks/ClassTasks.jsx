@@ -171,12 +171,12 @@ const ClassTasks = () => {
       {/* <h2>31. Feedback Submission Form</h2>
       <FeedbackSubmissionForm /> */}
 
-      <h2>32. Email Format Validator</h2>
-      <EmailFormatValidator />
+      {/* <h2>32. Email Format Validator</h2>
+      <EmailFormatValidator /> */}
 
-      {/* 
       <h2>33. Shopping List Entry Form</h2>
       <ShoppingListEntryForm />
+      {/* 
 
       <h2>34. Simple Contact Us Form</h2>
       <SimpleContactUsForm /> */}
