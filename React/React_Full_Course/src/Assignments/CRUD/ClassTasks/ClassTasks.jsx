@@ -160,8 +160,8 @@ const ClassTasks = () => {
       <StudentGradesTable /> */}
 
 
-      <h2>27. List with Deletion Functionality</h2>
-      <ListWithDeletion />
+      {/* <h2>27. List with Deletion Functionality</h2>
+      <ListWithDeletion /> */}
 
       {/* 
       <h2>30. Basic Login Form</h2>
