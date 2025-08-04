@@ -163,16 +163,18 @@ const ClassTasks = () => {
       {/* <h2>27. List with Deletion Functionality</h2>
       <ListWithDeletion /> */}
 
-      {/* 
-      <h2>30. Basic Login Form</h2>
-      <BasicLoginForm />
+      {/* <h2>30. Basic Login Form</h2>
+      <BasicLoginForm /> */}
 
-      <h2>31. Feedback Submission Form</h2>
-      <FeedbackSubmissionForm />
+
+
+      {/* <h2>31. Feedback Submission Form</h2>
+      <FeedbackSubmissionForm /> */}
 
       <h2>32. Email Format Validator</h2>
       <EmailFormatValidator />
 
+      {/* 
       <h2>33. Shopping List Entry Form</h2>
       <ShoppingListEntryForm />
 
