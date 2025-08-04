@@ -5,8 +5,8 @@ const ColorListDisplay = () => {
 
   return (
     <ul>
-      {colors.map((color, index) => (
-        <li key={index}>{color}</li>
+      {colors.map((color, i) => (
+        <li key={i}>{i+1+" "}{color}</li>
       ))}
     </ul>
   );

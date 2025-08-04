@@ -147,22 +147,23 @@ const ClassTasks = () => {
       {/* <h2>22. Loading Indicator</h2>
       <LoadingIndicator /> */}
 
-      <h2>23. Empty To-Do List Message</h2>
-      <EmptyToDoListMessage tasks={tasks} />
+      {/* <h2>23. Empty To-Do List Message</h2>
+      <EmptyToDoListMessage tasks={tasks} /> */}
 
-      {/* 
-      <h2>24. Dynamic Theme Renderer</h2>
-      <DynamicThemeRenderer />
+      {/* <h2>24. Dynamic Theme Renderer</h2>
+      <DynamicThemeRenderer /> */}
 
-      <h2>25. Color List Display</h2>
-      <ColorListDisplay />
+      {/* <h2>25. Color List Display</h2>
+      <ColorListDisplay /> */}
 
-      <h2>26. Student Grades Table</h2>
-      <StudentGradesTable />
+      {/* <h2>26. Student Grades Table</h2>
+      <StudentGradesTable /> */}
+
 
       <h2>27. List with Deletion Functionality</h2>
       <ListWithDeletion />
 
+      {/* 
       <h2>30. Basic Login Form</h2>
       <BasicLoginForm />
 
