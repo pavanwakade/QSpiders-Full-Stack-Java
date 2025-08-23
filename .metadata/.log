@@ -1,0 +1,23 @@
+!SESSION 2025-08-24 02:03:52.264 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=22.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-24 02:04:00.755
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-24 02:04:49.104
+!MESSAGE Logback config file: C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-24 02:05:23.696
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Admin'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 2 0 2025-08-24 02:09:55.264
+!MESSAGE Could not remove temporary backup file (it is safe to manually delete it): D:\Eclips\eclipse\eclipse.exe-4ec9fe92-bd45-4bd3-ada8-4368e1e721b2.p2bu
