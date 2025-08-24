@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
+// import Alerts from '../HOF/Alerts'
 
 const Login = () => {
     let [email, setEmail] = useState('')
     let [password, setPassword] = useState('')
-    let handleLogin = () => {
+    let handleLogin = (e) => {
+        e.preventDefault();
         if (email === 'pavan@gmail.com' && password === 'pavan') {
             Swal.fire({
                 title: 'Login Successful!',
@@ -13,6 +15,9 @@ const Login = () => {
                 confirmButtonColor: '#8b5cf6', // purple button
                 confirmButtonText: 'OK'
             });
+            
+            setEmail('')
+            setPassword('')
         }
         else {
             Swal.fire({
@@ -22,6 +27,9 @@ const Login = () => {
                 confirmButtonColor: '#8b5cf6', // purple button
                 confirmButtonText: 'Try Again'
             });
+            // <Alerts type="Error" message="hello" />
+            setEmail('')
+            setPassword('')
         }
     }
     return (
