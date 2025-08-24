@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Login = () => {
+    let[email,setEmail]=useState('')
+    let[password,setPassword]=useState('')
+    let handleLogin=()=>{
+        if (email==='pavan@gmail.com' && password==='pavan') {
+            alert("Login sucessfull")
+        }
+    }
   return (
-    <div className='flex items-center justify-center'>
-         <div className='h-[calc(100vh-10vh)] w-[calc(100%-50%)] p-5 bg-[#f1f1f5] backdrop-blur rounded-lg flex justify-center border-2 border-[#bd14cc] '>
-     <h1 className='text-3xl font-bold text-[#bd14cc] flex justify-center items-start'> Login Page </h1>
-    </div>
-    </div>
+    <div>
+      <form method="post">
+     <h5 id='inputTitle'>Email</h5>  <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Email' /> <br />
+     <h5 id='inputTitle'>Password</h5>       <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' />
+     <br />
+        <button type="submit" onClick={handleLogin}>Login</button>
+      </form>   
+       </div>
   )
 }
 
