@@ -2,34 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* line-height: 1.5;
-  font-weight: 400; */
 
-  /* color-scheme: light dark; */
-  /* color: rgba(255, 255, 255, 0.87); */
-  /* background-color: #242424; */
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#inputTitle {
-  font: bold 16px Arial, sans-serif; /* shorthand version */
-}
-
-input {
-  padding: 0.75rem;           /* equivalent to Tailwind p-3 */
-  border-radius: 0.5rem;      /* rounded-lg */
-  border: 1px solid #d1d5db;  /* gray-300 */
-  outline: none;
-  transition: 0.3s;
-}
-
-input:focus {
-  border-color: #a855f7;       /* purple-400 */
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3); /* focus ring */
+*{
+   margin: 0 ;
+  padding: 0;
+  box-sizing: border-box;
 }
