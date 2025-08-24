@@ -1,19 +1,18 @@
 import React from 'react'
 
-const Alerts = (type,message) => {
+const Alerts = (type, message) => {
     let back;
-    if (type==="Error") {
-       back="red"    
+    if (type === "Error") {
+        back = "red"
     }
-    else
-    {
-        back="green"
+    else {
+        back = "green"
     }
- return(
-    <div style={{background:{back}}}>
-        {message}
-    </div>
- )
+    return (
+        <div style={{ background: { back } }}>
+            {message}
+        </div>
+    )
 }
 
 export default Alerts

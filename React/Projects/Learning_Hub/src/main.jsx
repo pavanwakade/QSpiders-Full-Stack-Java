@@ -6,8 +6,8 @@ import Alerts from './HOF/Alerts.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Alerts>
+    {/* <Alerts> */}
     <App />
-    </Alerts>
+    {/* </Alerts> */}
   </StrictMode>,
 )

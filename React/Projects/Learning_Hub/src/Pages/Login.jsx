@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-// import Alerts from '../HOF/Alerts'
+import Alerts from '../HOF/Alerts'
 
 const Login = () => {
     let [email, setEmail] = useState('')
@@ -20,15 +20,15 @@ const Login = () => {
             setPassword('')
         }
         else {
-            Swal.fire({
-                title: 'Login Failed',
-                text: 'Email or password is incorrect!',
-                icon: 'error',
-                confirmButtonColor: '#8b5cf6', // purple button
-                confirmButtonText: 'Try Again'
-            });
-            // <Alerts type="Error" message="hello" />
-            setEmail('')
+            // Swal.fire({
+            //     title: 'Login Failed',
+            //     text: 'Email or password is incorrect!',
+            //     icon: 'error',
+            //     confirmButtonColor: '#8b5cf6', // purple button
+            //     confirmButtonText: 'Try Again'
+            // });
+            <Alerts type:"Error",message:"hello" />
+            setEmail('');
             setPassword('')
         }
     }
