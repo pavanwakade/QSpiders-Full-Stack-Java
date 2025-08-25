@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Alerts = (type, message) => {
+export const Alerts = (type, message) => {
     let back;
     if (type === "Error") {
         back = "red"
@@ -15,4 +15,3 @@ const Alerts = (type, message) => {
     )
 }
 
-export default Alerts

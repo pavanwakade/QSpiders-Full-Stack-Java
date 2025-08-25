@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import Alerts from '../HOF/Alerts'
+import Alerts from '../Store/Alerts'
 
 const Login = () => {
     let [email, setEmail] = useState('')
