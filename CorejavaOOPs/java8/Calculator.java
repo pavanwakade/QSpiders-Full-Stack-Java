@@ -27,24 +27,26 @@ import java.util.Iterator;
 //		
 //	}
 //}
+
+
 @FunctionalInterface
 interface CalInterface {
-    double calculate(double... nums);
+	double calculate(double... nums);
 }
 
 public class Calculator {
-    public static void main(String[] args) {
-        // Lambda: sum of all numbers
-        CalInterface add = (double... nums) -> {
-            double sum = 0;
-            for (double n : nums) {
-                sum += n;
-            }
-            return sum;
-        };
+	public static void main(String[] args) {
+		// Lambda: sum of all numbers
+		CalInterface add = (double... nums) -> {
+			double sum = 0;
+			for (double n : nums) {
+				sum += n;
+			}
+			return sum;
+		};
 
-        System.out.println(add.calculate(10, 20));       // 30.0
-        System.out.println(add.calculate(1, 2, 3, 4, 5+1, 2, 3, 4, 5));// 30.0
-        System.out.println(add.calculate());             // 0.0
-    }
+		System.out.println(add.calculate(10, 20)); // 30.0
+		System.out.println(add.calculate(1, 2, 3, 4, 5, 1, 2, 3, 4, 5));// 30.0
+		System.out.println(add.calculate()); // 0.0
+	}
 }
