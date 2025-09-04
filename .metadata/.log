@@ -21,3 +21,16 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.equinox.p2.touchpoint.natives 2 0 2025-08-24 02:09:55.264
 !MESSAGE Could not remove temporary backup file (it is safe to manually delete it): D:\Eclips\eclipse\eclipse.exe-4ec9fe92-bd45-4bd3-ada8-4368e1e721b2.p2bu
+!SESSION 2025-09-04 11:20:27.830 -----------------------------------------------
+eclipse.buildId=4.37.0.20250821-0636
+java.version=22.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product -data C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java
+
+!ENTRY ch.qos.logback.classic 1 0 2025-09-04 11:20:37.932
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.lemminx.uber-jar 4 0 2025-09-04 11:20:38.477
+!MESSAGE bundle org.eclipse.lemminx.uber-jar:0.31.0 (1173) Component descriptor entry 'OSGI-INF/*.xml' not found
