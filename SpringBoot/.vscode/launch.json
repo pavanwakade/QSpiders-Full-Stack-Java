@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-InventrymanagementsystemApplication<inventrymanagementsystem>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.inventrymanagmentsytem.inventrymanagementsystem.InventrymanagementsystemApplication",
+            "projectName": "inventrymanagementsystem",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
