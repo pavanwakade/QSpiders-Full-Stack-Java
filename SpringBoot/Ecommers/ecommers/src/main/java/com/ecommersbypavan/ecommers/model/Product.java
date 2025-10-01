@@ -1,22 +1,30 @@
+
 package com.ecommersbypavan.ecommers.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Lob;
 
 @Entity
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Double price;
-    private String imageUrl;
+
+    @Lob
+    private byte[] image;
 
     public Product() {}
 
-    public Product(String name, Double price, String imageUrl) {
+    public Product(String name, Double price, byte[] image) {
         this.name = name;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image = image;
     }
 
     public Long getId() { return id; }
@@ -25,6 +33,6 @@ public class Product {
     public void setName(String name) { this.name = name; }
     public Double getPrice() { return price; }
     public void setPrice(Double price) { this.price = price; }
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public byte[] getImage() { return image; }
+    public void setImage(byte[] image) { this.image = image; }
 }

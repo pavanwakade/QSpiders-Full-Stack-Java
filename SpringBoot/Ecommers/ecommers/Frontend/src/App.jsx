@@ -68,7 +68,11 @@ function Shop() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center' }}>
         {products.map(product => (
           <div key={product.id} style={{ border: '1px solid #ccc', borderRadius: 8, padding: 16, width: 200 }}>
-            <img src={product.imageUrl} alt={product.name} style={{ width: '100%', height: 120, objectFit: 'cover' }} />
+            <img
+              src={product.image ? `data:image/jpeg;base64,${product.image}` : ''}
+              alt={product.name}
+              style={{ width: '100%', height: 120, objectFit: 'cover' }}
+            />
             <h3>{product.name}</h3>
             <p>${product.price.toFixed(2)}</p>
             <button onClick={() => addToCart(product)}>Add to Cart</button>
