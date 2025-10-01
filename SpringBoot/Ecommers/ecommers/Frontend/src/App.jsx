@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from 'react';
 import './App.css';
+import Admin from './Admin';
 
 const API_URL = 'http://localhost:8080/api';
 
-function App() {
+function Shop() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
-    // Bonus: persist cart in localStorage
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
@@ -61,6 +61,7 @@ function App() {
   return (
     <div>
       <h1>🛒 E-Commerce Demo</h1>
+      <a href="#admin" style={{ position: 'absolute', left: 20, top: 20 }}>Admin</a>
       <button onClick={() => setCartOpen(true)} style={{ float: 'right', margin: 10 }}>
         Cart ({cart.reduce((sum, item) => sum + item.quantity, 0)})
       </button>
@@ -102,6 +103,17 @@ function App() {
       )}
     </div>
   );
+}
+
+function App() {
+  const [route, setRoute] = useState(window.location.hash);
+  useEffect(() => {
+    const onHash = () => setRoute(window.location.hash);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  if (route === '#admin') return <Admin />;
+  return <Shop />;
 }
 
 export default App;
