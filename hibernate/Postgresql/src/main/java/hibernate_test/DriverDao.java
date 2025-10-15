@@ -5,6 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
 
 
 public class DriverDao {
@@ -17,24 +23,24 @@ public class DriverDao {
 
 
 	public static void main(String[] args) {
-		
+
 
 //		 insertTrainerAndUser();
 //		findById();
 //		fetchallstudent();
 //		updateStudentName();
-		
+
 //		assignTrainerToStudent();
 //		deleteTrainerFromStudent();
 
 	}
-	
-	
-	
+
+
+
 	public static void deleteTrainerFromStudent() {
 		System.out.println("Enter Id Of Student!!");
 		int id = sc.nextInt();
-		
+
 		System.out.println("Enter Treiner id");
 
 		int tid=sc.nextInt();
@@ -55,7 +61,7 @@ public class DriverDao {
 					}
 				}
 				stu.setTrainer(trlList);
-  
+
 				List<Students> stuList = tr.getStu();
 				Iterator<Students> stuIterator = stuList.iterator();
 
@@ -73,7 +79,7 @@ public class DriverDao {
 			em.merge(stu);
 			et.commit();
 		}
-	
+
 
 	public static void assignTrainerToStudent() {
 		System.out.println("Enter Id Of Student!!");
@@ -107,7 +113,7 @@ public class DriverDao {
 	public static void updateStudentName() {
 		System.out.println("Enter Id Of Student!!");
 		int id = sc.nextInt();
-		
+
 		Students stu = em.find(Students.class, id);
 
 		if (stu != null) {
@@ -163,13 +169,13 @@ public class DriverDao {
 
 		Trainer trainer = new Trainer();
 		trainer.setName("sndeep sir");
-		
 
 
-		List<Students> studentsList = new ArrayList<Students>();
+
+		List<Students> studentsList = new ArrayList<>();
 		studentsList.add(stu);
 
-		List<Trainer> Trainerist = new ArrayList<Trainer>();
+		List<Trainer> Trainerist = new ArrayList<>();
 		Trainerist.add(trainer);
 
 		trainer.setStu(studentsList);

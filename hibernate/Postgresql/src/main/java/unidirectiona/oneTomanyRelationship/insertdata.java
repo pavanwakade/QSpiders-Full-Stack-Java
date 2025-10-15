@@ -35,7 +35,7 @@ public class insertdata {
 		ac3.setName("Savan");
 		ac3.setBalance(300000);
 
-		List<Account> list = new ArrayList<Account>();
+		List<Account> list = new ArrayList<>();
 		list.add(ac1);
 		list.add(ac2);
 		list.add(ac3);

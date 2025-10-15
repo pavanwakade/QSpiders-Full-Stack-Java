@@ -10,9 +10,9 @@ public class Employees {
 
 	@Id
 	private int id;
-	
+
 	private String name;
-	
+
 	private double sal;
 	@JoinColumn
 	@ManyToOne
@@ -48,9 +48,9 @@ public class Employees {
 	public String toString() {
 		return "Employees [id=" + id + ", name=" + name + ", sal=" + sal + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

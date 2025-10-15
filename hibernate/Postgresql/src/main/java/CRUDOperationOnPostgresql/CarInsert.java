@@ -20,7 +20,7 @@ public class CarInsert {
 		int id = sc.nextInt();
 
 		sc.nextLine();
-		
+
 		System.out.print("carNAme : ");
 		String carName = sc.nextLine();
 

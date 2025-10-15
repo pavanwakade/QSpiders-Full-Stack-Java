@@ -14,9 +14,9 @@ public class Driver {
 
 		EntityTransaction et = em.getTransaction();
 
-		
-		
-		
+
+
+
 		Product product = new Product();
 
 		product.setId(101);
@@ -25,20 +25,20 @@ public class Driver {
 
 		product.setPrice(100000);
 
-		
-		
-		
+
+
+
 		Review r1 = new Review();
-		
+
 		r1.setId(10);
 		r1.setMsg("BAd");
 
 		r1.setProduct(product);
 
-		
-		
-		
-		
+
+
+
+
 		Review r2 = new Review();
 
 		r2.setId(11);
@@ -46,14 +46,14 @@ public class Driver {
 
 		r2.setProduct(product);
 
-		
-		
+
+
 		et.begin();
 
 		em.persist(product);
 		em.persist(r1);
 		em.persist(r2);
-		
+
 		et.commit();
 	}
 }

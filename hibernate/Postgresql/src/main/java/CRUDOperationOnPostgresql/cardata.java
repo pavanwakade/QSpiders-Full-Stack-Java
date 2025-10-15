@@ -8,9 +8,9 @@ public class cardata {
 
 	@Id
 	private int carid;
-	
+
 	private String carName;
-	
+
 	private double price;
 
 	public cardata() {
@@ -52,7 +52,7 @@ public class cardata {
 //	public String toString() {
 //		return "cardata [carid=" + carid + ", carName=" + carName + ", price=" + price + "]";
 //	}
-	
-	
-	
+
+
+
 }

@@ -13,11 +13,11 @@ public class Persion {
 	private int id;
 	private String name;
 	private long phoneNO;
-	
+
 	@OneToOne
 	private Adharcard adhar;
 
-	
+
 	public Persion() {
 		super();
 	}
@@ -68,16 +68,16 @@ public class Persion {
 		return "Persion [id=" + id + ", name=" + name + ", phoneNO=" + phoneNO + "]";
 	}
 
-	
-	
-	
-	
-	
-		
+
+
+
+
+
+
 	}
 
-	
 
-	
-	
+
+
+
 

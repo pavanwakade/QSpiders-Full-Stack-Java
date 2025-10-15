@@ -9,7 +9,7 @@ public class Adharcard {
 	@Id
 	private int aid;
 	private String Address;
-	
+
 	public Adharcard() {
 		super();
 	}
@@ -30,10 +30,10 @@ public class Adharcard {
 		Address = address;
 	}
 
-	
 
-	
-	
-	
-	
+
+
+
+
+
 }

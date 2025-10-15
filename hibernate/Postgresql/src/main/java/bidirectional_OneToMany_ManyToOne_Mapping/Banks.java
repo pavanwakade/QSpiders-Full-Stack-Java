@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -12,12 +11,12 @@ public class Banks {
 
 	@Id
 	private int id;
-	
+
 	private String name;
-	
+
 	private String add;
-	
-	
+
+
 	@OneToMany(mappedBy = "bank")
 	private List<Accounts> account;
 
@@ -62,8 +61,8 @@ public class Banks {
 		return "Banks [id=" + id + ", name=" + name + ", add=" + add + "]";
 	}
 
-	
-	
-	
-	
+
+
+
+
 }

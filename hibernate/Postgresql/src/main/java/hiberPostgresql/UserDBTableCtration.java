@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.sql.Insert;
-
 @Entity
 @Table(name = "userDB")
 public class UserDBTableCtration {
@@ -83,5 +81,5 @@ public class UserDBTableCtration {
     public void setSalary(long salary) {
         this.salary = salary;
     }
-    
+
 }

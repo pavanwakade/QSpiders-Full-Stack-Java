@@ -22,7 +22,7 @@ public class DeleteData {
 			et.begin();
 
 			em.remove(person);
-			
+
 			em.remove(account);
 
 			System.out.println("Account deleted!!");

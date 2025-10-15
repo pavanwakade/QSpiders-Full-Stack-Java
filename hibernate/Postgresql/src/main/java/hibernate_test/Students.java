@@ -12,14 +12,14 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Students {
-	
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name ="student_name")
 	private String name;
-	
+
 	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private List<Trainer> trainer;
 
@@ -51,9 +51,9 @@ public class Students {
 	public String toString() {
 		return "Students [id=" + id + ", name=" + name + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

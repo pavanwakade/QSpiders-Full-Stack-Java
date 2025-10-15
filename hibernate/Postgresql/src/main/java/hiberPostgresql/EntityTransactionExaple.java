@@ -11,7 +11,7 @@ public class EntityTransactionExaple {
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("pavan");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et=em.getTransaction();
-		
+
 		et.begin();
 		System.out.println("hello ");
 		et.commit();

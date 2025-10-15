@@ -9,16 +9,16 @@ import javax.persistence.OneToOne;
 public class Person {
 	@Id
 	private int id;
-	
+
 	private String name;
-	
+
 	private long phone;
-	
+
 	@JoinColumn(name = "adhar_id")
 	@OneToOne
 	private Adhar adhar;
-	
-	
+
+
 	public Person() {
 		super();
 	}
@@ -70,8 +70,8 @@ public class Person {
 	}
 
 
-	
-	
-	
-	
+
+
+
+
 }

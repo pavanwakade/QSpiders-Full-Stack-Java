@@ -8,9 +8,9 @@ public class cardataa {
 
 	@Id
 	private int carid;
-	
+
 	private String carName;
-	
+
 	private double price;
 
 	public cardataa() {
@@ -47,7 +47,7 @@ public class cardataa {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
-	
+
+
+
 }

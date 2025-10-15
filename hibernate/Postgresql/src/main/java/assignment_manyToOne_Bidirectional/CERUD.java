@@ -46,7 +46,7 @@ public class CERUD {
 		em2.setSal(1000);
 		em2.setCom(com);
 
-		List<Employees> empl = new ArrayList<Employees>();
+		List<Employees> empl = new ArrayList<>();
 		empl.add(em1);
 		empl.add(em2);
 		com.setEmp(empl);
@@ -92,8 +92,8 @@ public class CERUD {
 
 	}
 
-	
-	
+
+
 	public static void fetchall() {
 
 		Query query = em.createQuery("select e from Employees e");
@@ -112,8 +112,8 @@ public class CERUD {
 		}
 	}
 
-	
-	
+
+
 	public static void delete() {
 
 		Employees em1 = em.find(Employees.class, 2);

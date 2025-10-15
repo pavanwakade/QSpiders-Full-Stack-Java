@@ -14,9 +14,9 @@ public class FetchDataFronDatabase {
 			System.out.println(cd.getCarid());
 			System.out.println(cd.getCarName());
 			System.out.println(cd.getPrice());
-			
-			
-			
+
+
+
 //			System.out.println(cd);
 		} else {
 			System.out.println("data is not present");

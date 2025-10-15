@@ -7,23 +7,23 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Review {
 
-	
 
-	
+
+
 
 	@Id
 	private int id;
-	
+
 	private String msg;
-	
+
 	@ManyToOne
 	private Product product;
 
 	public Review() {
 		super();
 	}
-	
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -47,10 +47,10 @@ public class Review {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Review [id=" + id + ", msg=" + msg + "]";
 	}
-	
+
 }

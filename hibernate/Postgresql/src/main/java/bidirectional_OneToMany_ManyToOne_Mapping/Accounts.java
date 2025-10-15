@@ -9,11 +9,11 @@ public class Accounts {
 
 	@Id
 	private int id;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private double balance;
-	
+
 	@ManyToOne
 	private Banks bank;
 
@@ -21,7 +21,7 @@ public class Accounts {
 		super();
 	}
 
-	
+
 
 	@Override
 	public String toString() {
@@ -79,10 +79,10 @@ public class Accounts {
 
 
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

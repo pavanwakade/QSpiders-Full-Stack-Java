@@ -24,13 +24,13 @@ public class CRUD {
 	static Studentss stu = new Studentss();
 
 	public static void main(String[] args) {
-		
+
 //		choice();
-		
-		
+
+
 	}
 
-	
+
 	public static void choice() {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter Choice\n1.insert\n2.Update\n3.Show all student\n4.Show all Subject\n5.delete subject from student");
@@ -42,28 +42,28 @@ public class CRUD {
 			break;
 
 		}
-		
+
 		case 2:
 		{
 			updateData();
 			break;
 
 		}
-		
+
 		case 3:
 		{
 			fetchallstudent();
 			break;
 
 		}
-		
+
 		case 4:
 		{
 			fetchallsubject();
 			break;
 
 		}
-		
+
 		case 5:
 		{
 			deleteData();
@@ -72,7 +72,7 @@ public class CRUD {
 		}
 
 		default:
-			
+
 			System.out.println();
 			break;
 		}
@@ -87,7 +87,7 @@ public class CRUD {
 		stu2.setId(2);
 		stu2.setName("Sonali");
 
-		List<Studentss> Studentss = new ArrayList<Studentss>();
+		List<Studentss> Studentss = new ArrayList<>();
 		Studentss.add(stu1);
 		Studentss.add(stu2);
 
@@ -99,7 +99,7 @@ public class CRUD {
 		sub2.setId(102);
 		sub2.setName("python");
 
-		List<Subjectss> Subjectss = new ArrayList<Subjectss>();
+		List<Subjectss> Subjectss = new ArrayList<>();
 		Subjectss.add(sub1);
 		Subjectss.add(sub2);
 

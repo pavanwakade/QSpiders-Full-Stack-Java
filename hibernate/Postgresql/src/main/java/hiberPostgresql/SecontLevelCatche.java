@@ -17,7 +17,7 @@ public class SecontLevelCatche {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String  name;
 
 	public SecontLevelCatche() {
@@ -44,31 +44,31 @@ public class SecontLevelCatche {
 	public String toString() {
 		return "SecontLevelCatche [id=" + id + ", name=" + name + "]";
 	}
-	
-	
+
+
 	public static void main(String[] args) {
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("pavan");
-		
+
 		EntityManager em = emf.createEntityManager();
 		EntityManager em1 = emf.createEntityManager();
-		
+
 		EntityTransaction et=em.getTransaction();
-		
+
 		SecontLevelCatche c=new SecontLevelCatche();
-		
+
 //		c.setName("pavan");
 		em.find(SecontLevelCatche.class, 1);
 		em.find(SecontLevelCatche.class, 1);
 		em.find(SecontLevelCatche.class, 1);
-		
+
 		em1.find(SecontLevelCatche.class, 1);
 		em1.find(SecontLevelCatche.class, 1);
 		em1.find(SecontLevelCatche.class, 1);
-		
+
 //		et.begin();
 //		em.persist(c);
-//		
+//
 //		et.commit();
-		
+
 	}
 }

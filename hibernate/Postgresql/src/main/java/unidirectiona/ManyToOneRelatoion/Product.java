@@ -8,12 +8,12 @@ public class Product {
 @Id
 private int id;
 
-private String name; 
+private String name;
 
 private double price;
 
 public Product() {
-	
+
 }
 
 
@@ -58,7 +58,7 @@ public void setPrice(double price) {
 public String toString() {
 	return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
 }
- 
+
 
 
 

@@ -29,19 +29,19 @@ public class insert {
 		ac1.setName("jivan");
 		ac1.setBalance(1000);
 		ac1.setBank(bk);
-		
-		
+
+
 		Accounts ac2 = new Accounts();
 		ac2.setId(2);
 		ac2.setName("savan");
 		ac2.setBalance(2000);
 		ac2.setBank(bk);
-		
-		List<Accounts> account=new ArrayList<Accounts>();
+
+		List<Accounts> account=new ArrayList<>();
 		account.add(ac1);
-		account.add(ac2); 
+		account.add(ac2);
 		bk.setAccount(account);
-		
+
 		et.begin();
 		em.persist(bk);
 		em.persist(ac1);

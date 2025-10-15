@@ -23,13 +23,13 @@ public class Updatedata {
 			account.setBalance(200000);
 
 			et.begin();
-			
+
 			em.merge(account);
-			
+
 			et.commit();
 
 		}
-		
+
 		else {
 			System.out.println("Account Not Fount");
 		}

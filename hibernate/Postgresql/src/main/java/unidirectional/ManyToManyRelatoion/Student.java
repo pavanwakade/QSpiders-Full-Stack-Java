@@ -11,9 +11,9 @@ public class Student {
 
 	@Id
 	private int id;
-	
+
 	private String sname;
-	
+
 	@ManyToMany
 	private List<Subject> subject;
 
@@ -49,8 +49,8 @@ public class Student {
 	public String toString() {
 		return "Student [id=" + id + ", sname=" + sname + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 }

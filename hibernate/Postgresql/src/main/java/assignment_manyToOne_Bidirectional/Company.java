@@ -11,18 +11,18 @@ public class Company {
 
 	@Id
 	private int id;
-	
+
 	private String name;
-	
+
 	private String location;
-	
+
 	@OneToMany(mappedBy = "com")
-	
+
 	private List<Employees> emp;
 
-	
-	
-	
+
+
+
 	public Company() {
 		super();
 	}
@@ -117,8 +117,8 @@ public class Company {
 	public void setEmp(List<Employees> emp) {
 		this.emp = emp;
 	}
-	
-	
-	
-	
+
+
+
+
 }

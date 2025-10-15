@@ -16,8 +16,8 @@ public class Subjectss {
 	private int id;
 
 	private String name;
-	
-	
+
+
 	@ManyToMany(mappedBy = "sub",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 
 //	@ManyToMany
@@ -26,8 +26,8 @@ public class Subjectss {
 	public Subjectss() {
 		super();
 	}
-	
-	
+
+
 
 	public int getId() {
 		return id;
@@ -52,8 +52,8 @@ public class Subjectss {
 	public void setStu(List<Studentss> stu) {
 		this.stu = stu;
 	}
-	
-	
+
+
 
 	@Override
 	public String toString() {

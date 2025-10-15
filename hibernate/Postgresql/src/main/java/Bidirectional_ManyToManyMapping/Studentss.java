@@ -15,13 +15,13 @@ public class Studentss {
 	@Id
 	private int id;
 	private String name;
-	
+
 	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 
 	private List<Subjectss> sub;
 
 	public Studentss() {
-		super(); 
+		super();
 	}
 
 	public int getId() {
@@ -52,9 +52,9 @@ public class Studentss {
 	public String toString() {
 		return "Students [id=" + id + ", name=" + name + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

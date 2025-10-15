@@ -4,20 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import unidirectiona.OneToOneRelatoion.Persion;
-
 @Entity
 public class Adhar {
 
 	@Id
 	private int id;
-	
+
 	private String address;
-	
+
 	@OneToOne(mappedBy = "adhar")
 	private Person person;
-	
-	
+
+
 
 	public Adhar() {
 		super();
@@ -68,7 +66,7 @@ public class Adhar {
 
 
 
-	
-	
-	
+
+
+
 }

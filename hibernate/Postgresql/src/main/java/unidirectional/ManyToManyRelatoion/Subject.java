@@ -8,7 +8,7 @@ public class Subject {
 
 	@Id
 	private int id;
-	
+
 	private String subname;
 
 	public Subject() {
@@ -35,7 +35,7 @@ public class Subject {
 	public String toString() {
 		return "Subject [id=" + id + ", subname=" + subname + "]";
 	}
-	
-	
-	
+
+
+
 }
