@@ -47,7 +47,7 @@
 						<label for="recipient" class="form-label"><i
 							class="fas fa-user me-2"></i>Recipient Emails (comma-separated)</label> <input
 							type="text" class="form-control" id="recipient"
-							placeholder="e.g., user1@example.com,user2@example.com" required>   <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer">how to get password</a>
+							placeholder="e.g., user1@example.com,user2@example.com" required>
 					</div>
 					<div class="mb-3">
 						<label for="subject" class="form-label"><i
@@ -84,6 +84,11 @@
 						Email
 					</button>
 				</form>
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button class="btn btn-secondary" id="testSmtp">Test SMTP</button>
+                        <div id="smtpTestResult" class="align-self-center small"></div>
+                    </div>
 
 				<h2 class="section-title mt-5">
 					<i class="fas fa-history"></i> Sent Emails
@@ -314,6 +319,30 @@
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
+
+        // Test SMTP credentials button
+        document.getElementById('testSmtp').addEventListener('click', async () => {
+            const smtpUser = document.getElementById('smtpUser').value.trim();
+            const smtpPass = document.getElementById('smtpPass').value.trim();
+            const resultEl = document.getElementById('smtpTestResult');
+            resultEl.textContent = 'Testing...';
+            try {
+                const body = new URLSearchParams();
+                body.append('smtpUser', smtpUser);
+                body.append('smtpPass', smtpPass);
+                const resp = await fetch('/smtp-test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body.toString()
+                });
+                const text = await resp.text();
+                resultEl.textContent = text;
+            } catch (err) {
+                resultEl.textContent = 'Test failed: ' + err.message;
+            }
+            // clear the message after 8s
+            setTimeout(() => { resultEl.textContent = ''; }, 8000);
+        });
     </script>
 </body>
 </html>

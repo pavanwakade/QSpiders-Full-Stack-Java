@@ -124,6 +124,41 @@ public class MailController {
         }
     }
 
+    // Endpoint to test SMTP credentials quickly
+    @PostMapping(value = "/smtp-test", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String smtpTest(@org.springframework.web.bind.annotation.RequestParam("smtpUser") String smtpUser,
+                           @org.springframework.web.bind.annotation.RequestParam("smtpPass") String smtpPass) {
+        try {
+            org.springframework.mail.javamail.JavaMailSenderImpl testSender = new org.springframework.mail.javamail.JavaMailSenderImpl();
+            testSender.setHost("smtp.gmail.com");
+            testSender.setPort(587);
+            testSender.setUsername(smtpUser);
+            testSender.setPassword(smtpPass);
+            java.util.Properties props = testSender.getJavaMailProperties();
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.starttls.required", "true");
+            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+            // JavaMailSenderImpl doesn't expose a direct 'test connection' method; use a small transport connect
+            try {
+                var session = testSender.getSession();
+                jakarta.mail.Transport transport = session.getTransport("smtp");
+                try {
+                    transport.connect(testSender.getHost(), testSender.getPort(), smtpUser, smtpPass);
+                } finally {
+                    transport.close();
+                }
+            } catch (Exception connEx) {
+                return "SMTP test failed: " + connEx.getMessage();
+            }
+            return "SMTP test successful";
+        } catch (Exception e) {
+            return "SMTP test error: " + e.getMessage();
+        }
+    }
+
     private void saveToExcel(List<String> recipients, String timestamp) {
         // Save to project root; change to absolute path if needed, e.g.:
         // String filePath = System.getProperty("user.home") + "/Desktop/sent_emails.xlsx";
