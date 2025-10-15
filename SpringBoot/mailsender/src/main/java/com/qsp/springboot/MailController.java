@@ -28,6 +28,9 @@ public class MailController {
         private List<String> to;
         private String subject;
         private String text;
+        // optional per-request smtp credentials
+        private String smtpUser;
+        private String smtpPass;
 
         public List<String> getTo() { return to; }
         public void setTo(List<String> to) { this.to = to; }
@@ -35,11 +38,17 @@ public class MailController {
         public void setSubject(String subject) { this.subject = subject; }
         public String getText() { return text; }
         public void setText(String text) { this.text = text; }
+        public String getSmtpUser() { return smtpUser; }
+        public void setSmtpUser(String smtpUser) { this.smtpUser = smtpUser; }
+        public String getSmtpPass() { return smtpPass; }
+        public void setSmtpPass(String smtpPass) { this.smtpPass = smtpPass; }
     }
 
     @PostMapping(value = "/maile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String sendMail(@RequestPart(value = "email", required = true) EmailRequest emailRequest,
-                           @RequestPart(value = "file", required = false) MultipartFile file) {
+                           @RequestPart(value = "file", required = false) MultipartFile file,
+                           @RequestPart(value = "smtpUser", required = false) String smtpUser,
+                           @RequestPart(value = "smtpPass", required = false) String smtpPass) {
         try {
             List<String> sentRecipients = new ArrayList<>();
             List<String> failedRecipients = new ArrayList<>();
@@ -51,18 +60,43 @@ public class MailController {
                 return "Error: At least one recipient email is required";
             }
 
+            // Determine which mail sender to use: per-request if credentials provided, else autowired
+            var mailSenderToUse = this.javaMailSender;
+            org.springframework.mail.javamail.JavaMailSenderImpl tempSender = null;
+            if ((smtpUser != null && !smtpUser.isBlank()) || (emailRequest.getSmtpUser() != null && !emailRequest.getSmtpUser().isBlank())) {
+                String user = (smtpUser != null && !smtpUser.isBlank()) ? smtpUser : emailRequest.getSmtpUser();
+                String pass = (smtpPass != null && !smtpPass.isBlank()) ? smtpPass : emailRequest.getSmtpPass();
+                // build a JavaMailSenderImpl for this request
+                tempSender = new org.springframework.mail.javamail.JavaMailSenderImpl();
+                tempSender.setHost("smtp.gmail.com");
+                tempSender.setPort(587);
+                tempSender.setUsername(user);
+                tempSender.setPassword(pass);
+                java.util.Properties props = tempSender.getJavaMailProperties();
+                props.put("mail.transport.protocol", "smtp");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.starttls.required", "true");
+                props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                mailSenderToUse = tempSender;
+            }
+
             // Send email to each recipient
             for (String recipient : emailRequest.getTo()) {
                 try {
-                    MimeMessage message = javaMailSender.createMimeMessage();
-                    MimeMessageHelper helper = new MimeMessageHelper(message, file != null);
+                    MimeMessage message = mailSenderToUse.createMimeMessage();
+                    boolean hasFile = file != null && !file.isEmpty();
+                    MimeMessageHelper helper = new MimeMessageHelper(message, hasFile);
                     helper.setTo(recipient);
                     helper.setSubject(emailRequest.getSubject());
                     helper.setText(emailRequest.getText());
-                    if (file != null) {
-                        helper.addAttachment(file.getOriginalFilename(), file);
+                    if (hasFile) {
+                        MultipartFile f = java.util.Objects.requireNonNull(file);
+                        String fname = f.getOriginalFilename();
+                        if (fname == null || fname.isBlank()) fname = "attachment";
+                        helper.addAttachment(fname, f);
                     }
-                    javaMailSender.send(message);
+                    mailSenderToUse.send(message);
                     sentRecipients.add(recipient);
                 } catch (Exception e) {
                     failedRecipients.add(recipient + " (" + e.getMessage() + ")");

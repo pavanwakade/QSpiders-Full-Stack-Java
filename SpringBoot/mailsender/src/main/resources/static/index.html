@@ -35,11 +35,19 @@
 				</div>
 
 				<form id="emailForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="smtpUser" class="form-label"><i class="fas fa-user-cog me-2"></i>SMTP Username</label>
+                                <input type="email" class="form-control" id="smtpUser" placeholder="your@gmail.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="smtpPass" class="form-label"><i class="fas fa-key me-2"></i>SMTP Password / App Password</label>
+                                <input type="password" class="form-control" id="smtpPass" placeholder="App password" required>
+                            </div>
 					<div class="mb-3">
 						<label for="recipient" class="form-label"><i
 							class="fas fa-user me-2"></i>Recipient Emails (comma-separated)</label> <input
 							type="text" class="form-control" id="recipient"
-							placeholder="e.g., user1@example.com,user2@example.com" required>
+							placeholder="e.g., user1@example.com,user2@example.com" required>   <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer">how to get password</a>
 					</div>
 					<div class="mb-3">
 						<label for="subject" class="form-label"><i
@@ -129,7 +137,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
         // Load saved form data on page load
-        document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('DOMContentLoaded', () => {
             displayEmailHistory();
             
             // Load saved subject and body if available
@@ -154,6 +162,12 @@
                     fileName.style.display = 'none';
                 }
             });
+
+            // Load saved SMTP credentials if present
+            const savedSmtpUser = localStorage.getItem('smtpUser');
+            const savedSmtpPass = localStorage.getItem('smtpPass');
+            if (savedSmtpUser) document.getElementById('smtpUser').value = savedSmtpUser;
+            if (savedSmtpPass) document.getElementById('smtpPass').value = savedSmtpPass;
         });
 
         // Save subject and body as they are typed
@@ -203,6 +217,20 @@
                 return;
             }
 
+            // Read SMTP credentials from inputs
+            const smtpUser = document.getElementById('smtpUser').value.trim();
+            const smtpPass = document.getElementById('smtpPass').value.trim();
+
+            if (!smtpUser || !smtpPass) {
+                errorAlert.textContent = 'Please provide SMTP username and password';
+                errorAlert.style.display = 'block';
+                return;
+            }
+
+            // Persist SMTP credentials locally (so user doesn't have to re-enter next time)
+            localStorage.setItem('smtpUser', smtpUser);
+            localStorage.setItem('smtpPass', smtpPass);
+
             // Show loading spinner
             sendButton.disabled = true;
             spinner.style.display = 'inline-block';
@@ -211,6 +239,9 @@
                 const formData = new FormData();
                 const emailBlob = new Blob([JSON.stringify({ to: recipients, subject: subject, text: body })], { type: 'application/json' });
                 formData.append('email', emailBlob, 'email.json');
+                // include credentials as plain fields (backend will read them)
+                formData.append('smtpUser', smtpUser);
+                formData.append('smtpPass', smtpPass);
                 if (fileInput.files.length > 0) {
                     formData.append('file', fileInput.files[0]);
                 }
