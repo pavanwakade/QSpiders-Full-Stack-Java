@@ -1,5 +1,5 @@
-package API;
-import java.util.List;
+package src.api;
+
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -15,12 +15,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -28,7 +30,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
-public class AdvancedStealthAssistant1 {
+public class AdvancedStealthAssistant2 {
     private static JWindow frame;
     private static float opacity = Float.parseFloat(System.getProperty("stealth.opacity", "0.2"));
     private static final float STEALTH_OPACITY = Float.parseFloat(System.getProperty("stealth.opacity", "0.2"));
@@ -40,7 +42,7 @@ public class AdvancedStealthAssistant1 {
     private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
     private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
     private static String API_KEY = null;
-    private static final String CONFIG_FILE = "stealth_configs.dat";
+    private static final String CONFIG_FILE = "stealth_config.dat";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;
     private static JEditorPane htmlPreview;
@@ -49,26 +51,30 @@ public class AdvancedStealthAssistant1 {
     private static JLabel statusBar;
     private static JTextField promptField;
     private static boolean isHidden = false;
-    static String prompt = 
-    	    "Analyze the image carefully. Your task is to:\n\n" +
-    	    "1. Detect and recognize any **questions** present in the image. This includes:\n" +
-    	    "   - WH-questions: Who, What, Where, When, Why, Which, Whose, Whom, How\n" +
-    	    "   - Yes/No questions: Is, Are, Was, Were, Will, Do, Does, Did, Can, Could, Would, Should\n\n" +
-    	    "2. If **any question** is found:\n" +
-    	    "   - Provide ** the correct and optimized answer**.\n" +
-    	    "   - Format the answer in **Markdown**.\n" +
-    	    "   - You may use headers, lists, or code blocks if the answer is structured.\n" +
-    	    "3. If the image contains **multiple-choice questions (MCQs)**:\n" +
-    	    "   - Return only the correct option (e.g., A, B, C, or D).\n" +
-    	    "   - No explanation or reasoning should be included.\n\n" +
-    	    "4. If **no question** is found:\n" +
-    	    "   - Reply with exactly: No question detected in the image.\n\n" +
-    	    "5. If the image contains **code but no question**:\n" +
-    	    "   - Detect and describe any bugs or issues.\n" +
-    	    "   - Explain how to fix them.\n" +
-    	    "   - Show the expected output, if applicable.\n" +
-    	    "   - Format code using Markdown code blocks.\n\n" +
-    	    "Be precise and respond only according to the above rules.";
+    private static boolean isMultipleCaptureMode = false;
+    private static List<BufferedImage> capturedScreenshots = new ArrayList<>();
+    private static JPanel controlPanel;
+    private static JButton sendButton;
+//    static String prompt = 
+//    	    "Analyze the image carefully. Your task is to:\n\n" +
+//    	    "1. Detect and recognize any **questions** present in the image. This includes:\n" +
+//    	    "   - WH-questions: Who, What, Where, When, Why, Which, Whose, Whom, How\n" +
+//    	    "   - Yes/No questions: Is, Are, Was,Explain, Were, Will, Do, Does, Did, Can, Could, Would, Should\n\n" +
+//    	    "2. If **any question** is found:\n" +
+//    	    "   - Provide ** the correct and optimized answer**.\n" +
+//    	    "   - Format the answer in **Markdown**.\n" +
+//    	    "   - You may use headers, lists, or code blocks if the answer is structured.\n" +
+//    	    "3. If the image contains **multiple-choice questions (MCQs)**:\n" +
+//    	    "   - Return only the correct option (e.g., A, B, C, or D).\n" +
+//    	    "   - No explanation or reasoning should be included.\n\n" +
+//    	    "4. If **no question** is found:\n" +
+//    	    "   - Reply with exactly: No question detected in the image.\n\n" +
+//    	    "5. If the image contains **code but no question**:\n" +
+//    	    "   - Detect and describe any bugs or issues.\n" +
+//    	    "   - Explain how to fix them.\n" +
+//    	    "   - Show the expected output, if applicable.\n" +
+//    	    "   - Format code using Markdown code blocks.\n\n" +
+//    	    "Be precise and respond only according to the above rules.";
 
 
     private static ScheduledExecutorService scheduler;
@@ -205,11 +211,20 @@ public class AdvancedStealthAssistant1 {
         titleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         titleBar.add(titleLabel, BorderLayout.WEST);
 
-        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 0));
+        controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 1, 0));
         controlPanel.setOpaque(false);
 
         JButton screenshotButton = createStealthButton("📷", "Capture");
-        screenshotButton.addActionListener(e -> performStealthScreenshot());
+        screenshotButton.addActionListener(e -> {
+            if (isMultipleCaptureMode) {
+                captureSingleScreenshotForMultiple();
+            } else {
+                performStealthScreenshot();
+            }
+        });
+
+        JButton multiCaptureButton = createStealthButton("📸", "Multiple Capture");
+        multiCaptureButton.addActionListener(e -> toggleMultipleCaptureMode());
 
         JButton copyButton = createStealthButton("📋", "Copy");
         copyButton.addActionListener(e -> secureClipboardCopy());
@@ -221,12 +236,84 @@ public class AdvancedStealthAssistant1 {
         closeButton.addActionListener(e -> secureExit());
 
         controlPanel.add(screenshotButton);
+        controlPanel.add(multiCaptureButton);
         controlPanel.add(copyButton);
         controlPanel.add(ghostButton);
         controlPanel.add(closeButton);
 
         titleBar.add(controlPanel, BorderLayout.EAST);
         return titleBar;
+    }
+
+    private static void toggleMultipleCaptureMode() {
+        isMultipleCaptureMode = !isMultipleCaptureMode;
+        capturedScreenshots.clear();
+        if (isMultipleCaptureMode) {
+            statusBar.setText(" Multiple capture mode: Use 📷 to capture, Send to process");
+            sendButton = createStealthButton(">>>", "Send Captures");
+            sendButton.addActionListener(e -> sendMultipleScreenshots());
+            controlPanel.add(sendButton, 2); // Add after multiCaptureButton
+            controlPanel.revalidate();
+            controlPanel.repaint();
+        } else {
+            statusBar.setText(" Multiple capture mode disabled");
+            if (sendButton != null) {
+                controlPanel.remove(sendButton);
+                controlPanel.revalidate();
+                controlPanel.repaint();
+                sendButton = null;
+            }
+        }
+    }
+
+    private static void captureSingleScreenshotForMultiple() {
+        CompletableFuture.runAsync(() -> {
+            try {
+                statusBar.setText(" Capturing screenshot...");
+                SwingUtilities.invokeAndWait(() -> frame.setVisible(false));
+                Thread.sleep(300);
+                BufferedImage screenshot = captureWithStealth();
+                SwingUtilities.invokeAndWait(() -> frame.setVisible(true));
+                capturedScreenshots.add(screenshot);
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Captured " + capturedScreenshots.size() + " screenshot(s)"));
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Capture error: " + e.getMessage()));
+            }
+        });
+    }
+
+    private static void sendMultipleScreenshots() {
+        if (capturedScreenshots.isEmpty()) {
+            statusBar.setText(" No screenshots captured");
+            return;
+        }
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                statusBar.setText(" Processing " + capturedScreenshots.size() + " screenshots...");
+                StringBuilder combinedResponse = new StringBuilder();
+                for (int i = 0; i < capturedScreenshots.size(); i++) {
+                    BufferedImage screenshot = capturedScreenshots.get(i);
+                    String base64Image = encodeImageToBase64(screenshot);
+                    String response = sendSecureImageToGemini(base64Image);
+                    String responseText = extractResponseText(response);
+                    combinedResponse.append("### Screenshot ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
+                }
+
+                String finalResponse = combinedResponse.toString();
+                SwingUtilities.invokeLater(() -> {
+                    currentResponse = finalResponse;
+                    markdownArea.setText(currentResponse);
+                    updateSecureHtmlPreview(currentResponse);
+                    updateSecureCodeBlocks(currentResponse);
+                    statusBar.setText(" Analysis of " + capturedScreenshots.size() + " screenshots complete");
+                    toggleMultipleCaptureMode(); // Exit multiple capture mode
+                });
+
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> statusBar.setText(" Error: " + e.getMessage()));
+            }
+        });
     }
 
     private static JPanel createPromptPanel() {
@@ -238,7 +325,25 @@ public class AdvancedStealthAssistant1 {
         promptLabel.setForeground(new Color(140, 140, 140));
         promptLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
 
-        promptField = new JTextField(prompt);
+        promptField = new JTextField("Analyze the image carefully. Your task is to:\n\n" +
+        	    "1. Detect and recognize any **questions** present in the image. This includes:\n" +
+        	    "   - WH-questions: Who, What, Where, When, Why, Which, Whose, Whom, How\n" +
+        	    "   - Yes/No questions: Is, Are, Was,Explain, Were, Will, Do, Does, Did, Can, Could, Would, Should\n\n" +
+        	    "2. If **any question** is found:\n" +
+        	    "   - Provide ** the correct and optimized answer**.\n" +
+        	    "   - Format the answer in **Markdown**.\n" +
+        	    "   - You may use headers, lists, or code blocks if the answer is structured.\n" +
+        	    "3. If the image contains **multiple-choice questions (MCQs)**:\n" +
+        	    "   - Return only the correct option (e.g., A, B, C, or D).\n" +
+        	    "   - No explanation or reasoning should be included.\n\n" +
+        	    "4. If **no question** is found:\n" +
+        	    "   - Reply with exactly: No question detected in the image.\n\n" +
+        	    "5. If the image contains **code but no question**:\n" +
+        	    "   - Detect and describe any bugs or issues.\n" +
+        	    "   - Explain how to fix them.\n" +
+        	    "   - Show the expected output, if applicable.\n" +
+        	    "   - Format code using Markdown code blocks.\n\n" +
+        	    "Be precise and respond only according to the above rules.");
         promptField.setFont(new Font("Consolas", Font.PLAIN, 11));
         promptField.setBackground(new Color(40, 40, 40));
         promptField.setForeground(new Color(200, 200, 200));
@@ -371,7 +476,6 @@ public class AdvancedStealthAssistant1 {
         }
         return false;
     }
-    
 
     private static void initiateEmergencyProtocol() {
         SwingUtilities.invokeLater(() -> {
@@ -453,7 +557,25 @@ public class AdvancedStealthAssistant1 {
             .build();
 
         String customPrompt = promptField.getText().isEmpty() ?
-        		prompt  :
+        		"Analyze the image carefully. Your task is to:\n\n" +
+        	    "1. Detect and recognize any **questions** present in the image. This includes:\n" +
+        	    "   - WH-questions: Who, What, Where, When, Why, Which, Whose, Whom, How\n" +
+        	    "   - Yes/No questions: Is, Are, Was,Explain, Were, Will, Do, Does, Did, Can, Could, Would, Should\n\n" +
+        	    "2. If **any question** is found:\n" +
+        	    "   - Provide ** the correct and optimized answer**.\n" +
+        	    "   - Format the answer in **Markdown**.\n" +
+        	    "   - You may use headers, lists, or code blocks if the answer is structured.\n" +
+        	    "3. If the image contains **multiple-choice questions (MCQs)**:\n" +
+        	    "   - Return only the correct option (e.g., A, B, C, or D).\n" +
+        	    "   - No explanation or reasoning should be included.\n\n" +
+        	    "4. If **no question** is found:\n" +
+        	    "   - Reply with exactly: No question detected in the image.\n\n" +
+        	    "5. If the image contains **code but no question**:\n" +
+        	    "   - Detect and describe any bugs or issues.\n" +
+        	    "   - Explain how to fix them.\n" +
+        	    "   - Show the expected output, if applicable.\n" +
+        	    "   - Format code using Markdown code blocks.\n\n" +
+        	    "Be precise and respond only according to the above rules." :
             promptField.getText();
 
         String requestBody = String.format(
@@ -818,11 +940,11 @@ public class AdvancedStealthAssistant1 {
     }
 
     private static String escapeHtml(String text) {
-        return text.replace("&", "&amp;")
-                   .replace("<", "&lt;")
-                   .replace(">", "&gt;")
-                   .replace("\"", "&quot;")
-                   .replace("'", "&#39;");
+        return text.replace("&", "&")
+                   .replace("<", "<")
+                   .replace(">", ">")
+                   .replace("\"", "\"")
+                   .replace("'", "'");
     }
 
     private static String processLists(String markdown) {
@@ -1049,7 +1171,6 @@ public class AdvancedStealthAssistant1 {
                 }
             }
         });
-//        instructionLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JTextField apiKeyField = new JTextField(20);
         apiKeyField.setFont(new Font("Consolas", Font.PLAIN, 12));

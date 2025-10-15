@@ -1,6 +1,4 @@
-package Banking;
-
-import java.util.Objects;
+package src.Banking;
 
 public final class Accounts implements BankAccount {
 
