@@ -11,25 +11,32 @@ public class Introduction {
 
 
 
-        Map<Integer,String> students=new LinkedHashMap<>();
+        Map<Integer,String> students=new HashMap<>();
         students.put(5,"Pavan");
         students.put(2,"jivan");
         students.put(4,"sp");
-        Random random=new Random();
-        int key=random.nextInt(100)+1;
 
 
-//        TreeMap<Integer,String> students1=new TreeMap<>();
-//        students1.put(5,"Pavan");
-//        students1.put(2,"jivan");
-//        students1.put(4,"sp");
+        TreeMap<Integer,String> students1=new TreeMap<>();
+        students.put(5,"Pavan");
+        students.put(2,"jivan");
+        students.put(4,"sp");
 
 
         List<Map<Integer,String>> bank=new ArrayList<>();
         bank.add(students1);
+        bank.add(students);
 
 //        System.out.println("students "+students);
         System.out.println("bank "+bank);
+
+
+        Random random=new Random();
+//        long key = Math.abs(random.nextLong() * 1_000_000_000_00L) * 2L;
+
+//        long key = Math.abs(random.nextLong() * 1_000_000_000_000L);
+
+//        System.out.println(key);
 
     }
 }
