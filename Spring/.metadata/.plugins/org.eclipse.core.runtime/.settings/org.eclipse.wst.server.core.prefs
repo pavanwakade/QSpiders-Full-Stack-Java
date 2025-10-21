@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+module-start-timeout=300000
+runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime id\="Apache Tomcat v11.0" location\="D\:/software/apache-tomcat-11.0.4" name\="Apache Tomcat v11.0" runtime-type-id\="org.eclipse.jst.server.tomcat.runtime.110" timestamp\="0"/>\r\n  <runtime id\="Apache Tomcat v11.0 (2)" location\="D\:/software/apache-tomcat-11.0.4" name\="Apache Tomcat v11.0 (2)" runtime-type-id\="org.eclipse.jst.server.tomcat.runtime.110" timestamp\="0"/>\r\n</runtimes>\r\n

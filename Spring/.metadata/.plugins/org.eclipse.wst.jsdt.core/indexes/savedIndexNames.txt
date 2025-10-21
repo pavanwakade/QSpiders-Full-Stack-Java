@@ -1,0 +1,10 @@
+INDEX VERSION 1.4+C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\Spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1293851304.index
+2601224165.index
+1176094643.index
+3086254117.index
+2749753719.index
+71098504.index
+1197519833.index
+2103488049.index
+2900503868.index

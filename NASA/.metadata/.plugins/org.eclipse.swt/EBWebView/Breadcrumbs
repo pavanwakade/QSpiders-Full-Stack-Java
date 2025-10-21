@@ -1,0 +1,92 @@
+0:11:37 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl
+0:11:37 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_TabClosable
+0:11:37 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosingAll
+0:11:37 Microsoft.Shutdown.TabStripModel.CloseWebContentses
+0:11:37 Microsoft.Shutdown.TabStripModel.CloseWebContentses_FastShutdown
+0:11:37 Microsoft.Shutdown.TabStripModel.ShouldRunUnloadListenerBeforeClosing_false
+0:11:37 Tab3 RenderProcessGone
+0:11:37 Microsoft.Shutdown.TabStripModel.RunUnloadListenerBeforeClosing_false
+0:11:37 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosedAll
+0:11:37 Microsoft.Shutdown.TabStripModel.SendDetachWebContentsNotifications
+0:11:37 Browser3 Close Tab3 at 0
+0:11:37 Tab3 WebContentsDestroyed
+0:11:37 Microsoft.Shutdown.OnWindowClosing
+0:11:37 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:11:37 Widget Closed: BrowserFrame
+0:11:37 Microsoft.Shutdown.OnWindowClosing
+0:11:37 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:11:37 Microsoft.Browser_Removed
+0:11:37 Microsoft.NewBrowser_Popup
+0:11:37 Microsoft.BrowserList.AddBrowser
+0:11:37 Browser6 Insert active Tab6 at 0
+0:11:37 Tab6 StartNav43 #auto_toplevel
+0:11:37 Tab6 StartNav44 #typed
+0:11:37 Tab6 StartNav45 #typed
+0:11:37 Tab6 FinishNav43
+0:11:37 Tab6 PageLoad
+0:11:37 Tab6 FinishNav44
+0:11:37 Tab6 PageLoad
+0:11:37 Tab6 FinishNav45
+0:11:37 Tab6 PageLoad
+0:11:39 Tab6 StartNav46 #typed
+0:11:39 Tab6 FinishNav46
+0:11:39 Tab6 PageLoad
+0:11:41 Tab6 StartNav47 #typed
+0:11:41 Tab6 FinishNav47
+0:11:41 Tab6 PageLoad
+0:11:45 Tab4 StartNav48 #typed
+0:11:45 Tab4 FinishNav48
+0:11:45 Tab4 PageLoad
+0:11:47 Tab4 StartNav49 #typed
+0:11:47 Tab4 FinishNav49
+0:11:48 Tab4 PageLoad
+0:11:51 Tab4 StartNav50 #typed
+0:11:51 Tab4 FinishNav50
+0:11:51 Tab4 PageLoad
+0:11:55 Microsoft.Shutdown.OnWindowClosing
+0:11:55 Microsoft.Shutdown.OnWindowClosing_MaybeClearBrowsingDataOnExit
+0:11:55 Microsoft.Shutdown.OnWindowClosing_ClearBrowsingDataOnExitNotInProgress
+0:11:55 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:11:55 Microsoft.Shutdown.TabStripModel.CloseAllTabs
+0:11:55 Microsoft.Shutdown.TabStripModel.CloseTabs
+0:11:55 Microsoft.Shutdown.TabStripModel.CloseTabs_EdgeBeforeClosingAllTabs
+0:11:55 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl
+0:11:55 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_TabClosable
+0:11:55 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosingAll
+0:11:55 Microsoft.Shutdown.TabStripModel.CloseWebContentses
+0:11:55 Microsoft.Shutdown.TabStripModel.CloseWebContentses_FastShutdown
+0:11:55 Microsoft.Shutdown.TabStripModel.ShouldRunUnloadListenerBeforeClosing_false
+0:11:55 Tab6 RenderProcessGone
+0:11:55 Microsoft.Shutdown.TabStripModel.RunUnloadListenerBeforeClosing_false
+0:11:55 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosedAll
+0:11:55 Microsoft.Shutdown.TabStripModel.SendDetachWebContentsNotifications
+0:11:55 Browser6 Close Tab6 at 0
+0:11:55 Tab6 WebContentsDestroyed
+0:11:55 Microsoft.Shutdown.OnWindowClosing
+0:11:55 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:11:55 Widget Closed: BrowserFrame
+0:11:55 Microsoft.Shutdown.OnWindowClosing
+0:11:55 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:11:55 Microsoft.Browser_Removed
+0:11:55 Microsoft.NewBrowser_Popup
+0:11:55 Microsoft.BrowserList.AddBrowser
+0:11:55 Browser7 Insert active Tab7 at 0
+0:11:55 Tab7 StartNav51 #auto_toplevel
+0:11:55 Tab7 StartNav52 #typed
+0:11:55 Tab7 StartNav53 #typed
+0:11:55 Tab7 FinishNav51
+0:11:55 Tab7 PageLoad
+0:11:55 Tab7 FinishNav52
+0:11:55 Tab7 PageLoad
+0:11:55 Tab7 FinishNav53
+0:11:55 Tab7 PageLoad
+0:12:17 Tab7 StartNav54 #typed
+0:12:17 Tab7 FinishNav54
+0:12:17 Tab7 PageLoad
+0:12:19 Tab7 StartNav55 #typed
+0:12:19 Tab7 FinishNav55
+0:12:19 Tab7 PageLoad
+0:12:27 Tab4 StartNav56 #typed
+0:12:27 Tab4 FinishNav56
+0:12:27 Tab4 PageLoad
+0:13:53 Microsoft.Shutdown.OnWindowClosing

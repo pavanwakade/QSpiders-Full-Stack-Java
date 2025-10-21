@@ -1,0 +1,9 @@
+INDEX VERSION 1.134
+C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\Spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3810635744.index
+\com.qsp\src\main\java
+C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\Spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4145254987.index
+\full_project\src\main\java
+C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\Spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\390979467.index
+\springProject\src\main\java
+C:\Users\Admin\Desktop\Qspiders\QSpiders-Full-Stack-Java\Spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4234883805.index
+\spring\src\main\java

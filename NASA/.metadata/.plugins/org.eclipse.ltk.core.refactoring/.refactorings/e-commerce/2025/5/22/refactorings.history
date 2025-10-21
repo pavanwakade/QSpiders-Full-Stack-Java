@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.e_commerce.util&apos; to &apos;com.e-commerce/src/main/java/com.e_commerce&apos;&#x0D;&#x0A;- Original project: &apos;e-commerce&apos;&#x0D;&#x0A;- Destination element: &apos;com.e-commerce/src/main/java/com.e_commerce&apos;&#x0D;&#x0A;- Original element: &apos;e-commerce/src/main/java/com.e_commerce.util&apos;" description="Copy package" destination="=com.e-commerce/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.e_commerce" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.e_commerce.util" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1748378390876" version="1.0"/>
+</session>
