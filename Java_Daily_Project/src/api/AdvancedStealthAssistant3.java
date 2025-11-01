@@ -41,6 +41,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -75,6 +76,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.HyperlinkEvent;
+import javax.swing.text.AbstractDocument.Content;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
@@ -157,7 +159,7 @@ public class AdvancedStealthAssistant3 {
         try {
             
             if (isDebuggingDetected() || isVirtualMachineDetected()) {
-                System.exit(0);
+                // System.exit(0);
             }
             obfuscateProcessName();
             startSecurityMonitoring();
@@ -297,14 +299,7 @@ public class AdvancedStealthAssistant3 {
 
         JButton ghostButton = createStealthButton("👤", "Ghost");
         ghostButton.addActionListener(e -> toggleGhostMode());
-JButton protectionButton = createStealthButton("🛡️", "Toggle Protection");
-protectionButton.addActionListener(e -> {
-    ScreenshotProtection.toggleProtection(mainWindow);
-    statusLabel.setText(ScreenshotProtection.isProtected(mainWindow) 
-        ? " Protected from capture" 
-        : " Protection disabled");
-});
-controlPanel.add(protectionButton);
+
         JButton closeButton = createStealthButton("×", "Exit");
         closeButton.addActionListener(e -> secureExit());
 
@@ -355,39 +350,107 @@ controlPanel.add(protectionButton);
         });
     }
 
+    // private static void sendMultipleScreenshots() {
+    //     if (capturedImages.isEmpty()) {
+    //         statusLabel.setText(" No screenshots captured");
+    //         return;
+    //     }
+
+    //     CompletableFuture.runAsync(() -> {
+    //         try {
+    //             statusLabel.setText(" Processing " + capturedImages.size() + " screenshots...");
+    //             StringBuilder combinedResponse = new StringBuilder();
+    //             for (int i = 0; i < capturedImages.size(); i++) {
+    //                 BufferedImage screenshot = capturedImages.get(i);
+    //                 String base64Image = encodeImageToBase64(screenshot);
+    //                 String response = sendSecureImageToGemini(base64Image);
+    //                 String responseText = extractResponseText(response);
+    //                 combinedResponse.append("### Screenshot ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
+    //             }
+
+    //             String finalResponse = combinedResponse.toString();
+    //             SwingUtilities.invokeLater(() -> {
+    //                 currentResponse = finalResponse;
+    //                 markdownArea.setText(currentResponse);
+    //                 updateSecureHtmlPreview(currentResponse);
+    //                 updateSecureCodeBlocks(currentResponse);
+    //                 statusLabel.setText(" Analysis of " + capturedImages.size() + " screenshots complete");
+    //                 toggleMultipleCaptureMode();
+    //             });
+
+    //         } catch (Exception e) {
+    //             SwingUtilities.invokeLater(() -> statusLabel.setText(" Error: " + e.getMessage()));
+    //         }
+    //     });
+    // }
+
+
+
+
+
+
+
+
     private static void sendMultipleScreenshots() {
-        if (capturedImages.isEmpty()) {
-            statusLabel.setText(" No screenshots captured");
-            return;
-        }
-
-        CompletableFuture.runAsync(() -> {
-            try {
-                statusLabel.setText(" Processing " + capturedImages.size() + " screenshots...");
-                StringBuilder combinedResponse = new StringBuilder();
-                for (int i = 0; i < capturedImages.size(); i++) {
-                    BufferedImage screenshot = capturedImages.get(i);
-                    String base64Image = encodeImageToBase64(screenshot);
-                    String response = sendSecureImageToGemini(base64Image);
-                    String responseText = extractResponseText(response);
-                    combinedResponse.append("### Screenshot ").append(i + 1).append("\n\n").append(responseText).append("\n\n");
-                }
-
-                String finalResponse = combinedResponse.toString();
-                SwingUtilities.invokeLater(() -> {
-                    currentResponse = finalResponse;
-                    markdownArea.setText(currentResponse);
-                    updateSecureHtmlPreview(currentResponse);
-                    updateSecureCodeBlocks(currentResponse);
-                    statusLabel.setText(" Analysis of " + capturedImages.size() + " screenshots complete");
-                    toggleMultipleCaptureMode();
-                });
-
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> statusLabel.setText(" Error: " + e.getMessage()));
-            }
-        });
+    if (capturedImages.isEmpty()) {
+        statusLabel.setText("⚠ No screenshots captured");
+        return;
     }
+
+    CompletableFuture.runAsync(() -> {
+        try {
+            statusLabel.setText("🔄 Processing " + capturedImages.size() + " screenshots...");
+
+            addStealthDelay();
+            
+            Client client = Client.builder().apiKey(apiKey).build();
+            List<Part> parts = new ArrayList<>();
+            
+            // Add prompt first
+            parts.add(Part.fromText(
+                "Analyze these " + capturedImages.size() + 
+                " images in sequence:\n" + promptArea.getText()
+            ));
+            
+            // Add all images
+            for (BufferedImage img : capturedImages) {
+                String base64 = encodeImageToBase64(img);
+                parts.add(Part.builder()
+                    .inlineData(Blob.builder()
+                        .mimeType("image/png")
+                        .data(base64)
+                        .build())
+                    .build());
+            }
+            
+            Content content = Content.builder()
+                .role("user")
+                .parts(parts)
+                .build();
+            
+            GenerateContentResponse response = client.models.generateContent(
+                "gemini-2.0-flash-exp",
+                ImmutableList.of(content),
+                null
+            );
+            
+            String finalResponse = response.text().orElse("Analysis failed");
+            
+            SwingUtilities.invokeLater(() -> {
+                currentResponse = finalResponse;
+                markdownArea.setText(currentResponse);
+                updateSecureHtmlPreview(currentResponse);
+                updateSecureCodeBlocks(currentResponse);
+                statusLabel.setText("✅ Analysis complete");
+                toggleMultipleCaptureMode();
+            });
+
+        } catch (Exception e) {
+            SwingUtilities.invokeLater(() -> 
+                statusLabel.setText("❌ Error: " + e.getMessage()));
+        }
+    });
+}
 
     private static JPanel createPromptPanel() {
         JPanel promptPanel = new JPanel(new BorderLayout());
@@ -598,6 +661,7 @@ controlPanel.add(protectionButton);
                 SwingUtilities.invokeAndWait(() -> mainWindow.setVisible(true));
                 String base64Image = encodeImageToBase64(screenshot);
                 statusLabel.setText(" Processing...");
+                 addStealthDelay();
                 String response = sendSecureImageToGemini(base64Image);
                 String responseText = extractResponseText(response);
                 SwingUtilities.invokeLater(() -> {
@@ -634,35 +698,84 @@ controlPanel.add(protectionButton);
         return screenshot;
     }
 
+    // private static String sendSecureImageToGemini(String base64Image) throws Exception {
+    //     long timeoutSeconds = Long.parseLong(System.getProperty("gemini.api.timeout", "30"));
+    //     HttpClient client = HttpClient.newBuilder()
+    //         .connectTimeout(java.time.Duration.ofSeconds(timeoutSeconds))
+    //         .build();
+
+    //     String customPrompt = promptArea.getText().isEmpty() ? getDefaultPrompt() : promptArea.getText();
+
+    //     String requestBody = String.format(
+    //         "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
+    //         customPrompt.replace("\"", "\\\"").replace("\n", "\\n"),
+    //         base64Image
+    //     );
+
+    //     String url = GEMINI_API_URL + "?key=" + apiKey;
+    //     HttpRequest request = HttpRequest.newBuilder()
+    //         .uri(URI.create(url))
+    //         .header("Content-Type", "application/json")
+    //         .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+    //         .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+    //         .build();
+
+    //     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    //     if (response.statusCode() != 200) {
+    //         throw new IOException("API Error: " + response.statusCode());
+    //     }
+    //     return response.body();
+    // }
+
+
+
+
+
+
+
+
+
+
+
     private static String sendSecureImageToGemini(String base64Image) throws Exception {
-        long timeoutSeconds = Long.parseLong(System.getProperty("gemini.api.timeout", "30"));
-        HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(java.time.Duration.ofSeconds(timeoutSeconds))
-            .build();
+    // Initialize client with stored API key
 
-        String customPrompt = promptArea.getText().isEmpty() ? getDefaultPrompt() : promptArea.getText();
-
-        String requestBody = String.format(
-            "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inlineData\":{\"mimeType\":\"image/png\",\"data\":\"%s\"}}]}]}",
-            customPrompt.replace("\"", "\\\"").replace("\n", "\\n"),
-            base64Image
-        );
-
-        String url = GEMINI_API_URL + "?key=" + apiKey;
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .header("Content-Type", "application/json")
-            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-            .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() != 200) {
-            throw new IOException("API Error: " + response.statusCode());
-        }
-        return response.body();
-    }
-
+    addStealthDelay();
+    Client client = Client.builder()
+        .apiKey(apiKey)
+        .build();
+    
+    // Create image part from base64
+    Part imagePart = Part.builder()
+        .inlineData(Blob.builder()
+            .mimeType("image/png")
+            .data(base64Image)
+            .build())
+        .build();
+    
+    // Get custom prompt
+    String customPrompt = promptArea.getText().isEmpty() ? 
+        getDefaultPrompt() : promptArea.getText();
+    
+    // Create content with text + image
+    Content content = Content.builder()
+        .role("user")
+        .parts(ImmutableList.of(
+            Part.fromText(customPrompt),
+            imagePart
+        ))
+        .build();
+    
+    // Use gemini-2.0-flash-exp for speed and stealth
+    GenerateContentResponse response = client.models.generateContent(
+        "gemini-2.0-flash-exp",  // Faster, less network activity
+        ImmutableList.of(content),
+        null
+    );
+    
+    // Extract text directly - no regex parsing needed
+    return response.text().orElse("No response generated");
+}
     private static void toggleStealthMode() {
         isStealthMode = !isStealthMode;
         opacity = isStealthMode ? STEALTH_OPACITY : NORMAL_OPACITY;
@@ -1299,4 +1412,14 @@ controlPanel.add(protectionButton);
         dialog.setVisible(true);
         return result[0];
     }
+    // Add random delays between API calls
+private static void addStealthDelay() {
+    try {
+        Thread.sleep(2000 + new Random().nextInt(3000)); // 2-5 sec random
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+    }
+}
+
+// Call before API requests
 }

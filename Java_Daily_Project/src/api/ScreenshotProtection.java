@@ -4,6 +4,7 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef.HWND;
 import com.sun.jna.platform.win32.WinUser;
+import com.sun.jna.win32.W32APIOptions;
 import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 
@@ -13,6 +14,29 @@ import javax.swing.SwingUtilities;
  * Works with Zoom, Teams, Discord, OBS, and Windows built-in tools
  */
 public class ScreenshotProtection {
+    
+    // Extended User32 interface with additional methods
+    public interface User32Extended extends User32 {
+        User32Extended INSTANCE = Native.load("user32", User32Extended.class, W32APIOptions.DEFAULT_OPTIONS);
+        
+        /**
+         * SetWindowDisplayAffinity function
+         * Stores the display affinity setting in kernel mode on the hWnd associated with the window.
+         */
+        boolean SetWindowDisplayAffinity(HWND hWnd, int dwAffinity);
+        
+        /**
+         * GetWindowDisplayAffinity function
+         * Retrieves the current display affinity setting, from any process, for a given window.
+         */
+        boolean GetWindowDisplayAffinity(HWND hWnd, int[] pdwAffinity);
+        
+        /**
+         * SetLayeredWindowAttributes function
+         * Sets the opacity and transparency color key of a layered window.
+         */
+        boolean SetLayeredWindowAttributes(HWND hwnd, int crKey, byte bAlpha, int dwFlags);
+    }
     
     // Windows Display Affinity Constants
     private static final int WDA_NONE = 0x00000000;
@@ -54,6 +78,7 @@ public class ScreenshotProtection {
             
         } catch (Exception e) {
             System.err.println("Failed to apply protection: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -65,15 +90,31 @@ public class ScreenshotProtection {
      */
     private static boolean setDisplayAffinity(HWND hwnd) {
         try {
-            boolean result = User32.INSTANCE.SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE);
+            boolean result = User32Extended.INSTANCE.SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE);
             if (result) {
                 System.out.println("✓ Display affinity set - Window excluded from capture");
+                
+                // Verify the setting
+                int[] affinity = new int[1];
+                if (User32Extended.INSTANCE.GetWindowDisplayAffinity(hwnd, affinity)) {
+                    System.out.println("  Current affinity value: " + affinity[0]);
+                }
             } else {
-                System.err.println("✗ Display affinity failed - May require admin rights");
+                int error = Native.getLastError();
+                System.err.println("✗ Display affinity failed - Error code: " + error);
+                System.err.println("  Common causes:");
+                System.err.println("    - Requires Windows 10 version 1903 or later");
+                System.err.println("    - May need administrator privileges");
+                System.err.println("    - Window might not be fully initialized");
             }
             return result;
+        } catch (UnsatisfiedLinkError e) {
+            System.err.println("✗ SetWindowDisplayAffinity not available on this Windows version");
+            System.err.println("  Requires Windows 10 (1903+) or Windows 11");
+            return false;
         } catch (Exception e) {
             System.err.println("Display affinity error: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -97,10 +138,13 @@ public class ScreenshotProtection {
             
             if (success) {
                 System.out.println("✓ No-redirection bitmap set");
+            } else {
+                System.err.println("✗ No-redirection bitmap failed to set");
             }
             return success;
         } catch (Exception e) {
             System.err.println("Extended style error: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -112,32 +156,22 @@ public class ScreenshotProtection {
     private static boolean setLayeredProtection(HWND hwnd) {
         try {
             // Set layered window with alpha blending
-            boolean result = User32.INSTANCE.SetLayeredWindowAttributes(
+            boolean result = User32Extended.INSTANCE.SetLayeredWindowAttributes(
                 hwnd, 
-                0,      // Color key (not used)
-                255,    // Alpha value (fully opaque to user)
+                0,           // Color key (not used)
+                (byte) 255,  // Alpha value (fully opaque to user)
                 LWA_ALPHA
             );
             
             if (result) {
                 System.out.println("✓ Layered window protection active");
+            } else {
+                System.err.println("✗ Layered window protection failed");
             }
             return result;
         } catch (Exception e) {
             System.err.println("Layered protection error: " + e.getMessage());
-            return false;
-        }
-    }
-    
-    /**
-     * Remove all protections (for debugging or cleanup)
-     */
-    public static boolean removeProtection(JWindow window) {
-        try {
-            HWND hwnd = getWindowHandle(window);
-            return User32.INSTANCE.SetWindowDisplayAffinity(hwnd, WDA_NONE);
-        } catch (Exception e) {
-            System.err.println("Failed to remove protection: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -148,6 +182,14 @@ public class ScreenshotProtection {
     public static boolean isProtected(JWindow window) {
         try {
             HWND hwnd = getWindowHandle(window);
+            
+            // Check display affinity
+            int[] affinity = new int[1];
+            if (User32Extended.INSTANCE.GetWindowDisplayAffinity(hwnd, affinity)) {
+                return affinity[0] == WDA_EXCLUDEFROMCAPTURE;
+            }
+            
+            // Fallback: check extended style
             int style = User32.INSTANCE.GetWindowLong(hwnd, WinUser.GWL_EXSTYLE);
             return (style & WS_EX_NOREDIRECTIONBITMAP) != 0;
         } catch (Exception e) {
@@ -163,16 +205,22 @@ public class ScreenshotProtection {
     }
     
     /**
-     * Toggle protection on/off (for testing)
+     * Continuously monitor and reapply protection if it's removed
+     * This ensures protection stays active always
      */
-    public static void toggleProtection(JWindow window) {
-        if (isProtected(window)) {
-            removeProtection(window);
-            System.out.println("Protection disabled");
-        } else {
-            applyFullProtection(window);
-            System.out.println("Protection enabled");
-        }
+    public static void startProtectionMonitoring(JWindow window, java.util.concurrent.ScheduledExecutorService scheduler) {
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                if (!isProtected(window)) {
+                    System.out.println("⚠ Protection lost - Reapplying...");
+                    applyFullProtection(window);
+                }
+            } catch (Exception e) {
+                System.err.println("Protection monitoring error: " + e.getMessage());
+            }
+        }, 10, 5, java.util.concurrent.TimeUnit.SECONDS);
+        
+        System.out.println("✓ Protection monitoring started - Will maintain protection automatically");
     }
     
     /**
@@ -189,7 +237,7 @@ public class ScreenshotProtection {
                     success = applyFullProtection(window);
                     attempts++;
                     
-                    if (!success) {
+                    if (!success && attempts < maxAttempts) {
                         System.out.println("Retry attempt " + attempts + "/" + maxAttempts);
                     }
                 } catch (InterruptedException e) {
@@ -199,11 +247,67 @@ public class ScreenshotProtection {
             }
             
             if (success) {
-                System.out.println("✓ Protection successfully applied after " + attempts + " attempt(s)");
+                System.out.println("\n✓✓✓ Protection successfully applied after " + attempts + " attempt(s) ✓✓✓");
+                System.out.println("Your window is now hidden from:");
+                System.out.println("  • Screen captures (PrintScreen, Snipping Tool)");
+                System.out.println("  • Screen recording (OBS, Bandicam, etc.)");
+                System.out.println("  • Screen sharing (Zoom, Teams, Discord, Meet)");
             } else {
-                System.err.println("✗ Protection failed after " + maxAttempts + " attempts");
-                System.err.println("  This may require administrator privileges");
+                System.err.println("\n✗✗✗ Protection failed after " + maxAttempts + " attempts ✗✗✗");
+                System.err.println("Possible solutions:");
+                System.err.println("  1. Run as Administrator");
+                System.err.println("  2. Ensure Windows 10 (1903+) or Windows 11");
+                System.err.println("  3. Check Windows Update status");
+                System.err.println("  4. Try restarting the application");
             }
         });
+    }
+    
+    /**
+     * Get detailed protection status report
+     */
+    public static String getProtectionReport(JWindow window) {
+        try {
+            HWND hwnd = getWindowHandle(window);
+            StringBuilder report = new StringBuilder();
+            
+            report.append("=== PROTECTION STATUS REPORT ===\n");
+            
+            // Check display affinity
+            int[] affinity = new int[1];
+            if (User32Extended.INSTANCE.GetWindowDisplayAffinity(hwnd, affinity)) {
+                report.append("Display Affinity: ");
+                switch (affinity[0]) {
+                    case WDA_NONE:
+                        report.append("NONE (not protected)\n");
+                        break;
+                    case WDA_MONITOR:
+                        report.append("MONITOR\n");
+                        break;
+                    case WDA_EXCLUDEFROMCAPTURE:
+                        report.append("EXCLUDE_FROM_CAPTURE (protected) ✓\n");
+                        break;
+                    default:
+                        report.append("Unknown (" + affinity[0] + ")\n");
+                }
+            } else {
+                report.append("Display Affinity: Failed to query\n");
+            }
+            
+            // Check extended styles
+            int style = User32.INSTANCE.GetWindowLong(hwnd, WinUser.GWL_EXSTYLE);
+            report.append("Extended Styles:\n");
+            report.append("  WS_EX_NOREDIRECTIONBITMAP: " + 
+                ((style & WS_EX_NOREDIRECTIONBITMAP) != 0 ? "YES ✓" : "NO") + "\n");
+            report.append("  WS_EX_LAYERED: " + 
+                ((style & WS_EX_LAYERED) != 0 ? "YES ✓" : "NO") + "\n");
+            
+            report.append("Overall Status: " + (isProtected(window) ? "PROTECTED ✓" : "NOT PROTECTED ✗"));
+            
+            return report.toString();
+            
+        } catch (Exception e) {
+            return "Error generating report: " + e.getMessage();
+        }
     }
 }
