@@ -737,45 +737,71 @@ public class AdvancedStealthAssistant3 {
 
 
 
-    private static String sendSecureImageToGemini(String base64Image) throws Exception {
-    // Initialize client with stored API key
-
+  private static String sendSecureImageToGemini(String base64Image) throws Exception {
+    // ✅ Add stealth delay
     addStealthDelay();
-    Client client = Client.builder()
-        .apiKey(apiKey)
-        .build();
     
-    // Create image part from base64
-    Part imagePart = Part.builder()
-        .inlineData(Blob.builder()
-            .mimeType("image/png")
-            .data(base64Image)
-            .build())
+    long timeoutSeconds = Long.parseLong(System.getProperty("gemini.api.timeout", "30"));
+    HttpClient client = HttpClient.newBuilder()
+        .connectTimeout(java.time.Duration.ofSeconds(timeoutSeconds))
+        .followRedirects(HttpClient.Redirect.NORMAL)
         .build();
-    
-    // Get custom prompt
+
     String customPrompt = promptArea.getText().isEmpty() ? 
         getDefaultPrompt() : promptArea.getText();
-    
-    // Create content with text + image
-    Content content = Content.builder()
-        .role("user")
-        .parts(ImmutableList.of(
-            Part.fromText(customPrompt),
-            imagePart
-        ))
-        .build();
-    
-    // Use gemini-2.0-flash-exp for speed and stealth
-    GenerateContentResponse response = client.models.generateContent(
-        "gemini-2.0-flash-exp",  // Faster, less network activity
-        ImmutableList.of(content),
-        null
+
+    // Use minimal JSON - harder to detect patterns
+    String requestBody = String.format(
+        "{\"contents\":[{\"parts\":[{\"text\":\"%s\"},{\"inline_data\":{\"mime_type\":\"image/png\",\"data\":\"%s\"}}]}]}",
+        escapeJson(customPrompt),
+        base64Image
     );
+
+    String url = GEMINI_API_URL + "?key=" + apiKey;
     
-    // Extract text directly - no regex parsing needed
-    return response.text().orElse("No response generated");
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(url))
+        .header("Content-Type", "application/json")
+        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        .header("Accept", "application/json")
+        .header("Accept-Language", "en-US,en;q=0.9")
+        .header("Accept-Encoding", "gzip, deflate, br")
+        .header("Connection", "keep-alive")
+        .header("Sec-Fetch-Dest", "empty")
+        .header("Sec-Fetch-Mode", "cors")
+        .header("Sec-Fetch-Site", "cross-site")
+        .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+        .build();
+
+    HttpResponse<String> response = client.send(request, 
+        HttpResponse.BodyHandlers.ofString());
+    
+    if (response.statusCode() != 200) {
+        throw new IOException("API Error: " + response.statusCode() + 
+            " - " + response.body());
+    }
+    
+    return response.body();
 }
+
+// Helper method to escape JSON strings
+private static String escapeJson(String text) {
+    return text
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+        .replace("\t", "\\t")
+        .replace("\b", "\\b")
+        .replace("\f", "\\f");
+}
+
+
+
+
+
+
+
     private static void toggleStealthMode() {
         isStealthMode = !isStealthMode;
         opacity = isStealthMode ? STEALTH_OPACITY : NORMAL_OPACITY;
@@ -1184,21 +1210,54 @@ public class AdvancedStealthAssistant3 {
         return result.toString();
     }
 
-    private static String extractResponseText(String jsonResponse) {
-        try {
-            Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"((?:\\\\\"|[^\"])*?)\"");
-            Matcher matcher = pattern.matcher(jsonResponse);
-            if (matcher.find()) {
-                return matcher.group(1).replace("\\n", "\n")
-                    .replace("\\\"", "\"").replace("\\\\", "\\")
-                    .replace("\\t", "\t").replace("\\r", "\r")
-                    .replace("\\b", "\b").replace("\\f", "\f");
-            }
-        } catch (Exception e) {
-            return "Error parsing response: " + e.getMessage();
+private static String extractResponseText(String jsonResponse) {
+    try {
+        // Simple string manipulation - no regex, no external libraries
+        int textStart = jsonResponse.indexOf("\"text\"");
+        if (textStart == -1) {
+            return "No response text found";
         }
-        return "No response text found in: " + jsonResponse;
+        
+        // Find the opening quote after "text":
+        int quoteStart = jsonResponse.indexOf("\"", textStart + 6);
+        if (quoteStart == -1) {
+            return "Malformed response";
+        }
+        
+        // Find the closing quote (handle escaped quotes)
+        StringBuilder result = new StringBuilder();
+        boolean escaped = false;
+        
+        for (int i = quoteStart + 1; i < jsonResponse.length(); i++) {
+            char c = jsonResponse.charAt(i);
+            
+            if (escaped) {
+                // Handle escape sequences
+                switch (c) {
+                    case 'n': result.append('\n'); break;
+                    case 't': result.append('\t'); break;
+                    case 'r': result.append('\r'); break;
+                    case '\\': result.append('\\'); break;
+                    case '"': result.append('"'); break;
+                    default: result.append(c);
+                }
+                escaped = false;
+            } else if (c == '\\') {
+                escaped = true;
+            } else if (c == '"') {
+                // Found end of string
+                return result.toString();
+            } else {
+                result.append(c);
+            }
+        }
+        
+        return result.toString();
+        
+    } catch (Exception e) {
+        return "Error parsing response: " + e.getMessage();
     }
+}
 
     private static JButton createStealthButton(String text, String tooltip) {
         JButton button = new JButton(text);
@@ -1413,13 +1472,27 @@ public class AdvancedStealthAssistant3 {
         return result[0];
     }
     // Add random delays between API calls
+/**
+ * Add random delay with visual feedback for stealth operations
+ */
 private static void addStealthDelay() {
     try {
-        Thread.sleep(2000 + new Random().nextInt(3000)); // 2-5 sec random
+        int delayMs = 2000 + new Random().nextInt(3000); // 2-5 seconds
+        
+        // Show countdown in status (optional - for user feedback)
+        for (int i = delayMs / 1000; i > 0; i--) {
+            final int countdown = i;
+            SwingUtilities.invokeLater(() -> 
+                statusLabel.setText("⏳ Processing in " + countdown + "s...")
+            );
+            Thread.sleep(1000);
+        }
+        
     } catch (InterruptedException e) {
         Thread.currentThread().interrupt();
+        SwingUtilities.invokeLater(() -> 
+            statusLabel.setText("⚠️ Stealth delay interrupted")
+        );
     }
 }
-
-// Call before API requests
 }
