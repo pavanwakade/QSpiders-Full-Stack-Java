@@ -80,9 +80,11 @@ import javax.swing.text.AbstractDocument.Content;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import com.sun.java.swing.plaf.windows.TMSchema.Part;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef.HWND;
+import com.sun.security.ntlm.Client;
 import com.sun.jna.platform.win32.WinUser;
 
 
