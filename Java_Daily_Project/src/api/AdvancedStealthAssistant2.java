@@ -41,7 +41,7 @@ public class AdvancedStealthAssistant2 {
     private static boolean isStealthMode = true;
     private static final Dimension NORMAL_SIZE = new Dimension(200, 150);
     private static final Dimension MINIMIZED_SIZE = new Dimension(10, 10);
-    private static String API_KEY = null;
+    private static String API_KEY = "AIzaSyDXL_Ao4zpSIslhWycAM7I1DrRZtKCfd74";
     private static final String CONFIG_FILE = "stealth_config.dat";
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     private static JTextArea markdownArea;

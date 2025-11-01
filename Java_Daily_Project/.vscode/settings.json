@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "d:\\downloads\\jna-platform-5.13.0.jar",
+        "d:\\downloads\\jna-5.13.0.jar"
+    ]
+}
