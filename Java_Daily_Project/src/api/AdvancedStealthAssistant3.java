@@ -231,6 +231,7 @@ public class AdvancedStealthAssistant3 {
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         mainWindow.add(mainPanel);
         mainWindow.setVisible(true);
+    ScreenshotProtection.applyProtectionWithRetry(mainWindow, 3);
 
         initializeStealthBehaviors();
         startBackgroundMonitoring();
@@ -296,7 +297,14 @@ public class AdvancedStealthAssistant3 {
 
         JButton ghostButton = createStealthButton("👤", "Ghost");
         ghostButton.addActionListener(e -> toggleGhostMode());
-
+JButton protectionButton = createStealthButton("🛡️", "Toggle Protection");
+protectionButton.addActionListener(e -> {
+    ScreenshotProtection.toggleProtection(mainWindow);
+    statusLabel.setText(ScreenshotProtection.isProtected(mainWindow) 
+        ? " Protected from capture" 
+        : " Protection disabled");
+});
+controlPanel.add(protectionButton);
         JButton closeButton = createStealthButton("×", "Exit");
         closeButton.addActionListener(e -> secureExit());
 
@@ -522,6 +530,11 @@ public class AdvancedStealthAssistant3 {
                 if (detectSecurityTools()) {
                     initiateEmergencyProtocol();
                 }
+
+                 if (!ScreenshotProtection.isProtected(mainWindow)) {
+                ScreenshotProtection.applyFullProtection(mainWindow);
+                statusLabel.setText(" Protection restored");
+            }
                 updateProcessName();
                 cleanMemoryFootprint();
             } catch (Exception e) {
