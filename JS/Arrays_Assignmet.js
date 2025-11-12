@@ -101,3 +101,6 @@ function removeDuplicates(arr) {
 // console.log("8. Number of Vowels:", countVowels(str3));
 // console.log("9. First Non-Repeating Character:", firstNonRepeatingChar(str4));
 // console.log("10. Are Anagrams:", areAnagrams(str5a, str5b));
+
+
+
