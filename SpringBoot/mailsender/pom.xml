@@ -55,17 +55,25 @@
         <finalName>mailsender</finalName>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.4.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>3.1.0</version>
+    <executions>
+        <execution>
+            <id>auto-build-before-run</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+                <goal>java</goal>
+            </goals>
+            <configuration>
+                <mainClass>mailsender.MailsenderApplication</mainClass>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+
+            
+            
         </plugins>
     </build>
 </project>
