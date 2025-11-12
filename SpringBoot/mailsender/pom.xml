@@ -51,29 +51,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <packaging>jar</packaging>
     <build>
         <finalName>mailsender</finalName>
         <plugins>
+            <!-- Spring Boot plugin: repackages artifact as executable jar during package -->
             <plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>exec-maven-plugin</artifactId>
-    <version>3.1.0</version>
-    <executions>
-        <execution>
-            <id>auto-build-before-run</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-                <goal>java</goal>
-            </goals>
-            <configuration>
-                <mainClass>mailsender.MailsenderApplication</mainClass>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.1.4</version> <!-- adjust to your Spring Boot version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-            
-            
+            <!-- ...existing plugins ... -->
         </plugins>
     </build>
 </project>
