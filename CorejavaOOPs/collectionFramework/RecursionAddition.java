@@ -4,11 +4,11 @@ public class RecursionAddition {
 
     // Recursive method to find sum of squares
     public static int sumOfSquares(int n) {
-        int u=n,start=1;
-        if (n == u) {
-            return u*u; // base case
+        if (n == 1) {
+            return 1;
         }
-        return n * n + sumOfSquares(start + 1); // recursive call
+        System.out.println(n);
+        return n * n + sumOfSquares(n - 1);
     }
 
     public static void main(String[] args) {
