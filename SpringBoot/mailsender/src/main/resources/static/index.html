@@ -386,6 +386,28 @@
             display: none;
         }
 
+        .reselect-file-btn {
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .reselect-file-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .reselect-file-btn i {
+            margin-right: 0.5rem;
+        }
+
         .credentials-section {
             max-height: 0;
             overflow: hidden;
@@ -656,6 +678,9 @@
 									<div>Drag files here or click to browse</div>
 									<div class="text-muted small mt-1">Maximum file size: 25MB</div>
 									<div class="file-name" id="fileName"></div>
+									<button type="button" class="reselect-file-btn" id="reselectFileBtn">
+										<i class="fas fa-redo"></i> Click to select this file again
+									</button>
 								</div>
 							</label>
 							<input type="file" class="form-control" id="file">
@@ -719,52 +744,91 @@
 	<script>
 		// Load saved credentials and form data on page load
 		document.addEventListener('DOMContentLoaded', () => {
-			displayEmailHistory();
-			
-			// Load saved credentials
-			const savedEmail = localStorage.getItem('senderEmail');
-			const savedPassword = localStorage.getItem('senderPassword');
-			
-			if (savedEmail) {
-				document.getElementById('senderEmail').value = savedEmail;
-			}
-			
-			if (savedPassword) {
-				document.getElementById('senderPassword').value = savedPassword;
-			}
-			
-			// Don't show credentials section on load if credentials exist
-			if (savedEmail && savedPassword) {
-				document.getElementById('credentialsSection').classList.remove('show');
-				document.getElementById('settingsBtn').classList.remove('active');
-			} else {
-				// Show credentials section if no credentials saved
-				document.getElementById('credentialsSection').classList.add('show');
-				document.getElementById('settingsBtn').classList.add('active');
-			}
-			
-			// Load saved subject and body if available
-			const savedSubject = localStorage.getItem('savedSubject');
-			const savedBody = localStorage.getItem('savedBody');
-			
-			if (savedSubject) {
-				document.getElementById('subject').value = savedSubject;
-			}
-			
-			if (savedBody) {
-				document.getElementById('body').value = savedBody;
-			}
-			
-			// Update file name display when file is selected
-			document.getElementById('file').addEventListener('change', function() {
-				const fileName = document.getElementById('fileName');
-				if (this.files.length > 0) {
-					fileName.textContent = this.files[0].name;
-					fileName.style.display = 'block';
-				} else {
-					fileName.style.display = 'none';
-				}
-			});
+		    displayEmailHistory();
+		    
+		    // Load saved credentials
+		    const savedEmail = localStorage.getItem('senderEmail');
+		    const savedPassword = localStorage.getItem('senderPassword');
+		    
+		    if (savedEmail) {
+		        document.getElementById('senderEmail').value = savedEmail;
+		    }
+		    
+		    if (savedPassword) {
+		        document.getElementById('senderPassword').value = savedPassword;
+		    }
+		    
+		    // Don't show credentials section on load if credentials exist
+		    if (savedEmail && savedPassword) {
+		        document.getElementById('credentialsSection').classList.remove('show');
+		        document.getElementById('settingsBtn').classList.remove('active');
+		    } else {
+		        // Show credentials section if no credentials saved
+		        document.getElementById('credentialsSection').classList.add('show');
+		        document.getElementById('settingsBtn').classList.add('active');
+		    }
+		    
+		    // Load saved subject and body if available
+		    const savedSubject = localStorage.getItem('savedSubject');
+		    const savedBody = localStorage.getItem('savedBody');
+		    
+		    if (savedSubject) {
+		        document.getElementById('subject').value = savedSubject;
+		    }
+		    
+		    if (savedBody) {
+		        document.getElementById('body').value = savedBody;
+		    }
+		    
+		    // Load and display last selected filename with re-select button
+		    const lastFileName = localStorage.getItem('lastFileName');
+		    if (lastFileName) {
+		        const fileNameDisplay = document.getElementById('fileName');
+		        const reselectBtn = document.getElementById('reselectFileBtn');
+		        
+		        fileNameDisplay.textContent = `Last file: ${lastFileName}`;
+		        fileNameDisplay.style.display = 'block';
+		        fileNameDisplay.style.color = '#ffa500';
+		        reselectBtn.style.display = 'inline-block';
+		    }
+		    
+		    // Re-select file button click handler
+		    document.getElementById('reselectFileBtn').addEventListener('click', function(e) {
+		        e.preventDefault();
+		        e.stopPropagation();
+		        const lastFileName = localStorage.getItem('lastFileName');
+		        alert(`Please select the file: ${lastFileName}\n\nThe file browser will open now.`);
+		        document.getElementById('file').click();
+		    });
+		    
+		    // Update file name display when file is selected
+		    document.getElementById('file').addEventListener('change', function() {
+		        const fileName = document.getElementById('fileName');
+		        const reselectBtn = document.getElementById('reselectFileBtn');
+		        
+		        if (this.files.length > 0) {
+		            const selectedFile = this.files[0];
+		            fileName.textContent = selectedFile.name;
+		            fileName.style.display = 'block';
+		            fileName.style.color = '#28a745'; // Green color for newly selected file
+		            reselectBtn.style.display = 'none';
+		            
+		            // Save the filename to localStorage
+		            localStorage.setItem('lastFileName', selectedFile.name);
+		        } else {
+		            const lastFileName = localStorage.getItem('lastFileName');
+		            if (lastFileName) {
+		                fileName.textContent = `Last file: ${lastFileName}`;
+		                fileName.style.display = 'block';
+		                fileName.style.color = '#ffa500';
+		                reselectBtn.style.display = 'inline-block';
+		            } else {
+		                fileName.style.display = 'none';
+		                reselectBtn.style.display = 'none';
+		                localStorage.removeItem('lastFileName');
+		            }
+		        }
+		    });
 		});
 
 		// Settings button toggle
@@ -800,11 +864,14 @@
 				return;
 			}
 			
-			// Validate email format
-			if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-				alert('Please enter a valid email address');
-				return;
+			// Advanced email validation
+			const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+			if (!emailRegex.test(email.trim())) {
+			    alert('Please enter a valid email address');
+			    return;
 			}
+
 			
 			localStorage.setItem('senderEmail', email);
 			localStorage.setItem('senderPassword', password);
@@ -826,106 +893,134 @@
 		});
 		
 		document.getElementById('body').addEventListener('input', function() {
-			localStorage.setItem('savedBody', this.value);
+		localStorage.setItem('savedBody', this.value);
 		});
 
 		document.getElementById('emailForm').addEventListener('submit', async (e) => {
-			e.preventDefault();
+		    e.preventDefault();
 
-			const recipientInput = document.getElementById('recipient').value;
-			const subject = document.getElementById('subject').value;
-			const body = document.getElementById('body').value;
-			const fileInput = document.getElementById('file');
-			const sendButton = document.getElementById('sendButton');
-			const spinner = sendButton.querySelector('.spinner-border');
-			const successAlert = document.getElementById('successAlert');
-			const errorAlert = document.getElementById('errorAlert');
+		    const recipientInput = document.getElementById('recipient').value;
+		    const subject = document.getElementById('subject').value;
+		    const body = document.getElementById('body').value;
+		    const fileInput = document.getElementById('file');
+		    const sendButton = document.getElementById('sendButton');
+		    const spinner = sendButton.querySelector('.spinner-border');
+		    const successAlert = document.getElementById('successAlert');
+		    const errorAlert = document.getElementById('errorAlert');
 
-			// Get saved credentials
-			const senderEmail = localStorage.getItem('senderEmail');
-			const senderPassword = localStorage.getItem('senderPassword');
+		    // Get saved credentials
+		    const senderEmail = localStorage.getItem('senderEmail');
+		    const senderPassword = localStorage.getItem('senderPassword');
 
-			// Reset alerts
-			successAlert.style.display = 'none';
-			errorAlert.style.display = 'none';
+		    // Reset alerts
+		    successAlert.style.display = 'none';
+		    errorAlert.style.display = 'none';
 
-			// Validate credentials
-			if (!senderEmail || !senderPassword) {
-				errorAlert.textContent = 'Please save your email credentials first';
-				errorAlert.style.display = 'block';
-				return;
-			}
+		    // Validate credentials
+		    if (!senderEmail || !senderPassword) {
+		        errorAlert.textContent = 'Please save your email credentials first';
+		        errorAlert.style.display = 'block';
+		        return;
+		    }
 
-			// Split and validate recipients
-			const recipients = recipientInput.split(',').map(email => email.trim()).filter(email => email);
-			if (recipients.length === 0) {
-				errorAlert.textContent = 'Please enter at least one email address';
-				errorAlert.style.display = 'block';
-				return;
-			}
-			
-			for (const recipient of recipients) {
-				if (!recipient.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-					errorAlert.textContent = `Invalid email address: ${recipient}`;
-					errorAlert.style.display = 'block';
-					return;
-				}
-			}
+		    // Split and validate recipients
+		    const recipients = recipientInput.split(',').map(email => email.trim()).filter(email => email);
+		    if (recipients.length === 0) {
+		        errorAlert.textContent = 'Please enter at least one email address';
+		        errorAlert.style.display = 'block';
+		        return;
+		    }
+		    
+		 // Strong email validation regex
+		    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
 
-			// Validate file size (25MB limit)
-			if (fileInput.files.length > 0 && fileInput.files[0].size > 25 * 1024 * 1024) {
-				errorAlert.textContent = 'File size exceeds 25MB limit';
-				errorAlert.style.display = 'block';
-				return;
-			}
+		    for (const recipient of recipients) {
+		        const cleanEmail = recipient.trim();
 
-			// Show loading spinner
-			sendButton.disabled = true;
-			spinner.style.display = 'inline-block';
+		        // Empty check (extra safety)
+		        if (!cleanEmail) {
+		            errorAlert.textContent = `Email cannot be empty`;
+		            errorAlert.style.display = 'block';
+		            return;
+		        }
 
-			try {
-				const formData = new FormData();
-				const emailBlob = new Blob([JSON.stringify({ 
-					to: recipients, 
-					subject: subject, 
-					text: body,
-					senderEmail: senderEmail,
-					senderPassword: senderPassword
-				})], { type: 'application/json' });
-				
-				formData.append('email', emailBlob, 'email.json');
-				
-				if (fileInput.files.length > 0) {
-					formData.append('file', fileInput.files[0]);
-				}
+		        // Advanced validation
+		        if (!emailRegex.test(cleanEmail)) {
+		            errorAlert.textContent = `Invalid email address: ${cleanEmail}`;
+		            errorAlert.style.display = 'block';
+		            return;
+		        }
+		    }
 
-				const response = await fetch('http://localhost:8080/maile', {
-					method: 'POST',
-					body: formData
-				});
 
-				const result = await response.text();
+		    // Validate file size (25MB limit)
+		    if (fileInput.files.length > 0 && fileInput.files[0].size > 25 * 1024 * 1024) {
+		        errorAlert.textContent = 'File size exceeds 25MB limit';
+		        errorAlert.style.display = 'block';
+		        return;
+		    }
 
-				if (response.ok && result.includes('successfully')) {
-					successAlert.textContent = result;
-					successAlert.style.display = 'block';
-					document.getElementById('recipient').value = '';
-					document.getElementById('fileName').style.display = 'none';
-					document.getElementById('file').value = '';
-					recipients.forEach(recipient => {
-						saveEmailHistory(recipient);
-					});
-				} else {
-					errorAlert.textContent = `Failed to send email: ${result}`;
-					errorAlert.style.display = 'block';
-				}
-			} catch (error) {
-				errorAlert.textContent = `Failed to send email: ${error.message}`;
-				errorAlert.style.display = 'block';
-			} finally {
-				sendButton.disabled = false;
-				spinner.style.display = 'none';
-			}
+		    // Show loading spinner
+		    sendButton.disabled = true;
+		    spinner.style.display = 'inline-block';
+
+		    try {
+		        const formData = new FormData();
+		        const emailBlob = new Blob([JSON.stringify({ 
+		            to: recipients, 
+		            subject: subject, 
+		            text: body,
+		            senderEmail: senderEmail,
+		            senderPassword: senderPassword
+		        })], { type: 'application/json' });
+		        
+		        formData.append('email', emailBlob, 'email.json');
+		        
+		        if (fileInput.files.length > 0) {
+		            formData.append('file', fileInput.files[0]);
+		        }
+
+		        const response = await fetch('http://localhost:8080/maile', {
+		            method: 'POST',
+		            body: formData
+		        });
+
+		        const result = await response.text();
+
+		        if (response.ok && result.includes('successfully')) {
+		            successAlert.textContent = result;
+		            successAlert.style.display = 'block';
+		            document.getElementById('recipient').value = '';
+		            
+		            // Clear the file input but keep the filename as a reminder with re-select button
+		            const lastFileName = localStorage.getItem('lastFileName');
+		            document.getElementById('file').value = '';
+		            
+		            // Update the display to show re-select option
+		            if (lastFileName) {
+		                const fileNameDisplay = document.getElementById('fileName');
+		                const reselectBtn = document.getElementById('reselectFileBtn');
+		                
+		                fileNameDisplay.textContent = `Last file: ${lastFileName}`;
+		                fileNameDisplay.style.display = 'block';
+		                fileNameDisplay.style.color = '#ffa500';
+		                reselectBtn.style.display = 'inline-block';
+		            }
+		            
+		            recipients.forEach(recipient => {
+		                saveEmailHistory(recipient);
+		            });
+		        } else {
+		            errorAlert.textContent = `Failed to send email: ${result}`;
+		            errorAlert.style.display = 'block';
+		        }
+		    } catch (error) {
+		        errorAlert.textContent = `Failed to send email: ${error.message}`;
+		        errorAlert.style.display = 'block';
+		    } finally {
+		        sendButton.disabled = false;
+		        spinner.style.display = 'none';
+		    }
 		});
 
 		function saveEmailHistory(recipient) {

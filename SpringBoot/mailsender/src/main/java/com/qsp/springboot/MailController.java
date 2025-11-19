@@ -133,7 +133,7 @@ public class MailController {
     }
 
     private void saveToExcel(List<String> recipients, String timestamp, String senderEmail) {
-        String filePath = System.getProperty("user.home") + "/Desktop/sent_emails.xlsx";
+        String filePath = System.getProperty("user.home") + "/Desktop/sent_emails.xlsm";
         Workbook workbook = null;
         Sheet sheet = null;
         java.io.File file = new java.io.File(filePath);
